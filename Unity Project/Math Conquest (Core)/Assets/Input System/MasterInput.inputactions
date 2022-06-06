@@ -1,0 +1,296 @@
+{
+    "name": "MasterInput",
+    "maps": [
+        {
+            "name": "PlayerControlExploration",
+            "id": "00064fd6-8ab7-408a-82e0-8ce50573dbb9",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "694d00e6-b08c-457b-9cbd-19f065763901",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveUpdown",
+                    "type": "PassThrough",
+                    "id": "89e11989-8d1d-4e8c-9614-7798db898ebc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveLeftRight",
+                    "type": "PassThrough",
+                    "id": "b05c1e2e-b740-4f9d-b0e7-f0e17ef49040",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "cd618167-87cd-4ef2-818a-88849295e5f3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "af45669a-748d-4b4d-a95c-1d9b286b7575",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "1e887a0a-2755-4fd1-bb40-99c9523a188b",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUpdown",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "positive",
+                    "id": "96e024b9-7132-4156-9b2f-40f43f47cbcf",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUpdown",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "3a2ba436-0c89-40b1-858f-b9c2e52880f9",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUpdown",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "889a35cb-971d-4691-a939-2945543b7638",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b53fa372-d2d8-4e5a-930f-35fe61f32164",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "4ec1e644-ced9-4e71-80ca-bb02d3726ee0",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "25b1e7d5-97d0-45e5-beb6-a42587e1d952",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerControlDungeon",
+            "id": "842cae48-b2e0-4f9e-bb65-ceb688534142",
+            "actions": [
+                {
+                    "name": "MoveLeftRight",
+                    "type": "PassThrough",
+                    "id": "6560cd02-ee1a-4a0a-a08e-713f9f800fd3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "2e4a3698-eaeb-4483-823e-d75d2ea6de57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "03c9dda6-437e-477f-ad11-9f9e03bd4779",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "af0f66c4-80a7-4801-a1a1-43c1b669dd39",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "3cebcfa4-e1d5-480f-a0a4-fe70f95be42e",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "3843218c-3137-4a95-b1a2-5e050fc82252",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerControlElimination",
+            "id": "66507642-8aa9-48e2-8497-6acf4985e772",
+            "actions": [
+                {
+                    "name": "EnterAnswer",
+                    "type": "Button",
+                    "id": "3eb0adb7-e91d-44a1-bb64-bbd36d77c74c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ClearAnswer",
+                    "type": "Button",
+                    "id": "5e8fd122-b929-498a-869c-ef793734d1f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e7a3b993-33a9-4d2c-8812-58e6be0ad2ea",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnterAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cc321cd-81fc-444f-ab66-618e16c98b02",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClearAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerControlGeneral",
+            "id": "a955f81a-466e-46f2-9699-474cecb18e67",
+            "actions": [
+                {
+                    "name": "PauseGame",
+                    "type": "Button",
+                    "id": "8041132b-c0f1-4bcf-913d-af7ed0fffcc2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "93584668-50db-417f-abba-8bf081e0af2e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard Control",
+            "bindingGroup": "Keyboard Control",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
