@@ -176,6 +176,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClearAnswer"",
+                    ""type"": ""Button"",
+                    ""id"": ""56a0d206-7354-449b-a0e0-be21ac0e04ca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -222,6 +231,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be593045-a56a-484c-b906-9c9ee5ce2511"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClearAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -242,6 +262,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""name"": ""ClearAnswer"",
                     ""type"": ""Button"",
                     ""id"": ""5e8fd122-b929-498a-869c-ef793734d1f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchEnemy"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b21754b-9cb5-44e5-92b5-ea73c24c45a1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press"",
@@ -270,6 +299,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""action"": ""ClearAnswer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d4fea7c-25a5-4261-b3b8-2fe2af7ef664"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchEnemy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -285,6 +325,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextDialog"",
+                    ""type"": ""Button"",
+                    ""id"": ""da02ebaf-e5b3-4297-a47d-d9856f89f52b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -296,6 +345,28 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0407b478-d395-46bc-9899-13015ae8a686"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextDialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44224f57-05ec-4405-bb9b-463212da2986"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextDialog"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -326,13 +397,16 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_PlayerControlDungeon = asset.FindActionMap("PlayerControlDungeon", throwIfNotFound: true);
         m_PlayerControlDungeon_MoveLeftRight = m_PlayerControlDungeon.FindAction("MoveLeftRight", throwIfNotFound: true);
         m_PlayerControlDungeon_Jump = m_PlayerControlDungeon.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerControlDungeon_ClearAnswer = m_PlayerControlDungeon.FindAction("ClearAnswer", throwIfNotFound: true);
         // PlayerControlElimination
         m_PlayerControlElimination = asset.FindActionMap("PlayerControlElimination", throwIfNotFound: true);
         m_PlayerControlElimination_EnterAnswer = m_PlayerControlElimination.FindAction("EnterAnswer", throwIfNotFound: true);
         m_PlayerControlElimination_ClearAnswer = m_PlayerControlElimination.FindAction("ClearAnswer", throwIfNotFound: true);
+        m_PlayerControlElimination_SwitchEnemy = m_PlayerControlElimination.FindAction("SwitchEnemy", throwIfNotFound: true);
         // PlayerControlGeneral
         m_PlayerControlGeneral = asset.FindActionMap("PlayerControlGeneral", throwIfNotFound: true);
         m_PlayerControlGeneral_PauseGame = m_PlayerControlGeneral.FindAction("PauseGame", throwIfNotFound: true);
+        m_PlayerControlGeneral_NextDialog = m_PlayerControlGeneral.FindAction("NextDialog", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -451,12 +525,14 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private IPlayerControlDungeonActions m_PlayerControlDungeonActionsCallbackInterface;
     private readonly InputAction m_PlayerControlDungeon_MoveLeftRight;
     private readonly InputAction m_PlayerControlDungeon_Jump;
+    private readonly InputAction m_PlayerControlDungeon_ClearAnswer;
     public struct PlayerControlDungeonActions
     {
         private @MasterInput m_Wrapper;
         public PlayerControlDungeonActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveLeftRight => m_Wrapper.m_PlayerControlDungeon_MoveLeftRight;
         public InputAction @Jump => m_Wrapper.m_PlayerControlDungeon_Jump;
+        public InputAction @ClearAnswer => m_Wrapper.m_PlayerControlDungeon_ClearAnswer;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlDungeon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -472,6 +548,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
+                @ClearAnswer.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
+                @ClearAnswer.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
+                @ClearAnswer.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
             }
             m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface = instance;
             if (instance != null)
@@ -482,6 +561,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @ClearAnswer.started += instance.OnClearAnswer;
+                @ClearAnswer.performed += instance.OnClearAnswer;
+                @ClearAnswer.canceled += instance.OnClearAnswer;
             }
         }
     }
@@ -492,12 +574,14 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private IPlayerControlEliminationActions m_PlayerControlEliminationActionsCallbackInterface;
     private readonly InputAction m_PlayerControlElimination_EnterAnswer;
     private readonly InputAction m_PlayerControlElimination_ClearAnswer;
+    private readonly InputAction m_PlayerControlElimination_SwitchEnemy;
     public struct PlayerControlEliminationActions
     {
         private @MasterInput m_Wrapper;
         public PlayerControlEliminationActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @EnterAnswer => m_Wrapper.m_PlayerControlElimination_EnterAnswer;
         public InputAction @ClearAnswer => m_Wrapper.m_PlayerControlElimination_ClearAnswer;
+        public InputAction @SwitchEnemy => m_Wrapper.m_PlayerControlElimination_SwitchEnemy;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlElimination; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -513,6 +597,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @ClearAnswer.started -= m_Wrapper.m_PlayerControlEliminationActionsCallbackInterface.OnClearAnswer;
                 @ClearAnswer.performed -= m_Wrapper.m_PlayerControlEliminationActionsCallbackInterface.OnClearAnswer;
                 @ClearAnswer.canceled -= m_Wrapper.m_PlayerControlEliminationActionsCallbackInterface.OnClearAnswer;
+                @SwitchEnemy.started -= m_Wrapper.m_PlayerControlEliminationActionsCallbackInterface.OnSwitchEnemy;
+                @SwitchEnemy.performed -= m_Wrapper.m_PlayerControlEliminationActionsCallbackInterface.OnSwitchEnemy;
+                @SwitchEnemy.canceled -= m_Wrapper.m_PlayerControlEliminationActionsCallbackInterface.OnSwitchEnemy;
             }
             m_Wrapper.m_PlayerControlEliminationActionsCallbackInterface = instance;
             if (instance != null)
@@ -523,6 +610,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @ClearAnswer.started += instance.OnClearAnswer;
                 @ClearAnswer.performed += instance.OnClearAnswer;
                 @ClearAnswer.canceled += instance.OnClearAnswer;
+                @SwitchEnemy.started += instance.OnSwitchEnemy;
+                @SwitchEnemy.performed += instance.OnSwitchEnemy;
+                @SwitchEnemy.canceled += instance.OnSwitchEnemy;
             }
         }
     }
@@ -532,11 +622,13 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerControlGeneral;
     private IPlayerControlGeneralActions m_PlayerControlGeneralActionsCallbackInterface;
     private readonly InputAction m_PlayerControlGeneral_PauseGame;
+    private readonly InputAction m_PlayerControlGeneral_NextDialog;
     public struct PlayerControlGeneralActions
     {
         private @MasterInput m_Wrapper;
         public PlayerControlGeneralActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @PauseGame => m_Wrapper.m_PlayerControlGeneral_PauseGame;
+        public InputAction @NextDialog => m_Wrapper.m_PlayerControlGeneral_NextDialog;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlGeneral; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -549,6 +641,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @PauseGame.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
                 @PauseGame.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
                 @PauseGame.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
+                @NextDialog.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+                @NextDialog.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+                @NextDialog.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
             }
             m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface = instance;
             if (instance != null)
@@ -556,6 +651,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @PauseGame.started += instance.OnPauseGame;
                 @PauseGame.performed += instance.OnPauseGame;
                 @PauseGame.canceled += instance.OnPauseGame;
+                @NextDialog.started += instance.OnNextDialog;
+                @NextDialog.performed += instance.OnNextDialog;
+                @NextDialog.canceled += instance.OnNextDialog;
             }
         }
     }
@@ -580,14 +678,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     {
         void OnMoveLeftRight(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnClearAnswer(InputAction.CallbackContext context);
     }
     public interface IPlayerControlEliminationActions
     {
         void OnEnterAnswer(InputAction.CallbackContext context);
         void OnClearAnswer(InputAction.CallbackContext context);
+        void OnSwitchEnemy(InputAction.CallbackContext context);
     }
     public interface IPlayerControlGeneralActions
     {
         void OnPauseGame(InputAction.CallbackContext context);
+        void OnNextDialog(InputAction.CallbackContext context);
     }
 }

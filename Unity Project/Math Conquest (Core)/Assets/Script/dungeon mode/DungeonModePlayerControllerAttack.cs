@@ -5,8 +5,9 @@ using TMPro;
 
 public class DungeonModePlayerControllerAttack : MonoBehaviour
 {
-    MasterInput playerInput;
-    
+    private MasterInput playerInput;
+    private PlayerControllerStatus PlayerStatus;
+
     public Transform playerAttackPoint;
     public float playerAttackRadius;
     public LayerMask playerAttackLayerMask;
@@ -20,17 +21,13 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     }
     private void SetupComponent()
     {
-        
+        PlayerStatus = GetComponent<PlayerControllerStatus>();
     }
     private void SetupControl()
     {
         playerInput = new MasterInput();
         playerInput.PlayerControlExploration.Attack.performed += context => PlayerAttack();
 
-    }
-    private void Start()
-    {
-        
     }
 
     private void OnEnable()
@@ -68,9 +65,18 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
         }
 
         //send damage to the enemy
-        
+        if (closestEnemyTransform != null)
+        {
+            closestEnemyTransform.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerField.text, PlayerStatus.playerAttackDamage);
+            PlayerClearInputField();
+        }
+
         print(closestEnemyTransform);
         print(closetEnemyDistance);
+    }
+    private void PlayerClearInputField()
+    {
+        playerAnswerField.text = "";
     }
 
     private void FixedUpdate()

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &533057428798246284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 533057428798246285}
+  - component: {fileID: 533057428798246282}
+  m_Layer: 0
+  m_Name: Dialog System Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &533057428798246285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533057428798246284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 124, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &533057428798246282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533057428798246284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c541d938399e7f4dab9e86b12ccfdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogIndex: 0
+  isDialogActive: 0
+  dialogSetIndex: 0
+  DialogUI: {fileID: 0}
+  speakerImage: {fileID: 0}
+  speakerText: {fileID: 0}
+  dialogText: {fileID: 0}
+  dialogList:
+    DialogSet:
+    - DialogData:
+      - speakerString: Big Boss
+        speakerSprite: {fileID: 21300000, guid: 8d389642be30a134c8e82504a8fe87aa, type: 3}
+        dialogString: asdfasdfasdfasdfasdf
+      - speakerString: Mr.White
+        speakerSprite: {fileID: 21300000, guid: 9251a106100b45f4faf156f9bc469034, type: 3}
+        dialogString: qwerqwerqwerqwer
+      - speakerString: Chad
+        speakerSprite: {fileID: 21300000, guid: 8b0b44dbb7b6d574c85ef4a4fb6dae9f, type: 3}
+        dialogString: hjkhjkhjkhjkhjkhjkhjkhjk
+    - DialogData: []
