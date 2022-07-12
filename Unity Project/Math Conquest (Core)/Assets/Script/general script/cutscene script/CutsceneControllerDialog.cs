@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class CutsceneControllerDialog : MonoBehaviour
 {
+    [Header("Index of Dialogs (private)")]
     [SerializeField] private int dialogIndex = 0;
     [SerializeField] private bool isDialogActive;
-    [SerializeField] private int dialogSetIndex = 0;
+    [SerializeField] private int dialogSetIndex = -1;
 
+    [Header("Dialog Objects")]
     public GameObject DialogUI;
     public Image speakerImage;
     public TMP_Text speakerText;
@@ -25,7 +27,6 @@ public class CutsceneControllerDialog : MonoBehaviour
         SetupComponent();
         SetupControl();
         SetupDialog();
-        
     }
     private void SetupComponent()
     {
@@ -49,11 +50,17 @@ public class CutsceneControllerDialog : MonoBehaviour
     private void OnEnable()
     {
         playerInput.Enable();
+        DialogUI.SetActive(true);
+
+        dialogSetIndex++;
         PlayNextDialog();
     }
     private void OnDisable()
     {
         playerInput.Disable();
+        DialogUI.SetActive(false);
+
+        dialogIndex = 0;
     }
 
 

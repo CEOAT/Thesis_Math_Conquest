@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class EliminationModeEnemySpawnerController : MonoBehaviour
 {
-    public int enemyWaveCount;
-    public int enemyDeadCount;
+    [Header("Testing Variable")]
+    public bool testSpawnOnStart;
+
+    [Header("Count wave/enemy")]
+    [SerializeField] private int enemyWaveCount;
+    [SerializeField] private int enemyDeadCount;
 
     private GameObject enemyObject;
     private int enemySpawnCountInWave;
@@ -13,13 +17,21 @@ public class EliminationModeEnemySpawnerController : MonoBehaviour
     private List<int> enemyRandomPositionList = new List<int>();
     private int enemyRandomPositionIndex;
 
+    [Header("List of Enemy")]
     public EliminationModeEnemySpawnerWaveClass EnemyWave = new EliminationModeEnemySpawnerWaveClass();
     private EliminationModeEnemyControllerAction EnemyAction;
     private Transform playerTransform;
 
+
     private void Start()
     {
         SetupComponent();
+
+        //enabled for testing
+        if (testSpawnOnStart == true)
+        {
+            CreateEnemyWave();
+        }
     }
     private void SetupComponent()
     {

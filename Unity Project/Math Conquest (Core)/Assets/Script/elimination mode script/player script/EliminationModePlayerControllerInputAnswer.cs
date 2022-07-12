@@ -18,6 +18,7 @@ public class EliminationModePlayerControllerInputAnswer : MonoBehaviour
 
     private MasterInput playerInput;
     private PlayerControllerStatus PlayerStatus;
+    private EliminationModeEventController EventController;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class EliminationModePlayerControllerInputAnswer : MonoBehaviour
     private void SetupComponent()
     {
         PlayerStatus = GetComponent<PlayerControllerStatus>();
+        EventController = GameObject.FindGameObjectWithTag("Event System").GetComponent<EliminationModeEventController>();
     }
     private void SetupControl()
     {

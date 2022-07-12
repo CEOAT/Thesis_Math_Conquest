@@ -339,6 +339,8 @@ public class EnemyControllerQuestionBasicCalculation : MonoBehaviour
         enemyStatus.SetupEnemyQuestion(questionString, answerString);
     }
 
+
+
     private void FixedUpdate()
     {
         if (enemyStatus.isQuestionActive == false)
