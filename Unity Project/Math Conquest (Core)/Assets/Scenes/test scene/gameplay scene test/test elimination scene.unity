@@ -296,8 +296,11 @@ MonoBehaviour:
   isAllowOne: 1
   minimumAnswerValue: 1
   maximumAnswerValue: 15
+  isEquation: 0
+  equationSetting: 0
   valueA: 0
   valueB: 0
+  answerString: 
 --- !u!114 &159734667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,8 +609,11 @@ MonoBehaviour:
   isAllowOne: 1
   minimumAnswerValue: 1
   maximumAnswerValue: 15
+  isEquation: 0
+  equationSetting: 0
   valueA: 0
   valueB: 0
+  answerString: 
 --- !u!114 &278615592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,6 +1412,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3158167193069395393, guid: 15a12b8c9c32b4e4097e2563c40cd62a, type: 3}
+      propertyPath: isEnemyActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158167193069395394, guid: 15a12b8c9c32b4e4097e2563c40cd62a, type: 3}
+      propertyPath: isEquation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158167193069395394, guid: 15a12b8c9c32b4e4097e2563c40cd62a, type: 3}
+      propertyPath: useDivision
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158167193069395394, guid: 15a12b8c9c32b4e4097e2563c40cd62a, type: 3}
+      propertyPath: useSubtraction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158167193069395394, guid: 15a12b8c9c32b4e4097e2563c40cd62a, type: 3}
+      propertyPath: equationSetting
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158167193069395394, guid: 15a12b8c9c32b4e4097e2563c40cd62a, type: 3}
+      propertyPath: useMultiplication
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3158167193069395395, guid: 15a12b8c9c32b4e4097e2563c40cd62a, type: 3}
       propertyPath: m_RootOrder
       value: 11

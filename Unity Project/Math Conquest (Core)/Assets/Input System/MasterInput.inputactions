@@ -2,6 +2,217 @@
     "name": "MasterInput",
     "maps": [
         {
+            "name": "PlayerControlDungeon",
+            "id": "842cae48-b2e0-4f9e-bb65-ceb688534142",
+            "actions": [
+                {
+                    "name": "MoveLeftRight",
+                    "type": "PassThrough",
+                    "id": "6560cd02-ee1a-4a0a-a08e-713f9f800fd3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "2e4a3698-eaeb-4483-823e-d75d2ea6de57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ConfirmAnswer",
+                    "type": "Button",
+                    "id": "fdfa62dc-d915-441f-9395-802b198e4cc3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ClearAnswer",
+                    "type": "Button",
+                    "id": "56a0d206-7354-449b-a0e0-be21ac0e04ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeaponArt",
+                    "type": "Button",
+                    "id": "840b67de-5234-401c-a969-f7e635d5d129",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "03c9dda6-437e-477f-ad11-9f9e03bd4779",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "af0f66c4-80a7-4801-a1a1-43c1b669dd39",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "3cebcfa4-e1d5-480f-a0a4-fe70f95be42e",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeftRight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "3843218c-3137-4a95-b1a2-5e050fc82252",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "799d8b6a-c3bb-439d-991d-fd58c745f912",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConfirmAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "370e0bfa-c30c-48d5-8793-2540c2998af0",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConfirmAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ec54e8a-69ad-4f44-8f3d-d9196c23c266",
+                    "path": "<Keyboard>/f",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConfirmAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2315f6ce-fcc8-4d04-9d73-25aac0153f05",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeaponArt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be593045-a56a-484c-b906-9c9ee5ce2511",
+                    "path": "<Keyboard>/c",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClearAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerControlGeneral",
+            "id": "a955f81a-466e-46f2-9699-474cecb18e67",
+            "actions": [
+                {
+                    "name": "PauseGame",
+                    "type": "Button",
+                    "id": "8041132b-c0f1-4bcf-913d-af7ed0fffcc2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextDialog",
+                    "type": "Button",
+                    "id": "da02ebaf-e5b3-4297-a47d-d9856f89f52b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "93584668-50db-417f-abba-8bf081e0af2e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0407b478-d395-46bc-9899-13015ae8a686",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialog",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44224f57-05ec-4405-bb9b-463212da2986",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialog",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "PlayerControlExploration",
             "id": "00064fd6-8ab7-408a-82e0-8ce50573dbb9",
             "actions": [
@@ -30,15 +241,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "cd618167-87cd-4ef2-818a-88849295e5f3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -119,107 +321,6 @@
                     "action": "MoveLeftRight",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "25b1e7d5-97d0-45e5-beb6-a42587e1d952",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "PlayerControlDungeon",
-            "id": "842cae48-b2e0-4f9e-bb65-ceb688534142",
-            "actions": [
-                {
-                    "name": "MoveLeftRight",
-                    "type": "PassThrough",
-                    "id": "6560cd02-ee1a-4a0a-a08e-713f9f800fd3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "2e4a3698-eaeb-4483-823e-d75d2ea6de57",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ClearAnswer",
-                    "type": "Button",
-                    "id": "56a0d206-7354-449b-a0e0-be21ac0e04ca",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "1D Axis",
-                    "id": "03c9dda6-437e-477f-ad11-9f9e03bd4779",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveLeftRight",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "af0f66c4-80a7-4801-a1a1-43c1b669dd39",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveLeftRight",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "3cebcfa4-e1d5-480f-a0a4-fe70f95be42e",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveLeftRight",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "3843218c-3137-4a95-b1a2-5e050fc82252",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "be593045-a56a-484c-b906-9c9ee5ce2511",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ClearAnswer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -286,65 +387,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchEnemy",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "PlayerControlGeneral",
-            "id": "a955f81a-466e-46f2-9699-474cecb18e67",
-            "actions": [
-                {
-                    "name": "PauseGame",
-                    "type": "Button",
-                    "id": "8041132b-c0f1-4bcf-913d-af7ed0fffcc2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "NextDialog",
-                    "type": "Button",
-                    "id": "da02ebaf-e5b3-4297-a47d-d9856f89f52b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "93584668-50db-417f-abba-8bf081e0af2e",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PauseGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0407b478-d395-46bc-9899-13015ae8a686",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "NextDialog",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "44224f57-05ec-4405-bb9b-463212da2986",
-                    "path": "<Keyboard>/numpadEnter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "NextDialog",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

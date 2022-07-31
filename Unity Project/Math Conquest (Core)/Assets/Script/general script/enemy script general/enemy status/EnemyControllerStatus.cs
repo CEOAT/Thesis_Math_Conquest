@@ -39,6 +39,7 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         if (playerAnswer == questionAnswer)
         {
+            print("hit");
             PlayerAnswerCorrect(playerDamage);
 
             
@@ -47,6 +48,9 @@ public class EnemyControllerStatus : MonoBehaviour
         }
         else
         {
+            print("wrong");
+
+
             //wrong statement
             //reduce player hp, restore enemy's health?, gain shield?
         }

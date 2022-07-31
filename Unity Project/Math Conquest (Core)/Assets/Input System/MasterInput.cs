@@ -24,6 +24,217 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     ""name"": ""MasterInput"",
     ""maps"": [
         {
+            ""name"": ""PlayerControlDungeon"",
+            ""id"": ""842cae48-b2e0-4f9e-bb65-ceb688534142"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveLeftRight"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6560cd02-ee1a-4a0a-a08e-713f9f800fd3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e4a3698-eaeb-4483-823e-d75d2ea6de57"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ConfirmAnswer"",
+                    ""type"": ""Button"",
+                    ""id"": ""fdfa62dc-d915-441f-9395-802b198e4cc3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClearAnswer"",
+                    ""type"": ""Button"",
+                    ""id"": ""56a0d206-7354-449b-a0e0-be21ac0e04ca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WeaponArt"",
+                    ""type"": ""Button"",
+                    ""id"": ""840b67de-5234-401c-a969-f7e635d5d129"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""03c9dda6-437e-477f-ad11-9f9e03bd4779"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeftRight"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""af0f66c4-80a7-4801-a1a1-43c1b669dd39"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3cebcfa4-e1d5-480f-a0a4-fe70f95be42e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3843218c-3137-4a95-b1a2-5e050fc82252"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""799d8b6a-c3bb-439d-991d-fd58c745f912"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""370e0bfa-c30c-48d5-8793-2540c2998af0"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ec54e8a-69ad-4f44-8f3d-d9196c23c266"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2315f6ce-fcc8-4d04-9d73-25aac0153f05"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WeaponArt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be593045-a56a-484c-b906-9c9ee5ce2511"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClearAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerControlGeneral"",
+            ""id"": ""a955f81a-466e-46f2-9699-474cecb18e67"",
+            ""actions"": [
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""8041132b-c0f1-4bcf-913d-af7ed0fffcc2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextDialog"",
+                    ""type"": ""Button"",
+                    ""id"": ""da02ebaf-e5b3-4297-a47d-d9856f89f52b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""93584668-50db-417f-abba-8bf081e0af2e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0407b478-d395-46bc-9899-13015ae8a686"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextDialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44224f57-05ec-4405-bb9b-463212da2986"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextDialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""PlayerControlExploration"",
             ""id"": ""00064fd6-8ab7-408a-82e0-8ce50573dbb9"",
             ""actions"": [
@@ -52,15 +263,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Attack"",
-                    ""type"": ""Button"",
-                    ""id"": ""cd618167-87cd-4ef2-818a-88849295e5f3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -141,107 +343,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""action"": ""MoveLeftRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""25b1e7d5-97d0-45e5-beb6-a42587e1d952"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""PlayerControlDungeon"",
-            ""id"": ""842cae48-b2e0-4f9e-bb65-ceb688534142"",
-            ""actions"": [
-                {
-                    ""name"": ""MoveLeftRight"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""6560cd02-ee1a-4a0a-a08e-713f9f800fd3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""2e4a3698-eaeb-4483-823e-d75d2ea6de57"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ClearAnswer"",
-                    ""type"": ""Button"",
-                    ""id"": ""56a0d206-7354-449b-a0e0-be21ac0e04ca"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""03c9dda6-437e-477f-ad11-9f9e03bd4779"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveLeftRight"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""af0f66c4-80a7-4801-a1a1-43c1b669dd39"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveLeftRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""3cebcfa4-e1d5-480f-a0a4-fe70f95be42e"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveLeftRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3843218c-3137-4a95-b1a2-5e050fc82252"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""be593045-a56a-484c-b906-9c9ee5ce2511"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ClearAnswer"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -312,65 +413,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""PlayerControlGeneral"",
-            ""id"": ""a955f81a-466e-46f2-9699-474cecb18e67"",
-            ""actions"": [
-                {
-                    ""name"": ""PauseGame"",
-                    ""type"": ""Button"",
-                    ""id"": ""8041132b-c0f1-4bcf-913d-af7ed0fffcc2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""NextDialog"",
-                    ""type"": ""Button"",
-                    ""id"": ""da02ebaf-e5b3-4297-a47d-d9856f89f52b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""93584668-50db-417f-abba-8bf081e0af2e"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PauseGame"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0407b478-d395-46bc-9899-13015ae8a686"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextDialog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""44224f57-05ec-4405-bb9b-463212da2986"",
-                    ""path"": ""<Keyboard>/numpadEnter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextDialog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -387,26 +429,27 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         }
     ]
 }");
+        // PlayerControlDungeon
+        m_PlayerControlDungeon = asset.FindActionMap("PlayerControlDungeon", throwIfNotFound: true);
+        m_PlayerControlDungeon_MoveLeftRight = m_PlayerControlDungeon.FindAction("MoveLeftRight", throwIfNotFound: true);
+        m_PlayerControlDungeon_Jump = m_PlayerControlDungeon.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerControlDungeon_ConfirmAnswer = m_PlayerControlDungeon.FindAction("ConfirmAnswer", throwIfNotFound: true);
+        m_PlayerControlDungeon_ClearAnswer = m_PlayerControlDungeon.FindAction("ClearAnswer", throwIfNotFound: true);
+        m_PlayerControlDungeon_WeaponArt = m_PlayerControlDungeon.FindAction("WeaponArt", throwIfNotFound: true);
+        // PlayerControlGeneral
+        m_PlayerControlGeneral = asset.FindActionMap("PlayerControlGeneral", throwIfNotFound: true);
+        m_PlayerControlGeneral_PauseGame = m_PlayerControlGeneral.FindAction("PauseGame", throwIfNotFound: true);
+        m_PlayerControlGeneral_NextDialog = m_PlayerControlGeneral.FindAction("NextDialog", throwIfNotFound: true);
         // PlayerControlExploration
         m_PlayerControlExploration = asset.FindActionMap("PlayerControlExploration", throwIfNotFound: true);
         m_PlayerControlExploration_Interact = m_PlayerControlExploration.FindAction("Interact", throwIfNotFound: true);
         m_PlayerControlExploration_MoveUpdown = m_PlayerControlExploration.FindAction("MoveUpdown", throwIfNotFound: true);
         m_PlayerControlExploration_MoveLeftRight = m_PlayerControlExploration.FindAction("MoveLeftRight", throwIfNotFound: true);
-        m_PlayerControlExploration_Attack = m_PlayerControlExploration.FindAction("Attack", throwIfNotFound: true);
-        // PlayerControlDungeon
-        m_PlayerControlDungeon = asset.FindActionMap("PlayerControlDungeon", throwIfNotFound: true);
-        m_PlayerControlDungeon_MoveLeftRight = m_PlayerControlDungeon.FindAction("MoveLeftRight", throwIfNotFound: true);
-        m_PlayerControlDungeon_Jump = m_PlayerControlDungeon.FindAction("Jump", throwIfNotFound: true);
-        m_PlayerControlDungeon_ClearAnswer = m_PlayerControlDungeon.FindAction("ClearAnswer", throwIfNotFound: true);
         // PlayerControlElimination
         m_PlayerControlElimination = asset.FindActionMap("PlayerControlElimination", throwIfNotFound: true);
         m_PlayerControlElimination_EnterAnswer = m_PlayerControlElimination.FindAction("EnterAnswer", throwIfNotFound: true);
         m_PlayerControlElimination_ClearAnswer = m_PlayerControlElimination.FindAction("ClearAnswer", throwIfNotFound: true);
         m_PlayerControlElimination_SwitchEnemy = m_PlayerControlElimination.FindAction("SwitchEnemy", throwIfNotFound: true);
-        // PlayerControlGeneral
-        m_PlayerControlGeneral = asset.FindActionMap("PlayerControlGeneral", throwIfNotFound: true);
-        m_PlayerControlGeneral_PauseGame = m_PlayerControlGeneral.FindAction("PauseGame", throwIfNotFound: true);
-        m_PlayerControlGeneral_NextDialog = m_PlayerControlGeneral.FindAction("NextDialog", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -463,13 +506,118 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
+    // PlayerControlDungeon
+    private readonly InputActionMap m_PlayerControlDungeon;
+    private IPlayerControlDungeonActions m_PlayerControlDungeonActionsCallbackInterface;
+    private readonly InputAction m_PlayerControlDungeon_MoveLeftRight;
+    private readonly InputAction m_PlayerControlDungeon_Jump;
+    private readonly InputAction m_PlayerControlDungeon_ConfirmAnswer;
+    private readonly InputAction m_PlayerControlDungeon_ClearAnswer;
+    private readonly InputAction m_PlayerControlDungeon_WeaponArt;
+    public struct PlayerControlDungeonActions
+    {
+        private @MasterInput m_Wrapper;
+        public PlayerControlDungeonActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveLeftRight => m_Wrapper.m_PlayerControlDungeon_MoveLeftRight;
+        public InputAction @Jump => m_Wrapper.m_PlayerControlDungeon_Jump;
+        public InputAction @ConfirmAnswer => m_Wrapper.m_PlayerControlDungeon_ConfirmAnswer;
+        public InputAction @ClearAnswer => m_Wrapper.m_PlayerControlDungeon_ClearAnswer;
+        public InputAction @WeaponArt => m_Wrapper.m_PlayerControlDungeon_WeaponArt;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerControlDungeon; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerControlDungeonActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerControlDungeonActions instance)
+        {
+            if (m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface != null)
+            {
+                @MoveLeftRight.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnMoveLeftRight;
+                @MoveLeftRight.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnMoveLeftRight;
+                @MoveLeftRight.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnMoveLeftRight;
+                @Jump.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
+                @ConfirmAnswer.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnConfirmAnswer;
+                @ConfirmAnswer.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnConfirmAnswer;
+                @ConfirmAnswer.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnConfirmAnswer;
+                @ClearAnswer.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
+                @ClearAnswer.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
+                @ClearAnswer.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
+                @WeaponArt.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnWeaponArt;
+                @WeaponArt.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnWeaponArt;
+                @WeaponArt.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnWeaponArt;
+            }
+            m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveLeftRight.started += instance.OnMoveLeftRight;
+                @MoveLeftRight.performed += instance.OnMoveLeftRight;
+                @MoveLeftRight.canceled += instance.OnMoveLeftRight;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @ConfirmAnswer.started += instance.OnConfirmAnswer;
+                @ConfirmAnswer.performed += instance.OnConfirmAnswer;
+                @ConfirmAnswer.canceled += instance.OnConfirmAnswer;
+                @ClearAnswer.started += instance.OnClearAnswer;
+                @ClearAnswer.performed += instance.OnClearAnswer;
+                @ClearAnswer.canceled += instance.OnClearAnswer;
+                @WeaponArt.started += instance.OnWeaponArt;
+                @WeaponArt.performed += instance.OnWeaponArt;
+                @WeaponArt.canceled += instance.OnWeaponArt;
+            }
+        }
+    }
+    public PlayerControlDungeonActions @PlayerControlDungeon => new PlayerControlDungeonActions(this);
+
+    // PlayerControlGeneral
+    private readonly InputActionMap m_PlayerControlGeneral;
+    private IPlayerControlGeneralActions m_PlayerControlGeneralActionsCallbackInterface;
+    private readonly InputAction m_PlayerControlGeneral_PauseGame;
+    private readonly InputAction m_PlayerControlGeneral_NextDialog;
+    public struct PlayerControlGeneralActions
+    {
+        private @MasterInput m_Wrapper;
+        public PlayerControlGeneralActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PauseGame => m_Wrapper.m_PlayerControlGeneral_PauseGame;
+        public InputAction @NextDialog => m_Wrapper.m_PlayerControlGeneral_NextDialog;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerControlGeneral; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerControlGeneralActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerControlGeneralActions instance)
+        {
+            if (m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface != null)
+            {
+                @PauseGame.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
+                @NextDialog.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+                @NextDialog.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+                @NextDialog.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+            }
+            m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
+                @NextDialog.started += instance.OnNextDialog;
+                @NextDialog.performed += instance.OnNextDialog;
+                @NextDialog.canceled += instance.OnNextDialog;
+            }
+        }
+    }
+    public PlayerControlGeneralActions @PlayerControlGeneral => new PlayerControlGeneralActions(this);
+
     // PlayerControlExploration
     private readonly InputActionMap m_PlayerControlExploration;
     private IPlayerControlExplorationActions m_PlayerControlExplorationActionsCallbackInterface;
     private readonly InputAction m_PlayerControlExploration_Interact;
     private readonly InputAction m_PlayerControlExploration_MoveUpdown;
     private readonly InputAction m_PlayerControlExploration_MoveLeftRight;
-    private readonly InputAction m_PlayerControlExploration_Attack;
     public struct PlayerControlExplorationActions
     {
         private @MasterInput m_Wrapper;
@@ -477,7 +625,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_PlayerControlExploration_Interact;
         public InputAction @MoveUpdown => m_Wrapper.m_PlayerControlExploration_MoveUpdown;
         public InputAction @MoveLeftRight => m_Wrapper.m_PlayerControlExploration_MoveLeftRight;
-        public InputAction @Attack => m_Wrapper.m_PlayerControlExploration_Attack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlExploration; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -496,9 +643,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @MoveLeftRight.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
                 @MoveLeftRight.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
                 @MoveLeftRight.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
-                @Attack.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface = instance;
             if (instance != null)
@@ -512,62 +656,10 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @MoveLeftRight.started += instance.OnMoveLeftRight;
                 @MoveLeftRight.performed += instance.OnMoveLeftRight;
                 @MoveLeftRight.canceled += instance.OnMoveLeftRight;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
             }
         }
     }
     public PlayerControlExplorationActions @PlayerControlExploration => new PlayerControlExplorationActions(this);
-
-    // PlayerControlDungeon
-    private readonly InputActionMap m_PlayerControlDungeon;
-    private IPlayerControlDungeonActions m_PlayerControlDungeonActionsCallbackInterface;
-    private readonly InputAction m_PlayerControlDungeon_MoveLeftRight;
-    private readonly InputAction m_PlayerControlDungeon_Jump;
-    private readonly InputAction m_PlayerControlDungeon_ClearAnswer;
-    public struct PlayerControlDungeonActions
-    {
-        private @MasterInput m_Wrapper;
-        public PlayerControlDungeonActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MoveLeftRight => m_Wrapper.m_PlayerControlDungeon_MoveLeftRight;
-        public InputAction @Jump => m_Wrapper.m_PlayerControlDungeon_Jump;
-        public InputAction @ClearAnswer => m_Wrapper.m_PlayerControlDungeon_ClearAnswer;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerControlDungeon; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerControlDungeonActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerControlDungeonActions instance)
-        {
-            if (m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface != null)
-            {
-                @MoveLeftRight.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnMoveLeftRight;
-                @MoveLeftRight.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnMoveLeftRight;
-                @MoveLeftRight.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnMoveLeftRight;
-                @Jump.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnJump;
-                @ClearAnswer.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
-                @ClearAnswer.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
-                @ClearAnswer.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnClearAnswer;
-            }
-            m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @MoveLeftRight.started += instance.OnMoveLeftRight;
-                @MoveLeftRight.performed += instance.OnMoveLeftRight;
-                @MoveLeftRight.canceled += instance.OnMoveLeftRight;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
-                @ClearAnswer.started += instance.OnClearAnswer;
-                @ClearAnswer.performed += instance.OnClearAnswer;
-                @ClearAnswer.canceled += instance.OnClearAnswer;
-            }
-        }
-    }
-    public PlayerControlDungeonActions @PlayerControlDungeon => new PlayerControlDungeonActions(this);
 
     // PlayerControlElimination
     private readonly InputActionMap m_PlayerControlElimination;
@@ -617,47 +709,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         }
     }
     public PlayerControlEliminationActions @PlayerControlElimination => new PlayerControlEliminationActions(this);
-
-    // PlayerControlGeneral
-    private readonly InputActionMap m_PlayerControlGeneral;
-    private IPlayerControlGeneralActions m_PlayerControlGeneralActionsCallbackInterface;
-    private readonly InputAction m_PlayerControlGeneral_PauseGame;
-    private readonly InputAction m_PlayerControlGeneral_NextDialog;
-    public struct PlayerControlGeneralActions
-    {
-        private @MasterInput m_Wrapper;
-        public PlayerControlGeneralActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PauseGame => m_Wrapper.m_PlayerControlGeneral_PauseGame;
-        public InputAction @NextDialog => m_Wrapper.m_PlayerControlGeneral_NextDialog;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerControlGeneral; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerControlGeneralActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerControlGeneralActions instance)
-        {
-            if (m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface != null)
-            {
-                @PauseGame.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
-                @PauseGame.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
-                @PauseGame.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
-                @NextDialog.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
-                @NextDialog.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
-                @NextDialog.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
-            }
-            m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @PauseGame.started += instance.OnPauseGame;
-                @PauseGame.performed += instance.OnPauseGame;
-                @PauseGame.canceled += instance.OnPauseGame;
-                @NextDialog.started += instance.OnNextDialog;
-                @NextDialog.performed += instance.OnNextDialog;
-                @NextDialog.canceled += instance.OnNextDialog;
-            }
-        }
-    }
-    public PlayerControlGeneralActions @PlayerControlGeneral => new PlayerControlGeneralActions(this);
     private int m_KeyboardControlSchemeIndex = -1;
     public InputControlScheme KeyboardControlScheme
     {
@@ -667,28 +718,29 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeyboardControlSchemeIndex];
         }
     }
+    public interface IPlayerControlDungeonActions
+    {
+        void OnMoveLeftRight(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnConfirmAnswer(InputAction.CallbackContext context);
+        void OnClearAnswer(InputAction.CallbackContext context);
+        void OnWeaponArt(InputAction.CallbackContext context);
+    }
+    public interface IPlayerControlGeneralActions
+    {
+        void OnPauseGame(InputAction.CallbackContext context);
+        void OnNextDialog(InputAction.CallbackContext context);
+    }
     public interface IPlayerControlExplorationActions
     {
         void OnInteract(InputAction.CallbackContext context);
         void OnMoveUpdown(InputAction.CallbackContext context);
         void OnMoveLeftRight(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
-    }
-    public interface IPlayerControlDungeonActions
-    {
-        void OnMoveLeftRight(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnClearAnswer(InputAction.CallbackContext context);
     }
     public interface IPlayerControlEliminationActions
     {
         void OnEnterAnswer(InputAction.CallbackContext context);
         void OnClearAnswer(InputAction.CallbackContext context);
         void OnSwitchEnemy(InputAction.CallbackContext context);
-    }
-    public interface IPlayerControlGeneralActions
-    {
-        void OnPauseGame(InputAction.CallbackContext context);
-        void OnNextDialog(InputAction.CallbackContext context);
     }
 }

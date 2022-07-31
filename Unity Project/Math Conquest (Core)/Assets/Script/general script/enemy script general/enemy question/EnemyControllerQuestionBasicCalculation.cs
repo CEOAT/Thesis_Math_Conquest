@@ -37,6 +37,17 @@ public class EnemyControllerQuestionBasicCalculation : MonoBehaviour
     [Tooltip("Minimum answer value.")] public float minimumAnswerValue;
     [Tooltip("Maximum answer value.")] public float maximumAnswerValue;
 
+    [Header("Equation System")]
+    [Tooltip("Work as equation?")] public bool isEquation;
+    [Tooltip("Choose the type of decimal.")] public EquationSetting equationSetting;
+    public enum EquationSetting
+    {
+        xAsA,
+        xAsB,
+        xRandom
+    };
+
+
     private List<string> usedOperatorList = new List<string>();
     private string usedOperatorForQuestion;
 
@@ -46,9 +57,10 @@ public class EnemyControllerQuestionBasicCalculation : MonoBehaviour
     private List<string> usedNegativeTypeList = new List<string>();
     private string usedNegativeType;
 
+    [Header("A B and Answer")]
     [SerializeField] private float valueA;
     [SerializeField] private float valueB;
-    private string answerString;
+    [SerializeField] private string answerString;
     private string questionString;
 
     private void Start()
@@ -334,12 +346,47 @@ public class EnemyControllerQuestionBasicCalculation : MonoBehaviour
 
     private void EnemyQuestionCreate()
     {
+        if (isEquation == true)
+        {
+            EnemyQuestionCreateEquation();
+        }
+
         print("question:  " + questionString
             + "  answer:  " + answerString);
         enemyStatus.SetupEnemyQuestion(questionString, answerString);
     }
 
+    private void EnemyQuestionCreateEquation()
+    {
+        string[] equationString = questionString.Split(' ');
+        int randomEquationSetting = 0;
 
+        //type manage
+        if(equationSetting == EquationSetting.xAsA)
+        {
+            randomEquationSetting = 0;
+        }
+        if (equationSetting == EquationSetting.xAsB)
+        {
+            randomEquationSetting = 1;
+        }
+        if (equationSetting == EquationSetting.xRandom)
+        {
+            randomEquationSetting = Random.Range(0,2);
+        }
+
+        //set the equation
+        if (randomEquationSetting == 0)
+        {
+            questionString = $"X {equationString[1]} {equationString[2]} = {answerString}";
+            answerString = valueA.ToString();
+        }
+        if (randomEquationSetting == 1)
+        {
+            questionString = $"{equationString[0]} {equationString[1]} X = {answerString}";
+            answerString = valueB.ToString();
+        }
+    }
 
     private void FixedUpdate()
     {
