@@ -9,7 +9,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     [Header("Index of Dialogs (private)")]
     [SerializeField] private int dialogIndex = 0;
     [SerializeField] private bool isDialogActive;
-    [SerializeField] private int dialogSetIndex = -1;
+    [SerializeField] private int dialogSetIndex = 0;
 
     [Header("Dialog Objects")]
     public GameObject DialogUI;
@@ -52,20 +52,15 @@ public class CutsceneControllerDialog : MonoBehaviour
         playerInput.Enable();
         DialogUI.SetActive(true);
 
-        dialogSetIndex++;
         PlayNextDialog();
     }
     private void OnDisable()
     {
         playerInput.Disable();
-        DialogUI.SetActive(false);
-
-        dialogIndex = 0;
     }
 
-
     private void PlayNextDialog()
-    {        
+    {
         if (DialogUI.activeSelf == false)
         {
             return;
@@ -93,6 +88,8 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void DialogStart()
     {
+        print(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerString);
+
         speakerText.text = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerString;
         speakerImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite;
         StartCoroutine(TypeDialog(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].dialogString));
