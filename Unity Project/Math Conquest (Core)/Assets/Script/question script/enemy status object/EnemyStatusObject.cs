@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDetailObject : MonoBehaviour
+public class EnemyStatusObject : MonoBehaviour
 {
     public Transform enemyOwnDetailObject;
 

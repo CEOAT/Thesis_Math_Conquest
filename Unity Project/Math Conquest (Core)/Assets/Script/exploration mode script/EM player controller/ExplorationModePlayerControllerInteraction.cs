@@ -56,6 +56,7 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
         if (raycastHit3D.transform == null) { return; }
         if (raycastHit3D.transform.CompareTag("Interactable"))
         {
+            raycastHit3D.transform.GetComponent<ExplorationModeObjectInteractable>().Interacted();
             print(raycastHit3D.transform.name);
         }
     }

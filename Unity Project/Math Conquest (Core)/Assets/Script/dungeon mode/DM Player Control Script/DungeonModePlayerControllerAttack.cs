@@ -5,14 +5,19 @@ using TMPro;
 
 public class DungeonModePlayerControllerAttack : MonoBehaviour
 {
+    //InputSystem
     private MasterInput playerInput;
-    private PlayerControllerStatus PlayerStatus;
 
+    //Melee Attack System
     public Transform playerAttackPoint;
     public float playerAttackRadius;
     public LayerMask playerAttackLayerMask;
 
+    //Input Field
     public TMP_InputField playerAnswerField;
+
+    //Script In Same Object
+    DungeonModePlayerControllerSwitchTarget SwitchTarget;
     
     private void Awake()
     {
@@ -21,13 +26,14 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     }
     private void SetupComponent()
     {
-        PlayerStatus = GetComponent<PlayerControllerStatus>();
         playerInput = new MasterInput();
+        SwitchTarget = GetComponent<DungeonModePlayerControllerSwitchTarget>();
     }
     private void SetupControl()
     {
         playerInput.PlayerControlDungeon.ConfirmAnswer.performed += context => PlayerAttack();
         playerInput.PlayerControlDungeon.ClearAnswer.performed += context => PlayerClearInputField();
+        playerInput.PlayerControlDungeon.SwitchTarget.performed += context => PlayerSwitchTarget();
     }
 
     private void OnEnable()
@@ -73,6 +79,11 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     private void PlayerClearInputField()
     {
         playerAnswerField.text = "";
+    }
+
+    private void PlayerSwitchTarget()
+    {
+        //will implement later
     }
 
     private void FixedUpdate()
