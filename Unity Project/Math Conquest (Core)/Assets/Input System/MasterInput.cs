@@ -71,6 +71,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3ee1286-c88c-4c6d-b25e-73a116ae68bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""action"": ""ClearAnswer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ff7ca70-97fd-4883-8018-c0046018fa53"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -191,10 +211,10 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""NextDialog"",
                     ""type"": ""Button"",
-                    ""id"": ""da02ebaf-e5b3-4297-a47d-d9856f89f52b"",
+                    ""id"": ""b4499962-99ff-4757-868a-00710ca5d9e2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -212,7 +232,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0407b478-d395-46bc-9899-13015ae8a686"",
+                    ""id"": ""120ab47e-f3a2-4132-82f3-a6c5bd9ad108"",
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -223,8 +243,8 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""44224f57-05ec-4405-bb9b-463212da2986"",
-                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""id"": ""a18c0c56-1280-4aef-8c85-5beac729759c"",
+                    ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -436,6 +456,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_PlayerControlDungeon_ConfirmAnswer = m_PlayerControlDungeon.FindAction("ConfirmAnswer", throwIfNotFound: true);
         m_PlayerControlDungeon_ClearAnswer = m_PlayerControlDungeon.FindAction("ClearAnswer", throwIfNotFound: true);
         m_PlayerControlDungeon_WeaponArt = m_PlayerControlDungeon.FindAction("WeaponArt", throwIfNotFound: true);
+        m_PlayerControlDungeon_SwitchTarget = m_PlayerControlDungeon.FindAction("SwitchTarget", throwIfNotFound: true);
         // PlayerControlGeneral
         m_PlayerControlGeneral = asset.FindActionMap("PlayerControlGeneral", throwIfNotFound: true);
         m_PlayerControlGeneral_PauseGame = m_PlayerControlGeneral.FindAction("PauseGame", throwIfNotFound: true);
@@ -514,6 +535,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControlDungeon_ConfirmAnswer;
     private readonly InputAction m_PlayerControlDungeon_ClearAnswer;
     private readonly InputAction m_PlayerControlDungeon_WeaponArt;
+    private readonly InputAction m_PlayerControlDungeon_SwitchTarget;
     public struct PlayerControlDungeonActions
     {
         private @MasterInput m_Wrapper;
@@ -523,6 +545,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         public InputAction @ConfirmAnswer => m_Wrapper.m_PlayerControlDungeon_ConfirmAnswer;
         public InputAction @ClearAnswer => m_Wrapper.m_PlayerControlDungeon_ClearAnswer;
         public InputAction @WeaponArt => m_Wrapper.m_PlayerControlDungeon_WeaponArt;
+        public InputAction @SwitchTarget => m_Wrapper.m_PlayerControlDungeon_SwitchTarget;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlDungeon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -547,6 +570,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @WeaponArt.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnWeaponArt;
                 @WeaponArt.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnWeaponArt;
                 @WeaponArt.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnWeaponArt;
+                @SwitchTarget.started -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnSwitchTarget;
+                @SwitchTarget.performed -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnSwitchTarget;
+                @SwitchTarget.canceled -= m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface.OnSwitchTarget;
             }
             m_Wrapper.m_PlayerControlDungeonActionsCallbackInterface = instance;
             if (instance != null)
@@ -566,6 +592,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @WeaponArt.started += instance.OnWeaponArt;
                 @WeaponArt.performed += instance.OnWeaponArt;
                 @WeaponArt.canceled += instance.OnWeaponArt;
+                @SwitchTarget.started += instance.OnSwitchTarget;
+                @SwitchTarget.performed += instance.OnSwitchTarget;
+                @SwitchTarget.canceled += instance.OnSwitchTarget;
             }
         }
     }
@@ -725,6 +754,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         void OnConfirmAnswer(InputAction.CallbackContext context);
         void OnClearAnswer(InputAction.CallbackContext context);
         void OnWeaponArt(InputAction.CallbackContext context);
+        void OnSwitchTarget(InputAction.CallbackContext context);
     }
     public interface IPlayerControlGeneralActions
     {

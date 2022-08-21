@@ -21,6 +21,11 @@ public class EnemyControllerStatus : MonoBehaviour
     private float enemyHealthBarScale;
     private TMP_Text enemyQuestionText;
 
+    public bool isEnemySelectedUI;
+    [Range(0,1f)] public float UIUnselectedAlpha;
+    private Color HealthBarAlphaTopFull, HealthBarAlphaTopLow;
+    private Color HealthBarAlphaBottomFull, HealthBarAlphaBottomLow;
+
     [Header("Enemy Detail")]
     public string enemyName;
     
@@ -83,10 +88,18 @@ public class EnemyControllerStatus : MonoBehaviour
     private void SetupEnemyComponent()
     {
         enemyDetailObject = Instantiate(enemyDetailPrefab, transform.position, transform.rotation);
-        enemyDetailObject.GetComponent<EnemyDetailObject>().enemyOwnDetailObject = this.transform;
+        enemyDetailObject.GetComponent<EnemyStatusObject>().enemyOwnDetailObject = this.transform;
+
         enemyNameText = enemyDetailObject.transform.GetChild(0).GetComponent<TMP_Text>();
         enemyHealthBarObject = enemyDetailObject.transform.GetChild(1).transform;
-        enemyQuestionText = enemyDetailObject.transform.GetChild(2).GetComponent<TMP_Text>();
+        enemyQuestionText = enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>();
+
+        HealthBarAlphaTopFull = enemyDetailObject.transform.GetChild(1).GetComponent<SpriteRenderer>().color;       //start color + alpha
+        HealthBarAlphaBottomFull = enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color;
+        HealthBarAlphaTopLow = HealthBarAlphaTopFull;                                                                 //low opacity alpha
+        HealthBarAlphaTopLow.a = UIUnselectedAlpha;
+        HealthBarAlphaBottomLow = HealthBarAlphaBottomFull;
+        HealthBarAlphaBottomLow.a = UIUnselectedAlpha;
     }
     private void SetupEnemyStatus(string enemyName)
     {
@@ -105,6 +118,7 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         EnemyHealthCheckDestroy();
         EnemyHealthBarChangeScale();
+        EnemySelectedUI();
     }
     private void EnemyHealthCheckDestroy()
     {
@@ -118,5 +132,22 @@ public class EnemyControllerStatus : MonoBehaviour
         enemyHealthBarObject.localScale = new Vector3((enemyHealthCurrent / enemyHealthMax) * enemyHealthBarScale,
             enemyHealthBarObject.localScale.y,
             enemyHealthBarObject.localScale.z);
+    }
+    private void EnemySelectedUI()
+    {
+        if (isEnemySelectedUI == true)
+        {
+            enemyDetailObject.transform.GetChild(0).GetComponent<TMP_Text>().alpha = 1f;
+            enemyDetailObject.transform.GetChild(1).GetComponent<SpriteRenderer>().color = HealthBarAlphaTopFull;
+            enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color = HealthBarAlphaBottomFull;
+            enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>().alpha = 1f;
+        }
+        else
+        {
+            enemyDetailObject.transform.GetChild(0).GetComponent<TMP_Text>().alpha = UIUnselectedAlpha;
+            enemyDetailObject.transform.GetChild(1).GetComponent<SpriteRenderer>().color = HealthBarAlphaTopLow;
+            enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color = HealthBarAlphaBottomLow;
+            enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>().alpha = UIUnselectedAlpha;
+        }
     }
 }
