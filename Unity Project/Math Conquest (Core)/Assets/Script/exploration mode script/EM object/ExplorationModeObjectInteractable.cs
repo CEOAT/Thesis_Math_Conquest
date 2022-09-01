@@ -6,6 +6,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
 {
     public bool isReadyToInteract = true;
 
+
     [Tooltip("Type of interaction")] public InteractionType interactionType;
     public enum InteractionType
     {

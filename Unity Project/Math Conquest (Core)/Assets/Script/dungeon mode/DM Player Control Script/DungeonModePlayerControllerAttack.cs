@@ -17,7 +17,8 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     public TMP_InputField playerAnswerField;
 
     //Script In Same Object
-    DungeonModePlayerControllerSwitchTarget SwitchTarget;
+    DungeonModePlayerControllerTargetSystem SwitchTarget;
+    DungeonModePlayerControllerMovement Movement;
     
     private void Awake()
     {
@@ -27,7 +28,8 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     private void SetupComponent()
     {
         playerInput = new MasterInput();
-        SwitchTarget = GetComponent<DungeonModePlayerControllerSwitchTarget>();
+        SwitchTarget = GetComponent<DungeonModePlayerControllerTargetSystem>();
+        Movement = GetComponent<DungeonModePlayerControllerMovement>();
     }
     private void SetupControl()
     {
@@ -54,6 +56,7 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(playerAttackPoint.position, playerAttackRadius, playerAttackLayerMask);
         Transform closestEnemyTransform = null;
         float closestEnemyDistance = 0;
+        Movement.PlayerAttack();
 
         for (int i = 0; i < hitEnemies.Length; i++)
         {
@@ -72,7 +75,8 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
 
         if (closestEnemyTransform != null)
         {
-            closestEnemyTransform.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerField.text, 10f);
+
+            SwitchTarget.selectedEnemyObject.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerField.text, 10f);
             PlayerClearInputField();
         }
     }

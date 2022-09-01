@@ -12,14 +12,21 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
 
     MasterInput playerInput;
 
+    ExplorationModePlayerControllerMovement playerMovement;
+
     private void Awake()
     {
         SetupConrol();
+        SetupComponent();
     }
     private void SetupConrol()
     {
         playerInput = new MasterInput();
         playerInput.PlayerControlExploration.Interact.performed += context => PlayerInteract();
+    }
+    private void SetupComponent()
+    {
+        playerMovement = GetComponent<ExplorationModePlayerControllerMovement>();
     }
     private void OnEnable()
     {
@@ -58,6 +65,7 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
         {
             raycastHit3D.transform.GetComponent<ExplorationModeObjectInteractable>().Interacted();
             print(raycastHit3D.transform.name);
+            playerMovement.PlayerInteract();
         }
     }
 }
