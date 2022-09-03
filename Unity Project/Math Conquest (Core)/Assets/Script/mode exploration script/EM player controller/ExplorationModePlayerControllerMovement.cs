@@ -45,8 +45,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         PlayerIdle();
-        PlayerMoveUpDown();
-        PlayerMoveLeftRight();
+        PlayerMove();
         PlayerAnimation();
     }
     private void PlayerIdle()
@@ -58,10 +57,11 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             playerStatus = "idle";
         }
     }
-    private void PlayerMoveUpDown()
+    private void PlayerMove()
     {
         upDownInput = playerInput.PlayerControlExploration.MoveUpdown.ReadValue<float>();
-        
+        leftRightInput = playerInput.PlayerControlExploration.MoveLeftRight.ReadValue<float>();
+
         if (upDownInput == 1 && leftRightInput ==0)
         {
             rigidbody.AddForce(Vector3.forward * Time.deltaTime * playerMoveSpeed);
@@ -75,11 +75,6 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             playerRaycastPoint.transform.rotation = Quaternion.Euler(0, 180, 0);
             playerStatus = "run down";
         }
-    }
-    private void PlayerMoveLeftRight()
-    {
-        leftRightInput = playerInput.PlayerControlExploration.MoveLeftRight.ReadValue<float>();
-
         if (leftRightInput == 1 && upDownInput == 0)
         {
             rigidbody.AddForce(Vector3.right * Time.deltaTime * playerMoveSpeed);

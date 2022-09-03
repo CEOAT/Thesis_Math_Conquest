@@ -11,79 +11,22 @@ public class DungeonModePlayerControllerTargetSystem : MonoBehaviour
     public Transform selectedEnemyObject;
     [SerializeField] private int selectedEnemyIndex;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            AddEnemyToList(other.transform);
-            SelectionMarkOnEnter();
-            CheckEnemyIndex();
-        }
-    }
-    private void AddEnemyToList(Transform enemy)
-    {
-        if (enemyList.Count == 0)
-        {
-            enemyList.Add(enemy.transform);
-            selectedEnemyObject = enemy;
-        }
-        else if (enemyList.Count > 0)
-        {
-            if (enemyList.Contains(enemy) == false)
-            {
-                enemyList.Add(enemy.transform);
-            }
-        }
-    }
-    private void SelectionMarkOnEnter()
-    {
-        if (enemyList.Count == 1)
-        {
-            selectionMarkObject = Instantiate(selectionMarkPrefab);
-            selectionMarkObject.GetComponent<ObjectSelectionMark>().enemyTransform = enemyList[0].transform;
-        }
-    }
+    public Transform targetAreaCenterPointObject;
+    public float targetAreaXValue;
+    public float targetAreaYValue;
 
-
-    private void OnTriggerExit2D(Collider2D other)
+    private void Start()
     {
-        if (other.CompareTag("Enemy"))
-        {
-            RemoveEnemyFromList(other.transform);
-            RemoveSelectionMark();
-            CheckEnemyIndex();
-        }
+        InvokeRepeating("TargetEnemyInArea", 0.5f, 0.5f);
     }
-    private void RemoveEnemyFromList(Transform enemy)
+    private void OnDrawGizmosSelected()
     {
-        enemyList.Remove(enemy);
+        Gizmos.DrawWireCube(new Vector3(targetAreaCenterPointObject.position.x,targetAreaCenterPointObject.position.y, 0),
+            new Vector3(targetAreaXValue, targetAreaYValue, 0.5f));
     }
-    private void RemoveSelectionMark()
+    private void TargetEnemyInArea()
     {
-        if (enemyList.Count == 0)
-        {
-            selectedEnemyObject = null;
-            Destroy(selectionMarkObject);
-        }
-        else if (enemyList.Count == 1)
-        {
-            selectedEnemyObject = enemyList[0];
-            Destroy(selectionMarkObject);
-
-            selectionMarkObject = Instantiate(selectionMarkPrefab);
-            selectionMarkObject.GetComponent<ObjectSelectionMark>().enemyTransform = enemyList[0].transform;
-        }
-        else if (enemyList.Count > 1)
-        {
-            if (enemyList.Contains(selectedEnemyObject) == false)
-            {
-                selectedEnemyObject = null;
-                Destroy(selectionMarkObject);
-
-                selectionMarkObject = Instantiate(selectionMarkPrefab);
-                selectionMarkObject.GetComponent<ObjectSelectionMark>().enemyTransform = enemyList[0].transform;
-            }
-        }
+        print("repeating");
     }
 
 
@@ -91,9 +34,25 @@ public class DungeonModePlayerControllerTargetSystem : MonoBehaviour
     {
         selectedEnemyIndex = enemyList.IndexOf(selectedEnemyObject);
     }
-    private void SelectEnemy()  //can be pressed when there 2 more target
+    private void SwitchEnemy()  //can be pressed when there 2 more target
     {
+        //increase index number
+        //if there's more than 1 enemy, increase index and loop to 0.
+        //if -1 (no enemy) just return
 
+        if (enemyList.Count <= 1)
+        {
+            return;
+        }
+        else if (enemyList.Count > 1)
+        {
+            if (selectedEnemyIndex + 2 > enemyList.Count)
+            {
+                selectedEnemyIndex++;
+                return;
+            }
+            selectedEnemyIndex++;
+        }
     }
 }
 
