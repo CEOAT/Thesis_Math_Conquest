@@ -53,29 +53,10 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     }
     private void PlayerAttack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(playerAttackPoint.position, playerAttackRadius, playerAttackLayerMask);
-        Transform closestEnemyTransform = null;
-        float closestEnemyDistance = 0;
         Movement.PlayerAttack();
 
-        for (int i = 0; i < hitEnemies.Length; i++)
+        if (SwitchTarget.selectedEnemyObject != null)
         {
-            if (closestEnemyTransform == null)
-            {
-                closestEnemyTransform = hitEnemies[i].transform;
-                closestEnemyDistance = Vector2.Distance(transform.position, hitEnemies[i].transform.position);
-            }
-            if (Vector2.Distance(transform.position, hitEnemies[i].transform.position) < closestEnemyDistance
-                && hitEnemies.Length > 0)
-            {
-                closestEnemyTransform = hitEnemies[i].transform;
-                closestEnemyDistance = Vector2.Distance(transform.position, hitEnemies[i].transform.position);
-            }
-        }
-
-        if (closestEnemyTransform != null)
-        {
-
             SwitchTarget.selectedEnemyObject.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerField.text, 10f);
             PlayerClearInputField();
         }
