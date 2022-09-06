@@ -5,20 +5,20 @@ using UnityEngine;
 public class ObjectSelectionMark : MonoBehaviour
 {
     public Transform enemyTransform;
+    private bool isObjectDeativated = false;
 
     private void Start()
     {
         enemyTransform.GetComponent<EnemyControllerStatus>().isEnemySelectedUI = true;
     }
-    private void OnDestroy()
-    {
-        enemyTransform.GetComponent<EnemyControllerStatus>().isEnemySelectedUI = false;
-    }
 
     private void FixedUpdate()
     {
-        if (enemyTransform == null)
+        if (enemyTransform == null && isObjectDeativated == false)
         {
+            isObjectDeativated = true;
+            enemyTransform.GetComponent<EnemyControllerStatus>().isEnemySelectedUI = false;
+            Destroy(this.gameObject);
             return;
         }
         else

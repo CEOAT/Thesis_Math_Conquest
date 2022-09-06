@@ -17,7 +17,7 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     public TMP_InputField playerAnswerField;
 
     //Script In Same Object
-    DungeonModePlayerControllerTargetSystem SwitchTarget;
+    DungeonModePlayerControllerTargetSystem TargetSystem;
     DungeonModePlayerControllerMovement Movement;
     
     private void Awake()
@@ -28,7 +28,7 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     private void SetupComponent()
     {
         playerInput = new MasterInput();
-        SwitchTarget = GetComponent<DungeonModePlayerControllerTargetSystem>();
+        TargetSystem = GetComponent<DungeonModePlayerControllerTargetSystem>();
         Movement = GetComponent<DungeonModePlayerControllerMovement>();
     }
     private void SetupControl()
@@ -55,10 +55,20 @@ public class DungeonModePlayerControllerAttack : MonoBehaviour
     {
         Movement.PlayerAttack();
 
-        if (SwitchTarget.selectedEnemyObject != null)
+        if (TargetSystem.selectedEnemyObject != null)
         {
-            SwitchTarget.selectedEnemyObject.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerField.text, 10f);
-            PlayerClearInputField();
+            Collider2D[] enemyInAttackCircle = Physics2D.OverlapCircleAll(playerAttackPoint.position, 
+            playerAttackRadius,
+            playerAttackLayerMask);
+            
+            foreach (Collider2D enemy in enemyInAttackCircle)
+            {
+                if (TargetSystem.enemyList.Contains(enemy.transform) == true)
+                {
+                    TargetSystem.selectedEnemyObject.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerField.text, 50f);
+                    PlayerClearInputField();
+                }
+            }
         }
     }
     private void PlayerClearInputField()

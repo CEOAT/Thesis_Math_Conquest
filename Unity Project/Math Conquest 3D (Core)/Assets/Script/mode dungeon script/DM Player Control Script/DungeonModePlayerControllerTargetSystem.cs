@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DungeonModePlayerControllerTargetSystem : MonoBehaviour
 {
-    [SerializeField]private List<Transform> enemyList = new List<Transform>();
+    public List<Transform> enemyList = new List<Transform>();
     private LayerMask playerAttackLayerMask;
     private DungeonModePlayerControllerAttack AttackSystem;
 
@@ -29,7 +29,7 @@ public class DungeonModePlayerControllerTargetSystem : MonoBehaviour
         playerAttackLayerMask = AttackSystem.playerAttackLayerMask;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(new Vector3(targetAreaCenterPointObject.position.x,targetAreaCenterPointObject.position.y, 0),
@@ -49,6 +49,22 @@ public class DungeonModePlayerControllerTargetSystem : MonoBehaviour
             0f,                                                                                             //angle of box
             playerAttackLayerMask);                                                                         //get mask from player attack script ("enemy" layer)
 
+        if (enemiesInTargetArea.Length < enemyList.Count)
+        {
+            int enemyListCount = enemyList.Count;
+            for (int i = enemyListCount - 1; i >= 0; i--)
+            {
+                if (enemyList[i] == null)
+                {
+                    enemyList.RemoveAt(i);
+                }
+                else if (enemiesInTargetArea.Equals(enemyList[i].transform) == false)
+                {
+                    enemyList.Remove(enemyList[i].transform);
+                }
+            }
+        }
+
         foreach (Collider2D enemy in enemiesInTargetArea)
         {
             if (enemyList.Count == 0)
@@ -60,18 +76,6 @@ public class DungeonModePlayerControllerTargetSystem : MonoBehaviour
                 if (enemyList.Contains(enemy.transform) == false)
                 {
                     enemyList.Add(enemy.transform);
-                }
-            }
-        }
-
-        if (enemiesInTargetArea.Length < enemyList.Count)
-        {
-            int enemyListCount = enemyList.Count;
-            for (int i = enemyListCount; i > 0; i--)
-            {
-                if (enemiesInTargetArea.Equals(enemyList[i - 1].transform) == false)
-                {
-                    enemyList.Remove(enemyList[i - 1].transform);
                 }
             }
         }
