@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +123,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionAnswer: 
   isQuestionActive: 0
-  enemyDetailPrefab: {fileID: 6903029698676314509, guid: 743233d8b41a19b408a3faaba83496e0, type: 3}
+  enemyDetailPrefab: {fileID: 6903029698676314509, guid: 743233d8b41a19b408a3faaba83496e0,
+    type: 3}
+  isEnemySelectedUI: 0
+  UIUnselectedAlpha: 0
   enemyName: 
   enemyHealthMax: 100
   enemyHealthCurrent: 1
@@ -154,8 +158,11 @@ MonoBehaviour:
   isAllowOne: 1
   minimumAnswerValue: 1
   maximumAnswerValue: 15
+  isEquation: 0
+  equationSetting: 0
   valueA: 0
   valueB: 0
+  answerString: 
 --- !u!114 &3158167193069395393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +179,8 @@ MonoBehaviour:
   isEnemyActive: 0
   isEnemyStartActionFirstTime: 0
   enemyMoveSpeed: 0
+  enemyDestinationDistancePlayer: 0
+  enemyDestinationSpawnPoint: {x: 0, y: 0}
   enemyChargeAttackTime: 3
   enemyHoldAttackTime: 3
   enemyWearDownTime: 5
