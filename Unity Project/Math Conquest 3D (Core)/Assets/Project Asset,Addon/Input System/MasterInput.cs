@@ -433,6 +433,34 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""WindowControl"",
+            ""id"": ""9d792cc8-e9d0-4577-8d5d-da69ab4a402b"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""29c61b4a-991d-42c9-813b-d2d22a78afde"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""37d9bfb6-363f-4b1e-971b-6f616e8e9c8a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -471,6 +499,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_PlayerControlElimination_EnterAnswer = m_PlayerControlElimination.FindAction("EnterAnswer", throwIfNotFound: true);
         m_PlayerControlElimination_ClearAnswer = m_PlayerControlElimination.FindAction("ClearAnswer", throwIfNotFound: true);
         m_PlayerControlElimination_SwitchEnemy = m_PlayerControlElimination.FindAction("SwitchEnemy", throwIfNotFound: true);
+        // WindowControl
+        m_WindowControl = asset.FindActionMap("WindowControl", throwIfNotFound: true);
+        m_WindowControl_Newaction = m_WindowControl.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -738,6 +769,39 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         }
     }
     public PlayerControlEliminationActions @PlayerControlElimination => new PlayerControlEliminationActions(this);
+
+    // WindowControl
+    private readonly InputActionMap m_WindowControl;
+    private IWindowControlActions m_WindowControlActionsCallbackInterface;
+    private readonly InputAction m_WindowControl_Newaction;
+    public struct WindowControlActions
+    {
+        private @MasterInput m_Wrapper;
+        public WindowControlActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_WindowControl_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_WindowControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(WindowControlActions set) { return set.Get(); }
+        public void SetCallbacks(IWindowControlActions instance)
+        {
+            if (m_Wrapper.m_WindowControlActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_WindowControlActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public WindowControlActions @WindowControl => new WindowControlActions(this);
     private int m_KeyboardControlSchemeIndex = -1;
     public InputControlScheme KeyboardControlScheme
     {
@@ -772,5 +836,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         void OnEnterAnswer(InputAction.CallbackContext context);
         void OnClearAnswer(InputAction.CallbackContext context);
         void OnSwitchEnemy(InputAction.CallbackContext context);
+    }
+    public interface IWindowControlActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
