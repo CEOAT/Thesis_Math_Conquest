@@ -15,16 +15,40 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
     private List<int> letterIndexArrayEncryptedList = new List<int>();
     private List<string> letterEncryptedList = new List<string>();
     public string encryptedWord;
+    public string encryptionPuzzleDescription;
 
+    private ExplorationModeObjectInteractableWindow PuzzleWindow;
 
-    private void Start()
+    private void Awake()
     {
+        SetupComponent();
+        SetPuzzleWindow();
+    }
+    private void SetupComponent()
+    {
+        PuzzleWindow = GetComponent<ExplorationModeObjectInteractableWindow>();
+    }
+
+    private void SetPuzzleWindow()
+    {
+        CreateEncryptedWord();
+        PuzzleWindow.SetupWindow(encryptedWord, encryptionPuzzleDescription, wordToEncrypt);
+    }
+    private void CreateEncryptedWord()
+    {
+        ClearWordAfterReset();
         RandomWordFormList();
         ConvertWordToLetterArray();
         ConvertLetterArrayToIndexArray();
         IncreaseLetterIndexArray();
         ConvertIndexArrayTostring();
         CreateStringFromStringList();
+    }
+    private void ClearWordAfterReset()
+    {
+        letterIndexArrayToEncryptList.Clear();
+        letterIndexArrayEncryptedList.Clear();
+        letterEncryptedList.Clear();
     }
     private void RandomWordFormList()
     {
@@ -98,6 +122,16 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
         foreach (string letter in letterEncryptedList)
         {
             encryptedWord += letter;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (PuzzleWindow.isWindowReset == true)
+        {
+            SetPuzzleWindow();
+            PuzzleWindow.isWindowReset = false;
+            print("checker");
         }
     }
 }

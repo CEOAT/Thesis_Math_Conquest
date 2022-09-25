@@ -417,12 +417,21 @@
             "id": "9d792cc8-e9d0-4577-8d5d-da69ab4a402b",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "ConfirmAnswer",
                     "type": "Button",
                     "id": "29c61b4a-991d-42c9-813b-d2d22a78afde",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseWindow",
+                    "type": "Button",
+                    "id": "17cc94ff-b7dc-4a66-a76c-a64500d9b866",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -430,11 +439,22 @@
                 {
                     "name": "",
                     "id": "37d9bfb6-363f-4b1e-971b-6f616e8e9c8a",
-                    "path": "",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "ConfirmAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f2b8066-51f7-4dee-b638-a27a091bbebd",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

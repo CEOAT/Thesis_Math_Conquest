@@ -6,8 +6,8 @@ using System;
 
 public class ExplorationModeObjectInteractable : MonoBehaviour
 {
-    public delegate void Interact();
-    public static event Interact interaction;
+    public delegate void PuzzleInteract();
+    public static event PuzzleInteract puzzleInteract;
 
     public bool isReadyToInteract = true;
 
@@ -23,18 +23,28 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     {
         if (isReadyToInteract || !isReadyToInteract)
         {
-            GetInteraction();
-            interaction();
+
+            puzzleInteract();
+            if (isReadyToInteract == true)
+            {
+                isReadyToInteract = false;
+                GetInteraction();
+            }
+            else
+            {
+                isReadyToInteract = true;
+                LeaveInteraction();
+            }
         }
 
     }
     private void GetInteraction()   //when interact successful **subcribe to this
     {
-        isReadyToInteract = !isReadyToInteract;
+        
     }
     private void LeaveInteraction() //call when close the window or leave interaction **reference this method
     {
-        isReadyToInteract = true;
+        
     }   
 }
 

@@ -439,12 +439,21 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
             ""id"": ""9d792cc8-e9d0-4577-8d5d-da69ab4a402b"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""ConfirmAnswer"",
                     ""type"": ""Button"",
                     ""id"": ""29c61b4a-991d-42c9-813b-d2d22a78afde"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseWindow"",
+                    ""type"": ""Button"",
+                    ""id"": ""17cc94ff-b7dc-4a66-a76c-a64500d9b866"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -452,11 +461,22 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""37d9bfb6-363f-4b1e-971b-6f616e8e9c8a"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""ConfirmAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f2b8066-51f7-4dee-b638-a27a091bbebd"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseWindow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -501,7 +521,8 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_PlayerControlElimination_SwitchEnemy = m_PlayerControlElimination.FindAction("SwitchEnemy", throwIfNotFound: true);
         // WindowControl
         m_WindowControl = asset.FindActionMap("WindowControl", throwIfNotFound: true);
-        m_WindowControl_Newaction = m_WindowControl.FindAction("New action", throwIfNotFound: true);
+        m_WindowControl_ConfirmAnswer = m_WindowControl.FindAction("ConfirmAnswer", throwIfNotFound: true);
+        m_WindowControl_CloseWindow = m_WindowControl.FindAction("CloseWindow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -773,12 +794,14 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     // WindowControl
     private readonly InputActionMap m_WindowControl;
     private IWindowControlActions m_WindowControlActionsCallbackInterface;
-    private readonly InputAction m_WindowControl_Newaction;
+    private readonly InputAction m_WindowControl_ConfirmAnswer;
+    private readonly InputAction m_WindowControl_CloseWindow;
     public struct WindowControlActions
     {
         private @MasterInput m_Wrapper;
         public WindowControlActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_WindowControl_Newaction;
+        public InputAction @ConfirmAnswer => m_Wrapper.m_WindowControl_ConfirmAnswer;
+        public InputAction @CloseWindow => m_Wrapper.m_WindowControl_CloseWindow;
         public InputActionMap Get() { return m_Wrapper.m_WindowControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -788,16 +811,22 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_WindowControlActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNewaction;
+                @ConfirmAnswer.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnConfirmAnswer;
+                @ConfirmAnswer.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnConfirmAnswer;
+                @ConfirmAnswer.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnConfirmAnswer;
+                @CloseWindow.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
+                @CloseWindow.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
+                @CloseWindow.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
             }
             m_Wrapper.m_WindowControlActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @ConfirmAnswer.started += instance.OnConfirmAnswer;
+                @ConfirmAnswer.performed += instance.OnConfirmAnswer;
+                @ConfirmAnswer.canceled += instance.OnConfirmAnswer;
+                @CloseWindow.started += instance.OnCloseWindow;
+                @CloseWindow.performed += instance.OnCloseWindow;
+                @CloseWindow.canceled += instance.OnCloseWindow;
             }
         }
     }
@@ -839,6 +868,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     }
     public interface IWindowControlActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnConfirmAnswer(InputAction.CallbackContext context);
+        void OnCloseWindow(InputAction.CallbackContext context);
     }
 }
