@@ -62,30 +62,36 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         upDownInput = playerInput.PlayerControlExploration.MoveUpdown.ReadValue<float>();
         leftRightInput = playerInput.PlayerControlExploration.MoveLeftRight.ReadValue<float>();
 
-        if (upDownInput == 1 && leftRightInput ==0)
+        if (upDownInput == 1)
         {
             rigidbody.AddForce(Vector3.forward * Time.deltaTime * playerMoveSpeed);
             playerRaycastPoint.transform.rotation = Quaternion.Euler(0, 0, 0);
             playerStatus = "run up";
 
         }
-        if (upDownInput == -1 && leftRightInput == 0)
+        if (upDownInput == -1)
         {
             rigidbody.AddForce(-Vector3.forward * Time.deltaTime * playerMoveSpeed);
             playerRaycastPoint.transform.rotation = Quaternion.Euler(0, 180, 0);
             playerStatus = "run down";
         }
-        if (leftRightInput == 1 && upDownInput == 0)
+        if (leftRightInput == 1)
         {
             rigidbody.AddForce(Vector3.right * Time.deltaTime * playerMoveSpeed);
             playerRaycastPoint.transform.rotation = Quaternion.Euler(0, 90, 0);
-            playerStatus = "run right";
+            if (leftRightInput == 1 && upDownInput == 0)
+            {
+                playerStatus = "run right";
+            }
         }
-        if (leftRightInput == -1 && upDownInput == 0)
+        if (leftRightInput == -1)
         {
             rigidbody.AddForce(-Vector3.right * Time.deltaTime * playerMoveSpeed);
             playerRaycastPoint.transform.rotation = Quaternion.Euler(0, -90, 0);
-            playerStatus = "run left";
+            if (leftRightInput == -1 && upDownInput == 0)
+            {
+                playerStatus = "run left";
+            }
         }
     }
     private void PlayerAnimation()
