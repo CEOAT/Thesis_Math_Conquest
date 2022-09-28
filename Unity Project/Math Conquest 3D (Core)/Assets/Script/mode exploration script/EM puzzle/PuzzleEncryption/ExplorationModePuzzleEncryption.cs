@@ -131,7 +131,6 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
         {
             SetPuzzleWindow();
             PuzzleWindow.isWindowReset = false;
-            print("checker");
         }
     }
 }

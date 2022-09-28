@@ -6,12 +6,19 @@ using TMPro;
 public class ExplorationModeObjectInteractableWindow : MonoBehaviour
 {
     public GameObject windowGroup;
-    public TMP_Text windowTextPuzzle;
+    public TMP_Text windowTextPuzzleProblem;
     public TMP_Text windowTextDescription;
+    public TMP_Text windowTextPuzzleCompleteCount;
     public TMP_InputField windowInputField;
 
     public string windowAnswer;
     public bool isWindowReset;
+
+    public int puzzleCompleteCount;
+    public int puzzleCompleteMaximum;
+
+    public delegate void PuzzleReaction();
+    public static event PuzzleReaction puzzleReaction;
 
     private MasterInput playerInput;
 
@@ -32,10 +39,6 @@ public class ExplorationModeObjectInteractableWindow : MonoBehaviour
         SetupControl();
         SetupObject();
     }
-    private void SetupObject()
-    {
-        windowGroup.SetActive(false);
-    }
     private void SetupComponent()
     {
         playerInput = new MasterInput();
@@ -46,10 +49,15 @@ public class ExplorationModeObjectInteractableWindow : MonoBehaviour
         playerInput.WindowControl.CloseWindow.performed += context => CloseWindow();
         playerInput.WindowControl.ConfirmAnswer.performed += context => ConfirmAnswer();
     }
+    private void SetupObject()
+    {
+        windowGroup.SetActive(false);
+        windowTextPuzzleCompleteCount.text = $"Complete:\n{puzzleCompleteCount} / {puzzleCompleteMaximum}";
+    }
 
     public void SetupWindow(string textPuzzle, string textDescription, string puzzleAnswer)
     {
-        windowTextPuzzle.text = textPuzzle;
+        windowTextPuzzleProblem.text = textPuzzle;
         windowTextDescription.text = textDescription;
         windowAnswer = puzzleAnswer;
     }
@@ -58,12 +66,16 @@ public class ExplorationModeObjectInteractableWindow : MonoBehaviour
     {
         if (windowGroup.activeInHierarchy == false)
         {
-            windowGroup.SetActive(true);
+            OpenWindow();
         }
         else if (windowGroup.activeInHierarchy == true)
         {
             CloseWindow();
         }
+    }
+    private void OpenWindow()
+    {
+        windowGroup.SetActive(true);
     }
     private void CloseWindow()
     {
@@ -75,12 +87,27 @@ public class ExplorationModeObjectInteractableWindow : MonoBehaviour
         {
             if (windowInputField.text.ToString().ToUpper() == windowAnswer && isWindowReset == false)
             {
-                print("correct");
-                isWindowReset = true;
+                if (puzzleCompleteCount + 1 == puzzleCompleteMaximum)
+                {
+                    puzzleCompleteCount++;
+                    PuzzleComplete();
+                    WindowActivation();   //will be replaced with close window animation
+                }
+                else
+                {
+                    isWindowReset = true;
+                    puzzleCompleteCount++;
+                }
             }
+            windowTextPuzzleCompleteCount.text = $"Complete:\n{puzzleCompleteCount} / {puzzleCompleteMaximum}";
         }
         windowInputField.text = "";
+    }
 
+    private void PuzzleComplete()
+    {
+        print("puzzle complete");
+        puzzleReaction();
     }
 
     private void FixedUpdate()
