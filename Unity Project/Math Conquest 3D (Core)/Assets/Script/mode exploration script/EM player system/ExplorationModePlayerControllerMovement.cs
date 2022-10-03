@@ -5,10 +5,15 @@ using UnityEngine;
 public class ExplorationModePlayerControllerMovement : MonoBehaviour
 {
     public float playerMoveSpeed = 5f;
+    public float playerWalkSpeed = 5f;
+    public float playerRunSpeed = 10f;
+    [SerializeField] private bool isBoostSpeed;
+    [SerializeField] private bool canControlCharacter = false;
     public Transform playerRaycastPoint;
 
     private float upDownInput;
     private float leftRightInput;
+    private float runInput;
 
     Rigidbody rigidbody;
     MasterInput playerInput;
@@ -31,6 +36,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     private void SetupControl()
     {
         playerInput = new MasterInput();
+        playerMoveSpeed = playerRunSpeed;
     }
 
     private void OnEnable()
@@ -46,6 +52,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     {
         PlayerIdle();
         PlayerMove();
+        PlayerRun();
         PlayerAnimation();
     }
     private void PlayerIdle()
@@ -94,6 +101,33 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             }
         }
     }
+    private void PlayerRun()
+    {
+        runInput = playerInput.PlayerControlExploration.Run.ReadValue<float>();
+        if (runInput == 1)
+        {
+            playerMoveSpeed = playerRunSpeed;
+        }
+        else
+        {
+            playerMoveSpeed = playerWalkSpeed;
+        }
+    }
+
+    public void PlayerHurt()   // temporary disable player's movement
+    {
+
+    }
+    public void PlayerDead()   // disable all player action. game controller - disable pause button, player controller - diable all movement
+    {
+
+    }
+
+    public void AllowPlayerToControl()
+    {
+
+    }
+
     private void PlayerAnimation()
     {
         if (playerStatus == "idle")

@@ -196,6 +196,74 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
             ]
         },
         {
+            ""name"": ""PlayerControlElimination"",
+            ""id"": ""66507642-8aa9-48e2-8497-6acf4985e772"",
+            ""actions"": [
+                {
+                    ""name"": ""EnterAnswer"",
+                    ""type"": ""Button"",
+                    ""id"": ""3eb0adb7-e91d-44a1-bb64-bbd36d77c74c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClearAnswer"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e8fd122-b929-498a-869c-ef793734d1f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchEnemy"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b21754b-9cb5-44e5-92b5-ea73c24c45a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e7a3b993-33a9-4d2c-8812-58e6be0ad2ea"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnterAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9cc321cd-81fc-444f-ab66-618e16c98b02"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClearAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d4fea7c-25a5-4261-b3b8-2fe2af7ef664"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchEnemy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""PlayerControlGeneral"",
             ""id"": ""a955f81a-466e-46f2-9699-474cecb18e67"",
             ""actions"": [
@@ -284,6 +352,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""723245de-a180-4462-8d76-37e74fd0b1ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -363,74 +440,39 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""action"": ""MoveLeftRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""PlayerControlElimination"",
-            ""id"": ""66507642-8aa9-48e2-8497-6acf4985e772"",
-            ""actions"": [
-                {
-                    ""name"": ""EnterAnswer"",
-                    ""type"": ""Button"",
-                    ""id"": ""3eb0adb7-e91d-44a1-bb64-bbd36d77c74c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ClearAnswer"",
-                    ""type"": ""Button"",
-                    ""id"": ""5e8fd122-b929-498a-869c-ef793734d1f0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchEnemy"",
-                    ""type"": ""Button"",
-                    ""id"": ""6b21754b-9cb5-44e5-92b5-ea73c24c45a1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""e7a3b993-33a9-4d2c-8812-58e6be0ad2ea"",
-                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""7c722b73-0542-496b-97ea-d640e5101ecd"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""EnterAnswer"",
-                    ""isComposite"": false,
+                    ""action"": ""Run"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""9cc321cd-81fc-444f-ab66-618e16c98b02"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""name"": ""positive"",
+                    ""id"": ""05994b3c-0aa7-4fe8-906c-7e09d6d65d2d"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ClearAnswer"",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""6d4fea7c-25a5-4261-b3b8-2fe2af7ef664"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""name"": ""negative"",
+                    ""id"": ""956c19bf-f0e2-4b4b-a869-72b9bceccf21"",
+                    ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwitchEnemy"",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -505,6 +547,11 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_PlayerControlDungeon_ClearAnswer = m_PlayerControlDungeon.FindAction("ClearAnswer", throwIfNotFound: true);
         m_PlayerControlDungeon_WeaponArt = m_PlayerControlDungeon.FindAction("WeaponArt", throwIfNotFound: true);
         m_PlayerControlDungeon_SwitchTarget = m_PlayerControlDungeon.FindAction("SwitchTarget", throwIfNotFound: true);
+        // PlayerControlElimination
+        m_PlayerControlElimination = asset.FindActionMap("PlayerControlElimination", throwIfNotFound: true);
+        m_PlayerControlElimination_EnterAnswer = m_PlayerControlElimination.FindAction("EnterAnswer", throwIfNotFound: true);
+        m_PlayerControlElimination_ClearAnswer = m_PlayerControlElimination.FindAction("ClearAnswer", throwIfNotFound: true);
+        m_PlayerControlElimination_SwitchEnemy = m_PlayerControlElimination.FindAction("SwitchEnemy", throwIfNotFound: true);
         // PlayerControlGeneral
         m_PlayerControlGeneral = asset.FindActionMap("PlayerControlGeneral", throwIfNotFound: true);
         m_PlayerControlGeneral_PauseGame = m_PlayerControlGeneral.FindAction("PauseGame", throwIfNotFound: true);
@@ -514,11 +561,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_PlayerControlExploration_Interact = m_PlayerControlExploration.FindAction("Interact", throwIfNotFound: true);
         m_PlayerControlExploration_MoveUpdown = m_PlayerControlExploration.FindAction("MoveUpdown", throwIfNotFound: true);
         m_PlayerControlExploration_MoveLeftRight = m_PlayerControlExploration.FindAction("MoveLeftRight", throwIfNotFound: true);
-        // PlayerControlElimination
-        m_PlayerControlElimination = asset.FindActionMap("PlayerControlElimination", throwIfNotFound: true);
-        m_PlayerControlElimination_EnterAnswer = m_PlayerControlElimination.FindAction("EnterAnswer", throwIfNotFound: true);
-        m_PlayerControlElimination_ClearAnswer = m_PlayerControlElimination.FindAction("ClearAnswer", throwIfNotFound: true);
-        m_PlayerControlElimination_SwitchEnemy = m_PlayerControlElimination.FindAction("SwitchEnemy", throwIfNotFound: true);
+        m_PlayerControlExploration_Run = m_PlayerControlExploration.FindAction("Run", throwIfNotFound: true);
         // WindowControl
         m_WindowControl = asset.FindActionMap("WindowControl", throwIfNotFound: true);
         m_WindowControl_ConfirmAnswer = m_WindowControl.FindAction("ConfirmAnswer", throwIfNotFound: true);
@@ -652,96 +695,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     }
     public PlayerControlDungeonActions @PlayerControlDungeon => new PlayerControlDungeonActions(this);
 
-    // PlayerControlGeneral
-    private readonly InputActionMap m_PlayerControlGeneral;
-    private IPlayerControlGeneralActions m_PlayerControlGeneralActionsCallbackInterface;
-    private readonly InputAction m_PlayerControlGeneral_PauseGame;
-    private readonly InputAction m_PlayerControlGeneral_NextDialog;
-    public struct PlayerControlGeneralActions
-    {
-        private @MasterInput m_Wrapper;
-        public PlayerControlGeneralActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PauseGame => m_Wrapper.m_PlayerControlGeneral_PauseGame;
-        public InputAction @NextDialog => m_Wrapper.m_PlayerControlGeneral_NextDialog;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerControlGeneral; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerControlGeneralActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerControlGeneralActions instance)
-        {
-            if (m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface != null)
-            {
-                @PauseGame.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
-                @PauseGame.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
-                @PauseGame.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
-                @NextDialog.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
-                @NextDialog.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
-                @NextDialog.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
-            }
-            m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @PauseGame.started += instance.OnPauseGame;
-                @PauseGame.performed += instance.OnPauseGame;
-                @PauseGame.canceled += instance.OnPauseGame;
-                @NextDialog.started += instance.OnNextDialog;
-                @NextDialog.performed += instance.OnNextDialog;
-                @NextDialog.canceled += instance.OnNextDialog;
-            }
-        }
-    }
-    public PlayerControlGeneralActions @PlayerControlGeneral => new PlayerControlGeneralActions(this);
-
-    // PlayerControlExploration
-    private readonly InputActionMap m_PlayerControlExploration;
-    private IPlayerControlExplorationActions m_PlayerControlExplorationActionsCallbackInterface;
-    private readonly InputAction m_PlayerControlExploration_Interact;
-    private readonly InputAction m_PlayerControlExploration_MoveUpdown;
-    private readonly InputAction m_PlayerControlExploration_MoveLeftRight;
-    public struct PlayerControlExplorationActions
-    {
-        private @MasterInput m_Wrapper;
-        public PlayerControlExplorationActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Interact => m_Wrapper.m_PlayerControlExploration_Interact;
-        public InputAction @MoveUpdown => m_Wrapper.m_PlayerControlExploration_MoveUpdown;
-        public InputAction @MoveLeftRight => m_Wrapper.m_PlayerControlExploration_MoveLeftRight;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerControlExploration; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerControlExplorationActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerControlExplorationActions instance)
-        {
-            if (m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface != null)
-            {
-                @Interact.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
-                @MoveUpdown.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
-                @MoveUpdown.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
-                @MoveUpdown.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
-                @MoveLeftRight.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
-                @MoveLeftRight.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
-                @MoveLeftRight.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
-            }
-            m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
-                @MoveUpdown.started += instance.OnMoveUpdown;
-                @MoveUpdown.performed += instance.OnMoveUpdown;
-                @MoveUpdown.canceled += instance.OnMoveUpdown;
-                @MoveLeftRight.started += instance.OnMoveLeftRight;
-                @MoveLeftRight.performed += instance.OnMoveLeftRight;
-                @MoveLeftRight.canceled += instance.OnMoveLeftRight;
-            }
-        }
-    }
-    public PlayerControlExplorationActions @PlayerControlExploration => new PlayerControlExplorationActions(this);
-
     // PlayerControlElimination
     private readonly InputActionMap m_PlayerControlElimination;
     private IPlayerControlEliminationActions m_PlayerControlEliminationActionsCallbackInterface;
@@ -790,6 +743,104 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         }
     }
     public PlayerControlEliminationActions @PlayerControlElimination => new PlayerControlEliminationActions(this);
+
+    // PlayerControlGeneral
+    private readonly InputActionMap m_PlayerControlGeneral;
+    private IPlayerControlGeneralActions m_PlayerControlGeneralActionsCallbackInterface;
+    private readonly InputAction m_PlayerControlGeneral_PauseGame;
+    private readonly InputAction m_PlayerControlGeneral_NextDialog;
+    public struct PlayerControlGeneralActions
+    {
+        private @MasterInput m_Wrapper;
+        public PlayerControlGeneralActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PauseGame => m_Wrapper.m_PlayerControlGeneral_PauseGame;
+        public InputAction @NextDialog => m_Wrapper.m_PlayerControlGeneral_NextDialog;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerControlGeneral; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerControlGeneralActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerControlGeneralActions instance)
+        {
+            if (m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface != null)
+            {
+                @PauseGame.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnPauseGame;
+                @NextDialog.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+                @NextDialog.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+                @NextDialog.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+            }
+            m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
+                @NextDialog.started += instance.OnNextDialog;
+                @NextDialog.performed += instance.OnNextDialog;
+                @NextDialog.canceled += instance.OnNextDialog;
+            }
+        }
+    }
+    public PlayerControlGeneralActions @PlayerControlGeneral => new PlayerControlGeneralActions(this);
+
+    // PlayerControlExploration
+    private readonly InputActionMap m_PlayerControlExploration;
+    private IPlayerControlExplorationActions m_PlayerControlExplorationActionsCallbackInterface;
+    private readonly InputAction m_PlayerControlExploration_Interact;
+    private readonly InputAction m_PlayerControlExploration_MoveUpdown;
+    private readonly InputAction m_PlayerControlExploration_MoveLeftRight;
+    private readonly InputAction m_PlayerControlExploration_Run;
+    public struct PlayerControlExplorationActions
+    {
+        private @MasterInput m_Wrapper;
+        public PlayerControlExplorationActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_PlayerControlExploration_Interact;
+        public InputAction @MoveUpdown => m_Wrapper.m_PlayerControlExploration_MoveUpdown;
+        public InputAction @MoveLeftRight => m_Wrapper.m_PlayerControlExploration_MoveLeftRight;
+        public InputAction @Run => m_Wrapper.m_PlayerControlExploration_Run;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerControlExploration; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerControlExplorationActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerControlExplorationActions instance)
+        {
+            if (m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface != null)
+            {
+                @Interact.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
+                @MoveUpdown.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
+                @MoveUpdown.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
+                @MoveUpdown.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
+                @MoveLeftRight.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
+                @MoveLeftRight.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
+                @MoveLeftRight.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveLeftRight;
+                @Run.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnRun;
+            }
+            m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @MoveUpdown.started += instance.OnMoveUpdown;
+                @MoveUpdown.performed += instance.OnMoveUpdown;
+                @MoveUpdown.canceled += instance.OnMoveUpdown;
+                @MoveLeftRight.started += instance.OnMoveLeftRight;
+                @MoveLeftRight.performed += instance.OnMoveLeftRight;
+                @MoveLeftRight.canceled += instance.OnMoveLeftRight;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
+            }
+        }
+    }
+    public PlayerControlExplorationActions @PlayerControlExploration => new PlayerControlExplorationActions(this);
 
     // WindowControl
     private readonly InputActionMap m_WindowControl;
@@ -849,6 +900,12 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         void OnWeaponArt(InputAction.CallbackContext context);
         void OnSwitchTarget(InputAction.CallbackContext context);
     }
+    public interface IPlayerControlEliminationActions
+    {
+        void OnEnterAnswer(InputAction.CallbackContext context);
+        void OnClearAnswer(InputAction.CallbackContext context);
+        void OnSwitchEnemy(InputAction.CallbackContext context);
+    }
     public interface IPlayerControlGeneralActions
     {
         void OnPauseGame(InputAction.CallbackContext context);
@@ -859,12 +916,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnMoveUpdown(InputAction.CallbackContext context);
         void OnMoveLeftRight(InputAction.CallbackContext context);
-    }
-    public interface IPlayerControlEliminationActions
-    {
-        void OnEnterAnswer(InputAction.CallbackContext context);
-        void OnClearAnswer(InputAction.CallbackContext context);
-        void OnSwitchEnemy(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
     public interface IWindowControlActions
     {

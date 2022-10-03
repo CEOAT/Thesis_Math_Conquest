@@ -43,9 +43,10 @@ GameObject:
   - component: {fileID: 6268476657572152508}
   - component: {fileID: 6268476657572152513}
   - component: {fileID: 6268476657572152512}
+  - component: {fileID: 6268476657572152511}
   - component: {fileID: 6268476657572152515}
   - component: {fileID: 6268476657572152514}
-  - component: {fileID: 6268476657572152511}
+  - component: {fileID: 296608485}
   m_Layer: 0
   m_Name: Demo Player Exploration Mode
   m_TagString: Untagged
@@ -90,7 +91,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,38 +153,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &6268476657572152515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6268476657572152510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ed9d1c96fd0ba4c9c39278e24e5103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMoveSpeed: 15000
-  playerRaycastPoint: {fileID: 6268476656281153988}
-  playerStatus: 
---- !u!114 &6268476657572152514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6268476657572152510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fcb31671033a2348b1da44fc81d7e89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ray3DObject: {fileID: 6268476656281153988}
-  layerMask3D:
-    serializedVersion: 2
-    m_Bits: 128
-  ray3DRange: 50
 --- !u!95 &6268476657572152511
 Animator:
   serializedVersion: 4
@@ -204,6 +173,56 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6268476657572152515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268476657572152510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ed9d1c96fd0ba4c9c39278e24e5103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMoveSpeed: 15000
+  playerWalkSpeed: 15000
+  playerRunSpeed: 30000
+  isBoostSpeed: 0
+  canControlCharacter: 0
+  playerRaycastPoint: {fileID: 6268476656281153988}
+  playerStatus: 
+--- !u!114 &6268476657572152514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268476657572152510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fcb31671033a2348b1da44fc81d7e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ray3DObject: {fileID: 6268476656281153988}
+  layerMask3D:
+    serializedVersion: 2
+    m_Bits: 128
+  ray3DRange: 50
+--- !u!114 &296608485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268476657572152510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1428c5a29297e4f804d3b0811a23e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealthCurrent: 0
+  playerHealthMaximum: 100
 --- !u!1 &6268476657887066480
 GameObject:
   m_ObjectHideFlags: 0
