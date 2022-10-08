@@ -133,7 +133,6 @@ public class ExplorationModeObjectTrap : MonoBehaviour
                 trap.trapDamage = EditorGUILayout.FloatField(trap.trapDamage);
                 EditorGUILayout.EndHorizontal();
             }
-
         }
     }
 #endif

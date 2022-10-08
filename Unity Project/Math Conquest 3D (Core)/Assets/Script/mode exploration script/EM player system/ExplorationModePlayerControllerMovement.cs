@@ -4,34 +4,40 @@ using UnityEngine;
 
 public class ExplorationModePlayerControllerMovement : MonoBehaviour
 {
+    public bool canControlCharacter = false;
+
     public float playerMoveSpeed = 5f;
     public float playerWalkSpeed = 5f;
     public float playerRunSpeed = 10f;
-    [SerializeField] private bool isBoostSpeed;
-    [SerializeField] private bool canControlCharacter = false;
+    public bool isBoostSpeed = false;
+
     public Transform playerRaycastPoint;
 
     private float upDownInput;
     private float leftRightInput;
     private float runInput;
 
-    Rigidbody rigidbody;
-    MasterInput playerInput;
-
     public string playerStatus;
-    Animator animator;
-    SpriteRenderer spriteRenderer;
+
+    private MasterInput playerInput;
+    private Rigidbody rigidbody;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private ExplorationModePlayerControllerMovement PlayerMoverment;
 
     private void Awake()
     {
         SetupConponent();
         SetupControl();
+
+        PlayerAllowedMovement();
     }
     private void SetupConponent()
     {
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        PlayerMoverment = GetComponent<ExplorationModePlayerControllerMovement>();
     }
     private void SetupControl()
     {
@@ -50,10 +56,13 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        PlayerIdle();
-        PlayerMove();
-        PlayerRun();
-        PlayerAnimation();
+        if (canControlCharacter == true)
+        {
+            PlayerIdle();
+            PlayerMove();
+            PlayerRun();
+            PlayerAnimation();
+        }
     }
     private void PlayerIdle()
     {
@@ -116,16 +125,21 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
 
     public void PlayerHurt()   // temporary disable player's movement
     {
-
+        // player animation hurt
+        // PlayerDisabledMovement();
     }
     public void PlayerDead()   // disable all player action. game controller - disable pause button, player controller - diable all movement
     {
-
+        // player animation dead
+        PlayerDisabledMovement();
     }
-
-    public void AllowPlayerToControl()
+    public void PlayerDisabledMovement()
     {
-
+        canControlCharacter = false;
+    }
+    public void PlayerAllowedMovement()
+    {
+        canControlCharacter = true;
     }
 
     private void PlayerAnimation()
