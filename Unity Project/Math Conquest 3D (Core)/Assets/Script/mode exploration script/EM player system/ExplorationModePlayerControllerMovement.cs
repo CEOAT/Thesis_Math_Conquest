@@ -83,7 +83,6 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             rigidbody.AddForce(Vector3.forward * Time.deltaTime * playerMoveSpeed);
             playerRaycastPoint.transform.rotation = Quaternion.Euler(0, 0, 0);
             playerStatus = "run up";
-
         }
         if (upDownInput == -1)
         {
@@ -131,6 +130,14 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public void PlayerDead()   // disable all player action. game controller - disable pause button, player controller - diable all movement
     {
         // player animation dead
+        PlayerDisabledMovement();
+    }
+    public void PlayerWait()    // *** need clean up ***
+    {
+        animator.SetBool("isIdle", true);
+        animator.SetBool("isRunUp", false);
+        animator.SetBool("isRunDown", false);
+        animator.SetBool("isRunSide", false);
         PlayerDisabledMovement();
     }
     public void PlayerDisabledMovement()

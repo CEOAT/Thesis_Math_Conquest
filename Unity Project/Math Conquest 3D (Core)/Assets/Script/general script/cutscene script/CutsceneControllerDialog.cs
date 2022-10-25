@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class CutsceneControllerDialog : MonoBehaviour
 {
@@ -11,12 +12,20 @@ public class CutsceneControllerDialog : MonoBehaviour
     [SerializeField] private bool isDialogActive;
     [SerializeField] private int dialogSetIndex = 0;
 
+    [Header("Game Controller Object")]
+    public ExplorationModeGameController GameController;
+
     [Header("Dialog Objects")]
     public GameObject DialogUI;
     public Image speakerImage;
     public TMP_Text speakerText;
     public TMP_Text dialogText;
 
+    [Header("Dialog Repeat Setting")]
+    public bool isDialogRepeatable = false;
+    private bool isDialogPlayed = false;
+
+    [Header("Dialog Data")]
     public DialogListClass dialogList = new DialogListClass();
     private Queue<string> dialogQueue = new Queue<string>();
 
@@ -26,7 +35,6 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         SetupComponent();
         SetupControl();
-        SetupDialog();
     }
     private void SetupComponent()
     {
@@ -39,57 +47,72 @@ public class CutsceneControllerDialog : MonoBehaviour
         playerInput = new MasterInput();
         playerInput.PlayerControlGeneral.NextDialog.performed += context => PlayNextDialog();
     }
-    private void SetupDialog()
-    {
-        dialogQueue.Clear();
-        for (int i = 0; i < dialogList.DialogSet[dialogSetIndex].DialogData.Count; i++)
-        {
-            dialogQueue.Enqueue(dialogList.DialogSet[dialogSetIndex].DialogData[i].dialogString);
-        }
-    }
     private void OnEnable()
     {
         playerInput.Enable();
-        DialogUI.SetActive(true);
-
-        PlayNextDialog();
+        
     }
     private void OnDisable()
     {
         playerInput.Disable();
     }
 
-    private void PlayNextDialog()
+    public void StartDialogCutscene()
+    {
+        if (isDialogPlayed == false)
+        {
+            isDialogPlayed = true;
+            DialogUI.SetActive(true);
+            SetupDialog();
+            PlayNextDialog();
+            GameController.TriggerCutscene();
+        }
+    }
+    private void EndDialogCutscene()
+    {
+        DialogUI.SetActive(false);
+        GameController.AllowMovement();
+
+        if (isDialogRepeatable == true)
+        {
+            isDialogPlayed = false;
+        }
+    }
+    private void SetupDialog()
+    {
+        dialogIndex = 0;
+        dialogSetIndex = 0;
+        dialogQueue.Clear();
+        for (int i = 0; i < dialogList.DialogSet[dialogSetIndex].DialogData.Count; i++)
+        {
+            dialogQueue.Enqueue(dialogList.DialogSet[dialogSetIndex].DialogData[i].dialogString);
+        }
+    }
+    public void PlayNextDialog()
     {
         if (DialogUI.activeSelf == false)
         {
             return;
         }
+
         if (dialogQueue.Count == 0)
         {
             EndDialogCutscene();
-
             return;
         }
+
         if (isDialogActive == false)
         {
             DialogStart();
         }
+
         else if (isDialogActive == true)
         {
             DialogForceEnd();
         }
     }
-    private void EndDialogCutscene()
-    {
-        //start the game
-        //or end the stage
-        DialogUI.SetActive(false);
-    }
     private void DialogStart()
     {
-        print(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerString);
-
         speakerText.text = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerString;
         speakerImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite;
         StartCoroutine(TypeDialog(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].dialogString));
@@ -98,9 +121,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         StopAllCoroutines();
         dialogText.text = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].dialogString;
-        dialogIndex++;
-        isDialogActive = false;
-        dialogQueue.Dequeue();
+        DialogEnd();
     }
     IEnumerator TypeDialog(string dialog)
     {
@@ -108,12 +129,51 @@ public class CutsceneControllerDialog : MonoBehaviour
         isDialogActive = true;
         foreach (char letterOfDialog in dialog.ToCharArray())
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.075f);
             dialogText.text += letterOfDialog;
             yield return null;
         }
+        DialogEnd();
+    }
+    private void DialogEnd()
+    {
         dialogIndex++;
+        StartCoroutine(DialogEndWaiting());
         isDialogActive = false;
         dialogQueue.Dequeue();
     }
+
+    IEnumerator DialogEndWaiting()
+    {
+        yield return new WaitForSeconds(0.8f);
+    }
+
+    private void OnTriggerEnter(Collider player)
+    {
+        if (player.CompareTag("Player"))
+        {
+            StartDialogCutscene();
+        }
+    }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(CutsceneControllerDialog))]
+public class CutsceneControllerDialogTester : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        CutsceneControllerDialog dialog = (CutsceneControllerDialog)target;
+
+        EditorGUI.BeginDisabledGroup(dialog.DialogUI.activeSelf == true);
+        if (GUILayout.Button("Start Dialog")) {dialog.StartDialogCutscene();}
+        EditorGUI.EndDisabledGroup();
+
+        EditorGUI.BeginDisabledGroup(dialog.DialogUI.activeSelf == false);
+        if (GUILayout.Button("Play Next Dialog")) {dialog.PlayNextDialog();}
+        EditorGUI.EndDisabledGroup();
+    }
+}
+#endif

@@ -308,17 +308,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""action"": ""NextDialog"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a18c0c56-1280-4aef-8c85-5beac729759c"",
-                    ""path"": ""<Keyboard>/anyKey"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextDialog"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },

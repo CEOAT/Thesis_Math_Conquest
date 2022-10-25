@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 533057428798246285}
   - component: {fileID: 548116257419244988}
+  - component: {fileID: 1873808301853544883}
   m_Layer: 0
-  m_Name: Dialog System Controller
+  m_Name: Dialog System Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533057428798246284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 124, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52,4 +53,26 @@ MonoBehaviour:
   speakerText: {fileID: 0}
   dialogText: {fileID: 0}
   dialogList:
-    DialogSet: []
+    DialogSet:
+    - DialogData:
+      - speakerString: Mr.White
+        speakerSprite: {fileID: 21300000, guid: 9251a106100b45f4faf156f9bc469034,
+          type: 3}
+        dialogString: AAAHHHHHHHHHHHHH
+      - speakerString: Dentis
+        speakerSprite: {fileID: 21300000, guid: ec23101e5663ef841bb0130e5a16c0d3,
+          type: 3}
+        dialogString: Cringe
+--- !u!65 &1873808301853544883
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533057428798246284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -8,6 +8,9 @@ public class ExplorationModeGameController : MonoBehaviour
     // control the game when pause, restart the game when game over
 
     public GameObject GameOverWindowGroup;
+    public GameObject GameplayUiGroup;
+    public ExplorationModePlayerControllerMovement PlayerMovement;
+    public ExplorationModePlayerHealth PlayerHealth;
 
     private void Awake()
     {
@@ -27,12 +30,30 @@ public class ExplorationModeGameController : MonoBehaviour
         ExplorationModePlayerHealth.playerDead -= GameOver;
     }
 
-    private void GameOver()
+    // disable action method
+    public void TriggerCutscene()
     {
-        print("game over");
-        GameOverWindowGroup.SetActive(true);
+        PlayerMovement.PlayerWait();
+        PlayerHealth.canPlayerTakeDamage = false;
+        GameplayUiGroup.SetActive(false);   // *** need animated UI method ***
     }
 
+    // resume action method
+    public void AllowMovement()
+    {
+        PlayerMovement.PlayerAllowedMovement();
+        PlayerHealth.canPlayerTakeDamage = true;
+        GameplayUiGroup.SetActive(true);
+    }
+
+    // Game Over Function
+    private void GameOver()
+    {
+        GameOverWindowGroup.SetActive(true);
+        GameplayUiGroup.SetActive(false);
+    }
+
+    // Game Over UI
     public void GameOverWindowLoadCheckPoint()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
