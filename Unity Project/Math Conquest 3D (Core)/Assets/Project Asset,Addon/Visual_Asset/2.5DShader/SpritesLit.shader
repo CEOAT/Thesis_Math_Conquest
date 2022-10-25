@@ -40,7 +40,7 @@ Shader "Universal Render Pipeline/Custom/Sprites Lit"
         _DetailAlbedoMapScale("Scale", Range(0.0, 2.0)) = 1.0
         _DetailAlbedoMap("Detail Albedo x2", 2D) = "linearGrey" {}
         _DetailNormalMapScale("Scale", Range(0.0, 2.0)) = 1.0
-        [Normal] _DetailNormalMap("Normal Map", 2D) = "bump" {}
+        [Normal] [NoScaleOffset]_NormalMap("Normal Map", 2D) = "bump" {}
 
         // SRP batching compatibility for Clear Coat (Not used in Lit)
         [HideInInspector] _ClearCoatMask("_ClearCoatMask", Float) = 0.0
