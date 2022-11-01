@@ -13,14 +13,7 @@ public class UIRotateCharacter : MonoBehaviour ,IBeginDragHandler,IDragHandler
 
     public Action<float> OnDragLeft;
     public Action<float> OnDragRight;
-
-    public static UIRotateCharacter inst;
-
-    private void Awake()
-    {
-        inst = this;
-    }
-
+    
     public void OnBeginDrag(PointerEventData eventData)
     {
         touchStart = eventData.position;
