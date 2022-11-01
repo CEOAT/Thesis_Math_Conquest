@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ExplorationModeObjectInteractableWindow : MonoBehaviour
+public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
 {
     public GameObject windowGroup;
     public TMP_Text windowTextPuzzleProblem;

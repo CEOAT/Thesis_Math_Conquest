@@ -11,29 +11,43 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
 
     private void OnEnable()
     {
-        ExplorationModeObjectInteractableWindow.puzzleReaction += ActiveReaction;
+        CheckInteractionTypeOnEnable();
     }
     private void OnDisable()
     {
-        ExplorationModeObjectInteractableWindow.puzzleReaction -= ActiveReaction;
+        CheckOnInteractionTypeOnDisable();
     }
 
+    private void CheckInteractionTypeOnEnable()
+    {
+        if (GetComponent<ExplorationModeObjectInteractableWindowUi>() != null)
+        {
+            interactionType = "Interactable Window";
+            ExplorationModeObjectInteractableWindowUi.puzzleReaction += ActiveReaction;
+        }
+        else
+        {
+            interactionType = "Instance";
+        }
+    }
+    private void CheckOnInteractionTypeOnDisable()
+    {
+        if (interactionType == "Interactable Window")
+        {
+            ExplorationModeObjectInteractableWindowUi.puzzleReaction -= ActiveReaction;
+        }
+    }
+
+    public string interactionType;
     public bool isReadyToInteract = true;
     public bool isInteractionDone = false;
-
-    [Tooltip("Type of interaction")] public InteractionType interactionType;
-    public enum InteractionType
-    {
-        puzzleWindow,       //create puzzle window
-        instance            //active some action (open door, call elevator)
-    };
-    //**implement later**
 
     public GameObject ReactionObject;
     [Tooltip("Type of reaction")] public ReactionType reactionType;
     public enum ReactionType
     {
         moveObject,
+        setActiveObject,
         removeObject
     };
 
@@ -42,15 +56,27 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     {
         if (isInteractionDone == false)
         {
-            puzzleInteract();
-            if (isReadyToInteract == true)
+            if (interactionType == "Interactable Window")
             {
-                isReadyToInteract = false;
+                puzzleInteract();
             }
-            else
+            if (interactionType == "Instance")
             {
-                isReadyToInteract = true;
+                ActiveReaction();
             }
+
+            InteractReadyCheck();
+        }
+    }
+    private void InteractReadyCheck()
+    {
+        if (isReadyToInteract == true)
+        {
+            isReadyToInteract = false;
+        }
+        else
+        {
+            isReadyToInteract = true;
         }
     }
 
@@ -64,6 +90,11 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
                     ReactionMoveObject();
                     break;
                 }
+            case ReactionType.setActiveObject:
+                {
+                    ReactionSetActiveObject();
+                    break;
+                }
             case ReactionType.removeObject:
                 {
                     ReactionRemoveObject();
@@ -74,6 +105,10 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     private void ReactionMoveObject()
     {
         ReactionObject.transform.position = ReactionObject.transform.position + (Vector3.up * 0.25f);
+    }
+    private void ReactionSetActiveObject()
+    {
+        ReactionObject.SetActive(true);
     }
     private void ReactionRemoveObject()
     {

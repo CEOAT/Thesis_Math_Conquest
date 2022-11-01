@@ -17,7 +17,7 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
     public string encryptedWord;
     public string encryptionPuzzleDescription;
 
-    private ExplorationModeObjectInteractableWindow PuzzleWindow;
+    private ExplorationModeObjectInteractableWindowUi PuzzleWindow;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
     }
     private void SetupComponent()
     {
-        PuzzleWindow = GetComponent<ExplorationModeObjectInteractableWindow>();
+        PuzzleWindow = GetComponent<ExplorationModeObjectInteractableWindowUi>();
     }
 
     private void SetPuzzleWindow()
