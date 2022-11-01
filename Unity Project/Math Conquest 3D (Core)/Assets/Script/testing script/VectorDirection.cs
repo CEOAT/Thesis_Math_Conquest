@@ -17,25 +17,27 @@ public class VectorDirection : MonoBehaviour
    private Vector3 vectorDummy;
    private ShapeGroup ArrowColor;
    [SerializeField] private TextMeshProUGUI Dot;
+   [SerializeField] private Light DotLight;
    private GameObject lookat;
    private Vector3 realone;
-   private float dotproduct;
+   
+   public UIRotateCharacter thisarrowrotaion;
    private void Awake()
    {
-      UIRotateCharacter.inst.OnDragLeft += OnDragLeft;
-      UIRotateCharacter.inst.OnDragRight += OnDragRight;
+      thisarrowrotaion.OnDragLeft += OnDragLeft;
+      thisarrowrotaion.OnDragRight += OnDragRight;
    }
 
    private void Start()
    {
       ArrowColor = Vector1.GetComponent<ShapeGroup>(); 
       lookat = GameObject.FindWithTag("DotTrasue");
-      var lookPos = new Vector3(lookat.transform.position.x,0,lookat.transform.position.z);
+      var lookPos = new Vector3(lookat.transform.position.x,0,lookat.transform.position.z)- new Vector3(transform.position.x,0,transform.position.z);
       //transform.parent.position = lookat.transform.position- lookat.transform.forward*4 ;
-      transform.up = lookPos-transform.position;
+      transform.up = lookPos;
        realone = transform.up;
-       dotproduct = Vector3.Dot(this.transform.up, realone) *100;
        transform.rotation= Quaternion.Euler(90,Mathf.Round(this.transform.rotation.eulerAngles.y),Mathf.Round(this.transform.rotation.eulerAngles.z));
+       transform.rotation= Quaternion.Euler(90,0,Mathf.Round(Random.Range(0,12)*30));
       // transform.rotation = quaternion.Euler(Vector3.zero);
       
    }
@@ -44,9 +46,9 @@ public class VectorDirection : MonoBehaviour
    {
       // transform.up = new Vector3(lookat.transform.position.x,0,lookat.transform.position.z) - new Vector3(transform.position.x,0,transform.position.z);
       // transform.rotation= Quaternion.Euler(90,Mathf.Round(this.transform.rotation.eulerAngles.y),Mathf.Round(this.transform.rotation.eulerAngles.z));
-    
-      Debug.Log("Update roation" + transform.rotation.eulerAngles);
+      
       ArrowColor.Color = Color.Lerp(Color.red, Color.green, Vector3.Dot(this.transform.up, realone));
+      DotLight.color = ArrowColor.Color;
       Dot.text = $"DOT : {Vector3.Dot(this.transform.up, realone).ToString("N2")}";
    }
    
@@ -54,14 +56,12 @@ public class VectorDirection : MonoBehaviour
    {
       var rotYEuler = distance * 2 * 1;
       RotateCharacterPreviewBy(rotYEuler);
-      Debug.Log("Just drag left, Y Euler changed: " + rotYEuler);
    }
 
    public void OnDragRight(float distance)
    {
       var rotYEuler = distance * 2 * 1;
       RotateCharacterPreviewBy(rotYEuler);
-      Debug.Log("Just drag right, Y Euler changed: " + rotYEuler);
    }
    
    public void RotateCharacterPreviewBy(float rotationAngleEulerY)
@@ -79,8 +79,6 @@ public class VectorDirection : MonoBehaviour
     //  Gizmos.DrawSphere(lookPos,1.5f);
     Gizmos.color = Color.green;
       Gizmos.DrawLine(transform.position,transform.position+ transform.up);
-      Gizmos.color = Color.red;
-      Gizmos.DrawLine(lookat.transform.position,realone+lookat.transform.position*2);
       Gizmos.color = Color.yellow;
       Gizmos.DrawLine(transform.position, lookat.transform.position );
    }
