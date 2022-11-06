@@ -6,9 +6,16 @@ public class ExplorationModePuzzleBooleanSwitch : MonoBehaviour
 {
     public GameObject switchLight;
     public bool isSwitchActive;
+    public bool isRandomActive;
 
     private void Awake()
     {
+        if (isRandomActive == true)
+        {
+            bool[] swichBoolean = { true, false };
+            isSwitchActive = swichBoolean[Random.Range(0, 2)];
+        }
+
         if (isSwitchActive == true)
         {
             switchLight.SetActive(true);

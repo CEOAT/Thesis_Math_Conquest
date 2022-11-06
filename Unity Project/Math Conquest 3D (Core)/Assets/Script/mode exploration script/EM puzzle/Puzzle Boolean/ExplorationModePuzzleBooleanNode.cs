@@ -12,6 +12,18 @@ public class ExplorationModePuzzleBooleanNode : MonoBehaviour
     private void Start()
     {
         nodeText.GetComponent<TMP_Text>();
+        SetNodeOnStart();
+    }
+    public void SetNodeOnStart()
+    {
+        if (isNodeActive == true)
+        {
+            NodeOn();
+        }
+        else
+        {
+            NodeOff();
+        }
     }
     public void NodeOn()
     {

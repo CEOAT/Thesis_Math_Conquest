@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 6268476657572152509}
   - component: {fileID: 6268476657572152508}
   - component: {fileID: 6268476657572152513}
+  - component: {fileID: 4175171531252574837}
   - component: {fileID: 6268476657572152512}
   - component: {fileID: 6268476657572152511}
   - component: {fileID: 6268476657572152515}
@@ -137,6 +138,19 @@ CapsuleCollider:
   m_Height: 1.17
   m_Direction: 1
   m_Center: {x: -0.070449024, y: -0.036626577, z: 0}
+--- !u!135 &4175171531252574837
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268476657572152510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.8639288
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6268476657572152512
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -185,11 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ed9d1c96fd0ba4c9c39278e24e5103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canControlCharacter: 0
   playerMoveSpeed: 15000
   playerWalkSpeed: 15000
   playerRunSpeed: 30000
   isBoostSpeed: 0
-  canControlCharacter: 0
   playerRaycastPoint: {fileID: 6268476656281153988}
   playerStatus: 
 --- !u!114 &6268476657572152514
@@ -223,6 +237,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthCurrent: 0
   playerHealthMaximum: 100
+  playerHealthPercentage: 0
+  playerInvincibleTimeMax: 2
+  playerInvincibleTimeCurrent: 0
+  isPlayerOnInvincible: 0
+  canPlayerTakeDamage: 1
+  PlayerStatusUIGroup: {fileID: 0}
 --- !u!1 &6268476657887066480
 GameObject:
   m_ObjectHideFlags: 0
