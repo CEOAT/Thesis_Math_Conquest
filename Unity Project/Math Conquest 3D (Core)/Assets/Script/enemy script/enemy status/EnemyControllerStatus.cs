@@ -21,6 +21,9 @@ public class EnemyControllerStatus : MonoBehaviour
     private float enemyHealthBarScale;
     private TMP_Text enemyQuestionText;
 
+    public GameObject enemySelectorPrefab;
+    private GameObject enemySelectorObject;
+
     public bool isEnemySelectedUI;
     [Range(0,1f)] public float UIUnselectedAlpha;
     private Color HealthBarAlphaTopFull, HealthBarAlphaTopLow;
@@ -84,6 +87,7 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         SetupEnemyComponent();
         SetupEnemyStatus(enemyName);
+        EnemySelectedUI();
     }
     private void SetupEnemyComponent()
     {
@@ -149,5 +153,18 @@ public class EnemyControllerStatus : MonoBehaviour
             enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color = HealthBarAlphaBottomLow;
             enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>().alpha = UIUnselectedAlpha;
         }
+    }
+    public void EnemySelected()
+    {
+        isEnemySelectedUI = true;
+
+        enemySelectorObject = Instantiate(enemySelectorPrefab, transform.position + new Vector3(0,0.2f,-0.35f), transform.rotation);
+        enemySelectorObject.transform.SetParent(this.transform);
+    }
+    public void EnemyDeselected()
+    {
+        isEnemySelectedUI = false;
+
+        Destroy(enemySelectorObject.gameObject);
     }
 }

@@ -6,6 +6,11 @@ public class EnemyStatusObject : MonoBehaviour
 {
     public Transform enemyOwnDetailObject;
 
+    private void Start()
+    {
+        transform.eulerAngles = new Vector3(35f, 0f, 0f);
+    }
+
     private void FixedUpdate()
     {
         DetailObjectFollow();

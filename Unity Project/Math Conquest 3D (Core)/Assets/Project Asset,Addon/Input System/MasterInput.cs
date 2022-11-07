@@ -316,15 +316,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
             ""id"": ""00064fd6-8ab7-408a-82e0-8ce50573dbb9"",
             ""actions"": [
                 {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""694d00e6-b08c-457b-9cbd-19f065763901"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""MoveUpdown"",
                     ""type"": ""PassThrough"",
                     ""id"": ""89e11989-8d1d-4e8c-9614-7798db898ebc"",
@@ -350,20 +341,45 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""694d00e6-b08c-457b-9cbd-19f065763901"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""d68a054d-e4c0-4cef-9f56-103e1f03a6c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a54c76f-3dd8-4d06-be19-d7135b77b5ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClearAnswer"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2ce91a5-2c08-4c36-81da-b1059386f0a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""af45669a-748d-4b4d-a95c-1d9b286b7575"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""1D Axis"",
                     ""id"": ""1e887a0a-2755-4fd1-bb40-99c9523a188b"",
@@ -462,6 +478,50 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d1ef2f9-3ba2-40cc-8eff-1af72572494d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c38edc6a-e06c-4b99-97e4-cb6438def7ba"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClearAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6274c1b8-e216-4783-b0ac-86bc3de6a708"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af45669a-748d-4b4d-a95c-1d9b286b7575"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -547,10 +607,13 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_PlayerControlGeneral_NextDialog = m_PlayerControlGeneral.FindAction("NextDialog", throwIfNotFound: true);
         // PlayerControlExploration
         m_PlayerControlExploration = asset.FindActionMap("PlayerControlExploration", throwIfNotFound: true);
-        m_PlayerControlExploration_Interact = m_PlayerControlExploration.FindAction("Interact", throwIfNotFound: true);
         m_PlayerControlExploration_MoveUpdown = m_PlayerControlExploration.FindAction("MoveUpdown", throwIfNotFound: true);
         m_PlayerControlExploration_MoveLeftRight = m_PlayerControlExploration.FindAction("MoveLeftRight", throwIfNotFound: true);
         m_PlayerControlExploration_Run = m_PlayerControlExploration.FindAction("Run", throwIfNotFound: true);
+        m_PlayerControlExploration_Interact = m_PlayerControlExploration.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerControlExploration_Attack = m_PlayerControlExploration.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerControlExploration_SwitchTarget = m_PlayerControlExploration.FindAction("SwitchTarget", throwIfNotFound: true);
+        m_PlayerControlExploration_ClearAnswer = m_PlayerControlExploration.FindAction("ClearAnswer", throwIfNotFound: true);
         // WindowControl
         m_WindowControl = asset.FindActionMap("WindowControl", throwIfNotFound: true);
         m_WindowControl_ConfirmAnswer = m_WindowControl.FindAction("ConfirmAnswer", throwIfNotFound: true);
@@ -777,18 +840,24 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     // PlayerControlExploration
     private readonly InputActionMap m_PlayerControlExploration;
     private IPlayerControlExplorationActions m_PlayerControlExplorationActionsCallbackInterface;
-    private readonly InputAction m_PlayerControlExploration_Interact;
     private readonly InputAction m_PlayerControlExploration_MoveUpdown;
     private readonly InputAction m_PlayerControlExploration_MoveLeftRight;
     private readonly InputAction m_PlayerControlExploration_Run;
+    private readonly InputAction m_PlayerControlExploration_Interact;
+    private readonly InputAction m_PlayerControlExploration_Attack;
+    private readonly InputAction m_PlayerControlExploration_SwitchTarget;
+    private readonly InputAction m_PlayerControlExploration_ClearAnswer;
     public struct PlayerControlExplorationActions
     {
         private @MasterInput m_Wrapper;
         public PlayerControlExplorationActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Interact => m_Wrapper.m_PlayerControlExploration_Interact;
         public InputAction @MoveUpdown => m_Wrapper.m_PlayerControlExploration_MoveUpdown;
         public InputAction @MoveLeftRight => m_Wrapper.m_PlayerControlExploration_MoveLeftRight;
         public InputAction @Run => m_Wrapper.m_PlayerControlExploration_Run;
+        public InputAction @Interact => m_Wrapper.m_PlayerControlExploration_Interact;
+        public InputAction @Attack => m_Wrapper.m_PlayerControlExploration_Attack;
+        public InputAction @SwitchTarget => m_Wrapper.m_PlayerControlExploration_SwitchTarget;
+        public InputAction @ClearAnswer => m_Wrapper.m_PlayerControlExploration_ClearAnswer;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlExploration; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -798,9 +867,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface != null)
             {
-                @Interact.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
                 @MoveUpdown.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
                 @MoveUpdown.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
                 @MoveUpdown.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnMoveUpdown;
@@ -810,13 +876,22 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @Run.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnRun;
+                @Interact.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnInteract;
+                @Attack.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnAttack;
+                @SwitchTarget.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnSwitchTarget;
+                @SwitchTarget.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnSwitchTarget;
+                @SwitchTarget.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnSwitchTarget;
+                @ClearAnswer.started -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnClearAnswer;
+                @ClearAnswer.performed -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnClearAnswer;
+                @ClearAnswer.canceled -= m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface.OnClearAnswer;
             }
             m_Wrapper.m_PlayerControlExplorationActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
                 @MoveUpdown.started += instance.OnMoveUpdown;
                 @MoveUpdown.performed += instance.OnMoveUpdown;
                 @MoveUpdown.canceled += instance.OnMoveUpdown;
@@ -826,6 +901,18 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
+                @SwitchTarget.started += instance.OnSwitchTarget;
+                @SwitchTarget.performed += instance.OnSwitchTarget;
+                @SwitchTarget.canceled += instance.OnSwitchTarget;
+                @ClearAnswer.started += instance.OnClearAnswer;
+                @ClearAnswer.performed += instance.OnClearAnswer;
+                @ClearAnswer.canceled += instance.OnClearAnswer;
             }
         }
     }
@@ -902,10 +989,13 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     }
     public interface IPlayerControlExplorationActions
     {
-        void OnInteract(InputAction.CallbackContext context);
         void OnMoveUpdown(InputAction.CallbackContext context);
         void OnMoveLeftRight(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnSwitchTarget(InputAction.CallbackContext context);
+        void OnClearAnswer(InputAction.CallbackContext context);
     }
     public interface IWindowControlActions
     {

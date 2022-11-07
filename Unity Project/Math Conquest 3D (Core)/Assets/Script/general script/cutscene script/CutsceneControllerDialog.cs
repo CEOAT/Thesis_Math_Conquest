@@ -23,6 +23,7 @@ public class CutsceneControllerDialog : MonoBehaviour
 
     [Header("Dialog Repeat Setting")]
     public bool isDialogRepeatable = false;
+    public bool isDialogDisabledAfterFinish = false;
     private bool isDialogPlayed = false;
 
     [Header("Dialog Data")]
@@ -76,6 +77,10 @@ public class CutsceneControllerDialog : MonoBehaviour
         if (isDialogRepeatable == true)
         {
             isDialogPlayed = false;
+        }
+        if (isDialogDisabledAfterFinish == true)
+        {
+            this.gameObject.SetActive(false);
         }
     }
     private void SetupDialog()
