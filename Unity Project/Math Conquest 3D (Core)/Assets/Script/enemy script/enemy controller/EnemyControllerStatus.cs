@@ -35,6 +35,7 @@ public class EnemyControllerStatus : MonoBehaviour
     [Header("Enemy Health")]
     public float enemyHealthMax;
     public float enemyHealthCurrent;
+    public float enemyTimeToSelfDestroy = 2f;
 
     [Header("Enemy Damage")]
     public float enemyAttackDamage;
@@ -128,7 +129,7 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         if (enemyHealthCurrent <= 0)
         {
-            Destroy(this.gameObject);
+            StartCoroutine(EnemyDead());
         }
     }
     private void EnemyHealthBarChangeScale()
@@ -154,6 +155,18 @@ public class EnemyControllerStatus : MonoBehaviour
             enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>().alpha = UIUnselectedAlpha;
         }
     }
+
+    IEnumerator EnemyDead()
+    {
+        GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
+        Destroy(GetComponent<Rigidbody>());
+
+        //** implement animation here
+
+        yield return new WaitForSeconds(enemyTimeToSelfDestroy);
+        Destroy(this.gameObject);
+    }
+
     public void EnemySelected()
     {
         isEnemySelectedUI = true;
@@ -163,8 +176,10 @@ public class EnemyControllerStatus : MonoBehaviour
     }
     public void EnemyDeselected()
     {
-        isEnemySelectedUI = false;
-
-        Destroy(enemySelectorObject.gameObject);
+        if (this.gameObject != null)
+        {
+            isEnemySelectedUI = false;
+            Destroy(enemySelectorObject.gameObject);
+        }
     }
 }

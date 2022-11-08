@@ -181,8 +181,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7468675170112052624}
-  - component: {fileID: 6268476655874460036}
   - component: {fileID: 325630537205300379}
+  - component: {fileID: 6268476655874460036}
   m_Layer: 6
   m_Name: player attack system controller
   m_TagString: Untagged
@@ -205,6 +205,19 @@ Transform:
   m_Father: {fileID: 6268476657572152509}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &325630537205300379
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33204793115311069}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.5268497
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6268476655874460036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,19 +237,6 @@ MonoBehaviour:
   enemyList: []
   enemyCurrentSelected: {fileID: 0}
   enemyCurrentSelectedIndex: 0
---- !u!135 &325630537205300379
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 33204793115311069}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.5268497
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6268476656281153991
 GameObject:
   m_ObjectHideFlags: 0

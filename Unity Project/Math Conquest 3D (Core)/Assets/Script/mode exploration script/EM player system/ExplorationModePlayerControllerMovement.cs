@@ -23,7 +23,6 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     private Rigidbody rigidbody;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    private ExplorationModePlayerControllerMovement PlayerMoverment;
 
     private void Awake()
     {
@@ -37,7 +36,6 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        PlayerMoverment = GetComponent<ExplorationModePlayerControllerMovement>();
     }
     private void SetupControl()
     {
@@ -126,6 +124,8 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     {
         // player animation hurt
         // PlayerDisabledMovement();
+
+        print("player taken hit");
     }
     public void PlayerDead()   // disable all player action. game controller - disable pause button, player controller - diable all movement
     {

@@ -13,8 +13,8 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
     public ExplorationModePlayerControllerMovement PlayerController;
 
     [Header("Auto Add Target System")]
-    public List<GameObject> enemyList = new List<GameObject>();
-    public GameObject enemyCurrentSelected;
+    public List<Transform> enemyList = new List<Transform>();
+    public Transform enemyCurrentSelected;
 
     [Header("Switch Target System")]
     public int enemyCurrentSelectedIndex;
@@ -63,7 +63,11 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
 
     private void PlayerAttack()
     {
-        enemyCurrentSelected.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerText.text.ToString(), playerAttackDamage);
+        if(playerAnswerInputField.text == "") { return; }
+        if (enemyCurrentSelected != null)
+        {
+            enemyCurrentSelected.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerText.text.ToString(), playerAttackDamage);
+        }
         playerAnswerInputField.text = "";
     }
     private void PlayerClearAnswer()
@@ -78,11 +82,11 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
         {
             if (enemyList.Count == 0)
             {
-                TargetAddBlankList(enemy.gameObject);
+                TargetAddBlankList(enemy.transform);
             }
             else if (enemyList.Count > 0)
             {
-                TargetAdd(enemy.gameObject);
+                TargetAdd(enemy.transform);
             }
         }
     }
@@ -90,24 +94,27 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
     {
         if (enemy.CompareTag("Enemy"))
         {
-            TargetRemove(enemy.gameObject);
-            CheckEnemyInList();
-            }
+            TargetRemove(enemy.transform);
+        }
+        if (enemyList.Count == 0)
+        {
+            enemyCurrentSelected = null;
+        }
     }
 
-    private void TargetAddBlankList(GameObject enemyAdded)
+    private void TargetAddBlankList(Transform enemyAdded)
     {
         enemyList.Add(enemyAdded);
         enemyCurrentSelected = enemyList[0];
         enemyCurrentSelected.GetComponent<EnemyControllerStatus>().EnemySelected();
     }
-    private void TargetAdd(GameObject enemyAdded)
+    private void TargetAdd(Transform enemyAdded)
     {
         enemyList.Add(enemyAdded);
     }
-    private void TargetRemove(GameObject enemyRemoved)
+    private void TargetRemove(Transform enemyRemoved)
     {
-        enemyList.Remove(enemyRemoved.gameObject);
+        enemyList.Remove(enemyRemoved.transform);
 
         if (enemyCurrentSelected == enemyRemoved && enemyList.Count > 0)
         {
@@ -122,7 +129,7 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
 
     private void TargetSwitch()
     {
-        if(enemyList.Count == 0 && enemyList.Count == 1) { return; }
+        if(enemyList.Count == 0 || enemyList.Count == 1) { return; }
 
         enemyCurrentSelected.GetComponent<EnemyControllerStatus>().EnemyDeselected();
 
@@ -134,17 +141,5 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
 
         enemyCurrentSelected = enemyList[enemyCurrentSelectedIndex];
         enemyCurrentSelected.GetComponent<EnemyControllerStatus>().EnemySelected();
-    }
-
-    private void CheckEnemyInList()
-    {
-        foreach (GameObject enemy in enemyList)
-        {
-            if (enemy == null)
-            {
-                print("found null");
-                enemyList.Remove(enemy);
-            }
-        }
     }
 }
