@@ -41,7 +41,7 @@ public class ExplorationModeGameController : MonoBehaviour
     // resume action method
     public void AllowMovement()
     {
-        PlayerMovement.PlayerAllowedMovement();
+        PlayerMovement.PlayerEnableddMovement();
         PlayerHealth.canPlayerTakeDamage = true;
         GameplayUiGroup.SetActive(true);
     }

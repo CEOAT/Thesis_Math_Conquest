@@ -793,13 +793,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ed9d1c96fd0ba4c9c39278e24e5103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canControlCharacter: 0
   playerMoveSpeed: 1200
   playerWalkSpeed: 5
   playerRunSpeed: 10
   isBoostSpeed: 0
   playerRaycastPoint: {fileID: 714686062}
   playerStatus: 
+  canControlCharacter: 0
+  playerRecoveryTimeUsed: 0
+  playerRecoveryTimeCount: 0
 --- !u!136 &366325195
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1163,28 +1165,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7959769359368755652, guid: 0fcb86f4f4a875840ba9e0c97e7478aa,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
     - target: {fileID: 7959769359368755653, guid: 0fcb86f4f4a875840ba9e0c97e7478aa,
         type: 3}
       propertyPath: m_Name
       value: Enemy Test 3D (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7959769359368755677, guid: 0fcb86f4f4a875840ba9e0c97e7478aa,
-        type: 3}
-      propertyPath: maximumAnswerValue
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7959769359368755677, guid: 0fcb86f4f4a875840ba9e0c97e7478aa,
-        type: 3}
-      propertyPath: minimumAnswerValue
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 777051914, guid: 0fcb86f4f4a875840ba9e0c97e7478aa, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fcb86f4f4a875840ba9e0c97e7478aa, type: 3}
 --- !u!1 &549314725
 GameObject:
@@ -4115,6 +4101,10 @@ PrefabInstance:
       propertyPath: PlayerStatusUIGroup
       value: 
       objectReference: {fileID: 1110779204}
+    - target: {fileID: 296608485, guid: 49c1a2e6ee95d55428c5990d8699738e, type: 3}
+      propertyPath: playerInvincibleTimeMax
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 729755037, guid: 49c1a2e6ee95d55428c5990d8699738e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.953717
@@ -4220,6 +4210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Demo Player Exploration Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 6268476657572152515, guid: 49c1a2e6ee95d55428c5990d8699738e,
+        type: 3}
+      propertyPath: playerRecoveryTimeUsed
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7468675170112052624, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}

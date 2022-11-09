@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class ExplorationModePlayerControllerMovement : MonoBehaviour
 {
-    public bool canControlCharacter = false;
 
+    [Header("Player Movement Setting")]
     public float playerMoveSpeed = 5f;
     public float playerWalkSpeed = 5f;
     public float playerRunSpeed = 10f;
     public bool isBoostSpeed = false;
 
+    [Header("Player Interaction")]
     public Transform playerRaycastPoint;
 
+    [Header("Player Status")]
+    public string playerStatus = "player status";
+    public bool canControlCharacter = false;
+
+    [Header("Player Recovery System")]
+    public float playerRecoveryTimeUsed;
+    public float playerRecoveryTimeCount;
+
+    private MasterInput playerInput;
     private float upDownInput;
     private float leftRightInput;
     private float runInput;
 
-    public string playerStatus;
-
-    private MasterInput playerInput;
     private Rigidbody rigidbody;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -28,8 +35,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     {
         SetupConponent();
         SetupControl();
-
-        PlayerAllowedMovement();
+        PlayerEnableddMovement();
     }
     private void SetupConponent()
     {
@@ -62,6 +68,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             PlayerAnimation();
         }
     }
+
     private void PlayerIdle()
     {
         upDownInput = playerInput.PlayerControlExploration.MoveUpdown.ReadValue<float>();
@@ -119,17 +126,24 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             playerMoveSpeed = playerWalkSpeed;
         }
     }
-
     public void PlayerHurt()   // temporary disable player's movement
     {
         // player animation hurt
         // PlayerDisabledMovement();
+        // prevent player's control
 
-        print("player taken hit");
+        StartCoroutine(PlayerReovery());
+        PlayerDisabledMovement();
+    }
+    private IEnumerator PlayerReovery()
+    {
+        yield return new WaitForSeconds(playerRecoveryTimeUsed);
+        PlayerEnableddMovement();
     }
     public void PlayerDead()   // disable all player action. game controller - disable pause button, player controller - diable all movement
     {
         // player animation dead
+
         PlayerDisabledMovement();
     }
     public void PlayerWait()    // *** need clean up ***
@@ -144,7 +158,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     {
         canControlCharacter = false;
     }
-    public void PlayerAllowedMovement()
+    public void PlayerEnableddMovement()
     {
         canControlCharacter = true;
     }
@@ -179,7 +193,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             animator.SetBool("isRunDown", false);
             animator.SetBool("isRunSide", true);
             spriteRenderer.flipX = false;
-            
+
         }
         if (playerStatus == "run left")
         {

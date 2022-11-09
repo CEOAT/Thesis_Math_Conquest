@@ -7,15 +7,30 @@ public class EnemyControllerMovement : MonoBehaviour
 {
     private Transform playerTransform;
     private bool isEnemyChasePlayer;
-    private bool isEnemyDisabled;
 
     [Header("Enemy Movement Setting")]
     public float enemyMoveSpeed;
+    public SphereCollider enemyDetectionSphere;
+    public float enemyDetectionRange;
+    public float enemyChasingRange;
 
     [Header("Enemy Attack System")]
     public Transform enemyAttackPointTransform;
+    public float enemyAttackTriggerRadius;
     public float enemyAttackPointRadius;
     public LayerMask enemyAttackLayerMask;
+    private Collider[] playerInAttackCircle;
+    public float enemyAttackDamage;
+
+    [Header("Enemy Attack Interval")]
+    public bool isEnemyCheckingAttack;
+    public float enemyCheckingAttackIntervalTime;
+    public bool isEnemyWaitToAttack;
+    public float enemyAttackWaitTime;
+
+    [Header("Enemy Recovery System")]
+    public bool isEnemyWaitToRecover;
+    public float enemyHurtRevoceryTime;
 
     private NavMeshAgent navMeshAgent;
     private EnemyControllerStatus EnemyStatus;
@@ -23,22 +38,18 @@ public class EnemyControllerMovement : MonoBehaviour
     private void Start()
     {
         SetupEnemyComponent();
+        SetupEnemySetting();
     }
     private void SetupEnemyComponent()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         EnemyStatus = GetComponent<EnemyControllerStatus>();
     }
-
-    private void PlayerMovementDisabled()
+    private void SetupEnemySetting()
     {
-        isEnemyDisabled = true;
+        navMeshAgent.speed = enemyMoveSpeed;
+        enemyDetectionSphere.radius = enemyDetectionRange;
     }
-    private void PlayerMovementEnabled()
-    {
-        isEnemyDisabled = false;
-    }
-
     private void OnTriggerEnter(Collider player)
     {
         if (player.CompareTag("Player"))
@@ -54,42 +65,77 @@ public class EnemyControllerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        EnemyChasePlayer();
-        EnemyCheckChaseRange();
+        if (isEnemyChasePlayer == true)
+        {
+            if (isEnemyWaitToAttack == false && isEnemyWaitToRecover == false)
+            {
+                EnemyChasePlayer();
+                EnemyAttackCheckEnabled();
+                if (isEnemyCheckingAttack == true)
+                {
+                    isEnemyCheckingAttack = false;
+                    EnemyAttackCheckEnabled();
+                }
+            }
+            EnemyCheckChaseRange();
+        }
     }
     private void EnemyChasePlayer()
     {
-        if (isEnemyChasePlayer == true)
-        {
-            navMeshAgent.SetDestination(playerTransform.transform.position);
-        }
+        navMeshAgent.SetDestination(playerTransform.transform.position);
     }
     private void EnemyCheckChaseRange()
     {
-
+        if (Vector3.Distance(playerTransform.position, this.transform.position) > enemyChasingRange)
+        {
+            EnemyStopChasePlayer();
+            EnemyAttackCheckDisabled();
+        }
     }
     private void EnemyStopChasePlayer()
     {
-
+        isEnemyChasePlayer = false;
     }
 
-    private void OnCollisionEnter(Collision player)
+    private void EnemyAttackWait()
     {
-        if (player.collider.CompareTag("Player"))
-        {
-            EnemyAttack();
-        }
+        
+    }
+    private void EnemyHurtRecovery()
+    {
+
     }
 
+    #if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, enemyDetectionRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, enemyChasingRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, enemyAttackTriggerRadius);
+    }
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.gray;
         Gizmos.DrawWireSphere(enemyAttackPointTransform.transform.position, enemyAttackPointRadius);
     }
-    private void EnemyAttack()
+    #endif
+
+    private void EnemyAttackCheckEnabled()
+    {
+        InvokeRepeating("EnemyAttackPerform", 0f, enemyCheckingAttackIntervalTime);
+    }
+    private void EnemyAttackCheckDisabled()
+    {
+        CancelInvoke("EnemyAttackPerform");
+    }
+    private void EnemyAttackPerform()
     {
         if (playerTransform != null)
         {
-            Collider[] playerInAttackCircle = Physics.OverlapSphere(
+            playerInAttackCircle = Physics.OverlapSphere(
                 enemyAttackPointTransform.transform.position,
                 enemyAttackPointRadius,
                 enemyAttackLayerMask);
@@ -98,28 +144,16 @@ public class EnemyControllerMovement : MonoBehaviour
             {
                 if (player.tag == "Player")
                 {
+                    // implement animation here
+
                     print("active attack");
-                    EnemyPerformAttack();
+                    EnemyAttackSendDamage();
                 }
             }
         }
     }
-    private void EnemyPerformAttack()
+    private void EnemyAttackSendDamage()   // this will bec called in animation event
     {
-        if (playerTransform != null)
-        {
-            Collider[] playerInAttackCircle = Physics.OverlapSphere(
-                enemyAttackPointTransform.transform.position,
-                enemyAttackPointRadius,
-                enemyAttackLayerMask);
-
-            foreach (Collider player in playerInAttackCircle)
-            {
-                if (player.tag == "Player")
-                {
-                    playerInAttackCircle[0].GetComponent<ExplorationModePlayerControllerMovement>().PlayerHurt();
-                }
-            }
-        }
+        playerInAttackCircle[0].GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(enemyAttackDamage);
     }
 }
