@@ -8,6 +8,14 @@ public class EnemyControllerMovement : MonoBehaviour
     private Transform playerTransform;
     private bool isEnemyChasePlayer;
 
+    [Header("Enemy Type")]
+    public EnemyType enemyType;
+    public enum EnemyType
+    {
+        obstacle,
+        chaseAndHit
+    };
+
     [Header("Enemy Movement Setting")]
     public float enemyMoveSpeed;
     public SphereCollider enemyDetectionSphere;
@@ -16,8 +24,8 @@ public class EnemyControllerMovement : MonoBehaviour
 
     [Header("Enemy Attack System")]
     public Transform enemyAttackPointTransform;
-    public float enemyAttackTriggerRadius;
-    public float enemyAttackPointRadius;
+    public float enemyAttackTriggerRange;
+    public float enemyAttackPointRange;
     public LayerMask enemyAttackLayerMask;
     private Collider[] playerInAttackCircle;
     public float enemyAttackDamage;
@@ -38,14 +46,30 @@ public class EnemyControllerMovement : MonoBehaviour
     private void Start()
     {
         SetupEnemyComponent();
-        SetupEnemySetting();
+        SetupEnemyType();
+        SetupEnemyStat();
     }
     private void SetupEnemyComponent()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         EnemyStatus = GetComponent<EnemyControllerStatus>();
     }
-    private void SetupEnemySetting()
+    private void SetupEnemyType()
+    {
+        switch (enemyType)
+        {
+            case EnemyType.obstacle:
+            {
+                enemyDetectionRange = 0;
+                enemyChasingRange = 0;
+                enemyAttackTriggerRange = 0;
+                enemyAttackPointRange = 0;
+                Destroy(navMeshAgent);
+                break;
+            }
+        }
+    }
+    private void SetupEnemyStat()
     {
         navMeshAgent.speed = enemyMoveSpeed;
         enemyDetectionSphere.radius = enemyDetectionRange;
@@ -114,12 +138,12 @@ public class EnemyControllerMovement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, enemyChasingRange);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemyAttackTriggerRadius);
+        Gizmos.DrawWireSphere(transform.position, enemyAttackTriggerRange);
     }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.gray;
-        Gizmos.DrawWireSphere(enemyAttackPointTransform.transform.position, enemyAttackPointRadius);
+        Gizmos.DrawWireSphere(enemyAttackPointTransform.transform.position, enemyAttackPointRange);
     }
     #endif
 
@@ -137,7 +161,7 @@ public class EnemyControllerMovement : MonoBehaviour
         {
             playerInAttackCircle = Physics.OverlapSphere(
                 enemyAttackPointTransform.transform.position,
-                enemyAttackPointRadius,
+                enemyAttackPointRange,
                 enemyAttackLayerMask);
 
             foreach (Collider player in playerInAttackCircle)

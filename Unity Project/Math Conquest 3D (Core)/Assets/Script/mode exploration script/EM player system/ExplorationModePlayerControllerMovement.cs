@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ExplorationModePlayerControllerMovement : MonoBehaviour
 {
-
     [Header("Player Movement Setting")]
     public float playerMoveSpeed = 5f;
     public float playerWalkSpeed = 5f;
