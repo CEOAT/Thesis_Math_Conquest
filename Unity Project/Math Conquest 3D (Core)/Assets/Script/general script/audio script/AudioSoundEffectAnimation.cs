@@ -26,9 +26,9 @@ public class AudioSoundEffectAnimation : MonoBehaviour
         currentAnimation = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         animationNameIndex = 0;
 
-        foreach (string animation in audioList.animationName)
+        foreach (AnimationClip animation in audioList.animationClip)
         {
-            if (currentAnimation == animation)
+            if (currentAnimation == animation.name)
             {
                 audioSource.clip = audioList.soundEffectList[animationNameIndex];
                 audioSource.Play();
@@ -42,6 +42,6 @@ public class AudioSoundEffectAnimation : MonoBehaviour
 [System.Serializable]
 public class AudioSoundEffectAnimationListClass
 {
-    public List<string> animationName;
+    public List<AnimationClip> animationClip;
     public List<AudioClip> soundEffectList;
 }

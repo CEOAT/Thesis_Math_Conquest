@@ -132,7 +132,6 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
         if(enemyList.Count == 0 || enemyList.Count == 1) { return; }
 
         enemyCurrentSelected.GetComponent<EnemyControllerStatus>().EnemyDeselected();
-
         enemyCurrentSelectedIndex++;
         if (enemyCurrentSelectedIndex + 1 > enemyList.Count)
         {

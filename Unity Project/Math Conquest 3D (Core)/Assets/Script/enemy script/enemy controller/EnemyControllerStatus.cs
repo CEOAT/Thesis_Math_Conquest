@@ -12,9 +12,10 @@ public class EnemyControllerStatus : MonoBehaviour
     public string questionAnswer;
     public bool isQuestionActive = false;
 
-    [Header("Enemy UI On Head")]
+    [Header("Enemy UI")]
     public GameObject enemyDetailPrefab;
     private GameObject enemyDetailObject;
+    public GameObject enemyTrackPoint;
 
     private TMP_Text enemyNameText;
     private Transform enemyHealthBarObject;
@@ -43,6 +44,8 @@ public class EnemyControllerStatus : MonoBehaviour
     [Header("Enemy State")]
     public string enemyState;
     public bool isEnemyTakenDamage;
+
+    private EnemyControllerMovement EnemyMovement;
 
     public void CheckPlayerAnswer(string playerAnswer, float playerDamage)
     {
@@ -105,6 +108,8 @@ public class EnemyControllerStatus : MonoBehaviour
         HealthBarAlphaTopLow.a = UIUnselectedAlpha;
         HealthBarAlphaBottomLow = HealthBarAlphaBottomFull;
         HealthBarAlphaBottomLow.a = UIUnselectedAlpha;
+
+        EnemyMovement = GetComponent<EnemyControllerMovement>();
     }
     private void SetupEnemyStatus(string enemyName)
     {
@@ -162,6 +167,7 @@ public class EnemyControllerStatus : MonoBehaviour
         Destroy(GetComponent<Rigidbody>());
 
         //** implement animation here
+        EnemyMovement.EnemyStopChasePlayer();
 
         yield return new WaitForSeconds(enemyTimeToSelfDestroy);
         Destroy(this.gameObject);
@@ -171,8 +177,8 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         isEnemySelectedUI = true;
 
-        enemySelectorObject = Instantiate(enemySelectorPrefab, transform.position + new Vector3(0,0.2f,-0.35f), transform.rotation);
-        enemySelectorObject.transform.SetParent(this.transform);
+        enemySelectorObject = Instantiate(enemySelectorPrefab, transform.position + new Vector3(0,0,-0.35f), enemySelectorPrefab.transform.rotation);
+        enemySelectorObject.GetComponent<EnemySelectorObject>().selectorTrackPoint = enemyTrackPoint.transform;
     }
     public void EnemyDeselected()
     {
