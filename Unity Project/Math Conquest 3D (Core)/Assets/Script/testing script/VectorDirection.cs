@@ -70,16 +70,16 @@ public class VectorDirection : MonoBehaviour
       localAngles.y = (localAngles.y + rotationAngleEulerY) % 360f;
       this.transform.localEulerAngles = localAngles;
    }
-   private void OnDrawGizmos()
-   {
-      Vector3 point_C = this.transform.rotation.normalized * (this.transform.position.normalized+Vector3.forward);
-     // Gizmos.DrawLine(this.transform.position, this.transform.position+this.transform.up);
-      var lookat = GameObject.FindWithTag("DotTrasue");
-      var lookPos = lookat.transform.position ;
-    //  Gizmos.DrawSphere(lookPos,1.5f);
-    Gizmos.color = Color.green;
-      Gizmos.DrawLine(transform.position,transform.position+ transform.up);
-      Gizmos.color = Color.yellow;
-      Gizmos.DrawLine(transform.position, lookat.transform.position );
-   }
+   // private void OnDrawGizmos()
+   // {
+   //    Vector3 point_C = this.transform.rotation.normalized * (this.transform.position.normalized+Vector3.forward);
+   //    Gizmos.DrawLine(this.transform.position, this.transform.position+this.transform.up);
+   //    var lookat = GameObject.FindWithTag("DotTrasue");
+   //    var lookPos = lookat.transform.position ;
+   //    Gizmos.DrawSphere(lookPos,1.5f);
+   //    Gizmos.color = Color.green;
+   //    Gizmos.DrawLine(transform.position,transform.position+ transform.up);
+   //    Gizmos.color = Color.yellow;
+   //    Gizmos.DrawLine(transform.position, lookat.transform.position );
+   // }
 }
