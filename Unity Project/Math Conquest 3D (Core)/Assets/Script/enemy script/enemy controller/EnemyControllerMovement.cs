@@ -70,6 +70,9 @@ public class EnemyControllerMovement : MonoBehaviour
                 enemyAttackTriggerRange = 0;
                 enemyAttackPointRange = 0;
                 Destroy(navMeshAgent);
+                rigidbody.constraints = 
+                      RigidbodyConstraints.FreezePositionX
+                    | RigidbodyConstraints.FreezePositionZ;
                 break;
             }
         }
@@ -95,7 +98,10 @@ public class EnemyControllerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(enemyType == EnemyType.obstacle) { return; }
+
         EnemyCheckFacing();
+        
         if (isEnemyChasePlayer == true)
         {
             if (isEnemyWaitToAttack == false && isEnemyWaitToRecover == false)
@@ -113,7 +119,6 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyCheckFacing()
     {
-        print(navMeshAgent.velocity);
         if (navMeshAgent.velocity.x > 0)
         {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
@@ -141,7 +146,7 @@ public class EnemyControllerMovement : MonoBehaviour
         navMeshAgent.SetDestination(transform.position);
     }
 
-    //
+    // wait to implement after have enemy sprite
     private void EnemyAttackWait()
     {
         isEnemyReadyToAttack = false;
