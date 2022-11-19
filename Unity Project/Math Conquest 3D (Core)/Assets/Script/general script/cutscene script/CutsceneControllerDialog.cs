@@ -17,6 +17,7 @@ public class CutsceneControllerDialog : MonoBehaviour
 
     [Header("Dialog Objects")]
     public GameObject DialogUI;
+    public Image backgroundImage;
     public Image speakerImage;
     public TMP_Text speakerText;
     public TMP_Text dialogText;
@@ -119,9 +120,35 @@ public class CutsceneControllerDialog : MonoBehaviour
     private void DialogStart()
     {
         speakerText.text = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerString;
-        speakerImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite;
+        DialogStartSetSpeakerImage();
+        DialogStartSetBackgroundImage();
         StartCoroutine(TypeDialog(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].dialogString));
     }
+    private void DialogStartSetSpeakerImage()
+    {
+        if (dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite != null)
+        {
+            speakerImage.gameObject.SetActive(true);
+            speakerImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite;
+        }
+        else
+        {
+            speakerImage.gameObject.SetActive(false);
+        }
+    }
+    private void DialogStartSetBackgroundImage()
+    {
+        if (dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite != null)
+        {
+            backgroundImage.gameObject.SetActive(true);
+            backgroundImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite;
+        }
+        else
+        {
+            backgroundImage.gameObject.SetActive(false);
+        }
+    }
+
     private void DialogForceEnd()
     {
         StopAllCoroutines();
