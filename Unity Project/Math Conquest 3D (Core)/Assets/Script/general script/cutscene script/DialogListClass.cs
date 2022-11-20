@@ -19,5 +19,6 @@ public class DialogData
 {
     public string speakerString;
     public Sprite speakerSprite;
+    public Sprite backgroundSprite;
     [TextArea(3, 10)] public string dialogString;
 }

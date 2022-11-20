@@ -33,6 +33,9 @@ public class EnemyControllerMovement : MonoBehaviour
     [Header("Enemy Attack Interval")]
     public bool isEnemyCheckingAttack;
     public float enemyCheckingAttackIntervalTime;
+    public bool isEnemyReadyToAttack;
+
+    [Header("Enemy Attack Wait")]
     public bool isEnemyWaitToAttack;
     public float enemyAttackWaitTime;
 
@@ -41,6 +44,7 @@ public class EnemyControllerMovement : MonoBehaviour
     public float enemyHurtRevoceryTime;
 
     private NavMeshAgent navMeshAgent;
+    private Rigidbody rigidbody;
     private EnemyControllerStatus EnemyStatus;
 
     private void Start()
@@ -51,6 +55,7 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void SetupEnemyComponent()
     {
+        rigidbody = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         EnemyStatus = GetComponent<EnemyControllerStatus>();
     }
@@ -65,6 +70,9 @@ public class EnemyControllerMovement : MonoBehaviour
                 enemyAttackTriggerRange = 0;
                 enemyAttackPointRange = 0;
                 Destroy(navMeshAgent);
+                rigidbody.constraints = 
+                      RigidbodyConstraints.FreezePositionX
+                    | RigidbodyConstraints.FreezePositionZ;
                 break;
             }
         }
@@ -73,6 +81,7 @@ public class EnemyControllerMovement : MonoBehaviour
     {
         navMeshAgent.speed = enemyMoveSpeed;
         enemyDetectionSphere.radius = enemyDetectionRange;
+        isEnemyReadyToAttack = true;
     }
     private void OnTriggerEnter(Collider player)
     {
@@ -89,6 +98,10 @@ public class EnemyControllerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(enemyType == EnemyType.obstacle) { return; }
+
+        EnemyCheckFacing();
+        
         if (isEnemyChasePlayer == true)
         {
             if (isEnemyWaitToAttack == false && isEnemyWaitToRecover == false)
@@ -104,6 +117,17 @@ public class EnemyControllerMovement : MonoBehaviour
             EnemyCheckChaseRange();
         }
     }
+    private void EnemyCheckFacing()
+    {
+        if (navMeshAgent.velocity.x > 0)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        if (navMeshAgent.velocity.x < 0)
+        {
+            transform.localScale = new Vector3(-1f * Mathf.Abs((transform.localScale.x)), transform.localScale.y, transform.localScale.z);
+        }
+    }
     private void EnemyChasePlayer()
     {
         navMeshAgent.SetDestination(playerTransform.transform.position);
@@ -116,18 +140,20 @@ public class EnemyControllerMovement : MonoBehaviour
             EnemyAttackCheckDisabled();
         }
     }
-    private void EnemyStopChasePlayer()
+    public void EnemyStopChasePlayer()
     {
         isEnemyChasePlayer = false;
+        navMeshAgent.SetDestination(transform.position);
     }
 
+    // wait to implement after have enemy sprite
     private void EnemyAttackWait()
     {
-        
+        isEnemyReadyToAttack = false;
     }
     private void EnemyHurtRecovery()
     {
-
+        
     }
 
     #if UNITY_EDITOR
@@ -157,13 +183,13 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyAttackPerform()
     {
-        if (playerTransform != null)
+        if (playerTransform != null && isEnemyReadyToAttack == true)
         {
             playerInAttackCircle = Physics.OverlapSphere(
                 enemyAttackPointTransform.transform.position,
                 enemyAttackPointRange,
                 enemyAttackLayerMask);
-
+            
             foreach (Collider player in playerInAttackCircle)
             {
                 if (player.tag == "Player")
