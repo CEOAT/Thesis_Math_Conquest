@@ -557,6 +557,24 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextInstructionPage"",
+                    ""type"": ""Button"",
+                    ""id"": ""205af486-76fb-4da5-993e-3fdb6410dae7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousInstructionPage"",
+                    ""type"": ""Button"",
+                    ""id"": ""19772f93-350b-448a-a45c-da6f92024c45"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -579,6 +597,50 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CloseWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97d11ffd-b39b-4f60-9075-6c87debb803b"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextInstructionPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef54b094-4914-4045-95a6-99434e4daf94"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextInstructionPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""787c4399-dbff-4b7b-b552-fbee4063f001"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousInstructionPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9684aef-74b3-4b88-9f4d-116f7c6399fd"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousInstructionPage"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -629,6 +691,8 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_WindowControl = asset.FindActionMap("WindowControl", throwIfNotFound: true);
         m_WindowControl_ConfirmAnswer = m_WindowControl.FindAction("ConfirmAnswer", throwIfNotFound: true);
         m_WindowControl_CloseWindow = m_WindowControl.FindAction("CloseWindow", throwIfNotFound: true);
+        m_WindowControl_NextInstructionPage = m_WindowControl.FindAction("NextInstructionPage", throwIfNotFound: true);
+        m_WindowControl_PreviousInstructionPage = m_WindowControl.FindAction("PreviousInstructionPage", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -934,12 +998,16 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private IWindowControlActions m_WindowControlActionsCallbackInterface;
     private readonly InputAction m_WindowControl_ConfirmAnswer;
     private readonly InputAction m_WindowControl_CloseWindow;
+    private readonly InputAction m_WindowControl_NextInstructionPage;
+    private readonly InputAction m_WindowControl_PreviousInstructionPage;
     public struct WindowControlActions
     {
         private @MasterInput m_Wrapper;
         public WindowControlActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @ConfirmAnswer => m_Wrapper.m_WindowControl_ConfirmAnswer;
         public InputAction @CloseWindow => m_Wrapper.m_WindowControl_CloseWindow;
+        public InputAction @NextInstructionPage => m_Wrapper.m_WindowControl_NextInstructionPage;
+        public InputAction @PreviousInstructionPage => m_Wrapper.m_WindowControl_PreviousInstructionPage;
         public InputActionMap Get() { return m_Wrapper.m_WindowControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -955,6 +1023,12 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @CloseWindow.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
                 @CloseWindow.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
                 @CloseWindow.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
+                @NextInstructionPage.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNextInstructionPage;
+                @NextInstructionPage.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNextInstructionPage;
+                @NextInstructionPage.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnNextInstructionPage;
+                @PreviousInstructionPage.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnPreviousInstructionPage;
+                @PreviousInstructionPage.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnPreviousInstructionPage;
+                @PreviousInstructionPage.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnPreviousInstructionPage;
             }
             m_Wrapper.m_WindowControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -965,6 +1039,12 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @CloseWindow.started += instance.OnCloseWindow;
                 @CloseWindow.performed += instance.OnCloseWindow;
                 @CloseWindow.canceled += instance.OnCloseWindow;
+                @NextInstructionPage.started += instance.OnNextInstructionPage;
+                @NextInstructionPage.performed += instance.OnNextInstructionPage;
+                @NextInstructionPage.canceled += instance.OnNextInstructionPage;
+                @PreviousInstructionPage.started += instance.OnPreviousInstructionPage;
+                @PreviousInstructionPage.performed += instance.OnPreviousInstructionPage;
+                @PreviousInstructionPage.canceled += instance.OnPreviousInstructionPage;
             }
         }
     }
@@ -1012,5 +1092,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     {
         void OnConfirmAnswer(InputAction.CallbackContext context);
         void OnCloseWindow(InputAction.CallbackContext context);
+        void OnNextInstructionPage(InputAction.CallbackContext context);
+        void OnPreviousInstructionPage(InputAction.CallbackContext context);
     }
 }

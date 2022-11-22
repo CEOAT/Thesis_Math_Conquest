@@ -49,15 +49,6 @@ public class CutsceneControllerDialog : MonoBehaviour
         playerInput = new MasterInput();
         playerInput.PlayerControlGeneral.NextDialog.performed += context => PlayNextDialog();
     }
-    private void OnEnable()
-    {
-        playerInput.Enable();
-        
-    }
-    private void OnDisable()
-    {
-        playerInput.Disable();
-    }
 
     public void StartDialogCutscene()
     {
@@ -73,6 +64,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     private void EndDialogCutscene()
     {
         DialogUI.SetActive(false);
+        playerInput.Disable();
         GameController.AllowMovement();
 
         if (isDialogRepeatable == true)
@@ -184,6 +176,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         if (player.CompareTag("Player"))
         {
+            playerInput.Enable();
             StartDialogCutscene();
         }
     }

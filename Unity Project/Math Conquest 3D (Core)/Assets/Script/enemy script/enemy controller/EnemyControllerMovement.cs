@@ -142,8 +142,11 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     public void EnemyStopChasePlayer()
     {
-        isEnemyChasePlayer = false;
-        navMeshAgent.SetDestination(transform.position);
+        if (navMeshAgent != null)
+        {
+            isEnemyChasePlayer = false;
+            navMeshAgent.SetDestination(transform.position);
+        }
     }
 
     // wait to implement after have enemy sprite
