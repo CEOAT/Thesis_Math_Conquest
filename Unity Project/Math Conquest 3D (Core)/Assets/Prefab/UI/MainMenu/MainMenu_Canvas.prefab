@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 5009757391786412754}
   - component: {fileID: 5009757391786412755}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Image_REF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.8015883, g: 1, b: 0.5613208, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 166149717511554336}
   - component: {fileID: 8503598338780761191}
   m_Layer: 5
-  m_Name: Anim
+  m_Name: LeftPanel_StartMainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +326,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -156.26813, y: -107.90097}
   m_SizeDelta: {x: 472.2277, y: 798.5029}
   m_Pivot: {x: 0, y: 0.5}
@@ -400,6 +400,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 166149717511554336}
     m_Modifications:
+    - target: {fileID: 526529806402342183, guid: c64a7f62d9dc1db49bead1b8139bf54b,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564527918626432218, guid: c64a7f62d9dc1db49bead1b8139bf54b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564527918626432218, guid: c64a7f62d9dc1db49bead1b8139bf54b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564527918626432218, guid: c64a7f62d9dc1db49bead1b8139bf54b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564527918626432218, guid: c64a7f62d9dc1db49bead1b8139bf54b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564527918626432218, guid: c64a7f62d9dc1db49bead1b8139bf54b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4718739507246669814, guid: c64a7f62d9dc1db49bead1b8139bf54b,
         type: 3}
       propertyPath: m_Pivot.x
