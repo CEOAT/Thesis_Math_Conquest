@@ -47,7 +47,7 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
         if (ray3DRange > 0)
         {
             if (Physics.Raycast(ray3D, out raycastHit3D, ray3DRange,
-                layerMask3D, QueryTriggerInteraction.Collide))
+                layerMask3D, QueryTriggerInteraction.Ignore))
             {
                 Debug.DrawLine(ray3D.origin, raycastHit3D.point, Color.red);
             }

@@ -356,7 +356,7 @@ MonoBehaviour:
   enemySelectorPrefab: {fileID: 8443834629550702227, guid: 89e561cf4d207954e95157fd7f6e82eb,
     type: 3}
   isEnemySelectedUI: 0
-  UIUnselectedAlpha: 0.1
+  UIUnselectedAlpha: 0
   enemyName: Test Enemy
   enemyHealthMax: 100
   enemyHealthCurrent: 0
@@ -419,8 +419,10 @@ MonoBehaviour:
     m_Bits: 64
   enemyAttackDamage: 10
   isEnemyCheckingAttack: 0
-  enemyCheckingAttackIntervalTime: 0
+  enemyCheckingAttackIntervalTime: 1
+  isEnemyReadyToAttack: 0
   isEnemyWaitToAttack: 0
-  enemyAttackWaitTime: 0
+  enemyAttackWaitTime: 1
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 0
+  enemyAnimationState: 

@@ -278,7 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6268476657572152509}
   - component: {fileID: 6268476657572152508}
-  - component: {fileID: 6268476657572152513}
+  - component: {fileID: 4026046256886132284}
   - component: {fileID: 6268476657572152512}
   - component: {fileID: 6268476657572152511}
   - component: {fileID: 2430912693709566475}
@@ -364,7 +364,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &6268476657572152513
+--- !u!136 &4026046256886132284
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -374,10 +374,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.33
+  m_Radius: 0.32999995
   m_Height: 1.17
   m_Direction: 1
-  m_Center: {x: -0.070449024, y: -0.036626577, z: 0}
+  m_Center: {x: -0.07044904, y: -0.036626592, z: 0.000000036631135}
 --- !u!54 &6268476657572152512
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -581,8 +581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioList:
-    animationName:
-    - demo player run side
+    animationClip:
+    - {fileID: 7400000, guid: f8bbf78c86381774c86b34e3450713a5, type: 2}
     soundEffectList:
     - {fileID: 8300000, guid: e239873ee899def48baee4c052bbe608, type: 3}
   currentAnimation: 

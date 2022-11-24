@@ -27,7 +27,7 @@ public class EnemyControllerMovement : MonoBehaviour
     public float enemyAttackTriggerRange;
     public float enemyAttackPointRange;
     public LayerMask enemyAttackLayerMask;
-    private Collider[] playerInAttackCircle;
+    [SerializeField] private Collider[] playerInAttackCircle;
     public float enemyAttackDamage;
 
     [Header("Enemy Attack Interval")]
@@ -36,16 +36,22 @@ public class EnemyControllerMovement : MonoBehaviour
     public bool isEnemyReadyToAttack;
 
     [Header("Enemy Attack Wait")]
-    public bool isEnemyWaitToAttack;
+    public bool isEnemyWaitFromAttack;
+    [Tooltip("Set to 0 if want enemy to resume activity immediately after attack. If not, set time to be longer than enemy's attack animation")] 
     public float enemyAttackWaitTime;
 
     [Header("Enemy Recovery System")]
     public bool isEnemyWaitToRecover;
     public float enemyHurtRevoceryTime;
 
+    [Header("Enemy Animation")]
+    public string enemyAnimationState;
+    private Animator animator;
+
     private NavMeshAgent navMeshAgent;
     private Rigidbody rigidbody;
     private EnemyControllerStatus EnemyStatus;
+
 
     private void Start()
     {
@@ -57,6 +63,7 @@ public class EnemyControllerMovement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         EnemyStatus = GetComponent<EnemyControllerStatus>();
     }
     private void SetupEnemyType()
@@ -92,6 +99,7 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyStartChasePlayer(Transform player)
     {
+        print("chase player");
         isEnemyChasePlayer = true;
         playerTransform = player;
     }
@@ -101,10 +109,13 @@ public class EnemyControllerMovement : MonoBehaviour
         if(enemyType == EnemyType.obstacle) { return; }
 
         EnemyCheckFacing();
-        
+        EnemyAnimationUpdate();
+
+        print(navMeshAgent.destination);
+
         if (isEnemyChasePlayer == true)
         {
-            if (isEnemyWaitToAttack == false && isEnemyWaitToRecover == false)
+            if (isEnemyWaitFromAttack == false && isEnemyWaitToRecover == false)
             {
                 EnemyChasePlayer();
                 EnemyAttackCheckEnabled();
@@ -122,10 +133,16 @@ public class EnemyControllerMovement : MonoBehaviour
         if (navMeshAgent.velocity.x > 0)
         {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            enemyAnimationState = "Enemy Walk";
         }
         if (navMeshAgent.velocity.x < 0)
         {
             transform.localScale = new Vector3(-1f * Mathf.Abs((transform.localScale.x)), transform.localScale.y, transform.localScale.z);
+            enemyAnimationState = "Enemy Walk";
+        }
+        if (navMeshAgent.velocity.x == 0 && navMeshAgent.velocity.y == 0)
+        {
+            enemyAnimationState = "Enemy Idle";
         }
     }
     private void EnemyChasePlayer()
@@ -148,15 +165,41 @@ public class EnemyControllerMovement : MonoBehaviour
             navMeshAgent.SetDestination(transform.position);
         }
     }
+    public void EnemyDead()
+    {
+        EnemyStopChasePlayer();
+        GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
+        Destroy(GetComponent<Rigidbody>());
+
+        enemyAnimationState = "Enemy Dead";
+        EnemyAnimationTrigger();
+    }
+    public void EnemyDeadDestroyOnAnimation()
+    {
+        Destroy(this.gameObject);
+    }
 
     // wait to implement after have enemy sprite
     private void EnemyAttackWait()
     {
+        isEnemyWaitFromAttack = true;
         isEnemyReadyToAttack = false;
+        navMeshAgent.speed = 0f;
+        Invoke("EnemyAttackWaitComplete", enemyAttackWaitTime);
+    }
+    private void EnemyAttackWaitComplete()
+    {
+        isEnemyWaitFromAttack = false;
+        isEnemyReadyToAttack = true;
+        navMeshAgent.speed = enemyMoveSpeed;
     }
     private void EnemyHurtRecovery()
     {
         
+    }
+    private void EnemyHurtRecoveryComplete()
+    {
+
     }
 
     #if UNITY_EDITOR
@@ -167,7 +210,7 @@ public class EnemyControllerMovement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, enemyChasingRange);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemyAttackTriggerRange);
+        Gizmos.DrawWireSphere(enemyAttackPointTransform.transform.position, enemyAttackTriggerRange);
     }
     private void OnDrawGizmos()
     {
@@ -197,16 +240,50 @@ public class EnemyControllerMovement : MonoBehaviour
             {
                 if (player.tag == "Player")
                 {
-                    // implement animation here
-
-                    print("active attack");
-                    EnemyAttackSendDamage();
+                    enemyAnimationState = "Enemy Attack";
+                    EnemyAnimationTrigger();
+                    EnemyAttackWait();
                 }
             }
         }
     }
-    private void EnemyAttackSendDamage()   // this will bec called in animation event
+    private void EnemyAttackSendDamage()    // on animation event
     {
-        playerInAttackCircle[0].GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(enemyAttackDamage);
+        playerInAttackCircle = Physics.OverlapSphere(
+                enemyAttackPointTransform.transform.position,
+                enemyAttackTriggerRange,
+                enemyAttackLayerMask);
+        foreach (Collider player in playerInAttackCircle)
+        {
+            if (player.tag == "Player" && player.GetComponent<CapsuleCollider>() != null)
+            {
+                player.GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(enemyAttackDamage);
+            }
+        }
+    }
+
+    private void EnemyAnimationUpdate()
+    {
+        if (enemyAnimationState == "Enemy Idle")
+        {
+            animator.SetBool("boolEnemyIdle", true);
+            animator.SetBool("boolEnemyWalk", false);
+        }
+        if (enemyAnimationState == "Enemy Walk")
+        {
+            animator.SetBool("boolEnemyIdle", false);
+            animator.SetBool("boolEnemyWalk", true);
+        }
+    }
+    private void EnemyAnimationTrigger()
+    {
+        if (enemyAnimationState == "Enemy Attack")
+        {
+            animator.SetTrigger("triggerEnemyAttack");
+        }
+        if (enemyAnimationState == "Enemy Dead")
+        {
+            animator.SetTrigger("triggerEnemyDead");
+        }
     }
 }

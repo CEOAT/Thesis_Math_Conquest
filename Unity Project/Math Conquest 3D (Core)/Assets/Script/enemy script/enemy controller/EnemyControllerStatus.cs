@@ -37,6 +37,7 @@ public class EnemyControllerStatus : MonoBehaviour
     public float enemyHealthMax;
     public float enemyHealthCurrent;
     public float enemyTimeToSelfDestroy = 2f;
+    private bool isEnemyDeadCheck = false;
 
     [Header("Enemy Damage")]
     public float enemyAttackDamage;
@@ -132,9 +133,10 @@ public class EnemyControllerStatus : MonoBehaviour
     }
     private void EnemyHealthCheckDestroy()
     {
-        if (enemyHealthCurrent <= 0)
+        if (enemyHealthCurrent <= 0 && isEnemyDeadCheck == false)
         {
-            StartCoroutine(EnemyDead());
+            isEnemyDeadCheck = true;
+            EnemyMovement.EnemyDead();
         }
     }
     private void EnemyHealthBarChangeScale()
@@ -159,18 +161,6 @@ public class EnemyControllerStatus : MonoBehaviour
             enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color = HealthBarAlphaBottomLow;
             enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>().alpha = UIUnselectedAlpha;
         }
-    }
-
-    IEnumerator EnemyDead()
-    {
-        GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
-        Destroy(GetComponent<Rigidbody>());
-
-        //** implement animation here
-        EnemyMovement.EnemyStopChasePlayer();
-
-        yield return new WaitForSeconds(enemyTimeToSelfDestroy);
-        Destroy(this.gameObject);
     }
 
     public void EnemySelected()
