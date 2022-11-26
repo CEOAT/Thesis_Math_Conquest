@@ -27,6 +27,9 @@ public class CutsceneControllerDialog : MonoBehaviour
     public bool isDialogDisabledAfterFinish = false;
     private bool isDialogPlayed = false;
 
+    [Header("Active End Dialog Object")]
+    public GameObject activeAfterEndDialogObject;
+
     [Header("Dialog Data")]
     public DialogListClass dialogList = new DialogListClass();
     private Queue<string> dialogQueue = new Queue<string>();
@@ -36,18 +39,12 @@ public class CutsceneControllerDialog : MonoBehaviour
     private void Awake()
     {
         SetupComponent();
-        SetupControl();
     }
     private void SetupComponent()
     {
         speakerImage.GetComponent<Image>();
         speakerText.GetComponent<TMP_Text>();
         dialogText.GetComponent<TMP_Text>();
-    }
-    private void SetupControl()
-    {
-        playerInput = new MasterInput();
-        playerInput.PlayerControlGeneral.NextDialog.performed += context => PlayNextDialog();
     }
 
     public void StartDialogCutscene()
@@ -162,7 +159,10 @@ public class CutsceneControllerDialog : MonoBehaviour
     private void DialogEnd()
     {
         dialogIndex++;
+
         StartCoroutine(DialogEndWaiting());
+        ActiveObjectAtEndDialog();
+
         isDialogActive = false;
         dialogQueue.Dequeue();
     }
@@ -171,14 +171,27 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
     }
+    private void ActiveObjectAtEndDialog()
+    {
+        if (activeAfterEndDialogObject != null)
+        {
+            activeAfterEndDialogObject.SetActive(true);
+        }
+    }
 
     private void OnTriggerEnter(Collider player)
     {
         if (player.CompareTag("Player"))
         {
+            SetupControl();
             playerInput.Enable();
             StartDialogCutscene();
         }
+    }
+    private void SetupControl()
+    {
+        playerInput = new MasterInput();
+        playerInput.PlayerControlGeneral.NextDialog.performed += context => PlayNextDialog();
     }
 }
 

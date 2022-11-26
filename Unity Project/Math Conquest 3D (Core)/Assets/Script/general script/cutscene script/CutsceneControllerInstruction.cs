@@ -23,6 +23,12 @@ public class CutsceneControllerInstruction : MonoBehaviour
     [Header("Game Controller Object")]
     public ExplorationModeGameController GameController;
 
+    [Header("Active End Instruction Object")]
+    public GameObject activeAfterEnInstructionObject;
+
+    [Header("Instruction Setting")]
+    public bool isDeactivateAfterEnd;
+
     [Header("Instruction Data")]
     public InstructionListClass instructionList;
 
@@ -83,7 +89,6 @@ public class CutsceneControllerInstruction : MonoBehaviour
                 print("play animation");
                 element.GetComponent<Animator>().Play("Instruction Element Slide Up");
             }
-
         }
     }
     private void HideLastPageElementNextButton()
@@ -154,6 +159,20 @@ public class CutsceneControllerInstruction : MonoBehaviour
         pageCurrent = pageTotal;
         PlayerInput.Disable();
         GameController.AllowMovement();
+
+        ActiveObjectAtEndInstruction();
+        DeactivateAfterEndInstruction();
+    }
+    private void ActiveObjectAtEndInstruction()
+    {
+        activeAfterEnInstructionObject.SetActive(true);
+    }
+    private void DeactivateAfterEndInstruction()
+    {
+        if (isDeactivateAfterEnd == true)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     // press previous page button

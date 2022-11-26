@@ -39,6 +39,8 @@ AnimationClip:
       value: {fileID: -1373980625, guid: af00f45121edcc440bdd5577d69b917c, type: 3}
     - time: 1
       value: {fileID: 1979717594, guid: af00f45121edcc440bdd5577d69b917c, type: 3}
+    - time: 1.1666666
+      value: {fileID: 1979717594, guid: af00f45121edcc440bdd5577d69b917c, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -68,12 +70,13 @@ AnimationClip:
     - {fileID: 703364383, guid: af00f45121edcc440bdd5577d69b917c, type: 3}
     - {fileID: -1373980625, guid: af00f45121edcc440bdd5577d69b917c, type: 3}
     - {fileID: 1979717594, guid: af00f45121edcc440bdd5577d69b917c, type: 3}
+    - {fileID: 1979717594, guid: af00f45121edcc440bdd5577d69b917c, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.0166667
+    m_StopTime: 1.1833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -95,6 +98,13 @@ AnimationClip:
   m_Events:
   - time: 0.68333334
     functionName: EnemyAttackSendDamage
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1666666
+    functionName: EnemyAttackWaitComplete
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

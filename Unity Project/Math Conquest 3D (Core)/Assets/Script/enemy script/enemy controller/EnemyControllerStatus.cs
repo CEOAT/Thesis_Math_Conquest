@@ -61,6 +61,7 @@ public class EnemyControllerStatus : MonoBehaviour
         }
         else
         {
+            enemyHealthCurrent += 10;
             print("wrong");
 
 
@@ -73,6 +74,7 @@ public class EnemyControllerStatus : MonoBehaviour
         enemyHealthCurrent -= receivedDamage;
         isQuestionActive = false;
         isEnemyTakenDamage = true;
+        EnemyMovement.EnemyHurtRecovery();
     }
 
 

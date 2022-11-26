@@ -179,27 +179,46 @@ public class EnemyControllerMovement : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    // wait to implement after have enemy sprite
     private void EnemyAttackWait()
     {
         isEnemyWaitFromAttack = true;
         isEnemyReadyToAttack = false;
         navMeshAgent.speed = 0f;
-        Invoke("EnemyAttackWaitComplete", enemyAttackWaitTime);
+
+        if (enemyAttackWaitTime >= 1)    // make sure wait time is longer than attack animation if not set to 0
+        {
+            Invoke("EnemyAttackWaitComplete", enemyAttackWaitTime);
+        }
     }
     private void EnemyAttackWaitComplete()
     {
+        if(enemyAttackWaitTime >= 1) { return; }
+
         isEnemyWaitFromAttack = false;
         isEnemyReadyToAttack = true;
         navMeshAgent.speed = enemyMoveSpeed;
     }
-    private void EnemyHurtRecovery()
+    public void EnemyHurtRecovery()
     {
-        
+        enemyAnimationState = "Enemy Hurt";
+        EnemyAnimationTrigger();
+
+        isEnemyWaitToRecover = true;
+        isEnemyReadyToAttack = false;
+        navMeshAgent.speed = 0f;
+
+        if (enemyAttackWaitTime >= 1)    // make sure wait time is longer than hurt animation if not set to 0
+        {
+            Invoke("EnemyHurtRecoveryComplete", enemyHurtRevoceryTime);
+        }
     }
     private void EnemyHurtRecoveryComplete()
     {
+        if (enemyHurtRevoceryTime >= 1) { return; }
 
+        isEnemyWaitToRecover = false;
+        isEnemyReadyToAttack = true;
+        navMeshAgent.speed = enemyMoveSpeed;
     }
 
     #if UNITY_EDITOR
@@ -281,9 +300,13 @@ public class EnemyControllerMovement : MonoBehaviour
         {
             animator.SetTrigger("triggerEnemyAttack");
         }
-        if (enemyAnimationState == "Enemy Dead")
+        else if (enemyAnimationState == "Enemy Dead")
         {
             animator.SetTrigger("triggerEnemyDead");
+        }
+        else if (enemyAnimationState == "Enemy Hurt")
+        {
+            animator.SetTrigger("triggerEnemyHurt");
         }
     }
 }
