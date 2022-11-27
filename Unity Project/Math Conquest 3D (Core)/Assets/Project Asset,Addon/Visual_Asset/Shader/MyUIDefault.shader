@@ -1,4 +1,4 @@
-Shader "UI/Default"
+Shader "Hidden/UI/Default (SoftMaskable)"
 {
     Properties
     {
@@ -11,7 +11,9 @@ Shader "UI/Default"
         _StencilWriteMask ("Stencil Write Mask", Float) = 255
         _StencilReadMask ("Stencil Read Mask", Float) = 255
 
-       // _ColorMask ("Color Mask", Float) = 15
+        _ColorMask ("Color Mask", Float) = 15
+         _SoftMask          ("Mask", 2D) = "white" {}
+
 
         [Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
     }
@@ -41,21 +43,25 @@ Shader "UI/Default"
         ZWrite Off
         ZTest [unity_GUIZTestMode]
         Blend SrcAlpha OneMinusSrcAlpha
-       // ColorMask [_ColorMask]
+        ColorMask [_ColorMask]
 
         Pass
         {
             Name "Default"
-        CGPROGRAM
+            CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 2.0
 
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
+            #include "Packages/com.coffee.softmask-for-ugui/Shaders/SoftMask.cginc"	// Add for soft mask
+            #pragma multi_compile __ UNITY_UI_CLIP_RECT
+            #pragma multi_compile __ UNITY_UI_ALPHACLIP
 
-            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
-            #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
+            
+            #pragma shader_feature __ SOFTMASK_EDITOR	// Add for soft mask
+             #pragma multi_compile __ SOFTMASK_SIMPLE SOFTMASK_SLICED SOFTMASK_TILED
 
             struct appdata_t
             {
@@ -74,6 +80,9 @@ Shader "UI/Default"
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
+
+
+
             sampler2D _MainTex;
             fixed4 _Color;
             fixed4 _TextureSampleAdd;
@@ -91,6 +100,7 @@ Shader "UI/Default"
                 OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 
                 OUT.color = v.color * _Color;
+
                 return OUT;
             }
 
@@ -98,17 +108,17 @@ Shader "UI/Default"
             {
                 half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
 
-               #ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
 
                 #ifdef UNITY_UI_ALPHACLIP
-                clip (color.a - 0.001);
+                    clip (color.a - 0.001);
                 #endif
+
+                color.a *= SoftMask(IN.vertex, IN.worldPosition);	// Add for soft mask
 
                 return color;
             }
-        ENDCG
+            ENDCG
         }
     }
 }
