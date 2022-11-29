@@ -25,17 +25,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729755034}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.15302752}
   m_LocalScale: {x: 0.0659309, y: 0.0659309, z: 0.0659309}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6268476657572152509}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.055925608, y: 0.9501224}
+  m_AnchoredPosition: {x: -0.057, y: 0.9501224}
   m_SizeDelta: {x: 30.1466, y: 4.9479}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &729755036
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -4913637463156679144, guid: 65eb82dda5212f2448aff7de410823bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,8 +102,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Answer Text 3D
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 65eb82dda5212f2448aff7de410823bd, type: 2}
+  m_sharedMaterial: {fileID: -4913637463156679144, guid: 65eb82dda5212f2448aff7de410823bd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -216,7 +217,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.1447155
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6268476655874460036
 MonoBehaviour:
