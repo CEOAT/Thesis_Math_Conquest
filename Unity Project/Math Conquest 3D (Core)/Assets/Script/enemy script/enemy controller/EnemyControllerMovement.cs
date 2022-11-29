@@ -99,7 +99,6 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyStartChasePlayer(Transform player)
     {
-        print("chase player");
         isEnemyChasePlayer = true;
         playerTransform = player;
     }
@@ -110,8 +109,6 @@ public class EnemyControllerMovement : MonoBehaviour
 
         EnemyCheckFacing();
         EnemyAnimationUpdate();
-
-        print(navMeshAgent.destination);
 
         if (isEnemyChasePlayer == true)
         {

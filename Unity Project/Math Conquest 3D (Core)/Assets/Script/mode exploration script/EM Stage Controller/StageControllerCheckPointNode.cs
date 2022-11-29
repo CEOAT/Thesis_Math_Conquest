@@ -36,6 +36,8 @@ public class StageControllerCheckPointNode : MonoBehaviour
 
             CheckPointManager.SendObjective(checkpointObjective);
             CheckPointManager.SendCheckpointData(checkpointSaveData);
+
+            this.gameObject.SetActive(false);
         }
     }
 }
