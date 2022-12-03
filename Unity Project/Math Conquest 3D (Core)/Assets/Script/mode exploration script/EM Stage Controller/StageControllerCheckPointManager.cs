@@ -10,7 +10,6 @@ public class StageControllerCheckPointManager : MonoBehaviour
 
     [Header("Checkpoint Manager Data")]
     public int checkpointCurrentIndex;
-    public string checkpointCurrentName = "None";
     private Transform checkpointCurrentPosition;
     public List<Transform> checkpointList;
 
@@ -28,15 +27,13 @@ public class StageControllerCheckPointManager : MonoBehaviour
         StageSaveData checkpointSaveData = new StageSaveData();
         checkpointSaveData = SaveController.LoadGameCheckpoint();
 
-        int count = 0;
-        foreach (Transform checkpoint in checkpointList)
+        for (int i = 0; i < checkpointList.Count; i++)
         {
-            if (checkpointSaveData.checkpointName == checkpoint.name)
+            if (checkpointSaveData.checkpointIndex == i)
             {
-                checkpointCurrentPosition = checkpoint.transform;
+                checkpointCurrentPosition = checkpointList[i].transform;
                 break;
             }
-            count++;
         }
         return checkpointCurrentPosition;
     }

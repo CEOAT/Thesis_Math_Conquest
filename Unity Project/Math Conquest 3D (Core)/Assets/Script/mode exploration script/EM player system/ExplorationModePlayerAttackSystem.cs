@@ -6,11 +6,18 @@ using TMPro;
 
 public class ExplorationModePlayerAttackSystem : MonoBehaviour
 {
+    [Header("Player Movement")]
+    public ExplorationModePlayerControllerMovement PlayerMovement;
+
     [Header("Player Attack System")]
     public float playerAttackDamage;
+    public GameObject playerAttackShockwavePrefab;
+    private GameObject playerAttackShockwaveObject;
+
+    [Header("Player UI")]
     public TMP_InputField playerAnswerInputField;
     public TMP_Text playerAnswerText;
-    public ExplorationModePlayerControllerMovement PlayerController;
+    
 
     [Header("Auto Add Target System")]
     public List<Transform> enemyList = new List<Transform>();
@@ -64,11 +71,15 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
     private void PlayerAttack()
     {
         if(playerAnswerInputField.text == "") { return; }
-        if (enemyCurrentSelected != null)
+        if (enemyCurrentSelected != null && PlayerMovement.canControlCharacter == true)
         {
-            enemyCurrentSelected.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerText.text.ToString(), playerAttackDamage);
+            PlayerLaunchingShockWave();
         }
         playerAnswerInputField.text = "";
+    }
+    private void PlayerLaunchingShockWave()
+    {
+        enemyCurrentSelected.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerText.text.ToString(), playerAttackDamage);
     }
     private void PlayerClearAnswer()
     {

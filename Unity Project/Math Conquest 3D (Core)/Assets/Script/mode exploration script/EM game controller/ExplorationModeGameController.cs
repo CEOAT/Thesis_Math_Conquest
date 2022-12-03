@@ -68,7 +68,7 @@ public class ExplorationModeGameController : MonoBehaviour
     }
     public void AllowMovement()
     {
-        PlayerMovement.PlayerEnableddMovement();
+        PlayerMovement.PlayerEnabledMovement();
         GameplayUiGroup.SetActive(true);
     }
     #endregion

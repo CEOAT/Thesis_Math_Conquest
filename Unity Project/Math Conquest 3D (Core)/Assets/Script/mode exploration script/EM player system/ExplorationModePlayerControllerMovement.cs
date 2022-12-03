@@ -34,7 +34,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     {
         SetupConponent();
         SetupControl();
-        PlayerEnableddMovement();
+        PlayerEnabledMovement();
     }
     private void SetupConponent()
     {
@@ -125,25 +125,32 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             playerMoveSpeed = playerWalkSpeed;
         }
     }
+
+    public void PlayerAttackPerform()
+    {
+        animator.SetTrigger("triggerAttack");
+        PlayerWait();
+        PlayerDisabledMovement();
+    }
+    public void PlayerAttackCancle()
+    {
+        PlayerEnabledMovement();
+    }
+
     public void PlayerHurt()   // temporary disable player's movement
     {
-        // player animation hurt
-        // PlayerDisabledMovement();
-        // prevent player's control
-
-        StartCoroutine(PlayerReovery());
-        PlayerDisabledMovement();
+        animator.SetTrigger("triggerHurt");
+        PlayerWait();
     }
-    private IEnumerator PlayerReovery()
+    public void PlayerHurtCancle()
     {
-        yield return new WaitForSeconds(playerRecoveryTimeUsed);
-        PlayerEnableddMovement();
+        PlayerEnabledMovement();
     }
-    public void PlayerDead()   // disable all player action. game controller - disable pause button, player controller - diable all movement
-    {
-        // player animation dead
 
-        PlayerDisabledMovement();
+    public void PlayerDead()
+    {
+        animator.SetTrigger("triggerDead");
+        PlayerWait();
     }
     public void PlayerWait()    // *** need clean up ***
     {
@@ -153,11 +160,12 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         animator.SetBool("isRunSide", false);
         PlayerDisabledMovement();
     }
+
     public void PlayerDisabledMovement()
     {
         canControlCharacter = false;
     }
-    public void PlayerEnableddMovement()
+    public void PlayerEnabledMovement()
     {
         canControlCharacter = true;
     }
@@ -192,7 +200,6 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             animator.SetBool("isRunDown", false);
             animator.SetBool("isRunSide", true);
             spriteRenderer.flipX = false;
-
         }
         if (playerStatus == "run left")
         {
