@@ -13,10 +13,16 @@ public class ExplorationModeGameController : MonoBehaviour
     public GameObject GameplayUiGroup;
     public GameObject ObjectiveText;
 
+    [Header("Game Over Object")]
+    public GameObject WorldSpaceBlackScreenCube;
+    public GameObject ImageFadeBlackPrefab;
+    public Transform canvasTransform;
+
     [Header("Player")]
     public Transform playerGameObject;
     public ExplorationModePlayerControllerMovement PlayerMovement;
     public ExplorationModePlayerHealth PlayerHealth;
+    public ExplorationModePlayerAttackSystem PlayerAttackSystem;
 
     [Header("Game System Script")]
     public SaveController SaveController;
@@ -100,8 +106,26 @@ public class ExplorationModeGameController : MonoBehaviour
     private void GameOver()
     {
         TriggerCutscene();
+        StartCoroutine(GameOverCutscene());
+    }
+    private IEnumerator GameOverCutscene()
+    {
+        Time.timeScale = 0.2f;
+
+        PlayerAttackSystem.PlayerClearAnswer();
+        PlayerMovement.PlayerDead();
+        
         GamePauseWindowGroup.SetActive(false);
         GameplayUiGroup.SetActive(false);
+
+        yield return new WaitForSeconds(0.4f);
+        Time.timeScale = 1f;
+        Transform transitionImageObject = Instantiate(ImageFadeBlackPrefab.transform);
+        transitionImageObject.SetParent(canvasTransform);
+        transitionImageObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        transitionImageObject.SetAsFirstSibling();
+
+        yield return new WaitForSeconds(3f);
         GameOverWindowGroup.SetActive(true);
     }
 

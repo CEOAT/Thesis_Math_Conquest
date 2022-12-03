@@ -81,7 +81,7 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
     {
         enemyCurrentSelected.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerText.text.ToString(), playerAttackDamage);
     }
-    private void PlayerClearAnswer()
+    public void PlayerClearAnswer()
     {
         playerAnswerInputField.text = "";
     }

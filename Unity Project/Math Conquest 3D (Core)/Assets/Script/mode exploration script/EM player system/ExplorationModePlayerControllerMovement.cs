@@ -137,7 +137,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         PlayerEnabledMovement();
     }
 
-    public void PlayerHurt()   // temporary disable player's movement
+    public void PlayerHurt()
     {
         animator.SetTrigger("triggerHurt");
         PlayerWait();
@@ -150,9 +150,21 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public void PlayerDead()
     {
         animator.SetTrigger("triggerDead");
+        Destroy(rigidbody);
+        GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
+
+        CheckPlayerDeadFacing();
         PlayerWait();
     }
-    public void PlayerWait()    // *** need clean up ***
+    public void CheckPlayerDeadFacing()
+    {
+        if (spriteRenderer.flipX == true)
+        {
+            spriteRenderer.flipX = false;
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y, transform.localScale.z);
+        }
+    }
+    public void PlayerWait()
     {
         animator.SetBool("isIdle", true);
         animator.SetBool("isRunUp", false);
