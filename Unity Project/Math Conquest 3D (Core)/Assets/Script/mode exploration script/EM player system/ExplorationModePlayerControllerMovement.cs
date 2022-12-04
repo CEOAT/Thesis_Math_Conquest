@@ -21,6 +21,10 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public float playerRecoveryTimeUsed;
     public float playerRecoveryTimeCount;
 
+    [Header("Player Material")]
+    public Material playerMaterialStart;
+    public Material playerMaterialDamaged;
+
     private MasterInput playerInput;
     private float upDownInput;
     private float leftRightInput;
@@ -141,6 +145,18 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     {
         animator.SetTrigger("triggerHurt");
         PlayerWait();
+        StartCoroutine(PlayerHurtColorSwitch());
+    }
+    private Color enemyColorDefault = new Color(255, 255, 255, 255);
+    private Color enemyColorRed = new Color(255, 0, 0, 255);
+    private IEnumerator PlayerHurtColorSwitch()
+    {
+        spriteRenderer.material = playerMaterialDamaged;
+        spriteRenderer.color = enemyColorRed;
+
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = enemyColorDefault;
+        spriteRenderer.material = playerMaterialStart;
     }
     public void PlayerHurtCancle()
     {

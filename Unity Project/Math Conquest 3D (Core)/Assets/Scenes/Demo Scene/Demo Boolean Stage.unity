@@ -647,7 +647,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
+      objectReference: {fileID: 2100000, guid: 9bdec9f365060ea41bc5c3641fcd2896, type: 2}
     - target: {fileID: 6268476657572152509, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: m_RootOrder
@@ -708,6 +708,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demo Player Exploration Mode
       objectReference: {fileID: 0}
+    - target: {fileID: 6268476657572152515, guid: 49c1a2e6ee95d55428c5990d8699738e,
+        type: 3}
+      propertyPath: playerMaterialStart
+      value: 
+      objectReference: {fileID: 2100000, guid: 656e3625fdc343d45859fd764cdc1ca8, type: 2}
+    - target: {fileID: 6268476657572152515, guid: 49c1a2e6ee95d55428c5990d8699738e,
+        type: 3}
+      propertyPath: playerMaterialDamaged
+      value: 
+      objectReference: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49c1a2e6ee95d55428c5990d8699738e, type: 3}
 --- !u!114 &197249745 stripped
@@ -2804,21 +2814,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
-        type: 3}
-      propertyPath: enemyAttackDamage
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
-        type: 3}
-      propertyPath: enemyDetectionRange
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2527330564533414494, guid: 0ae20bee99561c546bd066ab3fc34b9f,
-        type: 3}
-      propertyPath: enemyAttackDamage
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ae20bee99561c546bd066ab3fc34b9f, type: 3}
 --- !u!1 &1314724830
@@ -3435,6 +3430,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414471, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414471, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414471, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414471, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 656e3625fdc343d45859fd764cdc1ca8, type: 2}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
       propertyPath: enemyAttackDamage
