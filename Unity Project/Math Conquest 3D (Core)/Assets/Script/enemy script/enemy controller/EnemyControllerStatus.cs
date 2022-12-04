@@ -48,35 +48,7 @@ public class EnemyControllerStatus : MonoBehaviour
 
     private EnemyControllerMovement EnemyMovement;
 
-    public void CheckPlayerAnswer(string playerAnswer, float playerDamage)
-    {
-        if (playerAnswer == questionAnswer)
-        {
-            print("hit");
-            PlayerAnswerCorrect(playerDamage);
-
-            
-            //random new question
-            //enemy lose health
-        }
-        else
-        {
-            enemyHealthCurrent += 10;
-            print("wrong");
-
-
-            //wrong statement
-            //reduce player hp, restore enemy's health?, gain shield?
-        }
-    }
-    private void PlayerAnswerCorrect(float receivedDamage)
-    {
-        enemyHealthCurrent -= receivedDamage;
-        isQuestionActive = false;
-        isEnemyTakenDamage = true;
-        EnemyMovement.EnemyHurtRecovery();
-    }
-
+    
 
     private void Awake()
     {
@@ -168,6 +140,7 @@ public class EnemyControllerStatus : MonoBehaviour
         }
     }
 
+    #region Select Enemy Function
     public void EnemySelected()
     {
         isEnemySelectedUI = true;
@@ -183,4 +156,51 @@ public class EnemyControllerStatus : MonoBehaviour
             Destroy(enemySelectorObject.gameObject);
         }
     }
+    #endregion
+
+    #region Enemy Check Answer
+    public void CheckPlayerAnswer(string playerAnswer, float playerDamage)
+    {
+        if (playerAnswer == questionAnswer)
+        {
+            PlayerAnswerCorrect(playerDamage);
+            enemyDetailObject.GetComponent<Animator>().SetTrigger("triggerUiWorldSpaceShake");
+
+            //random new question
+            //enemy lose health
+        }
+        else
+        {
+            PlayerAnswerFalse();
+
+            //wrong statement
+            //reduce player hp, restore enemy's health?, gain shield?
+        }
+    }
+    private void PlayerAnswerCorrect(float receivedDamage)
+    {
+        enemyHealthCurrent -= receivedDamage;
+        isQuestionActive = false;
+        isEnemyTakenDamage = true;
+        EnemyMovement.EnemyHurtRecovery();
+    }
+    private void PlayerAnswerFalse()
+    {
+        FalseReactionHeal();
+    }
+    #endregion
+
+    #region False Reaction
+    private void FalseReactionHeal()
+    {
+        if (enemyHealthCurrent + 10 > 100)
+        {
+            enemyHealthCurrent = 100;
+        }
+        else
+        {
+            enemyHealthCurrent += 10;
+        }
+    }
+    #endregion
 }

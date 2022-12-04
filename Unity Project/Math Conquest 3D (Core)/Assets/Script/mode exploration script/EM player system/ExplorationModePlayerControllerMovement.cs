@@ -21,6 +21,9 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public float playerRecoveryTimeUsed;
     public float playerRecoveryTimeCount;
 
+    [Header("Player In-Game UI")]
+    public Animator InGameUiAnimator;
+
     [Header("Player Material")]
     public Material playerMaterialStart;
     public Material playerMaterialDamaged;
@@ -136,6 +139,17 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         PlayerWait();
         PlayerDisabledMovement();
     }
+    public void PlayerCheckFacingTarget(Transform targetEnemy)
+    {
+        if (targetEnemy.position.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (targetEnemy.position.x > transform.position.x)
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
     public void PlayerAttackCancle()
     {
         PlayerEnabledMovement();
@@ -144,6 +158,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public void PlayerHurt()
     {
         animator.SetTrigger("triggerHurt");
+        InGameUiAnimator.SetTrigger("triggerUiCanvasShake");
         PlayerWait();
         StartCoroutine(PlayerHurtColorSwitch());
     }
