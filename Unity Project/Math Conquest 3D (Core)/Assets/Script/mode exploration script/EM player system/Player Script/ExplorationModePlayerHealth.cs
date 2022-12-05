@@ -88,8 +88,9 @@ public class ExplorationModePlayerHealth : MonoBehaviour
             playerInvincibleTimeCurrent += Time.deltaTime;
             canPlayerTakeDamage = false;
         }
-        if (playerInvincibleTimeCurrent > playerInvincibleTimeMax)
+        else if (playerInvincibleTimeCurrent > playerInvincibleTimeMax)
         {
+            PlayerMovement.PlayerInvincibleEffectCancle();
             playerInvincibleTimeCurrent = 0;
             canPlayerTakeDamage = true;
             isPlayerOnInvincible = false;

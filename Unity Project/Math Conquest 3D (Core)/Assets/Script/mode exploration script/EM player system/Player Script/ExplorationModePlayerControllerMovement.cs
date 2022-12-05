@@ -24,9 +24,10 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     [Header("Player In-Game UI")]
     public Animator InGameUiAnimator;
 
-    [Header("Player Material")]
+    [Header("Player Invincible System")]
     public Material playerMaterialStart;
     public Material playerMaterialDamaged;
+    public GameObject playerInvincibleShieldPrefab;
 
     private MasterInput playerInput;
     private float upDownInput;
@@ -160,18 +161,27 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         animator.SetTrigger("triggerHurt");
         InGameUiAnimator.SetTrigger("triggerUiCanvasShake");
         PlayerWait();
+        StopCoroutine("PlayerHurtColorSwitch");
         StartCoroutine(PlayerHurtColorSwitch());
     }
-    private Color enemyColorDefault = new Color(255, 255, 255, 255);
-    private Color enemyColorRed = new Color(255, 0, 0, 255);
+    private Color playerColorDefault = new Color(255, 255, 255, 255);
+    private Color playerColorRed = new Color(255, 0, 0, 255);
     private IEnumerator PlayerHurtColorSwitch()
     {
         spriteRenderer.material = playerMaterialDamaged;
-        spriteRenderer.color = enemyColorRed;
+        spriteRenderer.color = playerColorRed;
 
-        yield return new WaitForSeconds(0.2f);
-        spriteRenderer.color = enemyColorDefault;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = playerColorDefault;
         spriteRenderer.material = playerMaterialStart;
+
+        GameObject playerShield = Instantiate(playerInvincibleShieldPrefab, transform.position + (Vector3.back * 0.2f), playerInvincibleShieldPrefab.transform.rotation);
+        playerShield.transform.parent = transform;
+        playerShield.GetComponent<ExplorationModePlayerParticleEffect>().particleLifeTime = GetComponent<ExplorationModePlayerHealth>().playerInvincibleTimeMax;
+    }
+    public void PlayerInvincibleEffectCancle()
+    {
+        StopCoroutine("PlayerHurtColorSwitch");
     }
     public void PlayerHurtCancle()
     {
