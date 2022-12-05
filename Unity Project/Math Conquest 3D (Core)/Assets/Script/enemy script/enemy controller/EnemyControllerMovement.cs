@@ -48,8 +48,13 @@ public class EnemyControllerMovement : MonoBehaviour
     public string enemyAnimationState;
     private Animator animator;
 
+    [Header("Enemy Meterial")]
+    public Material materialStart;
+    public Material materialDamaged;
+
     private NavMeshAgent navMeshAgent;
     private Rigidbody rigidbody;
+    private SpriteRenderer spriteRenderer;
     private EnemyControllerStatus EnemyStatus;
 
 
@@ -64,6 +69,7 @@ public class EnemyControllerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         EnemyStatus = GetComponent<EnemyControllerStatus>();
     }
     private void SetupEnemyType()
@@ -199,6 +205,7 @@ public class EnemyControllerMovement : MonoBehaviour
     {
         enemyAnimationState = "Enemy Hurt";
         EnemyAnimationTrigger();
+        StartCoroutine(EnemyHurtColorSwitch());
 
         isEnemyWaitToRecover = true;
         isEnemyReadyToAttack = false;
@@ -208,6 +215,17 @@ public class EnemyControllerMovement : MonoBehaviour
         {
             Invoke("EnemyHurtRecoveryComplete", enemyHurtRevoceryTime);
         }
+    }
+    private Color enemyColorDefault = new Color(255, 255, 255, 255);
+    private Color enemyColorRed = new Color(255, 0, 0, 255);
+    private IEnumerator EnemyHurtColorSwitch()
+    {
+        spriteRenderer.material = materialDamaged;
+        spriteRenderer.color = enemyColorRed;
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = enemyColorDefault;
+        spriteRenderer.material = materialStart;
+
     }
     private void EnemyHurtRecoveryComplete()
     {

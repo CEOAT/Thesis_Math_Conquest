@@ -50,11 +50,16 @@ MonoBehaviour:
   GameOverWindowGroup: {fileID: 0}
   GameplayUiGroup: {fileID: 0}
   ObjectiveText: {fileID: 0}
+  WorldSpaceBlackScreenCube: {fileID: 0}
+  ImageFadeBlackPrefab: {fileID: 4722997382980211500, guid: 43169d1ef9d5d5442985b7973f2f5371,
+    type: 3}
+  canvasTransform: {fileID: 0}
   playerGameObject: {fileID: 0}
   PlayerMovement: {fileID: 0}
   PlayerHealth: {fileID: 0}
-  SaveController: {fileID: 0}
-  CheckpointManager: {fileID: 0}
+  PlayerAttackSystem: {fileID: 0}
+  SaveController: {fileID: 8543283494750403515}
+  CheckpointManager: {fileID: 5876758486017747192}
 --- !u!114 &5876758486017747192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,11 +72,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80f4f5f67401f946b4e1c322bc8fe6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameController: {fileID: 0}
-  SaveController: {fileID: 0}
+  GameController: {fileID: 4994313322238069128}
+  SaveController: {fileID: 8543283494750403515}
   checkpointCurrentIndex: 0
-  checkpointCurrentName: None
-  checkpointList: []
+  checkpointList:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &8543283494750403515
 MonoBehaviour:
   m_ObjectHideFlags: 0

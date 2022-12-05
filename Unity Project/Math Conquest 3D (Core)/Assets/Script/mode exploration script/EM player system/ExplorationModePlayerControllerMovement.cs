@@ -21,6 +21,13 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public float playerRecoveryTimeUsed;
     public float playerRecoveryTimeCount;
 
+    [Header("Player In-Game UI")]
+    public Animator InGameUiAnimator;
+
+    [Header("Player Material")]
+    public Material playerMaterialStart;
+    public Material playerMaterialDamaged;
+
     private MasterInput playerInput;
     private float upDownInput;
     private float leftRightInput;
@@ -34,7 +41,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     {
         SetupConponent();
         SetupControl();
-        PlayerEnableddMovement();
+        PlayerEnabledMovement();
     }
     private void SetupConponent()
     {
@@ -125,27 +132,70 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             playerMoveSpeed = playerWalkSpeed;
         }
     }
-    public void PlayerHurt()   // temporary disable player's movement
-    {
-        // player animation hurt
-        // PlayerDisabledMovement();
-        // prevent player's control
 
-        StartCoroutine(PlayerReovery());
+    public void PlayerAttackPerform()
+    {
+        animator.SetTrigger("triggerAttack");
+        PlayerWait();
         PlayerDisabledMovement();
     }
-    private IEnumerator PlayerReovery()
+    public void PlayerCheckFacingTarget(Transform targetEnemy)
     {
-        yield return new WaitForSeconds(playerRecoveryTimeUsed);
-        PlayerEnableddMovement();
+        if (targetEnemy.position.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (targetEnemy.position.x > transform.position.x)
+        {
+            spriteRenderer.flipX = false;
+        }
     }
-    public void PlayerDead()   // disable all player action. game controller - disable pause button, player controller - diable all movement
+    public void PlayerAttackCancle()
     {
-        // player animation dead
+        PlayerEnabledMovement();
+    }
 
-        PlayerDisabledMovement();
+    public void PlayerHurt()
+    {
+        animator.SetTrigger("triggerHurt");
+        InGameUiAnimator.SetTrigger("triggerUiCanvasShake");
+        PlayerWait();
+        StartCoroutine(PlayerHurtColorSwitch());
     }
-    public void PlayerWait()    // *** need clean up ***
+    private Color enemyColorDefault = new Color(255, 255, 255, 255);
+    private Color enemyColorRed = new Color(255, 0, 0, 255);
+    private IEnumerator PlayerHurtColorSwitch()
+    {
+        spriteRenderer.material = playerMaterialDamaged;
+        spriteRenderer.color = enemyColorRed;
+
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = enemyColorDefault;
+        spriteRenderer.material = playerMaterialStart;
+    }
+    public void PlayerHurtCancle()
+    {
+        PlayerEnabledMovement();
+    }
+
+    public void PlayerDead()
+    {
+        animator.SetTrigger("triggerDead");
+        Destroy(rigidbody);
+        GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
+
+        CheckPlayerDeadFacing();
+        PlayerWait();
+    }
+    public void CheckPlayerDeadFacing()
+    {
+        if (spriteRenderer.flipX == true)
+        {
+            spriteRenderer.flipX = false;
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y, transform.localScale.z);
+        }
+    }
+    public void PlayerWait()
     {
         animator.SetBool("isIdle", true);
         animator.SetBool("isRunUp", false);
@@ -153,11 +203,12 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         animator.SetBool("isRunSide", false);
         PlayerDisabledMovement();
     }
+
     public void PlayerDisabledMovement()
     {
         canControlCharacter = false;
     }
-    public void PlayerEnableddMovement()
+    public void PlayerEnabledMovement()
     {
         canControlCharacter = true;
     }
@@ -192,7 +243,6 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             animator.SetBool("isRunDown", false);
             animator.SetBool("isRunSide", true);
             spriteRenderer.flipX = false;
-
         }
         if (playerStatus == "run left")
         {

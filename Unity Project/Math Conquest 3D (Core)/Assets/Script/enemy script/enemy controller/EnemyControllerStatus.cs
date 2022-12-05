@@ -48,35 +48,7 @@ public class EnemyControllerStatus : MonoBehaviour
 
     private EnemyControllerMovement EnemyMovement;
 
-    public void CheckPlayerAnswer(string playerAnswer, float playerDamage)
-    {
-        if (playerAnswer == questionAnswer)
-        {
-            print("hit");
-            PlayerAnswerCorrect(playerDamage);
-
-            
-            //random new question
-            //enemy lose health
-        }
-        else
-        {
-            enemyHealthCurrent += 10;
-            print("wrong");
-
-
-            //wrong statement
-            //reduce player hp, restore enemy's health?, gain shield?
-        }
-    }
-    private void PlayerAnswerCorrect(float receivedDamage)
-    {
-        enemyHealthCurrent -= receivedDamage;
-        isQuestionActive = false;
-        isEnemyTakenDamage = true;
-        EnemyMovement.EnemyHurtRecovery();
-    }
-
+    
 
     private void Awake()
     {
@@ -106,9 +78,10 @@ public class EnemyControllerStatus : MonoBehaviour
         enemyQuestionText = enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>();
 
         HealthBarAlphaTopFull = enemyDetailObject.transform.GetChild(1).GetComponent<SpriteRenderer>().color;       //start color + alpha
-        HealthBarAlphaBottomFull = enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color;
         HealthBarAlphaTopLow = HealthBarAlphaTopFull;                                                                 //low opacity alpha
         HealthBarAlphaTopLow.a = UIUnselectedAlpha;
+
+        HealthBarAlphaBottomFull = enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color;
         HealthBarAlphaBottomLow = HealthBarAlphaBottomFull;
         HealthBarAlphaBottomLow.a = UIUnselectedAlpha;
 
@@ -155,6 +128,7 @@ public class EnemyControllerStatus : MonoBehaviour
             enemyDetailObject.transform.GetChild(1).GetComponent<SpriteRenderer>().color = HealthBarAlphaTopFull;
             enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color = HealthBarAlphaBottomFull;
             enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>().alpha = 1f;
+            enemyDetailObject.transform.GetChild(4).GetComponent<SpriteRenderer>().color = HealthBarAlphaTopFull;
         }
         else
         {
@@ -162,9 +136,11 @@ public class EnemyControllerStatus : MonoBehaviour
             enemyDetailObject.transform.GetChild(1).GetComponent<SpriteRenderer>().color = HealthBarAlphaTopLow;
             enemyDetailObject.transform.GetChild(2).GetComponent<SpriteRenderer>().color = HealthBarAlphaBottomLow;
             enemyDetailObject.transform.GetChild(3).GetComponent<TMP_Text>().alpha = UIUnselectedAlpha;
+            enemyDetailObject.transform.GetChild(4).GetComponent<SpriteRenderer>().color = HealthBarAlphaBottomLow;
         }
     }
 
+    #region Select Enemy Function
     public void EnemySelected()
     {
         isEnemySelectedUI = true;
@@ -180,4 +156,51 @@ public class EnemyControllerStatus : MonoBehaviour
             Destroy(enemySelectorObject.gameObject);
         }
     }
+    #endregion
+
+    #region Enemy Check Answer
+    public void CheckPlayerAnswer(string playerAnswer, float playerDamage)
+    {
+        if (playerAnswer == questionAnswer)
+        {
+            PlayerAnswerCorrect(playerDamage);
+            enemyDetailObject.GetComponent<Animator>().SetTrigger("triggerUiWorldSpaceShake");
+
+            //random new question
+            //enemy lose health
+        }
+        else
+        {
+            PlayerAnswerFalse();
+
+            //wrong statement
+            //reduce player hp, restore enemy's health?, gain shield?
+        }
+    }
+    private void PlayerAnswerCorrect(float receivedDamage)
+    {
+        enemyHealthCurrent -= receivedDamage;
+        isQuestionActive = false;
+        isEnemyTakenDamage = true;
+        EnemyMovement.EnemyHurtRecovery();
+    }
+    private void PlayerAnswerFalse()
+    {
+        FalseReactionHeal();
+    }
+    #endregion
+
+    #region False Reaction
+    private void FalseReactionHeal()
+    {
+        if (enemyHealthCurrent + 10 > 100)
+        {
+            enemyHealthCurrent = 100;
+        }
+        else
+        {
+            enemyHealthCurrent += 10;
+        }
+    }
+    #endregion
 }

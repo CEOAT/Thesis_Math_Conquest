@@ -6,11 +6,25 @@ using TMPro;
 
 public class ExplorationModePlayerAttackSystem : MonoBehaviour
 {
+    [Header("Player Movement")]
+    public ExplorationModePlayerControllerMovement PlayerMovement;
+
     [Header("Player Attack System")]
     public float playerAttackDamage;
+
+    [Header("Player Shockwave")]
+    public GameObject playerAttackShockwavePrefab;
+    private GameObject playerAttackShockwaveObject;
+    public Vector3 playerShockwaveStartPosition;
+    public float playerShockwaveStartDistanceX;
+    public float playerShockwaveStartDistanceY;
+
+    [Header("Player UI")]
     public TMP_InputField playerAnswerInputField;
     public TMP_Text playerAnswerText;
-    public ExplorationModePlayerControllerMovement PlayerController;
+    public Animator playerAnswerAnimator;
+    public AnimationClip playerAnswerTextAnimationType;
+    public AnimationClip playerAnswerTextAnimationClear;
 
     [Header("Auto Add Target System")]
     public List<Transform> enemyList = new List<Transform>();
@@ -64,15 +78,65 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
     private void PlayerAttack()
     {
         if(playerAnswerInputField.text == "") { return; }
-        if (enemyCurrentSelected != null)
+        if (enemyCurrentSelected != null && PlayerMovement.canControlCharacter == true)
         {
-            enemyCurrentSelected.GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerText.text.ToString(), playerAttackDamage);
+            PlayerLaunchingShockWave();
+            PlayerMovement.PlayerAttackPerform();
+            PlayerMovement.PlayerCheckFacingTarget(enemyCurrentSelected);
         }
-        playerAnswerInputField.text = "";
+        PlayerClearAnswer();
     }
-    private void PlayerClearAnswer()
+    private void PlayerLaunchingShockWave()
+    {
+        PlayerCheckShockwaveStartPoint();
+        playerAttackShockwaveObject = Instantiate(playerAttackShockwavePrefab, 
+            playerShockwaveStartPosition,
+            playerAttackShockwavePrefab.transform.rotation);
+
+        // Assign shockwave property
+        ExplorationModePlayerAttackShockwave PlayerShockwave = playerAttackShockwaveObject.GetComponent<ExplorationModePlayerAttackShockwave>();
+        PlayerShockwave.enemyTargetTransform = enemyCurrentSelected;
+        PlayerShockwave.shockwaveAnswer = playerAnswerText.text.ToString();
+        PlayerShockwave.shockwaveDamage = playerAttackDamage;
+    }
+    private void PlayerCheckShockwaveStartPoint()
+    {
+        if (enemyCurrentSelected.position.x > transform.position.x)
+        {
+            playerShockwaveStartPosition = new Vector3(
+                transform.position.x + playerShockwaveStartDistanceX,
+                transform.position.y + playerShockwaveStartDistanceY,
+                transform.position.z);
+        }
+        else if (enemyCurrentSelected.position.x < transform.position.x)
+        {
+            playerShockwaveStartPosition = new Vector3(
+                transform.position.x - playerShockwaveStartDistanceX,
+                transform.position.y + playerShockwaveStartDistanceY,
+                transform.position.z);
+        }
+    }
+    public void PlayerTypeAnswerAnimation()
+    {
+        playerAnswerAnimator.Play(playerAnswerTextAnimationType.name);
+    }
+    public void PlayerClearAnswer()
     {
         playerAnswerInputField.text = "";
+        playerAnswerText.text = "";
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x + playerShockwaveStartDistanceX,
+                                            transform.position.y + playerShockwaveStartDistanceY,
+                                            transform.position.z),
+                                            0.1f);
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x - playerShockwaveStartDistanceX,
+                                            transform.position.y + playerShockwaveStartDistanceY,
+                                            transform.position.z),
+                                            0.1f);
     }
 
     // target system

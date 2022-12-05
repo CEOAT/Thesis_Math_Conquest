@@ -470,6 +470,8 @@ MonoBehaviour:
   canControlCharacter: 0
   playerRecoveryTimeUsed: 0
   playerRecoveryTimeCount: 0
+  playerMaterialStart: {fileID: 0}
+  playerMaterialDamaged: {fileID: 0}
 --- !u!136 &366325195
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1794,9 +1796,13 @@ MonoBehaviour:
   GameOverWindowGroup: {fileID: 741485672}
   GameplayUiGroup: {fileID: 1330912293}
   ObjectiveText: {fileID: 823981279}
+  WorldSpaceBlackScreenCube: {fileID: 0}
+  ImageFadeBlackPrefab: {fileID: 0}
+  canvasTransform: {fileID: 0}
   playerGameObject: {fileID: 1861097375}
   PlayerMovement: {fileID: 1861097374}
   PlayerHealth: {fileID: 1861097372}
+  PlayerAttackSystem: {fileID: 0}
   SaveController: {fileID: 1875675051}
   CheckpointManager: {fileID: 1875675052}
 --- !u!4 &1875675050
@@ -1841,7 +1847,6 @@ MonoBehaviour:
   GameController: {fileID: 1875675049}
   SaveController: {fileID: 1875675051}
   checkpointCurrentIndex: 0
-  checkpointCurrentName: 
   checkpointList:
   - {fileID: 1672092583}
   - {fileID: 422271525}
@@ -3052,6 +3057,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1168581053, guid: 182feb26373d01e4c94cd767a22709ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446603, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_Name
