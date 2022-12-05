@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UILOLBGglow
-  m_Shader: {fileID: 4800000, guid: b3d6d3c75167e4d49a15979ce168cdb6, type: 3}
+  m_Name: UIGlowLOLHardCOdeAlpha
+  m_Shader: {fileID: 4800000, guid: e543b9669f4ddb34d95368f3d18f639a, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: e199ee8112362864f831425463b09fda, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1eae6143ce30e2849b37136524e197f0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -37,7 +37,7 @@ Material:
     - _ColorMask: 15
     - _Glowpower: 0
     - _Lerp: 1
-    - _Speed: 0.1
+    - _Speed: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -47,5 +47,4 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 1, g: 1, b: 1, a: 1}
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

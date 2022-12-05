@@ -13,17 +13,22 @@ public class TmpExposeController : MonoBehaviour
     private void Start()
     {
         buttontext = GetComponent<TextMeshProUGUI>();
-        buttontext.fontMaterial.SetFloat("_GlowPower",glowpower);
+        buttontext.defaultMaterial.SetFloat("_GlowPower",glowpower);
+          
     }
 
     private void LateUpdate()
     {
-        buttontext.fontMaterial.SetFloat("_GlowPower",glowpower);
+        var tmpmat = buttontext.defaultMaterial;
+        tmpmat.SetFloat("_GlowPower",glowpower);
+        buttontext.GetModifiedMaterial(tmpmat);
     }
 
-    private void OnValidate()
+    /*private void OnValidate()
     {
-        buttontext.materialForRendering.SetFloat("_GlowPower",glowpower);
-    }
+        var tmpmat = buttontext.defaultMaterial;
+        tmpmat.SetFloat("_GlowPower",glowpower);
+        buttontext.GetModifiedMaterial(tmpmat);
+    }*/
 }
 
