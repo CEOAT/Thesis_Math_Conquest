@@ -1,4 +1,4 @@
-Shader "LOLButtonBlue"
+Shader "Hidden/LOLButtonBlue (SoftMaskable)"
 {
    Properties
     {
@@ -8,7 +8,8 @@ Shader "LOLButtonBlue"
         [HDR]_Emission("_Emission", Color) = (1, 1, 1, 1)
         _Lerp("_Lerp", Range(0,1)) = 0
         _Speed("_Speed", Float) = 0.1
-         _NoiseTex("_NoiseTex", 2D) = "white" {}
+        _Tiling("_Tiling", Vector) = (1, 1, 0, 0)
+        _NoiseTex("_NoiseTex", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
 
         
@@ -64,7 +65,8 @@ Shader "LOLButtonBlue"
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
            
-           
+            #include  "Packages/com.coffee.softmask-for-ugui/Shaders/SoftMask.cginc"	// Add for soft mask
+            #pragma shader_feature __ SOFTMASK_EDITOR	// Add for soft mask
 
             struct appdata_t
             {
@@ -122,11 +124,11 @@ Shader "LOLButtonBlue"
               
                
                 half4 color = (tex2D(_MainTex, IN.uv) + _TextureSampleAdd) * IN.color;
-                half4 colorSecond = (tex2D(_MaskTex ,IN.uv_SecondTexture)+_TextureSampleAdd) * IN.color;
+                half4 colorSecond = (tex2D(_MaskTex ,IN.uv)+_TextureSampleAdd) * IN.color;
 
                // IN.NoiseMap.x += _Time.x*_Speed;
-                 IN.uv_NoiseMap.x -=  _Time.y *_Speed ;
-                half4 NoiseTexSample = (tex2D(_NoiseTex,IN.uv_NoiseMap)+_TextureSampleAdd)* IN.color;
+                 IN.uv.x -=  _Time.y *_Speed ;
+                half4 NoiseTexSample = (tex2D(_NoiseTex,IN.uv)+_TextureSampleAdd)* IN.color;
                 
                 color *= IN.color;
                 _Emission.w = 1;
@@ -136,16 +138,17 @@ Shader "LOLButtonBlue"
                 
                 
 
-               #ifdef UNITY_UI_CLIP_RECT
+            //   #ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
                 colorSecond.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
+             //   #endif
 
                 #ifdef UNITY_UI_ALPHACLIP
                 clip (color.a - 0.001);
                 clip (colorSecond.a - 0.001);
                 #endif
                 
+                 color.a *= SoftMask(IN.vertex, IN.worldPosition);	// Add for soft mask// Add for soft mask
                  
                 return color;
             }

@@ -1,4 +1,4 @@
-Shader "LOLButtonBlue"
+Shader "UIGlowLOLHardCOdeAlpha"
 {
    Properties
     {
@@ -120,31 +120,16 @@ Shader "LOLButtonBlue"
             fixed4 frag(v2f IN) : SV_Target
             {
               
-               
+                IN.uv +=  _Time.y *1 ;
                 half4 color = (tex2D(_MainTex, IN.uv) + _TextureSampleAdd) * IN.color;
                 half4 colorSecond = (tex2D(_MaskTex ,IN.uv_SecondTexture)+_TextureSampleAdd) * IN.color;
 
                // IN.NoiseMap.x += _Time.x*_Speed;
-                 IN.uv_NoiseMap.x -=  _Time.y *_Speed ;
-                half4 NoiseTexSample = (tex2D(_NoiseTex,IN.uv_NoiseMap)+_TextureSampleAdd)* IN.color;
-                
-                color *= IN.color;
-                _Emission.w = 1;
-                color *= _Emission;
-                NoiseTexSample.w = 1;
-                color = lerp(color,color*NoiseTexSample,_Lerp);
-                
+              
+             
                 
 
-               #ifdef UNITY_UI_CLIP_RECT
-                color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                colorSecond.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
-
-                #ifdef UNITY_UI_ALPHACLIP
-                clip (color.a - 0.001);
-                clip (colorSecond.a - 0.001);
-                #endif
+        
                 
                  
                 return color;
