@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
 {
@@ -21,15 +22,14 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
     public static event PuzzleReaction puzzleReaction;
 
     private MasterInput playerInput;
+    private ExplorationModeGameController GameController;
 
     private void OnEnable()
     {
-        playerInput.Enable();
         ExplorationModeObjectInteractable.puzzleInteract += WindowActivation;
     }
     private void OnDisable()
     {
-        playerInput.Disable();
         ExplorationModeObjectInteractable.puzzleInteract -= WindowActivation;
     }
 
@@ -43,6 +43,7 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
     {
         playerInput = new MasterInput();
         windowInputField.GetComponent<TMP_InputField>();
+        GameController = GetComponent<ExplorationModeObjectInteractable>().GameController;
     }
     private void SetupControl()
     {
@@ -76,10 +77,17 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
     private void OpenWindow()
     {
         windowGroup.SetActive(true);
+        windowInputField.text = "";
+        GameController.TriggerCutscene();
+        GameController.DisablePauseGame();
+        playerInput.Enable();
     }
     private void CloseWindow()
     {
         windowGroup.SetActive(false);
+        GameController.AllowMovement();
+        GameController.EnablePauseGame();
+        playerInput.Disable();
     }
     private void ConfirmAnswer()
     {
@@ -91,7 +99,7 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
                 {
                     puzzleCompleteCount++;
                     PuzzleComplete();
-                    WindowActivation();   //will be replaced with close window animation
+                    WindowActivation();
                 }
                 else
                 {
@@ -106,7 +114,7 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
 
     private void PuzzleComplete()
     {
-        print("puzzle complete");
+        CloseWindow();
         puzzleReaction();
     }
 

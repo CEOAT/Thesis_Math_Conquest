@@ -29,6 +29,9 @@ public class ExplorationModeGameController : MonoBehaviour
     public StageControllerCheckPointManager CheckpointManager;
     private MasterInput PlayerInput;
 
+    [Header("Menu Active Checking")]
+    public bool isPauseGameDiabled;
+
     private void Awake()
     {
         SetupObject();
@@ -88,8 +91,18 @@ public class ExplorationModeGameController : MonoBehaviour
 
     #region Pause/Game Over Function
     // Pause Game Button
+    public void DisablePauseGame()
+    {
+        isPauseGameDiabled = true;
+    }
+    public void EnablePauseGame()
+    {
+        isPauseGameDiabled = false;
+    }
     private void PauseGame()
     {
+        if (isPauseGameDiabled == true) { return; }
+
         if (GamePauseWindowGroup.activeSelf == false)
         {
             Time.timeScale = 0;
@@ -108,6 +121,7 @@ public class ExplorationModeGameController : MonoBehaviour
     private void GameOver()
     {
         TriggerCutscene();
+        DisablePauseGame();
         StartCoroutine(GameOverCutscene());
     }
     private IEnumerator GameOverCutscene()

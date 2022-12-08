@@ -1,0 +1,220 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8129930326973036179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8129930326973036191}
+  - component: {fileID: 8129930326973036185}
+  - component: {fileID: 8129930326973036189}
+  - component: {fileID: 8129930326973036184}
+  - component: {fileID: 8129930326973036190}
+  - component: {fileID: 7328921695765582971}
+  m_Layer: 9
+  m_Name: Encryption Puzzle Trigger
+  m_TagString: Interactable
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8129930326973036191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129930326973036179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2744206232946590325}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8129930326973036185
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129930326973036179}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.75, z: 1}
+  m_Center: {x: 0, y: -0.85, z: 0}
+--- !u!114 &8129930326973036189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129930326973036179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3fa6594c6cb3f0408ac6f1cbec5848e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionType: 0
+  isRepeatableInteraction: 1
+  interactionCooldownTime: 1
+  PlayerInteractionDisableTime: 1.25
+  isReactionTriggerCutscene: 0
+  ReactionCutsceneDelayTime: 3
+  isReadyToInteract: 1
+  isInteractionDone: 0
+  reactionObject: {fileID: 0}
+  reactionType: 0
+  interactionBubbleObject: {fileID: 2744206232946590320}
+  GameController: {fileID: 0}
+--- !u!114 &8129930326973036184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129930326973036179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7872e355598928046ab3ad76a2dbca77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wordToEncrypt: 
+  encryptionValue: 3
+  wordList:
+  - blue ice
+  - captain
+  - odenkirk
+  - opacity
+  - retopo
+  encryptedWord: 
+  encryptionPuzzleDescription: Test encryption description
+--- !u!114 &8129930326973036190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129930326973036179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58805fa7e150fa4b8ff6c5b80531632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowGroup: {fileID: 0}
+  windowTextPuzzleProblem: {fileID: 0}
+  windowTextDescription: {fileID: 0}
+  windowTextPuzzleCompleteCount: {fileID: 0}
+  windowInputField: {fileID: 0}
+  windowAnswer: 
+  isWindowReset: 1
+  puzzleCompleteCount: 0
+  puzzleCompleteMaximum: 2
+--- !u!114 &7328921695765582971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129930326973036179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableBubbbleObject: {fileID: 2744206232946590320}
+  entryAnimation: 0
+  leaveAnimation: 0
+--- !u!1001 &1240435685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8129930326973036191}
+    m_Modifications:
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643986, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744206233880643989, guid: 7401e19703a7a754f9f428aabf0b6936,
+        type: 3}
+      propertyPath: m_Name
+      value: Interaction Bubble Exclamation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7401e19703a7a754f9f428aabf0b6936, type: 3}
+--- !u!1 &2744206232946590320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2744206233880643989, guid: 7401e19703a7a754f9f428aabf0b6936,
+    type: 3}
+  m_PrefabInstance: {fileID: 1240435685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2744206232946590325 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
+    type: 3}
+  m_PrefabInstance: {fileID: 1240435685}
+  m_PrefabAsset: {fileID: 0}

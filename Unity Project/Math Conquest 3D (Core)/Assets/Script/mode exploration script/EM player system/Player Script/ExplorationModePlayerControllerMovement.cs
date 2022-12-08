@@ -93,13 +93,11 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         if (upDownInput == 1)
         {
             rigidbody.AddForce(Vector3.forward * Time.deltaTime * playerMoveSpeed);
-            playerRaycastPoint.transform.rotation = Quaternion.Euler(0, 0, 0);
             playerStatus = "run up";
         }
         if (upDownInput == -1)
         {
             rigidbody.AddForce(-Vector3.forward * Time.deltaTime * playerMoveSpeed);
-            playerRaycastPoint.transform.rotation = Quaternion.Euler(0, 180, 0);
             playerStatus = "run down";
         }
         if (leftRightInput == 1)

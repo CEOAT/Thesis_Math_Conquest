@@ -742,6 +742,11 @@ PrefabInstance:
       propertyPath: playerAnswerInputField
       value: 
       objectReference: {fileID: 506108217}
+    - target: {fileID: 6268476657572152508, guid: 49c1a2e6ee95d55428c5990d8699738e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 656e3625fdc343d45859fd764cdc1ca8, type: 2}
     - target: {fileID: 6268476657572152510, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: m_Name
@@ -1700,10 +1705,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 2
+  isRepeatableInteraction: 0
+  interactionCooldownTime: 3
   isReadyToInteract: 1
   isInteractionDone: 0
-  ReactionObject: {fileID: 23347302}
+  reactionObject: {fileID: 0}
   reactionType: 0
+  interactionBubbleObject: {fileID: 0}
 --- !u!65 &645282777
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3475,7 +3483,7 @@ PrefabInstance:
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.900156
+      value: -23.400156
       objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
@@ -3517,6 +3525,16 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 197249747}
+    - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 182feb26373d01e4c94cd767a22709ac, type: 3}
 --- !u!1 &1797850556

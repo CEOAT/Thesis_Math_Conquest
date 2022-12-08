@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class ExplorationModePlayerControllerInteraction : MonoBehaviour
 {
-    public Transform ray3DObject;
-    private Ray ray3D;
-    private RaycastHit raycastHit3D;
-    public LayerMask layerMask3D;
-    public float ray3DRange;
-
-    MasterInput playerInput;
-
-    ExplorationModePlayerControllerMovement playerMovement;
+    public LayerMask interactableLayerMask;
+    private MasterInput playerInput;
+    private  ExplorationModePlayerControllerMovement PlayerMovement;
 
     private void Awake()
     {
@@ -26,7 +20,7 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
     }
     private void SetupComponent()
     {
-        playerMovement = GetComponent<ExplorationModePlayerControllerMovement>();
+        PlayerMovement = GetComponent<ExplorationModePlayerControllerMovement>();
     }
     private void OnEnable()
     {
@@ -37,35 +31,29 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
         playerInput.Disable();
     }
 
-    private void FixedUpdate()
+    private void OnDrawGizmosSelected()
     {
-        PlayerRaycast3D();
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), 1f);
     }
-    private void PlayerRaycast3D()
-    {
-        ray3D = new Ray(ray3DObject.position, ray3DObject.forward);
-        if (ray3DRange > 0)
-        {
-            if (Physics.Raycast(ray3D, out raycastHit3D, ray3DRange,
-                layerMask3D, QueryTriggerInteraction.Ignore))
-            {
-                Debug.DrawLine(ray3D.origin, raycastHit3D.point, Color.red);
-            }
-            else
-            {
-                Debug.DrawLine(ray3D.origin, ray3D.origin + ray3D.direction * ray3DRange, Color.green);
-            }
-        }
-    }
-
     private void PlayerInteract()
     {
-        if (raycastHit3D.transform == null) { return; }
-        if (raycastHit3D.transform.CompareTag("Interactable"))
+        if (PlayerMovement.canControlCharacter == false) { return; }
+
+        Collider[] interactableObject = Physics.OverlapSphere(
+                transform.position,
+                1f,
+                interactableLayerMask);
+
+        if (interactableObject[0].transform.CompareTag("Interactable") == true)
         {
-            raycastHit3D.transform.GetComponent<ExplorationModeObjectInteractable>().Interacted();
-            print(raycastHit3D.transform.name);
-            playerMovement.PlayerInteract();
+            ExplorationModeObjectInteractable InteractableObject = interactableObject[0].transform.GetComponent<ExplorationModeObjectInteractable>();
+            if (InteractableObject.isReadyToInteract == true)
+            {
+                InteractableObject.Interacted();
+                PlayerMovement.PlayerWait();
+                PlayerMovement.PlayerInteract();
+            }
         }
     }
 }
