@@ -105,12 +105,14 @@ public class ExplorationModeGameController : MonoBehaviour
 
         if (GamePauseWindowGroup.activeSelf == false)
         {
+            TriggerCutscene();
             Time.timeScale = 0;
             GameplayUiGroup.SetActive(false);
             GamePauseWindowGroup.SetActive(true);
         }
         else if (GamePauseWindowGroup.activeSelf == true)
         {
+            AllowMovement();
             Time.timeScale = 1;
             GameplayUiGroup.SetActive(true);
             GamePauseWindowGroup.SetActive(false);

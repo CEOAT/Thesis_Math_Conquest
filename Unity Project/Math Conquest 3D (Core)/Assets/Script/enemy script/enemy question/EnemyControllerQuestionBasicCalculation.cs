@@ -351,8 +351,6 @@ public class EnemyControllerQuestionBasicCalculation : MonoBehaviour
             EnemyQuestionCreateEquation();
         }
 
-        print("question:  " + questionString
-            + "  answer:  " + answerString);
         enemyStatus.SetupEnemyQuestion(questionString, answerString);
     }
 

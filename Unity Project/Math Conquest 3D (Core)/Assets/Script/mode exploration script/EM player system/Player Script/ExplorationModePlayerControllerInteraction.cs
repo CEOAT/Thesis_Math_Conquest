@@ -36,23 +36,28 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), 1f);
     }
+
+    private Collider[] interactableObject;
     private void PlayerInteract()
     {
         if (PlayerMovement.canControlCharacter == false) { return; }
 
-        Collider[] interactableObject = Physics.OverlapSphere(
+        interactableObject = Physics.OverlapSphere(
                 transform.position,
                 1f,
                 interactableLayerMask);
 
-        if (interactableObject[0].transform.CompareTag("Interactable") == true)
+        if (interactableObject.Length != 0)
         {
-            ExplorationModeObjectInteractable InteractableObject = interactableObject[0].transform.GetComponent<ExplorationModeObjectInteractable>();
-            if (InteractableObject.isReadyToInteract == true)
+            if (interactableObject[0].transform.CompareTag("Interactable") == true)
             {
-                InteractableObject.Interacted();
-                PlayerMovement.PlayerWait();
-                PlayerMovement.PlayerInteract();
+                ExplorationModeObjectInteractable InteractableObject = interactableObject[0].transform.GetComponent<ExplorationModeObjectInteractable>();
+                if (InteractableObject.isReadyToInteract == true)
+                {
+                    InteractableObject.Interacted();
+                    PlayerMovement.PlayerWait();
+                    PlayerMovement.PlayerInteract();
+                }
             }
         }
     }

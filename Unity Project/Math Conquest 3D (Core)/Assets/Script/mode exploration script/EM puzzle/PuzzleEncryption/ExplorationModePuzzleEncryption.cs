@@ -9,6 +9,7 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
     public string wordToEncrypt;
     public int encryptionValue;
     public List<string> wordList = new List<string>();
+    private List<string> usedWordList = new List<string>();
 
     private char[] letterCharToEncryptArray;
     private List<int> letterIndexArrayToEncryptList = new List<int>();
@@ -22,18 +23,22 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
     private void Awake()
     {
         SetupComponent();
-        SetPuzzleWindow();
+        PuzzleWindowNewQuestion();
     }
     private void SetupComponent()
     {
         PuzzleWindow = GetComponent<ExplorationModeObjectInteractableWindowUi>();
     }
-
-    private void SetPuzzleWindow()
+    private void PuzzleWindowNewQuestion()
     {
         CreateEncryptedWord();
         PuzzleWindow.SetupWindow(encryptedWord, encryptionPuzzleDescription, wordToEncrypt);
     }
+    private void PuzzleWindowFetch()
+    {
+        PuzzleWindow.SetupWindow(encryptedWord, encryptionPuzzleDescription, wordToEncrypt);
+    }
+
     private void CreateEncryptedWord()
     {
         ClearWordAfterReset();
@@ -50,9 +55,29 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
         letterIndexArrayEncryptedList.Clear();
         letterEncryptedList.Clear();
     }
+    private bool isUsedWord;
     private void RandomWordFormList()
     {
-        wordToEncrypt = wordList[Random.Range(0, wordList.Count)];
+        if (usedWordList.Count == 0)
+        {
+            wordToEncrypt = wordList[Random.Range(0, wordList.Count)];
+        }
+        else if (usedWordList.Count > 0 && usedWordList.Count <= wordList.Count)
+        {
+            do
+            {
+                isUsedWord = false;
+                wordToEncrypt = wordList[Random.Range(0, wordList.Count)];
+                for (int i = 0; i < usedWordList.Count ; i++)
+                {
+                    if (usedWordList[i] == wordToEncrypt)
+                    {
+                        isUsedWord = true;
+                    }
+                }
+            } while (usedWordList.Contains(wordToEncrypt) == false && isUsedWord == true);
+            usedWordList.Add(wordToEncrypt);
+        }
     }
     private void ConvertWordToLetterArray()
     {
@@ -127,10 +152,15 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PuzzleWindow.isWindowReset == true)
+        if (PuzzleWindow.isWindowGetNewQuestion == true)
         {
-            SetPuzzleWindow();
-            PuzzleWindow.isWindowReset = false;
+            PuzzleWindowNewQuestion();
+            PuzzleWindow.isWindowGetNewQuestion = false;
+        }
+        else if (PuzzleWindow.isWindowFetch == true)
+        {
+            PuzzleWindowFetch();
+            PuzzleWindow.isWindowFetch = false;
         }
     }
 }

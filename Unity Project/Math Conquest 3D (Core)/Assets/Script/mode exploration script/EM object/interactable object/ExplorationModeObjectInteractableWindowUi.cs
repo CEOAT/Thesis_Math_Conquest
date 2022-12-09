@@ -13,25 +13,15 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
     public TMP_InputField windowInputField;
 
     public string windowAnswer;
-    public bool isWindowReset;
+    public bool isWindowFetch;
+    public bool isWindowGetNewQuestion;
 
     public int puzzleCompleteCount;
     public int puzzleCompleteMaximum;
 
-    public delegate void PuzzleReaction();
-    public static event PuzzleReaction puzzleReaction;
-
     private MasterInput playerInput;
     private ExplorationModeGameController GameController;
-
-    private void OnEnable()
-    {
-        ExplorationModeObjectInteractable.puzzleInteract += WindowActivation;
-    }
-    private void OnDisable()
-    {
-        ExplorationModeObjectInteractable.puzzleInteract -= WindowActivation;
-    }
+    private ExplorationModeObjectInteractable ObjectInteractable;
 
     private void Awake()
     {
@@ -44,6 +34,7 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
         playerInput = new MasterInput();
         windowInputField.GetComponent<TMP_InputField>();
         GameController = GetComponent<ExplorationModeObjectInteractable>().GameController;
+        ObjectInteractable = GetComponent<ExplorationModeObjectInteractable>();
     }
     private void SetupControl()
     {
@@ -55,7 +46,6 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
         windowGroup.SetActive(false);
         windowTextPuzzleCompleteCount.text = $"Complete:\n{puzzleCompleteCount} / {puzzleCompleteMaximum}";
     }
-
     public void SetupWindow(string textPuzzle, string textDescription, string puzzleAnswer)
     {
         windowTextPuzzleProblem.text = textPuzzle;
@@ -63,7 +53,7 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
         windowAnswer = puzzleAnswer;
     }
 
-    private void WindowActivation()
+    public void WindowActivation()
     {
         if (windowGroup.activeInHierarchy == false)
         {
@@ -81,6 +71,8 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
         GameController.TriggerCutscene();
         GameController.DisablePauseGame();
         playerInput.Enable();
+        isWindowFetch = true;
+        windowTextPuzzleCompleteCount.text = $"Complete:\n{puzzleCompleteCount} / {puzzleCompleteMaximum}";
     }
     private void CloseWindow()
     {
@@ -88,12 +80,13 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
         GameController.AllowMovement();
         GameController.EnablePauseGame();
         playerInput.Disable();
+        this.enabled = false;
     }
     private void ConfirmAnswer()
     {
         if (windowInputField.isActiveAndEnabled == true)
         {
-            if (windowInputField.text.ToString().ToUpper() == windowAnswer && isWindowReset == false)
+            if (windowInputField.text.ToString().ToUpper() == windowAnswer && isWindowGetNewQuestion == false)
             {
                 if (puzzleCompleteCount + 1 == puzzleCompleteMaximum)
                 {
@@ -103,7 +96,7 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
                 }
                 else
                 {
-                    isWindowReset = true;
+                    isWindowGetNewQuestion = true;
                     puzzleCompleteCount++;
                 }
             }
@@ -114,8 +107,8 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
 
     private void PuzzleComplete()
     {
-        CloseWindow();
-        puzzleReaction();
+        ObjectInteractable.ActiveReaction();
+        Destroy(this.gameObject);
     }
 
     private void FixedUpdate()

@@ -15,22 +15,20 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     };
 
     [Header("Repeat Interact Cooldown")]
-    public bool isRepeatableInteraction = false;
+    public bool isRepeatableInteractionOrStatic = false;
     public float interactionCooldownTime = 3f;
 
     [Header("Player Disabled Time")]
     public float PlayerInteractionDisableTime = 3f;
 
     [Header("Reaction Cutscene Setting")]
+    public bool isReactionContainDialog;
     public bool isReactionTriggerCutscene = false;
     public float ReactionCutsceneDelayTime = 3f;
 
     [Header("Interact Check")]
     public bool isReadyToInteract = true;
     public bool isInteractionDone = false;
-
-    public delegate void PuzzleInteract();
-    public static event PuzzleInteract puzzleInteract;
 
     public GameObject reactionObject;
     [Tooltip("Type of reaction")] public ReactionType reactionType;
@@ -47,10 +45,11 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     public GameObject interactionBubbleObject;
 
     [Header("Game Controller")]
-    private BoxCollider interactCollider;
     public ExplorationModeGameController GameController;
+    private ExplorationModeObjectInteractableWindowUi InteractionWindow;
+    private BoxCollider interactCollider;
 
-    private void Start()
+    private void Awake()
     {
         SetupComponent();
     }
@@ -59,31 +58,16 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
         interactCollider = GetComponent<BoxCollider>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        CheckInteractionTypeOnEnable();
+        SetupInteractionType();
     }
-    private void OnDisable()
-    {
-        CheckOnInteractionTypeOnDisable();
-    }
-
-    private void CheckInteractionTypeOnEnable()
-    {
-        if (GetComponent<ExplorationModeObjectInteractableWindowUi>() != null)
-        {
-            ExplorationModeObjectInteractableWindowUi.puzzleReaction += ActiveReaction;
-        }
-        else
-        {
-            
-        }
-    }
-    private void CheckOnInteractionTypeOnDisable()
+    private void SetupInteractionType()
     {
         if (interactionType == InteractionType.interactionWindow)
         {
-            ExplorationModeObjectInteractableWindowUi.puzzleReaction -= ActiveReaction;
+            InteractionWindow = GetComponent<ExplorationModeObjectInteractableWindowUi>();
+            InteractionWindow.enabled = false;
         }
     }
 
@@ -94,7 +78,8 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
         {
             if (interactionType == InteractionType.interactionWindow)
             {
-                puzzleInteract();
+                InteractionWindow.enabled = true;
+                InteractionWindow.WindowActivation();
                 isReactionTriggerCutscene = false;
             }
             else if (interactionType == InteractionType.instance)
@@ -106,28 +91,28 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
             InteractReadyCheck();
         }
 
-        if (isRepeatableInteraction == true)
+        if (isRepeatableInteractionOrStatic == true)
         {
             StartCoroutine(InteractionCooldown());
         }
-        else if (isRepeatableInteraction == false)
+        else if (isRepeatableInteractionOrStatic == false)
         {
             this.gameObject.SetActive(false);
         }
     }
     private IEnumerator InteractionCooldown()
     {
-        interactCollider.center = new Vector3(interactCollider.center.x, 
+        interactCollider.center = new Vector3(interactCollider.center.x,
                                                 interactCollider.center.y - 30,
                                                 interactCollider.center.z);
-        
+
         yield return new WaitForSeconds(interactionCooldownTime);
         ShowInteractionBubble();
         isReadyToInteract = true;
         isInteractionDone = false;
         interactCollider.center = new Vector3(interactCollider.center.x,
-                                                interactCollider.center.y + 30,
-                                                interactCollider.center.z);
+                                            interactCollider.center.y + 30,
+                                            interactCollider.center.z);
     }
     private void InteractReadyCheck()
     {
@@ -176,7 +161,9 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
             GameController.TriggerCutscene();
             StartCoroutine(EndCutsceneDelay());
         }
-        else if (isReactionTriggerCutscene == false && interactionType != InteractionType.interactionWindow)
+        else if (isReactionTriggerCutscene == false 
+            && interactionType != InteractionType.interactionWindow 
+            && isReactionContainDialog == false)
         {
             GameController.PlayerMovement.PlayerDisabledMovement();
             StartCoroutine(EndInteractionDelay());
@@ -194,7 +181,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
         if(PlayerInteractionDisableTime < 1.25f) { PlayerInteractionDisableTime = 1.25f; }
 
         yield return new WaitForSeconds(PlayerInteractionDisableTime);
-        GameController.AllowMovement();
+        GameController.PlayerMovement.PlayerEnabledMovement();
     }
     private void ReactionMoveObjectUp()
     {
