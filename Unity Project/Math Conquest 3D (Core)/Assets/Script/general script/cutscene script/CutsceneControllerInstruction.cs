@@ -152,13 +152,14 @@ public class CutsceneControllerInstruction : MonoBehaviour
     private void EndPage()
     {
         ButtonRemoveEvent();
+        PlayerInput.Disable();
 
         instructionPageUiGroup.SetActive(false);
         HideLastPageElementNextButton();
 
         pageCurrent = pageTotal;
-        PlayerInput.Disable();
         GameController.AllowMovement();
+        GameController.DisablePauseGame();
 
         ActiveObjectAtEndInstruction();
         DeactivateAfterEndInstruction();
@@ -227,6 +228,7 @@ public class CutsceneControllerInstruction : MonoBehaviour
         instructionPageUiGroup.SetActive(true);
         DisplayFirstPage();
         GameController.TriggerCutscene();
+        GameController.DisablePauseGame();
     }
 #endregion
 }
