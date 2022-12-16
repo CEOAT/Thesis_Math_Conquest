@@ -86,6 +86,7 @@ public class EnemyControllerMovement : MonoBehaviour
                 rigidbody.constraints = 
                       RigidbodyConstraints.FreezePositionX
                     | RigidbodyConstraints.FreezePositionZ;
+                    rigidbody.freezeRotation = true;
                 break;
             }
         }
