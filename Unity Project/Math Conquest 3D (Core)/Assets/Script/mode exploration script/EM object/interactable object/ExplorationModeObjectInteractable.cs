@@ -22,7 +22,6 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     public float PlayerInteractionDisableTime = 3f;
 
     [Header("Reaction Cutscene Setting")]
-    public bool isReactionContainDialog;
     public bool isReactionTriggerCutscene = false;
     public float ReactionCutsceneDelayTime = 3f;
 
@@ -81,6 +80,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
                 InteractionWindow.enabled = true;
                 InteractionWindow.WindowActivation();
                 isReactionTriggerCutscene = false;
+                isRepeatableInteractionOrStatic = true;
             }
             else if (interactionType == InteractionType.instance)
             {
@@ -95,10 +95,14 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
         {
             StartCoroutine(InteractionCooldown());
         }
-        else if (isRepeatableInteractionOrStatic == false)
+        else if (isRepeatableInteractionOrStatic == false && isReactionTriggerCutscene == false)
         {
-            this.gameObject.SetActive(false);
+            DisableObjectAfterInteraction();
         }
+    }
+    private void DisableObjectAfterInteraction()
+    {
+        this.gameObject.SetActive(false);
     }
     private IEnumerator InteractionCooldown()
     {
@@ -162,8 +166,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
             StartCoroutine(EndCutsceneDelay());
         }
         else if (isReactionTriggerCutscene == false 
-            && interactionType != InteractionType.interactionWindow 
-            && isReactionContainDialog == false)
+            && interactionType != InteractionType.interactionWindow)
         {
             GameController.PlayerMovement.PlayerDisabledMovement();
             StartCoroutine(EndInteractionDelay());
@@ -182,7 +185,9 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
 
         yield return new WaitForSeconds(PlayerInteractionDisableTime);
         GameController.PlayerMovement.PlayerEnabledMovement();
+        DisableObjectAfterInteraction();
     }
+
     private void ReactionMoveObjectUp()
     {
         reactionObject.GetComponent<Animator>().SetTrigger("triggerMoveUp");
