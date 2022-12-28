@@ -12,6 +12,7 @@ public class ExplorationModeGameController : MonoBehaviour
     public GameObject GameOverWindowGroup;
     public GameObject GameplayUiGroup;
     public GameObject ObjectiveText;
+    public Animator CutsceneBlackBar;
 
     [Header("Game Over Object")]
     public GameObject WorldSpaceBlackScreenCube;
@@ -45,7 +46,7 @@ public class ExplorationModeGameController : MonoBehaviour
     private void SetupControl()
     {
         PlayerInput = new MasterInput();
-        PlayerInput.PlayerControlGeneral.PauseGame.performed += context => PauseGame();
+        PlayerInput.PlayerControlGeneral.PauseGame.performed += context => CheckPauseGame();
     }
 
     private void Start()
@@ -73,12 +74,23 @@ public class ExplorationModeGameController : MonoBehaviour
     public void TriggerCutscene()
     {
         PlayerMovement.PlayerWait();
+        PlayerHealth.EnableInvincibleDuringCutscene();
+        PlayerInput.Disable();
+        GameplayUiGroup.SetActive(false);
+        CutsceneBlackBar.SetBool("isBlackBarMoveIn", true);
+    }
+    public void TriggerHideUi()
+    {
+        PlayerMovement.PlayerWait();
         GameplayUiGroup.SetActive(false);
     }
     public void AllowMovement()
     {
         PlayerMovement.PlayerEnabledMovement();
+        PlayerHealth.DisableInvincibleAfterCutscene();
+        PlayerInput.Enable();
         GameplayUiGroup.SetActive(true);
+        CutsceneBlackBar.SetBool("isBlackBarMoveIn", false);
     }
     #endregion
 
@@ -99,24 +111,37 @@ public class ExplorationModeGameController : MonoBehaviour
     {
         isPauseGameDiabled = false;
     }
-    private void PauseGame()
+    private void CheckPauseGame()
     {
         if (isPauseGameDiabled == true) { return; }
 
         if (GamePauseWindowGroup.activeSelf == false)
         {
-            TriggerCutscene();
-            Time.timeScale = 0;
-            GameplayUiGroup.SetActive(false);
-            GamePauseWindowGroup.SetActive(true);
+            PauseGame();
         }
         else if (GamePauseWindowGroup.activeSelf == true)
         {
-            AllowMovement();
-            Time.timeScale = 1;
-            GameplayUiGroup.SetActive(true);
-            GamePauseWindowGroup.SetActive(false);
+            ResumeGame();
         }
+    }
+    private void PauseGame()
+    {
+        StartCoroutine(PauseGameSequence());
+    }
+    private IEnumerator PauseGameSequence()
+    {
+        TriggerCutscene();
+        PlayerInput.Disable();
+        GamePauseWindowGroup.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        PlayerInput.Enable();
+        Time.timeScale = 0;
+    }
+    private void ResumeGame()
+    {
+        AllowMovement();
+        Time.timeScale = 1;
+        GamePauseWindowGroup.SetActive(false);
     }
 
     // Game Over Function
@@ -150,7 +175,7 @@ public class ExplorationModeGameController : MonoBehaviour
     // In-Game Menu UI
     public void MenuResumeGame()
     {
-        GamePauseWindowGroup.SetActive(false);
+        CheckPauseGame();
     }
     public void MenuLoadCheckPoint()
     {

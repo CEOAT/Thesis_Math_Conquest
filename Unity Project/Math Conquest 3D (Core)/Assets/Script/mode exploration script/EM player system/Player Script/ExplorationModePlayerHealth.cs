@@ -77,6 +77,15 @@ public class ExplorationModePlayerHealth : MonoBehaviour
         PlayerHealthBar.fillAmount = playerHealthPercentage / 100f;
     }
 
+    public void EnableInvincibleDuringCutscene()
+    {
+        canPlayerTakeDamage = true;
+    }
+    public void DisableInvincibleAfterCutscene()
+    {
+        canPlayerTakeDamage = false;
+    }
+
     private void FixedUpdate()
     {
         PlayerActiveInvincible();

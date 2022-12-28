@@ -159,7 +159,6 @@ public class CutsceneControllerInstruction : MonoBehaviour
 
         pageCurrent = pageTotal;
         GameController.AllowMovement();
-        GameController.DisablePauseGame();
 
         ActiveObjectAtEndInstruction();
         DeactivateAfterEndInstruction();
@@ -211,7 +210,6 @@ public class CutsceneControllerInstruction : MonoBehaviour
             buttonPreviousPageObject.SetActive(false);
         }
     }
-
 #endregion
 
 #region instruction cutscene start and stop

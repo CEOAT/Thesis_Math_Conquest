@@ -24,16 +24,11 @@ public class ExplorationModeObjectInteractableBubble : MonoBehaviour
     private void Start()
     {
         SetupComponent();
-        SetupObject();
     }
     private void SetupComponent()
     {
         interactableBubbbleAnimator = interactableBubbbleObject.GetComponent<Animator>();
         ObjectInteractable = GetComponent<ExplorationModeObjectInteractable>();
-    }
-    private void SetupObject()
-    {
-        interactableBubbbleObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider player)

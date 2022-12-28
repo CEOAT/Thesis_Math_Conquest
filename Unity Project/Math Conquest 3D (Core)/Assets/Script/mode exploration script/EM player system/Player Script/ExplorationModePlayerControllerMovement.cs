@@ -215,10 +215,12 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public void PlayerDisabledMovement()
     {
         canControlCharacter = false;
+        playerInput.Disable();
     }
     public void PlayerEnabledMovement()
     {
         canControlCharacter = true;
+        playerInput.Enable();
     }
 
     private void PlayerAnimation()
