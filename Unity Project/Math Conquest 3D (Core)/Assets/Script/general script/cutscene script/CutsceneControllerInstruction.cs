@@ -165,7 +165,10 @@ public class CutsceneControllerInstruction : MonoBehaviour
     }
     private void ActiveObjectAtEndInstruction()
     {
-        activeAfterEnInstructionObject.SetActive(true);
+        if (activeAfterEnInstructionObject != null)
+        {
+            activeAfterEnInstructionObject.SetActive(true);
+        }
     }
     private void DeactivateAfterEndInstruction()
     {

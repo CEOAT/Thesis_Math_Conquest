@@ -613,30 +613,8 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ef54b094-4914-4045-95a6-99434e4daf94"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextInstructionPage"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""787c4399-dbff-4b7b-b552-fbee4063f001"",
                     ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PreviousInstructionPage"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e9684aef-74b3-4b88-9f4d-116f7c6399fd"",
-                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
