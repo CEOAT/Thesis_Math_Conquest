@@ -46,6 +46,7 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
         windowGroup.SetActive(false);
         windowTextPuzzleCompleteCount.text = $"Complete:\n{puzzleCompleteCount} / {puzzleCompleteMaximum}";
     }
+
     public void SetupWindow(string textPuzzle, string textDescription, string puzzleAnswer)
     {
         windowTextPuzzleProblem.text = textPuzzle;
