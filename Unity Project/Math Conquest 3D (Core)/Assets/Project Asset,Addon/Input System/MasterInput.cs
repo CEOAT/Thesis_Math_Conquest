@@ -575,6 +575,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchInputField"",
+                    ""type"": ""Button"",
+                    ""id"": ""6c1c3d89-c776-4635-8348-f012cbaec673"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -619,6 +628,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PreviousInstructionPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1abed8d-0883-4766-8b7c-7d90d9ff3eb9"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchInputField"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -671,6 +691,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_WindowControl_CloseWindow = m_WindowControl.FindAction("CloseWindow", throwIfNotFound: true);
         m_WindowControl_NextInstructionPage = m_WindowControl.FindAction("NextInstructionPage", throwIfNotFound: true);
         m_WindowControl_PreviousInstructionPage = m_WindowControl.FindAction("PreviousInstructionPage", throwIfNotFound: true);
+        m_WindowControl_SwitchInputField = m_WindowControl.FindAction("SwitchInputField", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -978,6 +999,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_WindowControl_CloseWindow;
     private readonly InputAction m_WindowControl_NextInstructionPage;
     private readonly InputAction m_WindowControl_PreviousInstructionPage;
+    private readonly InputAction m_WindowControl_SwitchInputField;
     public struct WindowControlActions
     {
         private @MasterInput m_Wrapper;
@@ -986,6 +1008,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         public InputAction @CloseWindow => m_Wrapper.m_WindowControl_CloseWindow;
         public InputAction @NextInstructionPage => m_Wrapper.m_WindowControl_NextInstructionPage;
         public InputAction @PreviousInstructionPage => m_Wrapper.m_WindowControl_PreviousInstructionPage;
+        public InputAction @SwitchInputField => m_Wrapper.m_WindowControl_SwitchInputField;
         public InputActionMap Get() { return m_Wrapper.m_WindowControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1007,6 +1030,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @PreviousInstructionPage.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnPreviousInstructionPage;
                 @PreviousInstructionPage.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnPreviousInstructionPage;
                 @PreviousInstructionPage.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnPreviousInstructionPage;
+                @SwitchInputField.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnSwitchInputField;
+                @SwitchInputField.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnSwitchInputField;
+                @SwitchInputField.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnSwitchInputField;
             }
             m_Wrapper.m_WindowControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -1023,6 +1049,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @PreviousInstructionPage.started += instance.OnPreviousInstructionPage;
                 @PreviousInstructionPage.performed += instance.OnPreviousInstructionPage;
                 @PreviousInstructionPage.canceled += instance.OnPreviousInstructionPage;
+                @SwitchInputField.started += instance.OnSwitchInputField;
+                @SwitchInputField.performed += instance.OnSwitchInputField;
+                @SwitchInputField.canceled += instance.OnSwitchInputField;
             }
         }
     }
@@ -1072,5 +1101,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         void OnCloseWindow(InputAction.CallbackContext context);
         void OnNextInstructionPage(InputAction.CallbackContext context);
         void OnPreviousInstructionPage(InputAction.CallbackContext context);
+        void OnSwitchInputField(InputAction.CallbackContext context);
     }
 }

@@ -553,6 +553,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchInputField",
+                    "type": "Button",
+                    "id": "6c1c3d89-c776-4635-8348-f012cbaec673",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -597,6 +606,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PreviousInstructionPage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1abed8d-0883-4766-8b7c-7d90d9ff3eb9",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchInputField",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

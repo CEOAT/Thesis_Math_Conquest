@@ -86,7 +86,6 @@ public class CutsceneControllerInstruction : MonoBehaviour
             element.SetActive(true);
             if (element.GetComponent<Animator>() != null)
             {
-                print("play animation");
                 element.GetComponent<Animator>().Play("Instruction Element Slide Up");
             }
         }
