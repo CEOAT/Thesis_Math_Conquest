@@ -7,7 +7,7 @@ using UnityEditor;
 using TMPro;
 
 
-public class ExplorationModePuzzleWorldSpace : MonoBehaviour
+public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
 {
     [Header("Game Controller")]
     [SerializeField] private ExplorationModeGameController GameController;
@@ -111,10 +111,16 @@ public class ExplorationModePuzzleWorldSpace : MonoBehaviour
     }
     private void CloseWorldSpacePuzzle()
     {
+        StartCoroutine(CloseWorldSpacePuzzleSequence());
+    }
+    private IEnumerator CloseWorldSpacePuzzleSequence()
+    {
         PlayerInput.Disable();
-        GameController.AllowMovement();
-
         GameObject.Destroy(puzzleWindowObject);
+        worldSpaceCamera.SetActive(false);
+
+        yield return new WaitForSeconds(0.8f);
+        GameController.AllowMovement();
         gameObject.SetActive(false);
     }
 
@@ -129,14 +135,14 @@ public class ExplorationModePuzzleWorldSpace : MonoBehaviour
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(ExplorationModePuzzleWorldSpace))]
+[CustomEditor(typeof(ExplorationModePuzzleWorldSpaceWindow))]
 public class ExplorationModePuzzleWorldSpaceTester : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        ExplorationModePuzzleWorldSpace WorldSpacePuzzle = (ExplorationModePuzzleWorldSpace)target;
+        ExplorationModePuzzleWorldSpaceWindow WorldSpacePuzzle = (ExplorationModePuzzleWorldSpaceWindow)target;
 
         if (GUILayout.Button("Confirm Value")) { WorldSpacePuzzle.ConfirmValue(); }
     }
