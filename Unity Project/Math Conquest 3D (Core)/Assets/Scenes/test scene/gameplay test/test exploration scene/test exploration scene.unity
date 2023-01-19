@@ -687,6 +687,11 @@ PrefabInstance:
       objectReference: {fileID: 1590730461}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
+      propertyPath: dialogButton
+      value: 
+      objectReference: {fileID: 1404742545}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
       propertyPath: speakerImage
       value: 
       objectReference: {fileID: 1952560413}
@@ -707,32 +712,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
+      propertyPath: speakerEffectSpawnpoint
+      value: 
+      objectReference: {fileID: 1688740045}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: backgroundTransitionPrefab
+      value: 
+      objectReference: {fileID: 4722997382980211500, guid: ab6a645dc575a1d448045bcaa6839f54,
+        type: 3}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
       propertyPath: dialogList.DialogSet.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.size
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[2].dialogString
-      value: Display only background with speaker image
+      value: Damn bro okay
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[3].dialogString
-      value: Fucking Hell
+      value: Change sprite picture.
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[4].dialogString
+      value: AAAASSSSDDDDFFFF
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[5].dialogString
+      value: Display only background with speaker image
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[6].dialogString
+      value: Fucking Hell
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[7].dialogString
       value: End
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
@@ -748,23 +779,24 @@ PrefabInstance:
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.data[2].dialogString
-      value: Display only background with speaker image
+      value: AAAASSSSDDDDFFFF
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.data[3].dialogString
-      value: Fucking Hell
+      value: Display only background with speaker image
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.data[4].dialogString
-      value: End
+      value: Fucking Hell
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[2].speakerSprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: ec23101e5663ef841bb0130e5a16c0d3,
+        type: 3}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[2].speakerString
@@ -774,11 +806,12 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[3].speakerSprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 152aa461a69c61c428377a8f5a148bde,
+        type: 3}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[3].speakerString
-      value: Walter
+      value: Zeta
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
@@ -789,6 +822,37 @@ PrefabInstance:
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[4].speakerString
+      value: Dentis
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[5].speakerSprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[5].speakerString
+      value: Dentis
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[6].speakerSprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[6].speakerString
+      value: Walter
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[7].speakerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ec23101e5663ef841bb0130e5a16c0d3,
+        type: 3}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[7].speakerString
       value: Dentis
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
@@ -821,28 +885,42 @@ PrefabInstance:
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.data[3].speakerString
-      value: Walter
+      value: Dentis
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.data[4].speakerSprite
       value: 
-      objectReference: {fileID: 21300000, guid: ec23101e5663ef841bb0130e5a16c0d3,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.data[4].speakerString
-      value: Dentis
+      value: Walter
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[2].backgroundSprite
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[3].backgroundSprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[4].backgroundSprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[5].backgroundSprite
+      value: 
       objectReference: {fileID: 21300000, guid: 117099ba842cc5646a863a6aaa66b97c,
         type: 3}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
-      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[3].backgroundSprite
+      propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.data[6].backgroundSprite
       value: 
       objectReference: {fileID: 21300000, guid: 431ff4094c58bc947ae6f5a5c3aacd12,
         type: 3}
@@ -850,13 +928,12 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.data[2].backgroundSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 117099ba842cc5646a863a6aaa66b97c,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[1].DialogData.Array.data[3].backgroundSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 431ff4094c58bc947ae6f5a5c3aacd12,
+      objectReference: {fileID: 21300000, guid: 117099ba842cc5646a863a6aaa66b97c,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4055d557832833148b8c2f2f15c6d100, type: 3}
@@ -1568,6 +1645,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1404742545 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3692517890098032728, guid: be224cfe16c7edc41bf5d9174348023e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9157653735101942395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1425526176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1830,6 +1913,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9643a2c4b92b7dc4485c0497592c4bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1688740045 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3692517890176081066, guid: be224cfe16c7edc41bf5d9174348023e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9157653735101942395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1718210214 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 909731490353994238, guid: be224cfe16c7edc41bf5d9174348023e,
@@ -2433,12 +2522,12 @@ PrefabInstance:
     - target: {fileID: 5998956516710382007, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.393
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 5998956516710382007, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2.012
+      value: 1.51
       objectReference: {fileID: 0}
     - target: {fileID: 6268476655874460036, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
@@ -2595,7 +2684,7 @@ PrefabInstance:
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.012
+      value: 1.51
       objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
@@ -2605,7 +2694,7 @@ PrefabInstance:
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.435324
+      value: -9.358324
       objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
@@ -2647,6 +2736,21 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 2014736627}
+    - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 182feb26373d01e4c94cd767a22709ac, type: 3}
 --- !u!1 &6312665208095209414 stripped
@@ -2938,6 +3042,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3348840642957497097, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3348840642957497098, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -559
+      objectReference: {fileID: 0}
+    - target: {fileID: 3348840642957497099, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3692517891013600404, guid: be224cfe16c7edc41bf5d9174348023e,
         type: 3}

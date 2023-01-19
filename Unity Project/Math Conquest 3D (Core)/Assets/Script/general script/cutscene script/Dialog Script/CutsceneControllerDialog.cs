@@ -20,12 +20,21 @@ public class CutsceneControllerDialog : MonoBehaviour
     public Image backgroundImage;
     public Image speakerImage;
     public TMP_Text speakerText;
+    public Transform speakerEffectSpawnpoint;
     public TMP_Text dialogText;
     public Animator dialogButton;
+    public GameObject backgroundTransitionPrefab;
 
-    private string speakerPreviousName;
+    private string speakerPreviousSpriteName;
+    private string backgroundImagePreviousName = "no background";
     private Animator speakerImageAnimator;
     private GameObject speakerEmotionEffectObject;
+
+    [Header("Dialog Typing and Waiting Time")]
+    public float typeLetterInterval = 0.075f;
+    public float nextDialogWaitTime = 0.8f;
+    public float backgroundTransitionMaxtWaitTime = 1f;
+    public float backgroundTransitionCurrentWaitTime = 0f;
 
     [Header("Dialog Repeat Setting")]
     public bool isDialogRepeatable = false;
@@ -70,6 +79,7 @@ public class CutsceneControllerDialog : MonoBehaviour
         DialogUI.SetActive(false);
         playerInput.Disable();
         GameController.AllowMovement();
+        DestroySpeakerEmotionEffectSprite();
 
         if (isDialogRepeatable == true)
         {
@@ -130,6 +140,8 @@ public class CutsceneControllerDialog : MonoBehaviour
         SetBackgroundImage();
         PlaySpeakerAnimation();
         PlaySpeakerEmotionEffect();
+        PlayDialogButtonConfirmAnimation();
+        PlayDialogButtonTypeAnimation();
         StartCoroutine(TypeDialog(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].dialogString));
     }
     private void SetSpeakerImage()
@@ -146,15 +158,41 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void SetBackgroundImage()
     {
+        SetBackgroundTransitionWaitTime();
+
         if (CheckIfBackgroundImageIsAvailable())
         {
+            if (CheckIfBackgroundIsNew())
+            {
+                CreateBackgroundTransition();
+                backgroundImagePreviousName = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite.name;
+            }
+
             backgroundImage.gameObject.SetActive(true);
             backgroundImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite;
         }
         else
         {
             backgroundImage.gameObject.SetActive(false);
+            backgroundImagePreviousName = "no background";
         }
+    }
+    private void SetBackgroundTransitionWaitTime()
+    {
+        if (CheckIfBackgroundImageIsAvailable())
+        {
+            backgroundTransitionCurrentWaitTime = backgroundTransitionMaxtWaitTime;
+        }
+        else
+        {
+            backgroundTransitionCurrentWaitTime = 0f;
+        }
+    }
+    private void CreateBackgroundTransition()
+    {
+        GameObject backgroundTransition = Instantiate(backgroundTransitionPrefab);
+        backgroundTransition.transform.SetParent(DialogUI.transform); 
+        backgroundTransition.transform.SetAsLastSibling();
     }
     private bool CheckIfSpeakerImageIsAvailable()
     {
@@ -164,10 +202,10 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         return dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite != null;
     }
-
+ 
     private void PlaySpeakerAnimation()
     {
-        if (CheckIfSpeakerImageIsAvailable() == false) 
+        if (CheckIfSpeakerImageIsAvailable() == false)
         {
             return;
         }
@@ -175,11 +213,16 @@ public class CutsceneControllerDialog : MonoBehaviour
         {
             speakerImageAnimator.SetTrigger("triggerSpeakerImageEntry");
         }
-        speakerPreviousName = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerString;
+        speakerPreviousSpriteName = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite.name;
+        print(speakerPreviousSpriteName);
     }
     private bool CheckIfSpeakerIsNew()
     {
-        return dialogIndex > 0 && speakerPreviousName != dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerString;
+        return dialogIndex > 0 && speakerPreviousSpriteName != dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite.name;
+    }
+    private bool CheckIfBackgroundIsNew()
+    {
+        return backgroundImagePreviousName != dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite.name;
     }
     private void PlaySpeakerEmotionEffect()
     {
@@ -189,16 +232,20 @@ public class CutsceneControllerDialog : MonoBehaviour
         }
         if (CheckIfSpeakerEmotionEffectIsAvailable())
         {
-            if (speakerEmotionEffectObject != null)
-            {
-                Destroy(speakerEmotionEffectObject);
-            }
+            DestroySpeakerEmotionEffectSprite();
             speakerEmotionEffectObject = Instantiate(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerEmotionEffect);
         }
     }
     private bool CheckIfSpeakerEmotionEffectIsAvailable()
     {
         return dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerEmotionEffect != null ;
+    }
+    private void DestroySpeakerEmotionEffectSprite()
+    {
+        if (speakerEmotionEffectObject != null)
+        {
+            Destroy(speakerEmotionEffectObject);
+        }
     }
 
     private void DialogForceEnd()
@@ -209,11 +256,13 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     IEnumerator TypeDialog(string dialog)
     {
+        yield return new WaitForSeconds(backgroundTransitionCurrentWaitTime);
+
         dialogText.text = "";
         isDialogActive = true;
         foreach (char letterOfDialog in dialog.ToCharArray())
         {
-            yield return new WaitForSeconds(0.075f);
+            yield return new WaitForSeconds(typeLetterInterval);
             dialogText.text += letterOfDialog;
             yield return null;
         }
@@ -228,19 +277,25 @@ public class CutsceneControllerDialog : MonoBehaviour
 
         isDialogActive = false;
         dialogQueue.Dequeue();
+
+        PlayDialogButtonWaitAnimation();
     }
-    private void DialogButtonPlay()
+    private void PlayDialogButtonTypeAnimation()
     {
         dialogButton.SetBool("isDialogButtonPlaying", true);
     }
-    private void DialogButtonStop()
+    private void PlayDialogButtonWaitAnimation()
     {
         dialogButton.SetBool("isDialogButtonPlaying", false);
+    }
+    private void PlayDialogButtonConfirmAnimation()
+    {
+        dialogButton.SetTrigger("triggerDialogButtonConfirm");
     }
 
     IEnumerator DialogEndWaiting()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(nextDialogWaitTime);
     }
     private void ActiveObjectAtEndDialog()
     {
