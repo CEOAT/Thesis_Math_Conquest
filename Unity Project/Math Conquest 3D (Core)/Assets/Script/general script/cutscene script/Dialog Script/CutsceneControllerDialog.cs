@@ -10,12 +10,15 @@ public class CutsceneControllerDialog : MonoBehaviour
     [Header("Index of Dialogs (private)")]
     [SerializeField] private int dialogIndex = 0;
     [SerializeField] private bool isDialogActive;
+    [SerializeField] private bool isWaitingAfterDialogEnd;
+    [SerializeField] private bool canForceEndDialog = false;
     [SerializeField] private int dialogSetIndex = 0;
 
     [Header("Game Controller Object")]
     public ExplorationModeGameController GameController;
 
     [Header("Dialog Objects")]
+    public GameObject inGameCanvas;
     public GameObject DialogUI;
     public Image backgroundImage;
     public Image speakerImage;
@@ -62,7 +65,7 @@ public class CutsceneControllerDialog : MonoBehaviour
         dialogButton.GetComponent<Animator>();
         speakerImageAnimator = speakerImage.GetComponent<Animator>();
     }
-
+    
     public void StartDialogCutscene()
     {
         if (isDialogPlayed == false)
@@ -78,6 +81,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         DialogUI.SetActive(false);
         playerInput.Disable();
+        RemoveControl();
         GameController.AllowMovement();
         DestroySpeakerEmotionEffectSprite();
 
@@ -102,9 +106,12 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     public void PlayNextDialog()
     {
-        CheckDialogUiActivation();
-        CheckDialogQueue();
-        CheckDialogPlaying();
+        if (isWaitingAfterDialogEnd == false)
+        {
+            CheckDialogUiActivation();
+            CheckDialogQueue();
+            CheckDialogPlaying();
+        }
     }
     private void CheckDialogUiActivation()
     {
@@ -123,12 +130,12 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void CheckDialogPlaying()
     {
-        if (isDialogActive == false)
+        if (isDialogActive == false && canForceEndDialog == false)
         {
             DialogStart();
         }
 
-        else if (isDialogActive == true)
+        else if (isDialogActive == true && canForceEndDialog == true)
         {
             DialogForceEnd();
         }
@@ -168,13 +175,19 @@ public class CutsceneControllerDialog : MonoBehaviour
                 backgroundImagePreviousName = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite.name;
             }
 
+            dialogText.text = "";
             backgroundImage.gameObject.SetActive(true);
             backgroundImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite;
         }
-        else
+        else if (!CheckIfBackgroundImageIsAvailable() && backgroundImagePreviousName != "no background")
         {
+            CreateBackgroundTransition();
             backgroundImage.gameObject.SetActive(false);
             backgroundImagePreviousName = "no background";
+        }
+        else if (!CheckIfBackgroundImageIsAvailable() && backgroundImagePreviousName == "no background")
+        {
+            backgroundImage.gameObject.SetActive(false);
         }
     }
     private void SetBackgroundTransitionWaitTime()
@@ -191,7 +204,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     private void CreateBackgroundTransition()
     {
         GameObject backgroundTransition = Instantiate(backgroundTransitionPrefab);
-        backgroundTransition.transform.SetParent(DialogUI.transform); 
+        backgroundTransition.transform.SetParent(inGameCanvas.transform); 
         backgroundTransition.transform.SetAsLastSibling();
     }
     private bool CheckIfSpeakerImageIsAvailable()
@@ -226,14 +239,17 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void PlaySpeakerEmotionEffect()
     {
-        if (CheckIfSpeakerImageIsAvailable() == false)
+        DestroySpeakerEmotionEffectSprite();
+
+        if (!CheckIfSpeakerImageIsAvailable())
         {
             return;
         }
         if (CheckIfSpeakerEmotionEffectIsAvailable())
         {
-            DestroySpeakerEmotionEffectSprite();
             speakerEmotionEffectObject = Instantiate(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerEmotionEffect);
+            speakerEmotionEffectObject.transform.SetParent(speakerEffectSpawnpoint);
+            speakerEmotionEffectObject.GetComponent<Animator>().SetTrigger(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerEmotionEffect.name); ;
         }
     }
     private bool CheckIfSpeakerEmotionEffectIsAvailable()
@@ -256,10 +272,12 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     IEnumerator TypeDialog(string dialog)
     {
+        canForceEndDialog = false;
         yield return new WaitForSeconds(backgroundTransitionCurrentWaitTime);
 
         dialogText.text = "";
         isDialogActive = true;
+        canForceEndDialog = true;
         foreach (char letterOfDialog in dialog.ToCharArray())
         {
             yield return new WaitForSeconds(typeLetterInterval);
@@ -270,6 +288,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void DialogEnd()
     {
+        canForceEndDialog = false;
         dialogIndex++;
 
         StartCoroutine(DialogEndWaiting());
@@ -295,7 +314,9 @@ public class CutsceneControllerDialog : MonoBehaviour
 
     IEnumerator DialogEndWaiting()
     {
+        isWaitingAfterDialogEnd = true;
         yield return new WaitForSeconds(nextDialogWaitTime);
+        isWaitingAfterDialogEnd = false;
     }
     private void ActiveObjectAtEndDialog()
     {
@@ -310,7 +331,6 @@ public class CutsceneControllerDialog : MonoBehaviour
         if (player.CompareTag("Player"))
         {
             SetupControl();
-            playerInput.Enable();
             StartDialogCutscene();
         }
     }
@@ -318,6 +338,11 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         playerInput = new MasterInput();
         playerInput.PlayerControlGeneral.NextDialog.performed += context => PlayNextDialog();
+        playerInput.Enable();
+    }
+    private void RemoveControl()
+    {
+        playerInput.PlayerControlGeneral.NextDialog.performed -= context => PlayNextDialog();
     }
 }
 

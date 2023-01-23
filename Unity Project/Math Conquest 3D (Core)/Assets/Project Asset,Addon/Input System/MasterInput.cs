@@ -282,7 +282,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""id"": ""b4499962-99ff-4757-868a-00710ca5d9e2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
