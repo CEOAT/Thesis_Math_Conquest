@@ -26,7 +26,8 @@ public class MainMenuManager : MonoBehaviour
     {
         foreach (var B_Event in ButtonEvents)
         {
-            if (B_Event.buttonClick == EventSystem.current.currentSelectedGameObject.GetComponent<Button>())
+            var tempbutton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+            if (B_Event.buttonClick == tempbutton)
             {
                 tempDelay = B_Event.TransistionDelay;
                 TransitionMaterialChange();
