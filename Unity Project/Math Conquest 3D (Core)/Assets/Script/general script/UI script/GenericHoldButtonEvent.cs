@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,6 +45,7 @@ public class GenericHoldButtonEvent : MonoBehaviour,IUpdateSelectedHandler,IPoin
 
               public void ResetDefaultState()
               {
+                  Debug.Log("Reset");
                   preventanim = false;
                   Button.animator.SetBool("PreventTransition",preventanim);
               }

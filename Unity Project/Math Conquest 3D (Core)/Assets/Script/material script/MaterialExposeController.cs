@@ -5,7 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
 [ExecuteAlways] 
+#endif
+
 public class MaterialExposeController : Image
 {
 [SerializeField] private  float _myCustomFloat;
@@ -23,7 +26,7 @@ protected override void Start()
    
 }
 
-protected void Update()
+protected  void Update()
 {
    GetModifiedMaterial(defaultMaterial);
 }
