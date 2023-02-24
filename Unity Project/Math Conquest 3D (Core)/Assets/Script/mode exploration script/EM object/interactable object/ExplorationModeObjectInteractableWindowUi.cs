@@ -6,22 +6,22 @@ using System;
 
 public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
 {
-    public GameObject windowGroup;
-    public TMP_Text windowTextPuzzleProblem;
-    public TMP_Text windowTextDescription;
-    public TMP_Text windowTextPuzzleCompleteCount;
-    public TMP_InputField windowInputField;
+    [SerializeField] public GameObject windowGroup;
+    [SerializeField] public TMP_Text windowTextPuzzleProblem;
+    [SerializeField] public TMP_Text windowTextDescription;
+    [SerializeField] public TMP_Text windowTextPuzzleCompleteCount;
+    [SerializeField] public TMP_InputField windowInputField;
 
-    public string windowAnswer;
-    public bool isWindowFetch;
-    public bool isWindowGetNewQuestion;
+    [SerializeField] public string windowAnswer;
+    [SerializeField] public bool isWindowFetch;
+    [SerializeField] public bool isWindowGetNewQuestion;
 
-    public int puzzleCompleteCount;
-    public int puzzleCompleteMaximum;
+    [SerializeField] public int puzzleCompleteCount;
+    [SerializeField] public int puzzleCompleteMaximum;
 
-    private MasterInput playerInput;
-    private ExplorationModeGameController GameController;
-    private ExplorationModeObjectInteractable ObjectInteractable;
+    [SerializeField] private MasterInput playerInput;
+    [SerializeField] private ExplorationModeGameController GameController;
+    [SerializeField] private ExplorationModeObjectInteractable ObjectInteractable;
 
     private void Awake()
     {
