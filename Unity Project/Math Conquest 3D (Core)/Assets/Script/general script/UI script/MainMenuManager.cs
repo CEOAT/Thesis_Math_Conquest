@@ -83,4 +83,9 @@ public class MainMenuManager : MonoBehaviour
         transistion.raycastTarget = false;
         yield break;
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
