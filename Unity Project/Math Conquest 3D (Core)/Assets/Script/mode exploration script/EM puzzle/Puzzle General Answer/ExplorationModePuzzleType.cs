@@ -18,6 +18,10 @@ public class ExplorationModePuzzleType : MonoBehaviour
     {
         PuzzleWindow = GetComponent<ExplorationModeObjectInteractableWindowUi>();
     }
+    private void SetupPuzzleWindowSetting()
+    {
+        PuzzleWindow.puzzleCompleteMaximum = 1;
+    }
 
     private void Start()
     {
