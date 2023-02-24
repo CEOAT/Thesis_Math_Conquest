@@ -131,7 +131,7 @@ Shader "LOLButtonBlue"
                 color *= IN.color;
                 _Emission.w = 1;
                 color *= _Emission;
-                NoiseTexSample.w = 1;
+                //NoiseTexSample.w = 1;
                 color = lerp(color,color*NoiseTexSample,_Lerp);
                 
                 
