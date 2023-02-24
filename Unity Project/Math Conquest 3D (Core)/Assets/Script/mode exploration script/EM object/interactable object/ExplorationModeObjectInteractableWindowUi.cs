@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.Events;
 
 public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
 
     [SerializeField] public int puzzleCompleteCount;
     [SerializeField] public int puzzleCompleteMaximum;
+
+    [HideInInspector] public UnityEvent uiUpdateEvent;
+    [HideInInspector] public UnityEvent uiUpdateQuestionEvent;
 
     [SerializeField] private MasterInput playerInput;
     [SerializeField] private ExplorationModeGameController GameController;
@@ -72,6 +76,7 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
         GameController.TriggerCutscene();
         GameController.DisablePauseGame();
         playerInput.Enable();
+        uiUpdateEvent.Invoke();
         isWindowFetch = true;
         windowTextPuzzleCompleteCount.text = $"Complete:\n{puzzleCompleteCount} / {puzzleCompleteMaximum}";
     }
@@ -91,14 +96,17 @@ public class ExplorationModeObjectInteractableWindowUi : MonoBehaviour
             {
                 if (puzzleCompleteCount + 1 == puzzleCompleteMaximum)
                 {
+                    print("puzzle complete");
                     puzzleCompleteCount++;
                     PuzzleComplete();
                     WindowActivation();
                 }
                 else
                 {
+                    print("puzzle next");
                     isWindowGetNewQuestion = true;
                     puzzleCompleteCount++;
+                    uiUpdateQuestionEvent.Invoke();
                 }
             }
             windowTextPuzzleCompleteCount.text = $"Complete:\n{puzzleCompleteCount} / {puzzleCompleteMaximum}";

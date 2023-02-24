@@ -33,6 +33,7 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     [Header("Puzzle Camera")]
     [SerializeField] private GameObject worldSpaceCamera;
 
+    [HideInInspector] public UnityEvent<string,string,string> uiUpdateEvent;
     [HideInInspector] public UnityEvent ConfirmValueEvent;
     private MasterInput PlayerInput;
 
@@ -97,9 +98,18 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     {
         if (inputFieldTotal > 1)
         {
-            inputFieldSelectedIndex++;
+            CheckInputFieldIndex();
         }
     }
+    private void CheckInputFieldIndex()
+    {
+        inputFieldSelectedIndex++;
+        if(inputFieldSelectedIndex < puzzleInputFieldList.Count)
+        {
+            inputFieldSelectedIndex = 0;
+        }
+    }
+
     public void ConfirmValue()
     {
         puzzleVariableList.Clear();
