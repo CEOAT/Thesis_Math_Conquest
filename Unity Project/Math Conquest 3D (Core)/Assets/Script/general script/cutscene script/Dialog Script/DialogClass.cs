@@ -3,15 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class DialogListClass
+public class DialogClass
 {
-    public List<DialogSet> DialogSet;
-}
-
-[System.Serializable]
-public class DialogSet
-{
-    public List<DialogData> DialogData;
+    public List<DialogData> DialogSet;
 }
 
 [System.Serializable]

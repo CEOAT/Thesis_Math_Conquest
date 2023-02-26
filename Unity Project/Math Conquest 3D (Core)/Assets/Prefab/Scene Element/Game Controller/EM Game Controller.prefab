@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4994313322238069128}
   - component: {fileID: 5876758486017747192}
   - component: {fileID: 8543283494750403515}
+  - component: {fileID: 1684701009}
   m_Layer: 0
   m_Name: EM Game Controller
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   GameOverWindowGroup: {fileID: 0}
   GameplayUiGroup: {fileID: 0}
   ObjectiveText: {fileID: 0}
+  CutsceneBlackBar: {fileID: 0}
   WorldSpaceBlackScreenCube: {fileID: 0}
   ImageFadeBlackPrefab: {fileID: 4722997382980211500, guid: 43169d1ef9d5d5442985b7973f2f5371,
     type: 3}
@@ -60,6 +62,7 @@ MonoBehaviour:
   PlayerAttackSystem: {fileID: 0}
   SaveController: {fileID: 8543283494750403515}
   CheckpointManager: {fileID: 5876758486017747192}
+  isPauseGameDiabled: 0
 --- !u!114 &5876758486017747192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,3 +93,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db10cf518bc805847aa6883a321a5862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1684701009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4994313322238069129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a3c05b7c6d78e4a8e6676032c98040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inGameCanvas: {fileID: 0}
+  DialogUI: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  speakerImage: {fileID: 0}
+  speakerText: {fileID: 0}
+  speakerEffectSpawnpoint: {fileID: 0}
+  dialogText: {fileID: 0}
+  dialogButton: {fileID: 0}
+  backgroundTransitionPrefab: {fileID: 0}

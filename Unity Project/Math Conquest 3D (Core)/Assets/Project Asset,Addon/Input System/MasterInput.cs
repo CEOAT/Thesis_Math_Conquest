@@ -282,7 +282,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""id"": ""b4499962-99ff-4757-868a-00710ca5d9e2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(pressPoint=0.8)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -302,6 +302,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""120ab47e-f3a2-4132-82f3-a6c5bd9ad108"",
                     ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextDialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9de12be4-c76c-468b-815b-eecdb019dbaf"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

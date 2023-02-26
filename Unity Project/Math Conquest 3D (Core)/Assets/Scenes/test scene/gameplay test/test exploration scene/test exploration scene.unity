@@ -917,6 +917,11 @@ PrefabInstance:
       objectReference: {fileID: 1952560413}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
+      propertyPath: DialogManager
+      value: 
+      objectReference: {fileID: 1684701009}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
       propertyPath: GameController
       value: 
       objectReference: {fileID: 1684701008}
@@ -937,15 +942,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
+      propertyPath: dialogScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: d909b9c0898c77b418cedad889be1072,
+        type: 2}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
       propertyPath: speakerEffectSpawnpoint
       value: 
       objectReference: {fileID: 1688740045}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogSettList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: backgroundTransitionPrefab
       value: 
       objectReference: {fileID: 4722997382980211500, guid: ce39cc120c0ee774d84e2a71faa93cc8,
         type: 3}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogSettList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d909b9c0898c77b418cedad889be1072,
+        type: 2}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogSettList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c03a307571eb6d4897793788b0993cc,
+        type: 2}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.size
@@ -956,6 +984,17 @@ PrefabInstance:
       propertyPath: backgroundTransitionMaxtWaitTime
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogScriptableObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
+        type: 3}
+      propertyPath: dialogScriptableObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d909b9c0898c77b418cedad889be1072,
+        type: 2}
     - target: {fileID: 548116257419244988, guid: 4055d557832833148b8c2f2f15c6d100,
         type: 3}
       propertyPath: dialogList.DialogSet.Array.data[0].DialogData.Array.size
@@ -1588,6 +1627,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: DialogUI
+      value: 
+      objectReference: {fileID: 782093066}
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: dialogText
+      value: 
+      objectReference: {fileID: 396374422}
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: speakerText
+      value: 
+      objectReference: {fileID: 1590730461}
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: dialogButton
+      value: 
+      objectReference: {fileID: 1404742545}
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: inGameCanvas
+      value: 
+      objectReference: {fileID: 1832217939}
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: speakerImage
+      value: 
+      objectReference: {fileID: 1952560413}
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: backgroundImage
+      value: 
+      objectReference: {fileID: 1259994475}
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: speakerEffectSpawnpoint
+      value: 
+      objectReference: {fileID: 1688740045}
+    - target: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
+      propertyPath: backgroundTransitionPrefab
+      value: 
+      objectReference: {fileID: 9157653735101942398}
     - target: {fileID: 4994313322238069128, guid: 9386a19ac0d8d4140b12b6dde568bad4,
         type: 3}
       propertyPath: PlayerHealth
@@ -2735,6 +2810,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9643a2c4b92b7dc4485c0497592c4bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1684701009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1684701009, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+    type: 3}
+  m_PrefabInstance: {fileID: 562046542}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a3c05b7c6d78e4a8e6676032c98040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1688740045 stripped
@@ -4283,6 +4370,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: In-Game Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3692517891013600491, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 2047
+      objectReference: {fileID: 0}
     - target: {fileID: 7103574075630513807, guid: be224cfe16c7edc41bf5d9174348023e,
         type: 3}
       propertyPath: m_ContentType
@@ -4304,6 +4396,12 @@ RectTransform:
 --- !u!95 &9157653735101942397 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2439483049236019157, guid: be224cfe16c7edc41bf5d9174348023e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9157653735101942395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9157653735101942398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8265513163187913820, guid: be224cfe16c7edc41bf5d9174348023e,
     type: 3}
   m_PrefabInstance: {fileID: 9157653735101942395}
   m_PrefabAsset: {fileID: 0}
