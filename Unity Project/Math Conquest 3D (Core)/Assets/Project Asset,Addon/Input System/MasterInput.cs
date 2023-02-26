@@ -593,7 +593,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""id"": ""6c1c3d89-c776-4635-8348-f012cbaec673"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -646,7 +646,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""e1abed8d-0883-4766-8b7c-7d90d9ff3eb9"",
                     ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchInputField"",

@@ -75,6 +75,8 @@ public class ExplorationModeGameController : MonoBehaviour
     {
         PlayerMovement.PlayerWait();
         PlayerHealth.EnableInvincibleDuringCutscene();
+        PlayerAttackSystem.PlayerClearAnswer();
+        PlayerAttackSystem.playerInput.Enable();
         PlayerInput.Disable();
         GameplayUiGroup.SetActive(false);
         CutsceneBlackBar.SetBool("isBlackBarMoveIn", true);
@@ -88,6 +90,7 @@ public class ExplorationModeGameController : MonoBehaviour
     {
         PlayerMovement.PlayerEnabledMovement();
         PlayerHealth.DisableInvincibleAfterCutscene();
+        PlayerAttackSystem.playerInput.Enable();
         PlayerInput.Enable();
         GameplayUiGroup.SetActive(true);
         CutsceneBlackBar.SetBool("isBlackBarMoveIn", false);
@@ -143,6 +146,7 @@ public class ExplorationModeGameController : MonoBehaviour
         Time.timeScale = 1;
         GamePauseWindowGroup.SetActive(false);
     }
+    
 
     // Game Over Function
     private void GameOver()

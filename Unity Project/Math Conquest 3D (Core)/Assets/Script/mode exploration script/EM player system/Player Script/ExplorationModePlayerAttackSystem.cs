@@ -32,7 +32,7 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
     [Header("Switch Target System")]
     public int enemyCurrentSelectedIndex;
 
-    private MasterInput playerInput;
+    [HideInInspector] public MasterInput playerInput;
 
     private void Awake()
     {

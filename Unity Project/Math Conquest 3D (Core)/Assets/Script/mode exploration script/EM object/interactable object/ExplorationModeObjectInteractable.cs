@@ -11,6 +11,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     public enum InteractionType
     {
         interactionWindow,
+        interactionWindowMultipleChoice,
         instance
     };
 
@@ -46,6 +47,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     [Header("Game Controller")]
     public ExplorationModeGameController GameController;
     private ExplorationModeObjectInteractableWindowUi InteractionWindow;
+    private ExplorationModePuzzleWorldSpaceWindow WorldSpaceWindow;
     private BoxCollider interactCollider;
 
     private void Awake()
@@ -68,6 +70,11 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
             InteractionWindow = GetComponent<ExplorationModeObjectInteractableWindowUi>();
             InteractionWindow.enabled = false;
         }
+        if (interactionType == InteractionType.interactionWindowMultipleChoice)
+        {
+            WorldSpaceWindow = GetComponent<ExplorationModePuzzleWorldSpaceWindow>();
+            WorldSpaceWindow.enabled = false;
+        }
     }
 
     //called from player
@@ -79,6 +86,13 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
             {
                 InteractionWindow.enabled = true;
                 InteractionWindow.WindowActivation();
+                isReactionTriggerCutscene = false;
+                isRepeatableInteractionOrStatic = true;
+            }
+            else if (interactionType == InteractionType.interactionWindowMultipleChoice)
+            {
+                WorldSpaceWindow.enabled = true;
+                WorldSpaceWindow.StartMultipleChoicePuzzleWindow();
                 isReactionTriggerCutscene = false;
                 isRepeatableInteractionOrStatic = true;
             }
