@@ -24,7 +24,8 @@ public class CutsceneControllerInstruction : MonoBehaviour
     public ExplorationModeGameController GameController;
 
     [Header("Active End Instruction Object")]
-    public GameObject activeAfterEnInstructionObject;
+    public GameObject activeAfterEndInstructionObject;
+    public GameObject disableAfterEndInstructionObject;
 
     [Header("Instruction Setting")]
     public bool isDeactivateAfterEnd;
@@ -160,13 +161,23 @@ public class CutsceneControllerInstruction : MonoBehaviour
         GameController.AllowMovement();
 
         ActiveObjectAtEndInstruction();
+        DisableObjectAfterInstruction();
         DeactivateAfterEndInstruction();
     }
     private void ActiveObjectAtEndInstruction()
     {
-        if (activeAfterEnInstructionObject != null)
+        if (activeAfterEndInstructionObject != null)
         {
-            activeAfterEnInstructionObject.SetActive(true);
+            activeAfterEndInstructionObject.SetActive(true);
+            activeAfterEndInstructionObject.GetComponent<BoxCollider>().center = new Vector3(0,5,0);
+            activeAfterEndInstructionObject.GetComponent<BoxCollider>().center = new Vector3(0,0,0);
+        }
+    }
+    private void DisableObjectAfterInstruction()
+    {
+        if (disableAfterEndInstructionObject != null)
+        {
+            disableAfterEndInstructionObject.SetActive(false);
         }
     }
     private void DeactivateAfterEndInstruction()

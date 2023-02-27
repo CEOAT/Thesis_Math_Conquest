@@ -33,10 +33,12 @@ public class CutsceneControllerDialog : MonoBehaviour
     public bool isDialogRepeatable = false;
     public bool isDialogDisabledAfterFinish = false;
     private bool isDialogObjectActivated = false;
+    private bool isDialogObjectDisabled = false;
     private bool isDialogPlayed = false;
 
     [Header("Active End Dialog Object")]
     public GameObject activeAfterEndDialogObject;
+    public GameObject disableAfterEndDialogObject;
 
     [Header("Dialog Data")]
     public List<DialogScriptableObjectClass> dialogSettList =  new List<DialogScriptableObjectClass>();
@@ -87,6 +89,10 @@ public class CutsceneControllerDialog : MonoBehaviour
         if(activeAfterEndDialogObject != null)
         {
             ActiveObjectAtEndDialog();
+        }
+        if(disableAfterEndDialogObject)
+        {
+            
         }
     }
     private void CountDialogSet()
@@ -324,6 +330,16 @@ public class CutsceneControllerDialog : MonoBehaviour
         {
             isDialogObjectActivated = true;
             activeAfterEndDialogObject.SetActive(true);
+            activeAfterEndDialogObject.GetComponent<BoxCollider>().center = new Vector3(0,5,0);
+            activeAfterEndDialogObject.GetComponent<BoxCollider>().center = new Vector3(0,0,0);
+        }
+    }
+    private void DisableObjectAtEndDialog()
+    {
+        if(disableAfterEndDialogObject != null && isDialogObjectDisabled == false)
+        {
+            isDialogObjectDisabled = true;
+            disableAfterEndDialogObject.SetActive(false);
         }
     }
 
