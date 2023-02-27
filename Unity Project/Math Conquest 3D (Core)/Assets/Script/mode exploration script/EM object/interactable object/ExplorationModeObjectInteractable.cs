@@ -17,7 +17,9 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
 
     [Header("Repeat Interact Cooldown")]
     public bool isRepeatableInteractionOrStatic = false;
+    public bool isNeedReenterTrigger = true;
     public float interactionCooldownTime = 3f;
+    [SerializeField] public bool isWaitReenter = false;
 
     [Header("Player Disabled Time")]
     public float PlayerInteractionDisableTime = 3f;
@@ -120,20 +122,46 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     }
     private IEnumerator InteractionCooldown()
     {
-        interactCollider.center = new Vector3(interactCollider.center.x,
-                                                interactCollider.center.y - 30,
-                                                interactCollider.center.z);
-
-        yield return new WaitForSeconds(interactionCooldownTime);
+        if (isNeedReenterTrigger == false)
+        {
+            MoveTriggeroff();
+            yield return new WaitForSeconds(interactionCooldownTime);
+            AllowInteraction();
+        }
+    }
+    public void AllowInteraction()
+    {
         ShowInteractionBubble();
         isReadyToInteract = true;
         isInteractionDone = false;
+        MoveTriggerIn();
+    }
+    public void AllowInteractionAfterReenter()
+    {
+        ShowInteractionBubble();
+        isReadyToInteract = true;
+        isInteractionDone = false;
+        isWaitReenter = false;
+    }
+    public void MoveTriggeroff()
+    {
         interactCollider.center = new Vector3(interactCollider.center.x,
-                                            interactCollider.center.y + 30,
-                                            interactCollider.center.z);
+                                                interactCollider.center.y - 30,
+                                                interactCollider.center.z);
+    }
+    private void MoveTriggerIn()
+    {
+        interactCollider.center = new Vector3(interactCollider.center.x,
+                                                interactCollider.center.y + 30,
+                                                interactCollider.center.z);
     }
     private void InteractReadyCheck()
     {
+        if( isNeedReenterTrigger == true && isWaitReenter == false)
+        {
+            isWaitReenter = true;
+        }
+
         if (isReadyToInteract == true)
         {
             isReadyToInteract = false;
