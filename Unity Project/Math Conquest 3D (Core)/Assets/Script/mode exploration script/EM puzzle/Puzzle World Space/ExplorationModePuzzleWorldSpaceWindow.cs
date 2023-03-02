@@ -34,6 +34,7 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     [SerializeField] private GameObject worldSpaceCamera;
 
     [HideInInspector] public UnityEvent ConfirmValueEvent;
+    [HideInInspector] public UnityEvent ResetValueEvent;
     private MasterInput PlayerInput;
 
     private void Awake()
@@ -54,6 +55,7 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
         PlayerInput.WindowControl.CloseWindow.performed += context => CloseWorldSpacePuzzle();
         PlayerInput.WindowControl.SwitchInputField.performed += context => SwitchInputField();
         PlayerInput.WindowControl.ConfirmAnswer.performed += context => ConfirmValue();
+        PlayerInput.WindowControl.ResetAnswer.performed += context => ResetValue();
     }
 
     public void StartMultipleChoicePuzzleWindow()
@@ -150,6 +152,10 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     private void ClearAnswer()
     {
         puzzleInputFieldList[inputFieldSelectedIndex].text = "";
+    }
+    public void ResetValue()
+    {
+        ResetValueEvent.Invoke();
     }
 
     private void FixedUpdate()

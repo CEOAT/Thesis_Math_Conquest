@@ -31,8 +31,9 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
     private void SetupSubscription()
     {
         PuzzleWorldSpaceWindow.ConfirmValueEvent.AddListener(CheckValueMinMaxValues);
-        PuzzleWorldSpaceWindow.ConfirmValueEvent.AddListener(ApplyMinMaxValuesToText);
+        PuzzleWorldSpaceWindow.ConfirmValueEvent.AddListener(ApplyValuesToText);
         PuzzleWorldSpaceWindow.ConfirmValueEvent.AddListener(ApplyValueToObject);
+        PuzzleWorldSpaceWindow.ResetValueEvent.AddListener(ResetObjectValue);
     }
 
     public virtual void ApplyValueToObject()
@@ -53,7 +54,7 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
             }
         }
     }
-    private void ApplyMinMaxValuesToText()
+    public void ApplyValuesToText()
     {
         int inputfieldCount = 0;
         foreach(TMP_InputField text in PuzzleWorldSpaceWindow.puzzleInputFieldList)
@@ -61,6 +62,11 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
             text.text = vairableList[inputfieldCount].ToString();
             inputfieldCount++;
         }
+    }
+
+    public virtual void ResetObjectValue()
+    {
+        // add reset method
     }
 
     private void FixedUpdate() 
@@ -74,8 +80,7 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
 
     private void OnDisable()
     {
-        PuzzleWorldSpaceWindow.ConfirmValueEvent.RemoveListener(CheckValueMinMaxValues);
-        PuzzleWorldSpaceWindow.ConfirmValueEvent.RemoveListener(ApplyMinMaxValuesToText);
-        PuzzleWorldSpaceWindow.ConfirmValueEvent.RemoveListener(ApplyValueToObject);
+        PuzzleWorldSpaceWindow.ConfirmValueEvent.RemoveAllListeners();
+        PuzzleWorldSpaceWindow.ResetValueEvent.RemoveAllListeners();
     }
 }

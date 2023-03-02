@@ -561,6 +561,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ResetAnswer"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae4873b9-2055-40cd-b0bd-ee955c9d7063"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""CloseWindow"",
                     ""type"": ""Button"",
                     ""id"": ""17cc94ff-b7dc-4a66-a76c-a64500d9b866"",
@@ -611,6 +620,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3593ef94-dc44-48df-85a6-c72f70e01863"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""8f2b8066-51f7-4dee-b638-a27a091bbebd"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -650,6 +670,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchInputField"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f7b89b6-6732-4a7a-aa2c-a114190d40b8"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetAnswer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -699,6 +730,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         // WindowControl
         m_WindowControl = asset.FindActionMap("WindowControl", throwIfNotFound: true);
         m_WindowControl_ConfirmAnswer = m_WindowControl.FindAction("ConfirmAnswer", throwIfNotFound: true);
+        m_WindowControl_ResetAnswer = m_WindowControl.FindAction("ResetAnswer", throwIfNotFound: true);
         m_WindowControl_CloseWindow = m_WindowControl.FindAction("CloseWindow", throwIfNotFound: true);
         m_WindowControl_NextInstructionPage = m_WindowControl.FindAction("NextInstructionPage", throwIfNotFound: true);
         m_WindowControl_PreviousInstructionPage = m_WindowControl.FindAction("PreviousInstructionPage", throwIfNotFound: true);
@@ -1007,6 +1039,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_WindowControl;
     private IWindowControlActions m_WindowControlActionsCallbackInterface;
     private readonly InputAction m_WindowControl_ConfirmAnswer;
+    private readonly InputAction m_WindowControl_ResetAnswer;
     private readonly InputAction m_WindowControl_CloseWindow;
     private readonly InputAction m_WindowControl_NextInstructionPage;
     private readonly InputAction m_WindowControl_PreviousInstructionPage;
@@ -1016,6 +1049,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         private @MasterInput m_Wrapper;
         public WindowControlActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @ConfirmAnswer => m_Wrapper.m_WindowControl_ConfirmAnswer;
+        public InputAction @ResetAnswer => m_Wrapper.m_WindowControl_ResetAnswer;
         public InputAction @CloseWindow => m_Wrapper.m_WindowControl_CloseWindow;
         public InputAction @NextInstructionPage => m_Wrapper.m_WindowControl_NextInstructionPage;
         public InputAction @PreviousInstructionPage => m_Wrapper.m_WindowControl_PreviousInstructionPage;
@@ -1032,6 +1066,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @ConfirmAnswer.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnConfirmAnswer;
                 @ConfirmAnswer.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnConfirmAnswer;
                 @ConfirmAnswer.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnConfirmAnswer;
+                @ResetAnswer.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnResetAnswer;
+                @ResetAnswer.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnResetAnswer;
+                @ResetAnswer.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnResetAnswer;
                 @CloseWindow.started -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
                 @CloseWindow.performed -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
                 @CloseWindow.canceled -= m_Wrapper.m_WindowControlActionsCallbackInterface.OnCloseWindow;
@@ -1051,6 +1088,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @ConfirmAnswer.started += instance.OnConfirmAnswer;
                 @ConfirmAnswer.performed += instance.OnConfirmAnswer;
                 @ConfirmAnswer.canceled += instance.OnConfirmAnswer;
+                @ResetAnswer.started += instance.OnResetAnswer;
+                @ResetAnswer.performed += instance.OnResetAnswer;
+                @ResetAnswer.canceled += instance.OnResetAnswer;
                 @CloseWindow.started += instance.OnCloseWindow;
                 @CloseWindow.performed += instance.OnCloseWindow;
                 @CloseWindow.canceled += instance.OnCloseWindow;
@@ -1109,6 +1149,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     public interface IWindowControlActions
     {
         void OnConfirmAnswer(InputAction.CallbackContext context);
+        void OnResetAnswer(InputAction.CallbackContext context);
         void OnCloseWindow(InputAction.CallbackContext context);
         void OnNextInstructionPage(InputAction.CallbackContext context);
         void OnPreviousInstructionPage(InputAction.CallbackContext context);

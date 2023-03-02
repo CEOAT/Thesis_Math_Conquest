@@ -539,6 +539,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ResetAnswer",
+                    "type": "Button",
+                    "id": "ae4873b9-2055-40cd-b0bd-ee955c9d7063",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CloseWindow",
                     "type": "Button",
                     "id": "17cc94ff-b7dc-4a66-a76c-a64500d9b866",
@@ -589,6 +598,17 @@
                 },
                 {
                     "name": "",
+                    "id": "3593ef94-dc44-48df-85a6-c72f70e01863",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConfirmAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8f2b8066-51f7-4dee-b638-a27a091bbebd",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -628,6 +648,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchInputField",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f7b89b6-6732-4a7a-aa2c-a114190d40b8",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetAnswer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
