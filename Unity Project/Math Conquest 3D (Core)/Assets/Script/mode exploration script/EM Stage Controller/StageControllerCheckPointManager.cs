@@ -5,13 +5,30 @@ using UnityEngine;
 public class StageControllerCheckPointManager : MonoBehaviour
 {
     [Header("Game Controller and Save Controller")]
-    public ExplorationModeGameController GameController;
-    public SaveController SaveController;
+    [HideInInspector] public ExplorationModeGameController GameController;
+    private SaveController SaveController;
 
     [Header("Checkpoint Manager Data")]
     public int checkpointCurrentIndex;
     private Transform checkpointCurrentPosition;
+    [HideInInspector] public bool isReadyToCreateEnterEffect = false;
+    [SerializeField] public GameObject checkpointEnterParticleEffect;
     public List<Transform> checkpointList;
+
+    private void Start()
+    {
+        SetupComponent();
+        Invoke("ReadyCountToCreateEffect", 1f);
+    }
+    private void SetupComponent()
+    {
+        GameController = GetComponent<ExplorationModeGameController>();
+        SaveController = GetComponent<SaveController>();
+    }
+    private void ReadyCountToCreateEffect()
+    {
+        isReadyToCreateEnterEffect = true;
+    }
 
     public void SendObjective(string objective)
     {

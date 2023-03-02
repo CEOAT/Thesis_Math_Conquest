@@ -71,19 +71,37 @@ public class ExplorationModePlayerHealth : MonoBehaviour
         playerHealthCurrent = 0;
     }
 
+    public void PlayerStoreHealth(int healthRestoreValue)
+    {
+        PlayerHealthBarControl();
+    }
+    public void PlayerResetHealth()
+    {
+        playerHealthCurrent = playerHealthMaximum;
+        PlayerHealthBarControl();
+    }
+
     private void PlayerHealthBarControl()
     {
+        CheckIfPlayerOverHeal();
         playerHealthPercentage = (playerHealthCurrent * 100f) / playerHealthMaximum;
         PlayerHealthBar.fillAmount = playerHealthPercentage / 100f;
+    }
+    public void CheckIfPlayerOverHeal()
+    {
+        if(playerHealthCurrent > playerHealthMaximum)
+        {
+            playerHealthCurrent = playerHealthMaximum;
+        }
     }
 
     public void EnableInvincibleDuringCutscene()
     {
-        canPlayerTakeDamage = true;
+        canPlayerTakeDamage = false;
     }
     public void DisableInvincibleAfterCutscene()
     {
-        canPlayerTakeDamage = false;
+        canPlayerTakeDamage = true;
     }
 
     private void FixedUpdate()
@@ -105,6 +123,13 @@ public class ExplorationModePlayerHealth : MonoBehaviour
             isPlayerOnInvincible = false;
         }
     }
+
+
+    // test button
+    public void TestDamagePlayer()
+    {
+        PlayerTakenDamage(50f);
+    }
 }
 
 #if UNITY_EDITOR
@@ -120,6 +145,10 @@ public class PlayerHealthTester : Editor
         if (GUILayout.Button("Game Over"))
         {
             health.PlayerGameOver();
+        }
+        if(GUILayout.Button("Damage Player"))
+        {
+            health.TestDamagePlayer();
         }
     }
 }
