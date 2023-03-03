@@ -13,7 +13,10 @@ public class EnemyControllerMovement : MonoBehaviour
     public enum EnemyType
     {
         obstacle,
-        chaseAndHit
+        chaseAndHit,
+        chaser,
+        shooterTower,
+        shooterAndChase
     };
 
     [Header("Enemy Movement Setting")]
@@ -27,30 +30,32 @@ public class EnemyControllerMovement : MonoBehaviour
     public float enemyAttackTriggerRange;
     public float enemyAttackPointRange;
     public LayerMask enemyAttackLayerMask;
-    [SerializeField] private Collider[] playerInAttackCircle;
+    [HideInInspector] private Collider[] playerInAttackCircle;
     public float enemyAttackDamage;
 
     [Header("Enemy Attack Interval")]
-    public bool isEnemyCheckingAttack;
+    [HideInInspector] public bool isEnemyCheckingAttack;
     public float enemyCheckingAttackIntervalTime;
-    public bool isEnemyReadyToAttack;
+    [HideInInspector] public bool isEnemyReadyToAttack;
 
     [Header("Enemy Attack Wait")]
-    public bool isEnemyWaitFromAttack;
+    [HideInInspector] public bool isEnemyWaitFromAttack;
     [Tooltip("Set to 0 if want enemy to resume activity immediately after attack. If not, set time to be longer than enemy's attack animation")] 
     public float enemyAttackWaitTime;
 
     [Header("Enemy Recovery System")]
-    public bool isEnemyWaitToRecover;
+    [HideInInspector] public bool isEnemyWaitToRecover;
     public float enemyHurtRevoceryTime;
 
-    [Header("Enemy Animation")]
-    public string enemyAnimationState;
+    [HideInInspector] public string enemyAnimationState;
     private Animator animator;
 
     [Header("Enemy Meterial")]
     public Material materialStart;
     public Material materialDamaged;
+
+    [Header("Enemy Destroy Particle")]
+    public GameObject particleDestroyedPrefab;
 
     private NavMeshAgent navMeshAgent;
     private Rigidbody rigidbody;
@@ -74,21 +79,17 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void SetupEnemyType()
     {
-        switch (enemyType)
+        if (enemyType == EnemyType.obstacle || enemyType == EnemyType.chaser)
         {
-            case EnemyType.obstacle:
-            {
-                enemyDetectionRange = 0;
-                enemyChasingRange = 0;
-                enemyAttackTriggerRange = 0;
-                enemyAttackPointRange = 0;
-                Destroy(navMeshAgent);
-                rigidbody.constraints = 
-                      RigidbodyConstraints.FreezePositionX
-                    | RigidbodyConstraints.FreezePositionZ;
-                    rigidbody.freezeRotation = true;
-                break;
-            }
+            enemyDetectionRange = 0;
+            enemyChasingRange = 0;
+            enemyAttackTriggerRange = 0;
+            enemyAttackPointRange = 0;
+            Destroy(navMeshAgent);
+            rigidbody.constraints = 
+                    RigidbodyConstraints.FreezePositionX
+                | RigidbodyConstraints.FreezePositionZ;
+                rigidbody.freezeRotation = true;
         }
     }
     private void SetupEnemyStat()
@@ -174,13 +175,22 @@ public class EnemyControllerMovement : MonoBehaviour
         EnemyStopChasePlayer();
         GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
         Destroy(GetComponent<Rigidbody>());
-
+        
         enemyAnimationState = "Enemy Dead";
         EnemyAnimationTrigger();
     }
     public void EnemyDeadDestroyOnAnimation()
     {
         Destroy(this.gameObject);
+        CreateDestroyEffect();
+    }
+    private void CreateDestroyEffect()
+    {
+        if(particleDestroyedPrefab != null)
+        {
+            GameObject particleDestroyedObject = Instantiate( particleDestroyedPrefab, transform.position, transform.rotation);
+            Destroy(particleDestroyedObject, 1f);
+        }
     }
 
     private void EnemyAttackWait()
@@ -207,6 +217,8 @@ public class EnemyControllerMovement : MonoBehaviour
         enemyAnimationState = "Enemy Hurt";
         EnemyAnimationTrigger();
         StartCoroutine(EnemyHurtColorSwitch());
+        
+        if(CheckIfEnemyNotDisrupatable()) { return; }
 
         isEnemyWaitToRecover = true;
         isEnemyReadyToAttack = false;
@@ -217,6 +229,18 @@ public class EnemyControllerMovement : MonoBehaviour
             Invoke("EnemyHurtRecoveryComplete", enemyHurtRevoceryTime);
         }
     }
+    public bool CheckIfEnemyNotDisrupatable()
+    {
+        if(enemyType == EnemyType.chaser || enemyType == EnemyType.obstacle)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private Color enemyColorDefault = new Color(255, 255, 255, 255);
     private Color enemyColorRed = new Color(255, 0, 0, 255);
     private IEnumerator EnemyHurtColorSwitch()
