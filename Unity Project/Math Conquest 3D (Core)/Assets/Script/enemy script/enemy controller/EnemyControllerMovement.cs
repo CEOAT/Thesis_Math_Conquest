@@ -7,6 +7,7 @@ public class EnemyControllerMovement : MonoBehaviour
 {
     private Transform playerTransform;
     private bool isEnemyChasePlayer;
+    private Vector3 enemyStartPosition;
 
     [Header("Enemy Type")]
     public EnemyType enemyType;
@@ -94,6 +95,7 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void SetupEnemyStat()
     {
+        enemyStartPosition = transform.position;
         navMeshAgent.speed = enemyMoveSpeed;
         enemyDetectionSphere.radius = enemyDetectionRange;
         isEnemyReadyToAttack = true;
@@ -167,7 +169,7 @@ public class EnemyControllerMovement : MonoBehaviour
         if (navMeshAgent != null)
         {
             isEnemyChasePlayer = false;
-            navMeshAgent.SetDestination(transform.position);
+            navMeshAgent.SetDestination(enemyStartPosition);
         }
     }
     public void EnemyDead()
