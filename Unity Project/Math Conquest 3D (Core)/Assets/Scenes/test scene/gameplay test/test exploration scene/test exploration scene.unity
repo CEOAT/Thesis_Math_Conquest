@@ -2360,6 +2360,31 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9157653735101942395}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1627532118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2527330564533414465, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 568661821}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1627532128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627532118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf9500239342554cb100bab7ecce83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHealthDrain: 0
+  healthDrainInterval: 0.05
+  healthDrainValue: 1
+  isHealthRegen: 0
+  healthRegenInterval: 0.2
+  healthRegenValue: 1
+  isHealthRemovedWhenCollide: 1
 --- !u!4 &1672092583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2989110905999221030, guid: ad3833da192f69940b730f8c1a2e88de,
@@ -3457,7 +3482,7 @@ PrefabInstance:
     - target: {fileID: 6268476655874460036, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: playerAttackDamage
-      value: 1000
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6268476655874460036, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
