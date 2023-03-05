@@ -153,7 +153,7 @@ public class EnemyControllerStatus : MonoBehaviour
         if (this.gameObject != null)
         {
             isEnemySelectedUI = false;
-            Destroy(enemySelectorObject.gameObject);
+            if(enemySelectorObject != null) { Destroy(enemySelectorObject.gameObject);}
         }
     }
     #endregion
@@ -163,24 +163,22 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         if (playerAnswer == questionAnswer)
         {
-            PlayerAnswerCorrect(playerDamage);
+            PlayerAnswerCorrect();
+            EnemyTakenDamage(playerDamage);
             enemyDetailObject.GetComponent<Animator>().SetTrigger("triggerUiWorldSpaceShake");
-
-            //random new question
-            //enemy lose health
         }
         else
         {
             PlayerAnswerFalse();
-
-            //wrong statement
-            //reduce player hp, restore enemy's health?, gain shield?
         }
     }
-    private void PlayerAnswerCorrect(float receivedDamage)
+    private void PlayerAnswerCorrect()
+    {
+        isQuestionActive = false;
+    }
+    public void EnemyTakenDamage(float receivedDamage)
     {
         enemyHealthCurrent -= receivedDamage;
-        isQuestionActive = false;
         isEnemyTakenDamage = true;
         EnemyMovement.EnemyHurtRecovery();
     }

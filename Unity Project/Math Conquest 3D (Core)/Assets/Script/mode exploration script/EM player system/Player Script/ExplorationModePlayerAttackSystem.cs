@@ -186,7 +186,10 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
         }
         if (enemyRemoved != null)
         {
-            enemyRemoved.GetComponent<EnemyControllerStatus>().EnemyDeselected();
+            if(enemyRemoved.TryGetComponent<EnemyControllerStatus>(out EnemyControllerStatus enemyStatus))
+            {
+                enemyStatus.GetComponent<EnemyControllerStatus>().EnemyDeselected();
+            }
         }
     }
 

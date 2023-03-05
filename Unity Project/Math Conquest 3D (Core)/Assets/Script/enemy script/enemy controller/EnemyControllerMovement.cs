@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyControllerMovement : MonoBehaviour
 {
     private Transform playerTransform;
-    private bool isEnemyChasePlayer;
+    [HideInInspector] public bool isEnemyChasePlayer;
     private Vector3 enemyStartPosition;
 
     [Header("Enemy Type")]
@@ -63,6 +64,9 @@ public class EnemyControllerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private EnemyControllerStatus EnemyStatus;
 
+    [HideInInspector] public UnityEvent EventOnEnemyStartChase;
+    [HideInInspector] public UnityEvent EventOnEnemyStopChase;
+    [HideInInspector] public UnityEvent EventOnEnemyDead;
 
     private void Start()
     {
@@ -109,6 +113,7 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyStartChasePlayer(Transform player)
     {
+        EventOnEnemyStartChase.Invoke();
         isEnemyChasePlayer = true;
         playerTransform = player;
     }
@@ -170,11 +175,21 @@ public class EnemyControllerMovement : MonoBehaviour
         {
             isEnemyChasePlayer = false;
             navMeshAgent.SetDestination(enemyStartPosition);
+            EventOnEnemyStopChase.Invoke();
+        }
+    }
+    public void EnemyStopChasePlayerDead()
+    {
+        if (navMeshAgent != null)
+        {
+            isEnemyChasePlayer = false;
+            navMeshAgent.SetDestination(transform.position);
+            EventOnEnemyStopChase.Invoke();
         }
     }
     public void EnemyDead()
     {
-        EnemyStopChasePlayer();
+        EnemyStopChasePlayerDead();
         GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
         Destroy(GetComponent<Rigidbody>());
         
@@ -185,6 +200,7 @@ public class EnemyControllerMovement : MonoBehaviour
     {
         Destroy(this.gameObject);
         CreateDestroyEffect();
+        EventOnEnemyDead.Invoke();
     }
     private void CreateDestroyEffect()
     {
