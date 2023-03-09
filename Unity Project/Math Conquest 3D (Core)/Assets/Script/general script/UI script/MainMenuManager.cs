@@ -38,7 +38,7 @@ public class MainMenuManager : MonoBehaviour
         {
             if (B_Event.buttonClick == tempbutton)
             {
-                Debug.Log("CLICK");
+              // Debug.Log("CLICK");
                 if (B_Event.buttonBehavior == ButtonBehavior.Default)
                 {
                     tempDelay = B_Event.TransistionDelay;

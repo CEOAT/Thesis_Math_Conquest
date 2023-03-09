@@ -16,19 +16,19 @@ public class GenericHoldButtonEvent : MonoBehaviour,IUpdateSelectedHandler,IPoin
               {
                   if (isPressed)
                   {
-                   Debug.Log("ooooof long hold"+isPressed);
+                  // Debug.Log("ooooof long hold"+isPressed);
                   }
                   
               }
               public void OnPointerDown(PointerEventData data)
               {
                   isPressed = true;
-                  Debug.Log(isPressed);
+//                  Debug.Log(isPressed);
               }
               public void OnPointerUp(PointerEventData data)
               {
                   isPressed = false;
-                  Debug.Log(isPressed);
+                 // Debug.Log(isPressed);
               }
 
               public void OnPointerExit(PointerEventData data)
@@ -40,12 +40,12 @@ public class GenericHoldButtonEvent : MonoBehaviour,IUpdateSelectedHandler,IPoin
               {
                   preventanim = true;
                   Button.animator.SetBool("PreventTransition",preventanim);
-                  Debug.Log("preventanim"+preventanim);
+    //              Debug.Log("preventanim"+preventanim);
               }
 
               public void ResetDefaultState()
               {
-                  Debug.Log("Reset");
+                  //Debug.Log("Reset");
                   preventanim = false;
                   Button.animator.SetBool("PreventTransition",preventanim);
               }
