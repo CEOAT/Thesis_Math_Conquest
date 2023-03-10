@@ -84,7 +84,7 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void SetupEnemyType()
     {
-        if (enemyType == EnemyType.obstacle || enemyType == EnemyType.chaser)
+        if (enemyType == EnemyType.obstacle)
         {
             enemyDetectionRange = 0;
             enemyChasingRange = 0;
@@ -92,9 +92,16 @@ public class EnemyControllerMovement : MonoBehaviour
             enemyAttackPointRange = 0;
             Destroy(navMeshAgent);
             rigidbody.constraints = 
-                    RigidbodyConstraints.FreezePositionX
+                  RigidbodyConstraints.FreezePositionX
                 | RigidbodyConstraints.FreezePositionZ;
-                rigidbody.freezeRotation = true;
+            rigidbody.freezeRotation = true;
+        }
+        else if (enemyType == EnemyType.chaser)
+        {
+            enemyAttackTriggerRange = 0;
+            enemyAttackPointRange = 0;
+            Destroy(navMeshAgent);
+            rigidbody.useGravity = false;
         }
     }
     private void SetupEnemyStat()
@@ -120,7 +127,19 @@ public class EnemyControllerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(enemyType == EnemyType.obstacle) { return; }
+        if(enemyType == EnemyType.obstacle) 
+        { 
+            return; 
+        }
+        else if(enemyType ==  EnemyType.chaser)
+        {
+            if(playerTransform != null)
+            {
+                transform.position = Vector3.Lerp(transform.position, playerTransform.position, enemyMoveSpeed * 0.01f);
+            }
+            EnemyCheckFacing();
+            return;
+        }
 
         EnemyCheckFacing();
         EnemyAnimationUpdate();
@@ -142,19 +161,35 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyCheckFacing()
     {
-        if (navMeshAgent.velocity.x > 0)
+        if(navMeshAgent != null)
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            enemyAnimationState = "Enemy Walk";
+            if (navMeshAgent.velocity.x > 0)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                enemyAnimationState = "Enemy Walk";
+            }
+            if (navMeshAgent.velocity.x < 0)
+            {
+                transform.localScale = new Vector3(-1f * Mathf.Abs((transform.localScale.x)), transform.localScale.y, transform.localScale.z);
+                enemyAnimationState = "Enemy Walk";
+            }
+            if (navMeshAgent.velocity.x == 0 && navMeshAgent.velocity.y == 0)
+            {
+                enemyAnimationState = "Enemy Idle";
+            }
         }
-        if (navMeshAgent.velocity.x < 0)
+        else
         {
-            transform.localScale = new Vector3(-1f * Mathf.Abs((transform.localScale.x)), transform.localScale.y, transform.localScale.z);
-            enemyAnimationState = "Enemy Walk";
-        }
-        if (navMeshAgent.velocity.x == 0 && navMeshAgent.velocity.y == 0)
-        {
-            enemyAnimationState = "Enemy Idle";
+            if(transform.position.x < playerTransform.position.x)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                enemyAnimationState = "Enemy Walk";
+            }
+            else if(transform.position.x > playerTransform.position.x)
+            {
+                transform.localScale = new Vector3(-1f * Mathf.Abs((transform.localScale.x)), transform.localScale.y, transform.localScale.z);
+                enemyAnimationState = "Enemy Walk";
+            }
         }
     }
     private void EnemyChasePlayer()

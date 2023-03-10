@@ -43,6 +43,7 @@ public class EnemyComponentHealthModification : MonoBehaviour
     }
     private void SetupSubscription()
     {
+        if(isHealthDrain == false && isHealthRegen == false) { return; }
         EnemyController.EventOnEnemyStartChase.AddListener(StartHealthModify);
         EnemyController.EventOnEnemyStopChase.AddListener(StopHealthModify);
     }
@@ -53,6 +54,7 @@ public class EnemyComponentHealthModification : MonoBehaviour
     }
     private void SetupUnsubcription()
     {
+        if(isHealthDrain == false && isHealthRegen == false) { return; }
         EnemyController.EventOnEnemyStartChase.RemoveListener(StartHealthModify);
         EnemyController.EventOnEnemyStopChase.RemoveListener(StopHealthModify);
     }

@@ -1602,18 +1602,28 @@ PrefabInstance:
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
+      propertyPath: enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
       propertyPath: materialStart
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
+      propertyPath: enemyMoveSpeed
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
       propertyPath: enemyChasingRange
-      value: 4
+      value: 9.25
       objectReference: {fileID: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
       propertyPath: enemyDetectionRange
-      value: 3
+      value: 7.05
       objectReference: {fileID: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
@@ -2471,7 +2481,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 568661821}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1627532148
+--- !u!114 &1627532149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2480,14 +2490,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 1627532118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c4641d2355ae747b83a9f6e9c585d9, type: 3}
+  m_Script: {fileID: 11500000, guid: dcf9500239342554cb100bab7ecce83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagecircleSize: 0.5
-  damagecircleDamage: 10
-  damagecirclePrefab: {fileID: 2246264508662033518, guid: 29410577460d8634da4048d2b8c3767f,
+  isHealthDrain: 0
+  isStartDrainOnEncounterPlayer: 1
+  healthDrainInterval: 1
+  healthDrainValue: 1
+  isHealthRegen: 0
+  isStartRegenOnEncounterPlayer: 1
+  healthRegenInterval: 1
+  healthRegenValue: 1
+  stopChaseModifyType: 0
+  isHealthRemovedWhenCollide: 1
+--- !u!114 &1627532150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627532118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef617ad1ceaa8a843b97004098b1e9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombPrefab: {fileID: 5806514786225387796, guid: 98964b5438af51f4c905d972eb98357f,
     type: 3}
-  isDamageCircleActiveAllTime: 0
+  bombStartForce: 0
+  bombSpawnOffset: {x: 0, y: 0, z: 0}
+  isBombHarmEnemy: 1
+  isBombHasCountdown: 0
+  bombCountdownTime: 3
+  isDropBombOnDead: 0
+  isConstantCreateBomb: 0
+  bombDropInterval: 2
 --- !u!4 &1672092583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2989110905999221030, guid: ad3833da192f69940b730f8c1a2e88de,
