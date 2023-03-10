@@ -1535,6 +1535,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Slime (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414465, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2527330564533414468, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1616,6 +1621,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
         type: 3}
+    - target: {fileID: 2527330564533414494, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
+      propertyPath: enemyHealthMax
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ae20bee99561c546bd066ab3fc34b9f, type: 3}
 --- !u!1 &584915621 stripped
@@ -2461,28 +2471,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 568661821}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1627532138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627532118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcf9500239342554cb100bab7ecce83b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHealthDrain: 0
-  isStartDrainOnEncounterPlayer: 1
-  healthDrainInterval: 0.1
-  healthDrainValue: 0.2
-  isHealthRegen: 0
-  isStartRegenOnEncounterPlayer: 1
-  healthRegenInterval: 1
-  healthRegenValue: 1
-  stopChaseModifyType: 2
-  isHealthRemovedWhenCollide: 0
 --- !u!114 &1627532148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2492,17 +2480,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1627532118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef617ad1ceaa8a843b97004098b1e9d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 18c4641d2355ae747b83a9f6e9c585d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 5806514786225387796, guid: 98964b5438af51f4c905d972eb98357f,
+  damagecircleSize: 0.5
+  damagecircleDamage: 10
+  damagecirclePrefab: {fileID: 2246264508662033518, guid: 29410577460d8634da4048d2b8c3767f,
     type: 3}
-  bombStartForce: 650
-  isBombHasCountdown: 1
-  bombCountdownTime: 0.75
-  isDropBombOnDead: 1
-  isConstantCreateBomb: 0
-  bombDropInterval: 2
+  isDamageCircleActiveAllTime: 0
 --- !u!4 &1672092583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2989110905999221030, guid: ad3833da192f69940b730f8c1a2e88de,
@@ -3592,6 +3577,11 @@ PrefabInstance:
       propertyPath: PlayerStatusUIGroup
       value: 
       objectReference: {fileID: 600427369}
+    - target: {fileID: 4967258349010376452, guid: 49c1a2e6ee95d55428c5990d8699738e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5998956516710382007, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: m_RootOrder
@@ -3606,6 +3596,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151661669540929658, guid: 49c1a2e6ee95d55428c5990d8699738e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6268476655874460036, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
