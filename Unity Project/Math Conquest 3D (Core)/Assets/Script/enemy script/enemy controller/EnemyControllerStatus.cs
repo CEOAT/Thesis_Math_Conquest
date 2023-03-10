@@ -42,7 +42,10 @@ public class EnemyControllerStatus : MonoBehaviour
     [Header("Enemy Damage")]
     public float enemyAttackDamage;
 
-    [Header("Enemy State")]
+    [Header("Enemy Studiness")]
+    [SerializeField] private bool isEnemySturdyFromAttack;
+
+    [Header("Enemy State (Display Only)")]
     public string enemyState;
     public bool isEnemyTakenDamage;
 
@@ -60,7 +63,6 @@ public class EnemyControllerStatus : MonoBehaviour
         enemyState = "idle";
         isEnemyTakenDamage = false; 
     }
-
 
     private void Start()
     {
@@ -98,7 +100,6 @@ public class EnemyControllerStatus : MonoBehaviour
         enemyQuestionText.text = enemyQuestion;
         questionAnswer = enemyAnswer;
     }
-
 
     private void FixedUpdate()
     {
@@ -180,7 +181,11 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         enemyHealthCurrent -= receivedDamage;
         isEnemyTakenDamage = true;
-        EnemyMovement.EnemyHurtRecovery();
+
+        if(!isEnemySturdyFromAttack)
+        {
+            EnemyMovement.EnemyHurtRecovery();
+        }
     }
     private void PlayerAnswerFalse()
     {
