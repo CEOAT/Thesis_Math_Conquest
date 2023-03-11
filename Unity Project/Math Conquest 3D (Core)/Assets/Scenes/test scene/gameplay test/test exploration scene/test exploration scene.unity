@@ -1622,8 +1622,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
+      propertyPath: enemyAttackWaitTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
       propertyPath: enemyDetectionRange
       value: 7.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
+      propertyPath: enemyHurtRevoceryTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
@@ -1639,7 +1649,7 @@ PrefabInstance:
     - target: {fileID: 2527330564533414494, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
       propertyPath: isEnemySturdyFromAttack
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ae20bee99561c546bd066ab3fc34b9f, type: 3}
@@ -2167,7 +2177,7 @@ PrefabInstance:
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
       propertyPath: enemyMoveSpeed
-      value: 0.45
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
@@ -2183,7 +2193,7 @@ PrefabInstance:
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
       propertyPath: enemyAttackWaitTime
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
@@ -2194,6 +2204,11 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyAttackPointRange
       value: 5.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
+        type: 3}
+      propertyPath: enemyHurtRevoceryTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2527330564533414488, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
@@ -2229,7 +2244,7 @@ PrefabInstance:
     - target: {fileID: 2527330564533414494, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}
       propertyPath: isEnemySturdyFromAttack
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2527330564562798919, guid: 0ae20bee99561c546bd066ab3fc34b9f,
         type: 3}

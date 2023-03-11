@@ -265,15 +265,10 @@ public class EnemyControllerMovement : MonoBehaviour
         isEnemyReadyToAttack = false;
         navMeshAgent.speed = 0f;
 
-        if (enemyAttackWaitTime > 0)    // make sure wait time is longer than attack animation if not set to 0
-        {
-            Invoke("EnemyAttackWaitComplete", enemyAttackWaitTime);
-        }
+        Invoke("EnemyAttackWaitComplete", enemyAttackWaitTime);
     }
     private void EnemyAttackWaitComplete()
     {
-        //if(enemyAttackWaitTime >= 1) { return; }
-
         isEnemyWaitFromAttack = false;
         isEnemyReadyToAttack = true;
         navMeshAgent.speed = enemyMoveSpeed;
@@ -289,11 +284,7 @@ public class EnemyControllerMovement : MonoBehaviour
         isEnemyWaitToRecover = true;
         isEnemyReadyToAttack = false;
         navMeshAgent.speed = 0f;
-
-        if (enemyAttackWaitTime > 0)    // make sure wait time is longer than hurt animation if not set to 0
-        {
-            Invoke("EnemyHurtRecoveryComplete", enemyHurtRevoceryTime);
-        }
+        Invoke("EnemyHurtRecoveryComplete", enemyHurtRevoceryTime);
     }
     public bool CheckIfEnemyNotDisrupatable()
     {
@@ -320,8 +311,6 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyHurtRecoveryComplete()
     {
-        //if (enemyHurtRevoceryTime >= 1) { return; }
-
         isEnemyWaitToRecover = false;
         isEnemyReadyToAttack = true;
         navMeshAgent.speed = enemyMoveSpeed;
@@ -451,5 +440,6 @@ public class EnemyControllerMovement : MonoBehaviour
     private void OnDestroy() 
     {
         CancelInvoke();
+        StopAllCoroutines();
     }
 }
