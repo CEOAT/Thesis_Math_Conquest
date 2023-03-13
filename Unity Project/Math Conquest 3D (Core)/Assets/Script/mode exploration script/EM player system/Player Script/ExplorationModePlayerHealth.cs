@@ -71,7 +71,7 @@ public class ExplorationModePlayerHealth : MonoBehaviour
         playerHealthCurrent = 0;
     }
 
-    public void PlayerStoreHealth(int healthRestoreValue)
+    public void PlayerStoreHealth(float healthRestoreValue)
     {
         PlayerHealthBarControl();
     }

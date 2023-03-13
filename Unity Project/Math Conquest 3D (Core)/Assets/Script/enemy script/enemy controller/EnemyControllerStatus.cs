@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 
 // control enemy status (health, animation)
 
@@ -206,4 +207,9 @@ public class EnemyControllerStatus : MonoBehaviour
         }
     }
     #endregion
+
+    [Button] private void EnemyDead()
+    {
+        enemyHealthCurrent = 0;
+    }
 }

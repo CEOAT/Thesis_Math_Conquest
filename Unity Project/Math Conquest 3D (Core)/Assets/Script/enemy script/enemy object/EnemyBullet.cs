@@ -56,11 +56,22 @@ public class EnemyBullet : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider player) 
+    private void OnTriggerEnter(Collider other) 
     {
-        if(player.CompareTag("Player"))
+        if(other.CompareTag("Player"))
         {
-            player.GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(bulletDamage);
+            other.GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(bulletDamage);
+            CreateDestroyParticle();
+            Destroy(this.gameObject);
+        }
+        else if(other.CompareTag("Enemy") && LayerMask.LayerToName(other.gameObject.layer)  == "Enemy")
+        {
+            other.GetComponent<EnemyControllerStatus>().EnemyTakenDamage(bulletDamage);
+            CreateDestroyParticle();
+            Destroy(this.gameObject);
+        }
+        else if(other.CompareTag("Environment"))
+        {
             CreateDestroyParticle();
             Destroy(this.gameObject);
         }

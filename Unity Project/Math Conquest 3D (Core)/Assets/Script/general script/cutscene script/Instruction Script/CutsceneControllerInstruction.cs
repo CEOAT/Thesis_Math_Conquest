@@ -24,8 +24,10 @@ public class CutsceneControllerInstruction : MonoBehaviour
     public ExplorationModeGameController GameController;
 
     [Header("Active End Instruction Object")]
-    public GameObject activeAfterEndInstructionObject;
-    public GameObject disableAfterEndInstructionObject;
+    [SerializeField] private List<GameObject> activeAfterEndInstructionObjectList = new List<GameObject>();
+    [SerializeField] private List<GameObject> disableAfterEndInstructionObjectList = new List<GameObject>();
+    private bool isInstructionObjectActivated;
+    private bool isInstructionObjectDisabled;
 
     [Header("Instruction Setting")]
     public bool isDeactivateAfterEnd;
@@ -166,20 +168,40 @@ public class CutsceneControllerInstruction : MonoBehaviour
     }
     private void ActiveObjectAtEndInstruction()
     {
-        if (activeAfterEndInstructionObject != null)
+        if (activeAfterEndInstructionObjectList.Count > 0 && isInstructionObjectActivated == false)
         {
-            activeAfterEndInstructionObject.SetActive(true);
-            activeAfterEndInstructionObject.GetComponent<BoxCollider>().center = new Vector3(0,5,0);
-            activeAfterEndInstructionObject.GetComponent<BoxCollider>().center = new Vector3(0,0,0);
+            isInstructionObjectActivated = true;
+            LoopActiveObject();
+        }
+    }
+    private void LoopActiveObject()
+    {
+        foreach(GameObject activeObject in activeAfterEndInstructionObjectList)
+        {
+            activeObject.SetActive(true);
+            if(activeObject.TryGetComponent<BoxCollider>(out BoxCollider collider))
+            {
+                collider.GetComponent<BoxCollider>().center = new Vector3(0,5,0);
+                collider.GetComponent<BoxCollider>().center = new Vector3(0,0,0);
+            }
         }
     }
     private void DisableObjectAfterInstruction()
     {
-        if (disableAfterEndInstructionObject != null)
+        if (disableAfterEndInstructionObjectList.Count > 0 && isInstructionObjectDisabled == false)
         {
-            disableAfterEndInstructionObject.SetActive(false);
+            isInstructionObjectDisabled = true;
+            LoopDisableObject();
         }
     }
+    private void LoopDisableObject()
+    {
+        foreach(GameObject disableObject in activeAfterEndInstructionObjectList)
+        {
+            disableObject.SetActive(false);
+        }
+    }
+
     private void DeactivateAfterEndInstruction()
     {
         if (isDeactivateAfterEnd == true)

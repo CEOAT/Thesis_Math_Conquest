@@ -37,8 +37,8 @@ public class CutsceneControllerDialog : MonoBehaviour
     private bool isDialogPlayed = false;
 
     [Header("Active End Dialog Object")]
-    public GameObject activeAfterEndDialogObject;
-    public GameObject disableAfterEndDialogObject;
+    public List<GameObject> activeAfterEndDialogObjectList = new List<GameObject>();
+    public List<GameObject> disableAfterEndDialogObjectList = new List<GameObject>();
 
     [Header("Dialog Data")]
     public List<DialogScriptableObjectClass> dialogSettList =  new List<DialogScriptableObjectClass>();
@@ -86,13 +86,13 @@ public class CutsceneControllerDialog : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
-        if(activeAfterEndDialogObject != null)
+        if(activeAfterEndDialogObjectList.Count > 0)
         {
             ActiveObjectAtEndDialog();
         }
-        if(disableAfterEndDialogObject)
+        if(disableAfterEndDialogObjectList.Count > 0)
         {
-            
+            DisableObjectAtEndDialog();
         }
     }
     private void CountDialogSet()
@@ -326,20 +326,37 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void ActiveObjectAtEndDialog()
     {
-        if (activeAfterEndDialogObject != null && isDialogObjectActivated == false)
+        if (isDialogObjectActivated == false)
         {
             isDialogObjectActivated = true;
-            activeAfterEndDialogObject.SetActive(true);
-            activeAfterEndDialogObject.GetComponent<BoxCollider>().center = new Vector3(0,5,0);
-            activeAfterEndDialogObject.GetComponent<BoxCollider>().center = new Vector3(0,0,0);
+            LoopActiveObject();
+        }
+    }
+    private void LoopActiveObject()
+    {
+        foreach(GameObject activeObject in activeAfterEndDialogObjectList)
+        {
+            activeObject.SetActive(true);
+            if(activeObject.TryGetComponent<BoxCollider>(out BoxCollider collider))
+            {
+                collider.center = new Vector3(0,5,0);
+                collider.center = new Vector3(0,0,0);
+            }
         }
     }
     private void DisableObjectAtEndDialog()
     {
-        if(disableAfterEndDialogObject != null && isDialogObjectDisabled == false)
+        if(isDialogObjectDisabled == false)
         {
             isDialogObjectDisabled = true;
-            disableAfterEndDialogObject.SetActive(false);
+            LoopDisableObject();
+        }
+    }
+    private void LoopDisableObject()
+    {
+        foreach(GameObject disableObject in disableAfterEndDialogObjectList)
+        {
+            disableObject.SetActive(false);
         }
     }
 
