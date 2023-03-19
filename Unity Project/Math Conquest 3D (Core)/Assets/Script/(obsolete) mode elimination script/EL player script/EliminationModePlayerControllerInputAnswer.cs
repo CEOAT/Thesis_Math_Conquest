@@ -17,7 +17,7 @@ public class EliminationModePlayerControllerInputAnswer : MonoBehaviour
     public TMP_InputField inputField;
 
     private MasterInput playerInput;
-    private PlayerControllerStatus PlayerStatus;
+    // private PlayerControllerStatus PlayerStatus;
     private EliminationModeEventController EventController;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class EliminationModePlayerControllerInputAnswer : MonoBehaviour
     }
     private void SetupComponent()
     {
-        PlayerStatus = GetComponent<PlayerControllerStatus>();
+        // PlayerStatus = GetComponent<PlayerControllerStatus>();
         EventController = GameObject.FindGameObjectWithTag("Event System").GetComponent<EliminationModeEventController>();
     }
     private void SetupControl()
@@ -54,7 +54,7 @@ public class EliminationModePlayerControllerInputAnswer : MonoBehaviour
 
         playerAnswerNumber = float.Parse(inputField.text);
         inputField.text = "";
-        enemyObjectArray[enemySelectedIndex].GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerNumber.ToString(), PlayerStatus.playerAttackDamage);
+        //enemyObjectArray[enemySelectedIndex].GetComponent<EnemyControllerStatus>().CheckPlayerAnswer(playerAnswerNumber.ToString(), PlayerStatus.playerAttackDamage);
     }
     // press Space
     private void PlayerAnswerClear()

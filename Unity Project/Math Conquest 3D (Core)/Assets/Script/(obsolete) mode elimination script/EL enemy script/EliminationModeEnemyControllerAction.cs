@@ -86,7 +86,7 @@ public class EliminationModeEnemyControllerAction : MonoBehaviour
         //run in enemy's attack animation.
 
         EnemyStatus.enemyState = "damage execute";
-        PlayerAction.PlayerTakeDamage(EnemyStatus.enemyAttackDamage);
+        //PlayerAction.PlayerTakeDamage(EnemyStatus.enemyAttackDamage);
         EnemyActionInitiate();
     }
     private void EnemyWearDown()

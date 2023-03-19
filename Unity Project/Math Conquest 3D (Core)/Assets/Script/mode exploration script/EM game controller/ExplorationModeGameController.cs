@@ -190,6 +190,10 @@ public class ExplorationModeGameController : MonoBehaviour
         SaveController.RestartCheckpoint();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    public void MenuReturnToStageSelection()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void MenuReturnToMenu()
     {
         SceneManager.LoadScene(0);

@@ -15,8 +15,9 @@ public class SaveController : MonoBehaviour
     }
 
     // called from end stage trigger
-    public void SaveGameEndStage(string stageName)
+    public void SaveGameEndStage()
     {
+        string stageName = SceneManager.GetActiveScene().name;
         PlayerPrefs.SetString("StageName", "NoStage");
         PlayerPrefs.SetString("CheckpointName","Checkpoint-1");
         PlayerPrefs.SetInt("CheckpointIndex", 0);
