@@ -29,6 +29,8 @@ public class SaveController : MonoBehaviour
         
         switch(stageName)
         {
+            case "stage_test":{
+                checkpointSaveData.isStageClearTest = true; break;}
             case "stage_transformation":{
                 checkpointSaveData.isStageClear1 = true; break;}
             case "stage_logic":{
@@ -51,6 +53,7 @@ public class SaveController : MonoBehaviour
     public void DeleteSaveFile()
     {
         StageSaveData checkpointSaveData = new StageSaveData();
+        checkpointSaveData.isStageClearTest = false;
         checkpointSaveData.isStageClear1 = false;
         checkpointSaveData.isStageClear2 = false;
         checkpointSaveData.isStageClear3 = false;
@@ -119,6 +122,7 @@ public class StageSaveData
     public string checkpointName;
     public int checkpointIndex;
 
+    public bool isStageClearTest;
     public bool isStageClear1;
     public bool isStageClear2;
     public bool isStageClear3;
