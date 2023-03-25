@@ -34,7 +34,7 @@ public class ExplorationModePlayerBuff : MonoBehaviour
     }
     public void IncreaseMoveSpeed(float moveSpeedIncreaseValue)
     {
-        PlayerMovement.playerMoveSpeed += moveSpeedIncreaseValue;
+        PlayerMovement.playerWalkSpeed += moveSpeedIncreaseValue;
     }
     public void IncreaseDamage(float damageIncreaseValue)
     {
