@@ -12,7 +12,8 @@ public class MainMenuManager : MonoBehaviour
     public enum ButtonBehavior
     {
         Default,
-        Instant
+        Instant,
+        LoadingScene
     }
     
     [Serializable]
@@ -49,6 +50,10 @@ public class MainMenuManager : MonoBehaviour
                 {
                     tempDelay = B_Event.TransistionDelay;
                     StartCoroutine(ChangeCanvas(B_Event));
+                }
+                if (B_Event.buttonBehavior == ButtonBehavior.LoadingScene)
+                {   
+                    
                 }
             } ;
         }
