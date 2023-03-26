@@ -328,7 +328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000049591064, y: 0.0009765625}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0.0009765625}
   m_SizeDelta: {x: 472.71436, y: -29.7}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5774818024438501366
@@ -462,7 +462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3310071441234663053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2218,7 +2218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2332107265836837659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7795,6 +7795,7 @@ GameObject:
   - component: {fileID: 166149717511554336}
   - component: {fileID: 8503598338780761191}
   - component: {fileID: 8535066618324734849}
+  - component: {fileID: 6340785450357096979}
   m_Layer: 10
   m_Name: LeftPanel_StartMainMenu
   m_TagString: Untagged
@@ -7872,6 +7873,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6340785450357096979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301440874906544396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fd12b648a6fc84c9a269549940d0ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 8535066618324734849}
 --- !u!1 &5394698042955427505
 GameObject:
   m_ObjectHideFlags: 0
@@ -8901,14 +8915,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonEvents:
   - ButtonAction: MainStartToStartpage
-    buttonBehavior: 0
-    TransistionDelay: 1
+    buttonBehavior: 1
+    TransistionDelay: -1
     buttonClick: {fileID: 5302521094294218776}
     From: {fileID: 1536962460001641136}
     To: {fileID: 710048269076230152}
   - ButtonAction: StartTomain
-    buttonBehavior: 0
-    TransistionDelay: 1.25
+    buttonBehavior: 1
+    TransistionDelay: -1
     buttonClick: {fileID: 5574748537313202668}
     From: {fileID: 710048269076230152}
     To: {fileID: 1536962460001641136}
@@ -8990,12 +9004,19 @@ MonoBehaviour:
     buttonClick: {fileID: 7961264776212020113}
     From: {fileID: 412489198446000761}
     To: {fileID: 710048269076230152}
-  - ButtonAction: Linear_Start
+  - ButtonAction: NoneLinear_Start
     buttonBehavior: 1
     TransistionDelay: -1
     buttonClick: {fileID: 6170966305160837755}
     From: {fileID: 412489198446000761}
     To: {fileID: 3689982476636963256}
+  ButtonScene:
+  - ButtonName: S1
+    ButtonClick: {fileID: 7961264776212020113}
+    Scene: S1
+  - ButtonName: Chapter_S1
+    ButtonClick: {fileID: 8777637586573088333}
+    Scene: S1
   transistion: {fileID: 7488306902029910906}
 --- !u!1 &6357399631722371072
 GameObject:
@@ -14703,7 +14724,7 @@ PrefabInstance:
     - target: {fileID: 4718739507246669814, guid: c64a7f62d9dc1db49bead1b8139bf54b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35.37475
+      value: -35.374756
       objectReference: {fileID: 0}
     - target: {fileID: 4718739507246669814, guid: c64a7f62d9dc1db49bead1b8139bf54b,
         type: 3}
@@ -14954,16 +14975,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3137231497079430633}
     - target: {fileID: 3869174877247566330, guid: 94eecf2a25af6fe469449b93b9326ebe,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetResolution
+      value: scenebutton
       objectReference: {fileID: 0}
     - target: {fileID: 3869174877247566330, guid: 94eecf2a25af6fe469449b93b9326ebe,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ResolutionChanger, Assembly-CSharp
+      value: MainMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5194452744897324391, guid: 94eecf2a25af6fe469449b93b9326ebe,
         type: 3}
@@ -15108,6 +15129,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5504099048174036919}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8777637586573088333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3869174877247566330, guid: 94eecf2a25af6fe469449b93b9326ebe,
+    type: 3}
+  m_PrefabInstance: {fileID: 5504099048174036919}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5735903692325239069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15721,7 +15754,7 @@ PrefabInstance:
     - target: {fileID: 3869174877247566330, guid: 94eecf2a25af6fe469449b93b9326ebe,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: playtransistion
+      value: scenebutton
       objectReference: {fileID: 0}
     - target: {fileID: 4269751221196657693, guid: 94eecf2a25af6fe469449b93b9326ebe,
         type: 3}

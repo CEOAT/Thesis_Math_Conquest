@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -12,8 +13,7 @@ public class MainMenuManager : MonoBehaviour
     public enum ButtonBehavior
     {
         Default,
-        Instant,
-        LoadingScene
+        Instant
     }
     
     [Serializable]
@@ -26,11 +26,20 @@ public class MainMenuManager : MonoBehaviour
         public GameObject From;
         public GameObject To;
     }
+    [Serializable]
+    public struct LoadSceneButton_Mainmenu
+    {
+        public string ButtonName;
+        public Button ButtonClick; 
+        public string  Scene;
+    }
     
    
     private float tempDelay;
     [SerializeField] private MathConButtonMenuNavigation[] ButtonEvents;
+    [SerializeField] private LoadSceneButton_Mainmenu[] ButtonScene;
     public Image transistion;
+    private string tempscene;
 
     public void playtransistion()
     {
@@ -51,10 +60,19 @@ public class MainMenuManager : MonoBehaviour
                     tempDelay = B_Event.TransistionDelay;
                     StartCoroutine(ChangeCanvas(B_Event));
                 }
-                if (B_Event.buttonBehavior == ButtonBehavior.LoadingScene)
-                {   
-                    
-                }
+            } ;
+        }
+    }
+
+    public void scenebutton()
+    {
+        var tempbutton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+        foreach (var B_Event in ButtonScene)
+        {
+            if (B_Event.ButtonClick == tempbutton)
+            {
+                tempscene = B_Event.Scene;
+                StartCoroutine(SceneLoadingTransition());
             } ;
         }
     }
@@ -65,6 +83,23 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(ChangeTransistionMaterial());
     }
 
+   
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    IEnumerator SceneLoadingTransition()
+    {
+        transistion.raycastTarget = true;
+        Material tempmat = transistion.material;
+        Sequence s = DOTween.Sequence();
+        s.Append(DOVirtual.Float(0, 1f, 0.5f, v => tempmat.SetFloat("_Cutoff",v )));
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(tempscene);
+       
+    }
+    
     IEnumerator ChangeCanvas(MathConButtonMenuNavigation buttonEvent)
     {
         buttonEvent.From.TryGetComponent(out GraphicRaycaster fromRaycast);
@@ -89,8 +124,4 @@ public class MainMenuManager : MonoBehaviour
         yield break;
     }
 
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
 }
