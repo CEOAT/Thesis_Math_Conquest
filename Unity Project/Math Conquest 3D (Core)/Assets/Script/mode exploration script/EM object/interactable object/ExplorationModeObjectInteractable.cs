@@ -11,12 +11,15 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     public enum InteractionType
     {
         interactionWindow,
+        interactionWindowMultipleChoice,
         instance
     };
 
     [Header("Repeat Interact Cooldown")]
     public bool isRepeatableInteractionOrStatic = false;
+    public bool isNeedReenterTrigger = true;
     public float interactionCooldownTime = 3f;
+    [SerializeField] public bool isWaitReenter = false;
 
     [Header("Player Disabled Time")]
     public float PlayerInteractionDisableTime = 3f;
@@ -46,6 +49,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     [Header("Game Controller")]
     public ExplorationModeGameController GameController;
     private ExplorationModeObjectInteractableWindowUi InteractionWindow;
+    private ExplorationModePuzzleWorldSpaceWindow WorldSpaceWindow;
     private BoxCollider interactCollider;
 
     private void Awake()
@@ -68,6 +72,11 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
             InteractionWindow = GetComponent<ExplorationModeObjectInteractableWindowUi>();
             InteractionWindow.enabled = false;
         }
+        if (interactionType == InteractionType.interactionWindowMultipleChoice)
+        {
+            WorldSpaceWindow = GetComponent<ExplorationModePuzzleWorldSpaceWindow>();
+            WorldSpaceWindow.enabled = false;
+        }
     }
 
     //called from player
@@ -79,6 +88,13 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
             {
                 InteractionWindow.enabled = true;
                 InteractionWindow.WindowActivation();
+                isReactionTriggerCutscene = false;
+                isRepeatableInteractionOrStatic = true;
+            }
+            else if (interactionType == InteractionType.interactionWindowMultipleChoice)
+            {
+                WorldSpaceWindow.enabled = true;
+                WorldSpaceWindow.StartMultipleChoicePuzzleWindow();
                 isReactionTriggerCutscene = false;
                 isRepeatableInteractionOrStatic = true;
             }
@@ -106,20 +122,46 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     }
     private IEnumerator InteractionCooldown()
     {
-        interactCollider.center = new Vector3(interactCollider.center.x,
-                                                interactCollider.center.y - 30,
-                                                interactCollider.center.z);
-
-        yield return new WaitForSeconds(interactionCooldownTime);
+        if (isNeedReenterTrigger == false)
+        {
+            MoveTriggeroff();
+            yield return new WaitForSeconds(interactionCooldownTime);
+            AllowInteraction();
+        }
+    }
+    public void AllowInteraction()
+    {
         ShowInteractionBubble();
         isReadyToInteract = true;
         isInteractionDone = false;
+        MoveTriggerIn();
+    }
+    public void AllowInteractionAfterReenter()
+    {
+        ShowInteractionBubble();
+        isReadyToInteract = true;
+        isInteractionDone = false;
+        isWaitReenter = false;
+    }
+    public void MoveTriggeroff()
+    {
         interactCollider.center = new Vector3(interactCollider.center.x,
-                                            interactCollider.center.y + 30,
-                                            interactCollider.center.z);
+                                                interactCollider.center.y - 30,
+                                                interactCollider.center.z);
+    }
+    private void MoveTriggerIn()
+    {
+        interactCollider.center = new Vector3(interactCollider.center.x,
+                                                interactCollider.center.y + 30,
+                                                interactCollider.center.z);
     }
     private void InteractReadyCheck()
     {
+        if( isNeedReenterTrigger == true && isWaitReenter == false)
+        {
+            isWaitReenter = true;
+        }
+
         if (isReadyToInteract == true)
         {
             isReadyToInteract = false;

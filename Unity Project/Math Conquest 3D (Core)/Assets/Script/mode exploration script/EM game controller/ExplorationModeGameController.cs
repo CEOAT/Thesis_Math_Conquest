@@ -8,26 +8,26 @@ public class ExplorationModeGameController : MonoBehaviour
     // control the game when pause, restart the game when game over
 
     [Header("UI Object")]
-    public GameObject GamePauseWindowGroup;
-    public GameObject GameOverWindowGroup;
-    public GameObject GameplayUiGroup;
-    public GameObject ObjectiveText;
-    public Animator CutsceneBlackBar;
+    [SerializeField] public GameObject GamePauseWindowGroup;
+    [SerializeField] public GameObject GameOverWindowGroup;
+    [SerializeField] public GameObject GameplayUiGroup;
+    [SerializeField] public GameObject ObjectiveText;
+    [SerializeField] public Animator CutsceneBlackBar;
 
     [Header("Game Over Object")]
-    public GameObject WorldSpaceBlackScreenCube;
-    public GameObject ImageFadeBlackPrefab;
-    public Transform canvasTransform;
+    [SerializeField] public GameObject WorldSpaceBlackScreenCube;
+    [SerializeField] public GameObject ImageFadeBlackPrefab;
+    [SerializeField] public Transform canvasTransform;
 
     [Header("Player")]
-    public Transform playerGameObject;
-    public ExplorationModePlayerControllerMovement PlayerMovement;
-    public ExplorationModePlayerHealth PlayerHealth;
-    public ExplorationModePlayerAttackSystem PlayerAttackSystem;
+    [SerializeField] public Transform playerGameObject;
+    [SerializeField] public ExplorationModePlayerControllerMovement PlayerMovement;
+    [SerializeField] public ExplorationModePlayerHealth PlayerHealth;
+    [SerializeField] public ExplorationModePlayerAttackSystem PlayerAttackSystem;
 
     [Header("Game System Script")]
-    public SaveController SaveController;
-    public StageControllerCheckPointManager CheckpointManager;
+    [SerializeField] public SaveController SaveController;
+    [SerializeField] public StageControllerCheckPointManager CheckpointManager;
     private MasterInput PlayerInput;
 
     [Header("Menu Active Checking")]
@@ -75,6 +75,8 @@ public class ExplorationModeGameController : MonoBehaviour
     {
         PlayerMovement.PlayerWait();
         PlayerHealth.EnableInvincibleDuringCutscene();
+        PlayerAttackSystem.PlayerClearAnswer();
+        PlayerAttackSystem.playerInput.Enable();
         PlayerInput.Disable();
         GameplayUiGroup.SetActive(false);
         CutsceneBlackBar.SetBool("isBlackBarMoveIn", true);
@@ -88,6 +90,7 @@ public class ExplorationModeGameController : MonoBehaviour
     {
         PlayerMovement.PlayerEnabledMovement();
         PlayerHealth.DisableInvincibleAfterCutscene();
+        PlayerAttackSystem.playerInput.Enable();
         PlayerInput.Enable();
         GameplayUiGroup.SetActive(true);
         CutsceneBlackBar.SetBool("isBlackBarMoveIn", false);
@@ -143,6 +146,7 @@ public class ExplorationModeGameController : MonoBehaviour
         Time.timeScale = 1;
         GamePauseWindowGroup.SetActive(false);
     }
+    
 
     // Game Over Function
     private void GameOver()
@@ -185,6 +189,10 @@ public class ExplorationModeGameController : MonoBehaviour
     {
         SaveController.RestartCheckpoint();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void MenuReturnToStageSelection()
+    {
+        SceneManager.LoadScene(0);
     }
     public void MenuReturnToMenu()
     {

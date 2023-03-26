@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class EliminationModePlayerControllerAction : MonoBehaviour
 {
-    private PlayerControllerStatus PlayerStatus;
+    // private PlayerControllerStatus PlayerStatus;
 
-    private void Awake()
-    {
-        SetupComponent();
-    }
-    private void SetupComponent()
-    {
-        PlayerStatus = GetComponent<PlayerControllerStatus>();
-    }
+    // private void Awake()
+    // {
+    //     SetupComponent();
+    // }
+    // private void SetupComponent()
+    // {
+    //     PlayerStatus = GetComponent<PlayerControllerStatus>();
+    // }
 
-    public void PlayerTakeDamage(float damageTaken)
-    {
-        PlayerStatus.playerHealthCurrent -= damageTaken;
-    }
+    // public void PlayerTakeDamage(float damageTaken)
+    // {
+    //     PlayerStatus.playerHealthCurrent -= damageTaken;
+    // }
 }

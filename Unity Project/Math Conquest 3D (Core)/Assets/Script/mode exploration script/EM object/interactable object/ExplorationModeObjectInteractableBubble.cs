@@ -42,6 +42,11 @@ public class ExplorationModeObjectInteractableBubble : MonoBehaviour
     {
         if (player.CompareTag("Player") == true)
         {
+            if(ObjectInteractable.isNeedReenterTrigger == true
+            && ObjectInteractable.isWaitReenter == true)
+            {
+                ObjectInteractable.AllowInteractionAfterReenter();
+            }
             PlayerBubbleLeaveAnimation();
         }
     }

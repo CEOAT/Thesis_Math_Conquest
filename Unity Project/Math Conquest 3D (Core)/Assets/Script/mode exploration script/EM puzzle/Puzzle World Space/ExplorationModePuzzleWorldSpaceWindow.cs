@@ -16,6 +16,7 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     [SerializeField] private Transform inGameCanvas;
     [SerializeField] private GameObject puzzleWindowPrefab;
     private GameObject puzzleWindowObject;
+    private bool isPuzzleWindowActive = false;
 
     [Header("Puzzle Problem and Description")]
     [SerializeField] private string puzzleProblem;
@@ -24,49 +25,46 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     private TMP_Text textPuzzleDescription;
 
     [Header("List of Inputfield")]
-    [SerializeField] private List<InputField> puzzleInputFieldList = new List<InputField>();
+    public List<TMP_InputField> puzzleInputFieldList = new List<TMP_InputField>();
     [SerializeField] public List<float> puzzleVariableList = new List<float>();
-    [SerializeField] private int inputFieldSelectedIndex = 0;
-    [SerializeField] private GameObject inputFieldSelectedObject;
-    private int inputFieldTotal;
+    private int inputFieldSelectedIndex = 0;
+    private GameObject inputFieldSelectedObject;
 
     [Header("Puzzle Camera")]
     [SerializeField] private GameObject worldSpaceCamera;
 
     [HideInInspector] public UnityEvent ConfirmValueEvent;
+    [HideInInspector] public UnityEvent ResetValueEvent;
     private MasterInput PlayerInput;
 
     private void Awake()
     {
-        SetupInput();
         SetupObject();
-        SetupVariable();
-    }
-    private void SetupInput()
-    {
-        MasterInput PlayerInput = new MasterInput();
-        PlayerInput.WindowControl.CloseWindow.performed += context => CloseWorldSpacePuzzle();
-        PlayerInput.WindowControl.SwitchInputField.performed += context => SwitchInputField();
-        PlayerInput.WindowControl.ConfirmAnswer.performed += context => ConfirmValue();
     }
     private void SetupObject()
     {
         worldSpaceCamera.SetActive(false);
     }
-    private void SetupVariable()
+    private void Start()
     {
-        inputFieldTotal = puzzleInputFieldList.Count;
+        SetupInput();
+    }
+    private void SetupInput()
+    {
+        PlayerInput = new MasterInput();
+        PlayerInput.WindowControl.CloseWindow.performed += context => CloseWorldSpacePuzzle();
+        PlayerInput.WindowControl.SwitchInputField.performed += context => SwitchInputField();
+        PlayerInput.WindowControl.ConfirmAnswer.performed += context => ConfirmValue();
+        PlayerInput.WindowControl.ResetAnswer.performed += context => ResetValue();
     }
 
-    private void Start()
+    public void StartMultipleChoicePuzzleWindow()
     {
         EnableWorldSpacePuzzleCutscenAndInput();
         StartCoroutine(CreatePuzzleWindow());
     }
-
     private void EnableWorldSpacePuzzleCutscenAndInput()
     {
-        PlayerInput.Enable();
         GameController.TriggerCutscene();
     }
     private IEnumerator CreatePuzzleWindow()
@@ -75,37 +73,64 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
         yield return new WaitForSeconds(2f);
         InstantiatePuzzleWindow();
         SetPuzzleWindowComponent();
+        SetInputFieldList();
         SetPuzzleWindowText();
+        isPuzzleWindowActive = true;
+        PlayerInput.Enable();
     }
     private void InstantiatePuzzleWindow()
     {
         puzzleWindowObject = Instantiate(puzzleWindowPrefab);
-        puzzleWindowObject.transform.SetParent(inGameCanvas);
     }
     private void SetPuzzleWindowComponent()
     {
         textPuzzleProblem = puzzleWindowObject.transform.GetChild(0).GetComponent<TMP_Text>();
         textPuzzleDescription = puzzleWindowObject.transform.GetChild(1).GetComponent<TMP_Text>();
     }
+    private void SetInputFieldList()
+    {
+        puzzleInputFieldList.Clear();
+        for(int i = 2; i <= puzzleWindowObject.transform.childCount - 1; i++)
+        {
+            puzzleInputFieldList.Add(puzzleWindowObject.transform.GetChild(i).GetComponent<TMP_InputField>());
+        }
+    }
     private void SetPuzzleWindowText()
     {
         textPuzzleProblem.text = puzzleProblem;
         textPuzzleDescription.text = puzzleDescription;
+        
     }
 
     private void SwitchInputField()
     {
-        if (inputFieldTotal > 1)
+        if (puzzleInputFieldList.Count > 1)
         {
-            inputFieldSelectedIndex++;
+            CheckInputFieldIndex();
         }
     }
+    private void CheckInputFieldIndex()
+    {
+        inputFieldSelectedIndex++;
+        if(inputFieldSelectedIndex > puzzleInputFieldList.Count - 1)
+        {
+            inputFieldSelectedIndex = 0;
+        }
+    }
+
     public void ConfirmValue()
     {
         puzzleVariableList.Clear();
-        foreach (InputField inputField in puzzleInputFieldList)
+        foreach (TMP_InputField inputField in puzzleInputFieldList)
         {
-            puzzleVariableList.Add(float.Parse(inputField.text));
+            if(inputField.text != "")
+            {
+                puzzleVariableList.Add(float.Parse(inputField.text));
+            }
+            else
+            {
+                puzzleVariableList.Add(0f);
+            }
         }
         ConfirmValueEvent.Invoke();
     }
@@ -121,7 +146,16 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
         GameController.AllowMovement();
-        gameObject.SetActive(false);
+        this.enabled = false;
+        isPuzzleWindowActive = false;
+    }
+    private void ClearAnswer()
+    {
+        puzzleInputFieldList[inputFieldSelectedIndex].text = "";
+    }
+    public void ResetValue()
+    {
+        ResetValueEvent.Invoke();
     }
 
     private void FixedUpdate()
@@ -130,7 +164,10 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     }
     private void ActiveInputFieldByindex()
     {
-        puzzleInputFieldList[inputFieldSelectedIndex].ActivateInputField();
+        if(isPuzzleWindowActive == true)
+        {
+            puzzleInputFieldList[inputFieldSelectedIndex].ActivateInputField();
+        }
     }
 }
 

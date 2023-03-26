@@ -8,25 +8,15 @@ using UnityEditor;
 public class CutsceneControllerDialog : MonoBehaviour
 {
     [Header("Index of Dialogs (private)")]
-    [SerializeField] private int dialogIndex = 0;
-    [SerializeField] private bool isDialogActive;
-    [SerializeField] private bool isWaitingAfterDialogEnd;
-    [SerializeField] private bool canForceEndDialog = false;
-    [SerializeField] private int dialogSetIndex = 0;
+    private int dialogIndex = 0;
+    private bool isDialogActive;
+    private bool isWaitingAfterDialogEnd;
+    private bool canForceEndDialog = false;
+    private int dialogSetIndex = 0;
 
     [Header("Game Controller Object")]
     public ExplorationModeGameController GameController;
-
-    [Header("Dialog Objects")]
-    public GameObject inGameCanvas;
-    public GameObject DialogUI;
-    public Image backgroundImage;
-    public Image speakerImage;
-    public TMP_Text speakerText;
-    public Transform speakerEffectSpawnpoint;
-    public TMP_Text dialogText;
-    public Animator dialogButton;
-    public GameObject backgroundTransitionPrefab;
+    public DialogManager DialogManager;
 
     private string speakerPreviousSpriteName;
     private string backgroundImagePreviousName = "no background";
@@ -34,21 +24,24 @@ public class CutsceneControllerDialog : MonoBehaviour
     private GameObject speakerEmotionEffectObject;
 
     [Header("Dialog Typing and Waiting Time")]
-    public float typeLetterInterval = 0.075f;
-    public float nextDialogWaitTime = 0.8f;
-    public float backgroundTransitionMaxtWaitTime = 1f;
-    public float backgroundTransitionCurrentWaitTime = 0f;
+    private float typeLetterInterval = 0.075f;
+    private float nextDialogWaitTime = 0.2f;
+    private float backgroundTransitionMaxtWaitTime = 0.3f;
+    private float backgroundTransitionCurrentWaitTime = 0f;
 
     [Header("Dialog Repeat Setting")]
     public bool isDialogRepeatable = false;
     public bool isDialogDisabledAfterFinish = false;
+    private bool isDialogObjectActivated = false;
+    private bool isDialogObjectDisabled = false;
     private bool isDialogPlayed = false;
 
     [Header("Active End Dialog Object")]
-    public GameObject activeAfterEndDialogObject;
+    public List<GameObject> activeAfterEndDialogObjectList = new List<GameObject>();
+    public List<GameObject> disableAfterEndDialogObjectList = new List<GameObject>();
 
     [Header("Dialog Data")]
-    public DialogListClass dialogList = new DialogListClass();
+    public List<DialogScriptableObjectClass> dialogSettList =  new List<DialogScriptableObjectClass>();
     private Queue<string> dialogQueue = new Queue<string>();
 
     private MasterInput playerInput;
@@ -59,11 +52,11 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void SetupComponent()
     {
-        speakerText.GetComponent<TMP_Text>();
-        dialogText.GetComponent<TMP_Text>();
-        speakerImage.GetComponent<Image>();
-        dialogButton.GetComponent<Animator>();
-        speakerImageAnimator = speakerImage.GetComponent<Animator>();
+        DialogManager.speakerText.GetComponent<TMP_Text>();
+        DialogManager.dialogText.GetComponent<TMP_Text>();
+        DialogManager.speakerImage.GetComponent<Image>();
+        DialogManager.dialogButton.GetComponent<Animator>();
+        speakerImageAnimator = DialogManager.speakerImage.GetComponent<Animator>();
     }
     
     public void StartDialogCutscene()
@@ -71,7 +64,7 @@ public class CutsceneControllerDialog : MonoBehaviour
         if (isDialogPlayed == false)
         {
             isDialogPlayed = true;
-            DialogUI.SetActive(true);
+            DialogManager.DialogUI.SetActive(true);
             SetupDialog();
             PlayNextDialog();
             GameController.TriggerCutscene();
@@ -79,11 +72,11 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void EndDialogCutscene()
     {
-        DialogUI.SetActive(false);
-        playerInput.Disable();
+        DialogManager.DialogUI.SetActive(false);
         RemoveControl();
         GameController.AllowMovement();
         DestroySpeakerEmotionEffectSprite();
+        CountDialogSet();
 
         if (isDialogRepeatable == true)
         {
@@ -93,15 +86,30 @@ public class CutsceneControllerDialog : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+        if(activeAfterEndDialogObjectList.Count > 0)
+        {
+            ActiveObjectAtEndDialog();
+        }
+        if(disableAfterEndDialogObjectList.Count > 0)
+        {
+            DisableObjectAtEndDialog();
+        }
     }
+    private void CountDialogSet()
+    {
+        if(dialogSetIndex + 1 < dialogSettList.Count)
+        {
+            dialogSetIndex++;
+        }
+    }
+
     private void SetupDialog()
     {
         dialogIndex = 0;
-        dialogSetIndex = 0;
         dialogQueue.Clear();
-        for (int i = 0; i < dialogList.DialogSet[dialogSetIndex].DialogData.Count; i++)
+        for (int i = 0; i < dialogSettList[dialogSetIndex].dialogClass.DialogSet.Count; i++)
         {
-            dialogQueue.Enqueue(dialogList.DialogSet[dialogSetIndex].DialogData[i].dialogString);
+            dialogQueue.Enqueue(dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].dialogString);
         }
     }
     public void PlayNextDialog()
@@ -115,7 +123,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void CheckDialogUiActivation()
     {
-        if (DialogUI.activeSelf == false)
+        if (DialogManager.DialogUI.activeSelf == false)
         {
             return;
         }
@@ -142,25 +150,25 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void DialogStart()
     {
-        speakerText.text = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerString;
+        DialogManager.speakerText.text = dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerString;
         SetSpeakerImage();
         SetBackgroundImage();
         PlaySpeakerAnimation();
         PlaySpeakerEmotionEffect();
         PlayDialogButtonConfirmAnimation();
         PlayDialogButtonTypeAnimation();
-        StartCoroutine(TypeDialog(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].dialogString));
+        StartCoroutine(TypeDialog(dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].dialogString));
     }
     private void SetSpeakerImage()
     {
         if (CheckIfSpeakerImageIsAvailable())
         {
-            speakerImage.gameObject.SetActive(true);
-            speakerImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite;
+            DialogManager.speakerImage.gameObject.SetActive(true);
+            DialogManager.speakerImage.overrideSprite = dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerSprite;
         }
         else
         {
-            speakerImage.gameObject.SetActive(false);
+            DialogManager.speakerImage.gameObject.SetActive(false);
         }
     }
     private void SetBackgroundImage()
@@ -172,22 +180,22 @@ public class CutsceneControllerDialog : MonoBehaviour
             if (CheckIfBackgroundIsNew())
             {
                 CreateBackgroundTransition();
-                backgroundImagePreviousName = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite.name;
+                backgroundImagePreviousName = dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].backgroundSprite.name;
             }
 
-            dialogText.text = "";
-            backgroundImage.gameObject.SetActive(true);
-            backgroundImage.overrideSprite = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite;
+            DialogManager.dialogText.text = "";
+            DialogManager.backgroundImage.gameObject.SetActive(true);
+            DialogManager.backgroundImage.overrideSprite = dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].backgroundSprite;
         }
         else if (!CheckIfBackgroundImageIsAvailable() && backgroundImagePreviousName != "no background")
         {
             CreateBackgroundTransition();
-            backgroundImage.gameObject.SetActive(false);
+            DialogManager.backgroundImage.gameObject.SetActive(false);
             backgroundImagePreviousName = "no background";
         }
         else if (!CheckIfBackgroundImageIsAvailable() && backgroundImagePreviousName == "no background")
         {
-            backgroundImage.gameObject.SetActive(false);
+            DialogManager.backgroundImage.gameObject.SetActive(false);
         }
     }
     private void SetBackgroundTransitionWaitTime()
@@ -203,17 +211,17 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void CreateBackgroundTransition()
     {
-        GameObject backgroundTransition = Instantiate(backgroundTransitionPrefab);
-        backgroundTransition.transform.SetParent(inGameCanvas.transform); 
+        GameObject backgroundTransition = Instantiate(DialogManager.backgroundTransitionPrefab);
+        backgroundTransition.transform.SetParent(DialogManager.inGameCanvas.transform); 
         backgroundTransition.transform.SetAsLastSibling();
     }
     private bool CheckIfSpeakerImageIsAvailable()
     {
-        return dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite != null;
+        return dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerSprite != null;
     }
     private bool CheckIfBackgroundImageIsAvailable()
     {
-        return dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite != null;
+        return dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].backgroundSprite != null;
     }
  
     private void PlaySpeakerAnimation()
@@ -226,16 +234,15 @@ public class CutsceneControllerDialog : MonoBehaviour
         {
             speakerImageAnimator.SetTrigger("triggerSpeakerImageEntry");
         }
-        speakerPreviousSpriteName = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite.name;
-        print(speakerPreviousSpriteName);
+        speakerPreviousSpriteName = dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerSprite.name;
     }
     private bool CheckIfSpeakerIsNew()
     {
-        return dialogIndex > 0 && speakerPreviousSpriteName != dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerSprite.name;
+        return dialogIndex > 0 && speakerPreviousSpriteName != dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerSprite.name;
     }
     private bool CheckIfBackgroundIsNew()
     {
-        return backgroundImagePreviousName != dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].backgroundSprite.name;
+        return backgroundImagePreviousName != dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].backgroundSprite.name;
     }
     private void PlaySpeakerEmotionEffect()
     {
@@ -247,14 +254,14 @@ public class CutsceneControllerDialog : MonoBehaviour
         }
         if (CheckIfSpeakerEmotionEffectIsAvailable())
         {
-            speakerEmotionEffectObject = Instantiate(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerEmotionEffect);
-            speakerEmotionEffectObject.transform.SetParent(speakerEffectSpawnpoint);
-            speakerEmotionEffectObject.GetComponent<Animator>().SetTrigger(dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerEmotionEffect.name); ;
+            speakerEmotionEffectObject = Instantiate(dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerEmotionEffect);
+            speakerEmotionEffectObject.transform.SetParent(DialogManager.speakerEffectSpawnpoint);
+            speakerEmotionEffectObject.GetComponent<Animator>().SetTrigger(dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerEmotionEffect.name); ;
         }
     }
     private bool CheckIfSpeakerEmotionEffectIsAvailable()
     {
-        return dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].speakerEmotionEffect != null ;
+        return dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerEmotionEffect != null ;
     }
     private void DestroySpeakerEmotionEffectSprite()
     {
@@ -267,7 +274,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     private void DialogForceEnd()
     {
         StopAllCoroutines();
-        dialogText.text = dialogList.DialogSet[dialogSetIndex].DialogData[dialogIndex].dialogString;
+        DialogManager.dialogText.text = dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].dialogString;
         DialogEnd();
     }
     IEnumerator TypeDialog(string dialog)
@@ -275,13 +282,13 @@ public class CutsceneControllerDialog : MonoBehaviour
         canForceEndDialog = false;
         yield return new WaitForSeconds(backgroundTransitionCurrentWaitTime);
 
-        dialogText.text = "";
+        DialogManager.dialogText.text = "";
         isDialogActive = true;
         canForceEndDialog = true;
         foreach (char letterOfDialog in dialog.ToCharArray())
         {
             yield return new WaitForSeconds(typeLetterInterval);
-            dialogText.text += letterOfDialog;
+            DialogManager.dialogText.text += letterOfDialog;
             yield return null;
         }
         DialogEnd();
@@ -292,7 +299,6 @@ public class CutsceneControllerDialog : MonoBehaviour
         dialogIndex++;
 
         StartCoroutine(DialogEndWaiting());
-        ActiveObjectAtEndDialog();
 
         isDialogActive = false;
         dialogQueue.Dequeue();
@@ -301,15 +307,15 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void PlayDialogButtonTypeAnimation()
     {
-        dialogButton.SetBool("isDialogButtonPlaying", true);
+        DialogManager.dialogButton.SetBool("isDialogButtonPlaying", true);
     }
     private void PlayDialogButtonWaitAnimation()
     {
-        dialogButton.SetBool("isDialogButtonPlaying", false);
+        DialogManager.dialogButton.SetBool("isDialogButtonPlaying", false);
     }
     private void PlayDialogButtonConfirmAnimation()
     {
-        dialogButton.SetTrigger("triggerDialogButtonConfirm");
+        DialogManager.dialogButton.SetTrigger("triggerDialogButtonConfirm");
     }
 
     IEnumerator DialogEndWaiting()
@@ -320,9 +326,37 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void ActiveObjectAtEndDialog()
     {
-        if (activeAfterEndDialogObject != null)
+        if (isDialogObjectActivated == false)
         {
-            activeAfterEndDialogObject.SetActive(true);
+            isDialogObjectActivated = true;
+            LoopActiveObject();
+        }
+    }
+    private void LoopActiveObject()
+    {
+        foreach(GameObject activeObject in activeAfterEndDialogObjectList)
+        {
+            activeObject.SetActive(true);
+            if(activeObject.TryGetComponent<BoxCollider>(out BoxCollider collider))
+            {
+                collider.center = new Vector3(0,5,0);
+                collider.center = new Vector3(0,0,0);
+            }
+        }
+    }
+    private void DisableObjectAtEndDialog()
+    {
+        if(isDialogObjectDisabled == false)
+        {
+            isDialogObjectDisabled = true;
+            LoopDisableObject();
+        }
+    }
+    private void LoopDisableObject()
+    {
+        foreach(GameObject disableObject in disableAfterEndDialogObjectList)
+        {
+            disableObject.SetActive(false);
         }
     }
 
@@ -343,6 +377,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     private void RemoveControl()
     {
         playerInput.PlayerControlGeneral.NextDialog.performed -= context => PlayNextDialog();
+        playerInput.Disable();
     }
 }
 
@@ -356,11 +391,11 @@ public class CutsceneControllerDialogTester : Editor
 
         CutsceneControllerDialog dialog = (CutsceneControllerDialog)target;
 
-        EditorGUI.BeginDisabledGroup(dialog.DialogUI.activeSelf == true);
+        EditorGUI.BeginDisabledGroup(dialog.DialogManager.DialogUI.activeSelf == true);
         if (GUILayout.Button("Start Dialog")) {dialog.StartDialogCutscene();}
         EditorGUI.EndDisabledGroup();
 
-        EditorGUI.BeginDisabledGroup(dialog.DialogUI.activeSelf == false);
+        EditorGUI.BeginDisabledGroup(dialog.DialogManager.DialogUI.activeSelf == false);
         if (GUILayout.Button("Play Next Dialog")) {dialog.PlayNextDialog();}
         EditorGUI.EndDisabledGroup();
     }

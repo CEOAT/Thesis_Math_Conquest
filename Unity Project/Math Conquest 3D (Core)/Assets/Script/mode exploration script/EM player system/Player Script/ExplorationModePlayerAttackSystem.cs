@@ -32,7 +32,7 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
     [Header("Switch Target System")]
     public int enemyCurrentSelectedIndex;
 
-    private MasterInput playerInput;
+    [HideInInspector] public MasterInput playerInput;
 
     private void Awake()
     {
@@ -186,7 +186,10 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
         }
         if (enemyRemoved != null)
         {
-            enemyRemoved.GetComponent<EnemyControllerStatus>().EnemyDeselected();
+            if(enemyRemoved.TryGetComponent<EnemyControllerStatus>(out EnemyControllerStatus enemyStatus))
+            {
+                enemyStatus.GetComponent<EnemyControllerStatus>().EnemyDeselected();
+            }
         }
     }
 

@@ -5037,7 +5037,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5998956516710382007}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &325630537205300379
 SphereCollider:
@@ -5287,7 +5287,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5998956516710382007}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6268476657572152510
 GameObject:
@@ -5306,6 +5306,7 @@ GameObject:
   - component: {fileID: 6268476657572152515}
   - component: {fileID: 6268476657572152514}
   - component: {fileID: 296608485}
+  - component: {fileID: 7677696382566395459}
   - component: {fileID: 8992958219315677198}
   m_Layer: 6
   m_Name: Demo Player Exploration Mode
@@ -5326,9 +5327,9 @@ RectTransform:
   m_LocalScale: {x: 1.6271579, y: 1.627158, z: 1.627158}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6268476656281153988}
-  - {fileID: 6268476657887066481}
   - {fileID: 7468675170112052624}
+  - {fileID: 6268476657887066481}
+  - {fileID: 6268476656281153988}
   - {fileID: 729755037}
   - {fileID: 7252742931581372989}
   - {fileID: 1627493999}
@@ -5602,6 +5603,18 @@ MonoBehaviour:
   isPlayerOnInvincible: 0
   canPlayerTakeDamage: 1
   PlayerStatusUIGroup: {fileID: 0}
+--- !u!114 &7677696382566395459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268476657572152510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 497652d3b718b8c4e84a173e43792b5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8992958219315677198
 MonoBehaviour:
   m_ObjectHideFlags: 0

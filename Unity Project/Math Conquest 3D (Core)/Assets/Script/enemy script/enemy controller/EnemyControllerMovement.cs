@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 public class EnemyControllerMovement : MonoBehaviour
 {
     private Transform playerTransform;
-    private bool isEnemyChasePlayer;
+    [HideInInspector] public bool isEnemyChasePlayer;
+    private Vector3 enemyStartPosition;
 
     [Header("Enemy Type")]
     public EnemyType enemyType;
     public enum EnemyType
     {
         obstacle,
-        chaseAndHit
+        chaseAndHit,
+        chaser,
+        shooterTower,
+        shooterAndChase
     };
 
     [Header("Enemy Movement Setting")]
@@ -27,36 +33,46 @@ public class EnemyControllerMovement : MonoBehaviour
     public float enemyAttackTriggerRange;
     public float enemyAttackPointRange;
     public LayerMask enemyAttackLayerMask;
-    [SerializeField] private Collider[] playerInAttackCircle;
+    [HideInInspector] private Collider[] playerInAttackCircle;
     public float enemyAttackDamage;
 
     [Header("Enemy Attack Interval")]
-    public bool isEnemyCheckingAttack;
+    [HideInInspector] public bool isEnemyCheckingAttack;
     public float enemyCheckingAttackIntervalTime;
-    public bool isEnemyReadyToAttack;
+    [HideInInspector] public bool isEnemyReadyToAttack;
 
     [Header("Enemy Attack Wait")]
-    public bool isEnemyWaitFromAttack;
+    [HideInInspector] public bool isEnemyWaitFromAttack;
     [Tooltip("Set to 0 if want enemy to resume activity immediately after attack. If not, set time to be longer than enemy's attack animation")] 
     public float enemyAttackWaitTime;
 
     [Header("Enemy Recovery System")]
-    public bool isEnemyWaitToRecover;
+    [HideInInspector] public bool isEnemyWaitToRecover;
     public float enemyHurtRevoceryTime;
 
-    [Header("Enemy Animation")]
-    public string enemyAnimationState;
+    [HideInInspector] public string enemyAnimationState;
     private Animator animator;
 
     [Header("Enemy Meterial")]
     public Material materialStart;
     public Material materialDamaged;
 
+    [Header("Enemy Destroy Particle")]
+    public GameObject particleDestroyedPrefab;
+
+    [Header("Shooter Setting")]
+    [SerializeField] private GameObject enemyBulletPrefab;
+    [SerializeField] private float enemyShootDistance;
+    [SerializeField] private Vector3 enemyShootPointOffset;
+
     private NavMeshAgent navMeshAgent;
     private Rigidbody rigidbody;
     private SpriteRenderer spriteRenderer;
     private EnemyControllerStatus EnemyStatus;
 
+    [HideInInspector] public UnityEvent EventOnEnemyStartChase;
+    [HideInInspector] public UnityEvent EventOnEnemyStopChase;
+    [HideInInspector] public UnityEvent EventOnEnemyDead;
 
     private void Start()
     {
@@ -74,25 +90,33 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void SetupEnemyType()
     {
-        switch (enemyType)
+        if (enemyType == EnemyType.obstacle)
         {
-            case EnemyType.obstacle:
-            {
-                enemyDetectionRange = 0;
-                enemyChasingRange = 0;
-                enemyAttackTriggerRange = 0;
-                enemyAttackPointRange = 0;
-                Destroy(navMeshAgent);
-                rigidbody.constraints = 
-                      RigidbodyConstraints.FreezePositionX
-                    | RigidbodyConstraints.FreezePositionZ;
-                    rigidbody.freezeRotation = true;
-                break;
-            }
+            enemyDetectionRange = 0;
+            enemyChasingRange = 0;
+            enemyAttackTriggerRange = 0;
+            enemyAttackPointRange = 0;
+            Destroy(navMeshAgent);
+            rigidbody.constraints = 
+                  RigidbodyConstraints.FreezePositionX
+                | RigidbodyConstraints.FreezePositionZ;
+            rigidbody.freezeRotation = true;
+        }
+        else if (enemyType == EnemyType.chaser)
+        {
+            enemyAttackTriggerRange = 0;
+            enemyAttackPointRange = 0;
+            Destroy(navMeshAgent);
+            rigidbody.useGravity = false;
+        }
+        else if (enemyType == EnemyType.shooterTower)
+        {
+            enemyMoveSpeed = 0;
         }
     }
     private void SetupEnemyStat()
     {
+        enemyStartPosition = transform.position;
         navMeshAgent.speed = enemyMoveSpeed;
         enemyDetectionSphere.radius = enemyDetectionRange;
         isEnemyReadyToAttack = true;
@@ -106,47 +130,79 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyStartChasePlayer(Transform player)
     {
+        EventOnEnemyStartChase.Invoke();
         isEnemyChasePlayer = true;
         playerTransform = player;
     }
 
     private void FixedUpdate()
     {
-        if(enemyType == EnemyType.obstacle) { return; }
-
-        EnemyCheckFacing();
-        EnemyAnimationUpdate();
-
-        if (isEnemyChasePlayer == true)
+        if(enemyType == EnemyType.obstacle) 
+        { 
+            return; 
+        }
+        else if(enemyType ==  EnemyType.chaser)
         {
-            if (isEnemyWaitFromAttack == false && isEnemyWaitToRecover == false)
+            if(playerTransform != null)
             {
-                EnemyChasePlayer();
-                EnemyAttackCheckEnabled();
-                if (isEnemyCheckingAttack == true)
-                {
-                    isEnemyCheckingAttack = false;
-                    EnemyAttackCheckEnabled();
-                }
+                transform.position = Vector3.Lerp(transform.position, playerTransform.position, enemyMoveSpeed * 0.01f);
             }
-            EnemyCheckChaseRange();
+            EnemyCheckFacing();
+        }
+        else if(enemyType == EnemyType.chaseAndHit  ||
+                enemyType == EnemyType.shooterTower ||
+                enemyType == EnemyType.shooterAndChase)
+        {
+            EnemyCheckFacing();
+            EnemyAnimationUpdate();
+
+            if (isEnemyChasePlayer == true)
+            {
+                if (isEnemyWaitFromAttack == false && isEnemyWaitToRecover == false)
+                {
+                    EnemyChasePlayer();
+                    EnemyAttackCheckEnabled();
+                    if (isEnemyCheckingAttack == true)
+                    {
+                        isEnemyCheckingAttack = false;
+                        EnemyAttackCheckEnabled();
+                    }
+                }
+                EnemyCheckChaseRange();
+            }
         }
     }
+    
     private void EnemyCheckFacing()
     {
-        if (navMeshAgent.velocity.x > 0)
+        if(enemyType == EnemyType.chaseAndHit ||
+            enemyType == EnemyType.shooterAndChase)
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            enemyAnimationState = "Enemy Walk";
+            if (navMeshAgent.velocity.x > 0)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                enemyAnimationState = "Enemy Walk";
+            }
+            if (navMeshAgent.velocity.x < 0)
+            {
+                transform.localScale = new Vector3(-1f * Mathf.Abs((transform.localScale.x)), transform.localScale.y, transform.localScale.z);
+                enemyAnimationState = "Enemy Walk";
+            }
+            if (navMeshAgent.velocity.x == 0 && navMeshAgent.velocity.y == 0)
+            {
+                enemyAnimationState = "Enemy Idle";
+            }
         }
-        if (navMeshAgent.velocity.x < 0)
+        else
         {
-            transform.localScale = new Vector3(-1f * Mathf.Abs((transform.localScale.x)), transform.localScale.y, transform.localScale.z);
-            enemyAnimationState = "Enemy Walk";
-        }
-        if (navMeshAgent.velocity.x == 0 && navMeshAgent.velocity.y == 0)
-        {
-            enemyAnimationState = "Enemy Idle";
+            if(transform.position.x < playerTransform.position.x)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if(transform.position.x > playerTransform.position.x)
+            {
+                transform.localScale = new Vector3(-1f * Mathf.Abs((transform.localScale.x)), transform.localScale.y, transform.localScale.z);
+            }
         }
     }
     private void EnemyChasePlayer()
@@ -166,21 +222,41 @@ public class EnemyControllerMovement : MonoBehaviour
         if (navMeshAgent != null)
         {
             isEnemyChasePlayer = false;
+            navMeshAgent.SetDestination(enemyStartPosition);
+            EventOnEnemyStopChase.Invoke();
+        }
+    }
+    public void EnemyStopChasePlayerDead()
+    {
+        if (navMeshAgent != null)
+        {
+            isEnemyChasePlayer = false;
             navMeshAgent.SetDestination(transform.position);
+            EventOnEnemyStopChase.Invoke();
         }
     }
     public void EnemyDead()
     {
-        EnemyStopChasePlayer();
+        EnemyStopChasePlayerDead();
         GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
         Destroy(GetComponent<Rigidbody>());
-
+        
         enemyAnimationState = "Enemy Dead";
         EnemyAnimationTrigger();
     }
     public void EnemyDeadDestroyOnAnimation()
     {
         Destroy(this.gameObject);
+        CreateDestroyEffect();
+        EventOnEnemyDead.Invoke();
+    }
+    private void CreateDestroyEffect()
+    {
+        if(particleDestroyedPrefab != null)
+        {
+            GameObject particleDestroyedObject = Instantiate( particleDestroyedPrefab, transform.position, transform.rotation);
+            Destroy(particleDestroyedObject, 1f);
+        }
     }
 
     private void EnemyAttackWait()
@@ -189,15 +265,10 @@ public class EnemyControllerMovement : MonoBehaviour
         isEnemyReadyToAttack = false;
         navMeshAgent.speed = 0f;
 
-        if (enemyAttackWaitTime >= 1)    // make sure wait time is longer than attack animation if not set to 0
-        {
-            Invoke("EnemyAttackWaitComplete", enemyAttackWaitTime);
-        }
+        Invoke("EnemyAttackWaitComplete", enemyAttackWaitTime);
     }
     private void EnemyAttackWaitComplete()
     {
-        if(enemyAttackWaitTime >= 1) { return; }
-
         isEnemyWaitFromAttack = false;
         isEnemyReadyToAttack = true;
         navMeshAgent.speed = enemyMoveSpeed;
@@ -207,16 +278,26 @@ public class EnemyControllerMovement : MonoBehaviour
         enemyAnimationState = "Enemy Hurt";
         EnemyAnimationTrigger();
         StartCoroutine(EnemyHurtColorSwitch());
+        
+        if(CheckIfEnemyNotDisrupatable()) { return; }
 
         isEnemyWaitToRecover = true;
         isEnemyReadyToAttack = false;
         navMeshAgent.speed = 0f;
-
-        if (enemyAttackWaitTime >= 1)    // make sure wait time is longer than hurt animation if not set to 0
+        Invoke("EnemyHurtRecoveryComplete", enemyHurtRevoceryTime);
+    }
+    public bool CheckIfEnemyNotDisrupatable()
+    {
+        if(enemyType == EnemyType.chaser || enemyType == EnemyType.obstacle)
         {
-            Invoke("EnemyHurtRecoveryComplete", enemyHurtRevoceryTime);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
+
     private Color enemyColorDefault = new Color(255, 255, 255, 255);
     private Color enemyColorRed = new Color(255, 0, 0, 255);
     private IEnumerator EnemyHurtColorSwitch()
@@ -230,8 +311,6 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyHurtRecoveryComplete()
     {
-        if (enemyHurtRevoceryTime >= 1) { return; }
-
         isEnemyWaitToRecover = false;
         isEnemyReadyToAttack = true;
         navMeshAgent.speed = enemyMoveSpeed;
@@ -264,7 +343,8 @@ public class EnemyControllerMovement : MonoBehaviour
     }
     private void EnemyAttackPerform()
     {
-        if (playerTransform != null && isEnemyReadyToAttack == true)
+        if (playerTransform != null && isEnemyReadyToAttack == true
+            && isEnemyWaitFromAttack == false && isEnemyWaitToRecover == false)
         {
             playerInAttackCircle = Physics.OverlapSphere(
                 enemyAttackPointTransform.transform.position,
@@ -282,7 +362,7 @@ public class EnemyControllerMovement : MonoBehaviour
             }
         }
     }
-    private void EnemyAttackSendDamage()    // on animation event
+    private void EnemyAttackSendDamage()    // on animation event ** for melee/range enemy
     {
         playerInAttackCircle = Physics.OverlapSphere(
                 enemyAttackPointTransform.transform.position,
@@ -292,9 +372,40 @@ public class EnemyControllerMovement : MonoBehaviour
         {
             if (player.tag == "Player" && player.GetComponent<CapsuleCollider>() != null)
             {
-                player.GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(enemyAttackDamage);
+                if(enemyType == EnemyType.chaseAndHit)
+                {
+                    SendMeleeDamage(player);
+                }
+                else if(enemyType == EnemyType.shooterTower || enemyType == EnemyType.shooterAndChase)
+                {
+                    SendRangeDamage(player);
+               }
             }
         }
+    }
+    private void SendMeleeDamage(Collider playerCollider)        // on animation event ** for range enemy
+    {
+        playerTransform.GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(enemyAttackDamage);
+    }
+    private void SendRangeDamage(Collider playerCollider)
+    {
+        GameObject bulletObject = Instantiate(enemyBulletPrefab, enemyAttackPointTransform.position + CheckShootSide(), enemyAttackPointTransform.rotation);
+        bulletObject.GetComponent<EnemyBullet>().SetupBulletVariable(enemyAttackDamage, playerCollider.transform);
+    }
+    private Vector3 CheckShootSide()
+    {
+        Vector3 ShootPoint = new Vector3();
+
+        if(transform.position.x < playerTransform.position.x)
+        {
+            ShootPoint = new Vector3(enemyShootPointOffset.x, enemyShootPointOffset.y, enemyShootPointOffset.z) ;
+        }
+        else if(transform.position.x > playerTransform.position.x)
+        {
+            ShootPoint = new Vector3(-enemyShootPointOffset.x, enemyShootPointOffset.y, enemyShootPointOffset.z) ;
+        }
+
+        return ShootPoint;
     }
 
     private void EnemyAnimationUpdate()
@@ -324,5 +435,11 @@ public class EnemyControllerMovement : MonoBehaviour
         {
             animator.SetTrigger("triggerEnemyHurt");
         }
+    }
+
+    private void OnDestroy() 
+    {
+        CancelInvoke();
+        StopAllCoroutines();
     }
 }

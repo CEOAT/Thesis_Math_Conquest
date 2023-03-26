@@ -251,7 +251,7 @@
                     "id": "8041132b-c0f1-4bcf-913d-af7ed0fffcc2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Hold(duration=0.5)",
                     "initialStateCheck": false
                 },
                 {
@@ -260,7 +260,7 @@
                     "id": "b4499962-99ff-4757-868a-00710ca5d9e2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Press(pressPoint=0.8)",
                     "initialStateCheck": false
                 }
             ],
@@ -280,6 +280,17 @@
                     "name": "",
                     "id": "120ab47e-f3a2-4132-82f3-a6c5bd9ad108",
                     "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialog",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9de12be4-c76c-468b-815b-eecdb019dbaf",
+                    "path": "<Keyboard>/numpadEnter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -528,6 +539,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ResetAnswer",
+                    "type": "Button",
+                    "id": "ae4873b9-2055-40cd-b0bd-ee955c9d7063",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CloseWindow",
                     "type": "Button",
                     "id": "17cc94ff-b7dc-4a66-a76c-a64500d9b866",
@@ -560,7 +580,7 @@
                     "id": "6c1c3d89-c776-4635-8348-f012cbaec673",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -569,6 +589,17 @@
                     "name": "",
                     "id": "37d9bfb6-363f-4b1e-971b-6f616e8e9c8a",
                     "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConfirmAnswer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3593ef94-dc44-48df-85a6-c72f70e01863",
+                    "path": "<Keyboard>/numpadEnter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -613,10 +644,21 @@
                     "name": "",
                     "id": "e1abed8d-0883-4766-8b7c-7d90d9ff3eb9",
                     "path": "<Keyboard>/tab",
-                    "interactions": "Press",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SwitchInputField",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f7b89b6-6732-4a7a-aa2c-a114190d40b8",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetAnswer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

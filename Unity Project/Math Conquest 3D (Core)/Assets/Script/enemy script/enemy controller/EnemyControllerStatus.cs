@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 
 // control enemy status (health, animation)
 
@@ -42,7 +43,10 @@ public class EnemyControllerStatus : MonoBehaviour
     [Header("Enemy Damage")]
     public float enemyAttackDamage;
 
-    [Header("Enemy State")]
+    [Header("Enemy Studiness")]
+    [SerializeField] private bool isEnemySturdyFromAttack;
+
+    [Header("Enemy State (Display Only)")]
     public string enemyState;
     public bool isEnemyTakenDamage;
 
@@ -60,7 +64,6 @@ public class EnemyControllerStatus : MonoBehaviour
         enemyState = "idle";
         isEnemyTakenDamage = false; 
     }
-
 
     private void Start()
     {
@@ -98,7 +101,6 @@ public class EnemyControllerStatus : MonoBehaviour
         enemyQuestionText.text = enemyQuestion;
         questionAnswer = enemyAnswer;
     }
-
 
     private void FixedUpdate()
     {
@@ -153,7 +155,7 @@ public class EnemyControllerStatus : MonoBehaviour
         if (this.gameObject != null)
         {
             isEnemySelectedUI = false;
-            Destroy(enemySelectorObject.gameObject);
+            if(enemySelectorObject != null) { Destroy(enemySelectorObject.gameObject);}
         }
     }
     #endregion
@@ -163,26 +165,28 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         if (playerAnswer == questionAnswer)
         {
-            PlayerAnswerCorrect(playerDamage);
+            PlayerAnswerCorrect();
+            EnemyTakenDamage(playerDamage);
             enemyDetailObject.GetComponent<Animator>().SetTrigger("triggerUiWorldSpaceShake");
-
-            //random new question
-            //enemy lose health
         }
         else
         {
             PlayerAnswerFalse();
-
-            //wrong statement
-            //reduce player hp, restore enemy's health?, gain shield?
         }
     }
-    private void PlayerAnswerCorrect(float receivedDamage)
+    private void PlayerAnswerCorrect()
+    {
+        isQuestionActive = false;
+    }
+    public void EnemyTakenDamage(float receivedDamage)
     {
         enemyHealthCurrent -= receivedDamage;
-        isQuestionActive = false;
         isEnemyTakenDamage = true;
-        EnemyMovement.EnemyHurtRecovery();
+
+        if(!isEnemySturdyFromAttack)
+        {
+            EnemyMovement.EnemyHurtRecovery();
+        }
     }
     private void PlayerAnswerFalse()
     {
@@ -203,4 +207,9 @@ public class EnemyControllerStatus : MonoBehaviour
         }
     }
     #endregion
+
+    [Button] private void EnemyDead()
+    {
+        enemyHealthCurrent = 0;
+    }
 }
