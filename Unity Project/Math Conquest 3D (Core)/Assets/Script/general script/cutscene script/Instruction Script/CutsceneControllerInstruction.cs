@@ -4,13 +4,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEditor;
+using Sirenix.OdinInspector;
 
 public class CutsceneControllerInstruction : MonoBehaviour
 {
     [Header("Instruction Page Number")]
-    public int pageCurrent;
-    public int pageTotal;
-    public int elementInPageTotal;
+    [ReadOnly] public int pageCurrent;
+    [ReadOnly] public int pageTotal;
+    [ReadOnly] public int elementInPageTotal;
 
     [Header("Instruction Page Objects")]
     public GameObject instructionPageUiGroup;

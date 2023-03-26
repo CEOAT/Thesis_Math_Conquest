@@ -6,7 +6,7 @@ public class StageControllerCheckPointManager : MonoBehaviour
 {
     [Header("Game Controller and Save Controller")]
     [HideInInspector] public ExplorationModeGameController GameController;
-    private SaveController SaveController;
+    [SerializeField] private SaveController SaveController;
 
     [Header("Checkpoint Manager Data")]
     public int checkpointCurrentIndex;
@@ -23,7 +23,6 @@ public class StageControllerCheckPointManager : MonoBehaviour
     private void SetupComponent()
     {
         GameController = GetComponent<ExplorationModeGameController>();
-        SaveController = GetComponent<SaveController>();
     }
     private void ReadyCountToCreateEffect()
     {
