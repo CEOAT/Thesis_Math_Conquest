@@ -44,7 +44,7 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
 
         interactableObject = Physics.OverlapSphere(
                 transform.position,
-                1f,
+                0.5f,
                 interactableLayerMask);
 
         if (interactableObject.Length != 0)

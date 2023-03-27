@@ -45,7 +45,10 @@ public class EnemyComponentDamageCircle : MonoBehaviour
 
     private void OnDestroy() 
     {
-        UnsubscribeEvent();
+        if(EnemyController != null)
+        {
+            UnsubscribeEvent();
+        }
     }
     private void UnsubscribeEvent()
     {

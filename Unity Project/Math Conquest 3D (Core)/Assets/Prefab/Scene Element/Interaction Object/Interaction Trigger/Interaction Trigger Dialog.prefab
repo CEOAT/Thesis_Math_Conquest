@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1970914597038421774
+--- !u!1 &966210878745344510
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,169 +8,94 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1970914597038421762}
-  - component: {fileID: 1970914597038421764}
-  - component: {fileID: 1970914597038421760}
-  - component: {fileID: 1970914597038421763}
-  - component: {fileID: 1970914597038421885}
-  - component: {fileID: 1025914302495626726}
+  - component: {fileID: 966210878745344386}
+  - component: {fileID: 966210878745344511}
+  - component: {fileID: 966210878745344387}
+  - component: {fileID: 1596182295244727184}
   m_Layer: 9
-  m_Name: General Puzzle Trigger
+  m_Name: Interaction Trigger Dialog
   m_TagString: Interactable
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1970914597038421762
+--- !u!4 &966210878745344386
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970914597038421774}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.69, y: -0.57, z: 4.77}
+  m_GameObject: {fileID: 966210878745344510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8843874412434041404}
+  - {fileID: 8637909295977781155}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1970914597038421764
+--- !u!65 &966210878745344511
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970914597038421774}
+  m_GameObject: {fileID: 966210878745344510}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 2.75, z: 1}
   m_Center: {x: 0, y: -0.85, z: 0}
---- !u!114 &1970914597038421760
+--- !u!114 &966210878745344387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970914597038421774}
+  m_GameObject: {fileID: 966210878745344510}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3fa6594c6cb3f0408ac6f1cbec5848e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionType: 0
+  interactionType: 2
   isRepeatableInteractionOrStatic: 0
   isNeedReenterTrigger: 1
-  interactionCooldownTime: 1
+  interactionCooldownTime: 3
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
-  isReactionTriggerCutscene: 0
+  isReactionTriggerCutscene: 1
   ReactionCutsceneDelayTime: 3
   isReadyToInteract: 1
   isInteractionDone: 0
   reactionObject: {fileID: 0}
   reactionType: 0
-  interactionBubbleObject: {fileID: 0}
+  interactionBubbleObject: {fileID: 8637909295977781158}
   GameController: {fileID: 0}
---- !u!114 &1970914597038421763
+--- !u!114 &1596182295244727184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970914597038421774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58805fa7e150fa4b8ff6c5b80531632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windowGroup: {fileID: 0}
-  windowTextPuzzleProblem: {fileID: 0}
-  windowTextDescription: {fileID: 0}
-  windowTextPuzzleCompleteCount: {fileID: 0}
-  windowInputField: {fileID: 0}
-  windowAnswer: 
-  isWindowFetch: 0
-  isWindowGetNewQuestion: 0
-  puzzleCompleteCount: 0
-  puzzleCompleteMaximum: 1
-  uiUpdateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  uiUpdateQuestionEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  GameController: {fileID: 0}
-  ObjectInteractable: {fileID: 0}
---- !u!114 &1970914597038421885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970914597038421774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7148e1787dbf2314b91fb55c0c2e63b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  puzzleSet:
-  - puzzleProblem: 1 +1 = ?
-    puzzleDescription: "\u0E40\u0E15\u0E34\u0E21\u0E04\u0E33\u0E15\u0E2D\u0E1A\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07"
-    puzzleAnswer: 2
-  - puzzleProblem: 1 +9 = ?
-    puzzleDescription: "\u0E40\u0E15\u0E34\u0E21\u0E04\u0E33\u0E15\u0E2D\u0E1A\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07"
-    puzzleAnswer: 10
-  - puzzleProblem: 5 + 6 = ?
-    puzzleDescription: "\u0E40\u0E15\u0E34\u0E21\u0E04\u0E33\u0E15\u0E2D\u0E1A\u0E17\u0E35\u0E48\u0E16\u0E39\u0E01\u0E15\u0E49\u0E2D\u0E07"
-    puzzleAnswer: 11
-  puzzleIndex: 0
---- !u!114 &1025914302495626726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970914597038421774}
+  m_GameObject: {fileID: 966210878745344510}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 0}
+  interactableBubbbleObject: {fileID: 8637909295977781158}
   entryAnimation: 0
   leaveAnimation: 0
---- !u!1001 &6678453332816847788
+--- !u!1001 &5905738339999456819
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1970914597038421762}
+    m_TransformParent: {fileID: 966210878745344386}
     m_Modifications:
-    - target: {fileID: 2402659470283542212, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
-        type: 3}
-      propertyPath: m_Name
-      value: Bubble Instruction Particle
-      objectReference: {fileID: 0}
-    - target: {fileID: 2479601090839794448, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2479601090839794448, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.54962885
-      objectReference: {fileID: 0}
-    - target: {fileID: 2479601090839794448, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2744206233880643984, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
         type: 3}
       propertyPath: m_RootOrder
@@ -226,22 +151,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2744206233880643987, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 0fa92d4462bb5e44299fa26ad3c23edb,
-        type: 3}
     - target: {fileID: 2744206233880643989, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
         type: 3}
       propertyPath: m_Name
-      value: Interaction Bubble Instruction
+      value: Interaction Bubble Dialog
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe, type: 3}
---- !u!4 &8843874412434041404 stripped
+--- !u!4 &8637909295977781155 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2744206233880643984, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
     type: 3}
-  m_PrefabInstance: {fileID: 6678453332816847788}
+  m_PrefabInstance: {fileID: 5905738339999456819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8637909295977781158 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2744206233880643989, guid: 32a99cab2a12a0a4baba11e0b9bfc2fe,
+    type: 3}
+  m_PrefabInstance: {fileID: 5905738339999456819}
   m_PrefabAsset: {fileID: 0}

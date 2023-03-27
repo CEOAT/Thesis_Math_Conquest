@@ -150,6 +150,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void DialogStart()
     {
+        if(dialogIndex > dialogSettList[dialogSetIndex].dialogClass.DialogSet.Count - 1) { return; }
         DialogManager.speakerText.text = dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerString;
         SetSpeakerImage();
         SetBackgroundImage();

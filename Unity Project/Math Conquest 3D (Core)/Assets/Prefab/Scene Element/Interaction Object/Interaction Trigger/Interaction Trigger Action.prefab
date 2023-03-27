@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7045012273878519568}
   - component: {fileID: 8830017000637224195}
   m_Layer: 9
-  m_Name: Interaction Trigger
+  m_Name: Interaction Trigger Action
   m_TagString: Interactable
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -60,9 +60,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fa6594c6cb3f0408ac6f1cbec5848e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionType: 1
+  interactionType: 2
   isRepeatableInteractionOrStatic: 0
+  isNeedReenterTrigger: 1
   interactionCooldownTime: 3
+  isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 1
   ReactionCutsceneDelayTime: 3
@@ -107,7 +109,7 @@ PrefabInstance:
     - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2744206233880643984, guid: 7401e19703a7a754f9f428aabf0b6936,
         type: 3}

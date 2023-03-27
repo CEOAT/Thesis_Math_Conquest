@@ -35,6 +35,9 @@ public class EnemyComponentHealthModification : MonoBehaviour
     {
         SetupComponent();
         SetupSubscription();
+
+        if(!isStartRegenOnEncounterPlayer || !isStartDrainOnEncounterPlayer)
+            StartHealthModify();
     }
     private void SetupComponent()
     {

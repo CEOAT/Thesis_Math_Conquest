@@ -69,8 +69,9 @@ public class EnemyComponentCreateBomb : MonoBehaviour
     }
 
     private void StartConstantCreateBomb()
-    {
-        InvokeRepeating("CreateBomb", bombDropInterval, bombDropInterval);
+    { 
+        if(!IsInvoking("CreateBomb"))
+            InvokeRepeating("CreateBomb", bombDropInterval, bombDropInterval);
     }
     private void StopConstantCreateBomb()
     {
