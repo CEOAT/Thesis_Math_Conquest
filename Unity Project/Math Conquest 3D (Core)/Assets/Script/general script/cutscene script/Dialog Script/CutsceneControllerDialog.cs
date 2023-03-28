@@ -32,6 +32,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     [Header("Dialog Repeat Setting")]
     public bool isDialogRepeatable = false;
     public bool isDialogDisabledAfterFinish = false;
+    [SerializeField] private bool isDialogSelfDestroyAfterFinish = false;
     private bool isDialogObjectActivated = false;
     private bool isDialogObjectDisabled = false;
     private bool isDialogPlayed = false;
@@ -81,6 +82,10 @@ public class CutsceneControllerDialog : MonoBehaviour
         if (isDialogRepeatable == true)
         {
             isDialogPlayed = false;
+        }
+        if(isDialogSelfDestroyAfterFinish == true)
+        {
+            Destroy(this.gameObject);
         }
         if (isDialogDisabledAfterFinish == true)
         {
@@ -337,11 +342,14 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         foreach(GameObject activeObject in activeAfterEndDialogObjectList)
         {
-            activeObject.SetActive(true);
-            if(activeObject.TryGetComponent<BoxCollider>(out BoxCollider collider))
+            if(activeObject != null)
             {
-                collider.center = new Vector3(0,5,0);
-                collider.center = new Vector3(0,0,0);
+                activeObject.SetActive(true);
+                if(activeObject.TryGetComponent<BoxCollider>(out BoxCollider collider))
+                {
+                    collider.center = new Vector3(0,5,0);
+                    collider.center = new Vector3(0,0,0);
+                }
             }
         }
     }
@@ -357,7 +365,8 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         foreach(GameObject disableObject in disableAfterEndDialogObjectList)
         {
-            disableObject.SetActive(false);
+            if(disableObject != null)
+                disableObject.SetActive(false);
         }
     }
 

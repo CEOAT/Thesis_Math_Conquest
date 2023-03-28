@@ -32,6 +32,7 @@ public class CutsceneControllerInstruction : MonoBehaviour
 
     [Header("Instruction Setting")]
     public bool isDeactivateAfterEnd;
+    public bool isSelfDestroyAfterEnd;
 
     [Header("Instruction Data")]
     public InstructionListClass instructionList;
@@ -179,11 +180,14 @@ public class CutsceneControllerInstruction : MonoBehaviour
     {
         foreach(GameObject activeObject in activeAfterEndInstructionObjectList)
         {
-            activeObject.SetActive(true);
-            if(activeObject.TryGetComponent<BoxCollider>(out BoxCollider collider))
+            if(activeObject != null)
             {
-                collider.GetComponent<BoxCollider>().center = new Vector3(0,5,0);
-                collider.GetComponent<BoxCollider>().center = new Vector3(0,0,0);
+                activeObject.SetActive(true);
+                if(activeObject.TryGetComponent<BoxCollider>(out BoxCollider collider))
+                {
+                    collider.GetComponent<BoxCollider>().center = new Vector3(0,5,0);
+                    collider.GetComponent<BoxCollider>().center = new Vector3(0,0,0);
+                }
             }
         }
     }
@@ -199,7 +203,8 @@ public class CutsceneControllerInstruction : MonoBehaviour
     {
         foreach(GameObject disableObject in activeAfterEndInstructionObjectList)
         {
-            disableObject.SetActive(false);
+            if(disableObject != null)
+                disableObject.SetActive(false);
         }
     }
 
@@ -208,6 +213,10 @@ public class CutsceneControllerInstruction : MonoBehaviour
         if (isDeactivateAfterEnd == true)
         {
             this.gameObject.SetActive(false);
+        }
+        else if (isSelfDestroyAfterEnd == true)
+        {
+            Destroy(this.gameObject);
         }
     }
 

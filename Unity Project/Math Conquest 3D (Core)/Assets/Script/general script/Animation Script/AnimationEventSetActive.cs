@@ -19,7 +19,8 @@ public class AnimationEventSetActive : MonoBehaviour
         {
             foreach(GameObject activeObject in activeObjectList)
             {
-                activeObject.SetActive(true);
+                if(activeObject != null)
+                    activeObject.SetActive(true);
             }
         }
     }
@@ -27,9 +28,10 @@ public class AnimationEventSetActive : MonoBehaviour
     {
         if(deactiveObjectList.Count > 0)
         {
-            foreach(GameObject activeObject in deactiveObjectList)
+            foreach(GameObject deactiveObject in deactiveObjectList)
             {
-                activeObject.SetActive(false);
+                if(deactiveObject != null)
+                    deactiveObject.SetActive(false);
             }
         }
     }
