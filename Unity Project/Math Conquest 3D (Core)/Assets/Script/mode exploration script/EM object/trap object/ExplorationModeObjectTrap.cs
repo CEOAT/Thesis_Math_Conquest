@@ -19,8 +19,8 @@ public class ExplorationModeObjectTrap : MonoBehaviour
     };
     public bool isTrapTrigger;
     public bool isDealDamage;
-    [HideInInspector] public float trapSpeed;
-    [HideInInspector] public float trapDamage;
+    [SerializeField] public float trapSpeed;
+    [SerializeField] public float trapDamage;
 
     private Animator animator;
     private Collider collider;

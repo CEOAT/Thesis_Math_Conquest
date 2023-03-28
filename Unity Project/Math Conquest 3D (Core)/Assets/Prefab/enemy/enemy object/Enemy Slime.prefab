@@ -62,7 +62,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 656e3625fdc343d45859fd764cdc1ca8, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
   enemyAttackDamage: 60
+  isEnemySturdyFromAttack: 0
   enemyState: 
   isEnemyTakenDamage: 0
 --- !u!114 &2527330564533414489
@@ -236,8 +237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69732ec146a08c42aec6a2f101dbf4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemyChasePlayer: 0
   enemyType: 1
-  enemyMoveSpeed: 3
+  enemyMoveSpeed: 2
   enemyDetectionSphere: {fileID: 2527330564857677662}
   enemyDetectionRange: 4.5
   enemyChasingRange: 5.5
@@ -247,18 +249,30 @@ MonoBehaviour:
   enemyAttackLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  playerInAttackCircle: []
   enemyAttackDamage: 60
   isEnemyCheckingAttack: 0
   enemyCheckingAttackIntervalTime: 2.5
   isEnemyReadyToAttack: 0
   isEnemyWaitFromAttack: 0
-  enemyAttackWaitTime: 0
+  enemyAttackWaitTime: 0.5
   isEnemyWaitToRecover: 0
-  enemyHurtRevoceryTime: 0
+  enemyHurtRevoceryTime: 0.7
   enemyAnimationState: 
-  materialStart: {fileID: 2100000, guid: 656e3625fdc343d45859fd764cdc1ca8, type: 2}
-  materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
+  materialStart: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  materialDamaged: {fileID: 2100000, guid: 3a4dc95f379f45e40a0806abed6163a8, type: 2}
+  particleDestroyedPrefab: {fileID: 0}
+  enemyBulletPrefab: {fileID: 0}
+  enemyShootDistance: 0
+  enemyShootPointOffset: {x: 0, y: 0, z: 0}
+  EventOnEnemyStartChase:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnEnemyStopChase:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnEnemyDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2527330564562798918
 GameObject:
   m_ObjectHideFlags: 0
