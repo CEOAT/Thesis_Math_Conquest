@@ -92,17 +92,17 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
 
         if (upDownInput == 1)
         {
-            rigidbody.AddForce(Vector3.forward * Time.deltaTime * playerMoveSpeed);
+            rigidbody.AddForce(transform.forward * Time.deltaTime * playerMoveSpeed);
             playerStatus = "run up";
         }
         if (upDownInput == -1)
         {
-            rigidbody.AddForce(-Vector3.forward * Time.deltaTime * playerMoveSpeed);
+            rigidbody.AddForce(-transform.forward * Time.deltaTime * playerMoveSpeed);
             playerStatus = "run down";
         }
         if (leftRightInput == 1)
         {
-            rigidbody.AddForce(Vector3.right * Time.deltaTime * playerMoveSpeed);
+            rigidbody.AddForce(transform.right * Time.deltaTime * playerMoveSpeed);
             playerRaycastPoint.transform.rotation = Quaternion.Euler(0, 90, 0);
             if (leftRightInput == 1 && upDownInput == 0)
             {
@@ -111,7 +111,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         }
         if (leftRightInput == -1)
         {
-            rigidbody.AddForce(-Vector3.right * Time.deltaTime * playerMoveSpeed);
+            rigidbody.AddForce(-transform.right * Time.deltaTime * playerMoveSpeed);
             playerRaycastPoint.transform.rotation = Quaternion.Euler(0, -90, 0);
             if (leftRightInput == -1 && upDownInput == 0)
             {
