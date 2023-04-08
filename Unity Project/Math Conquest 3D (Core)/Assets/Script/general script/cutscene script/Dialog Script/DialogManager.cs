@@ -13,6 +13,4 @@ public class DialogManager: MonoBehaviour
     [SerializeField] public TMP_Text dialogText;
     [SerializeField] public Animator dialogButton;
     [SerializeField] public GameObject backgroundTransitionPrefab; 
-
-    [SerializeField] public Sprite speakerSpriteData;
 }

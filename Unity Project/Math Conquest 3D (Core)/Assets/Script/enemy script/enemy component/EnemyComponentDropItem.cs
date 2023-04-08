@@ -12,8 +12,8 @@ public class EnemyComponentDropItem : MonoBehaviour
         dropOnlyOneItem, randomDropEveryItem, confirmDropEveryItem
     }
     [SerializeField] private DropType dropType;
-    [SerializeField] private float forceMinimum = 50f;
-    [SerializeField] private float forceMaximum = 300f;
+    [SerializeField] private float forceMinimum = 2.5f;
+    [SerializeField] private float forceMaximum = 5f;
     private EnemyControllerMovement EnemyMovement;
 
     private void Start()
@@ -50,7 +50,11 @@ public class EnemyComponentDropItem : MonoBehaviour
             {
                 itemObject = Instantiate(itemDropPrefabList[itemIndex], transform.position, transform.rotation);
                 itemObject.SetActive(true);
-                AddForceToItem(itemObject.GetComponent<Rigidbody>());
+                
+                if(itemObject.GetComponent<Rigidbody>() != null)
+                {
+                    AddForceToItem(itemObject.GetComponent<Rigidbody>());
+                }
                 
                 if(dropType == DropType.dropOnlyOneItem)
                 { break; }

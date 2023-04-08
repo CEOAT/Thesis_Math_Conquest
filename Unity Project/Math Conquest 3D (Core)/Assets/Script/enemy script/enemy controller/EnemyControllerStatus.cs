@@ -197,9 +197,9 @@ public class EnemyControllerStatus : MonoBehaviour
     #region False Reaction
     private void FalseReactionHeal()
     {
-        if (enemyHealthCurrent + 10 > 100)
+        if (enemyHealthCurrent + 10 > enemyHealthMax)
         {
-            enemyHealthCurrent = 100;
+            enemyHealthCurrent = enemyHealthMax;
         }
         else
         {
