@@ -24,8 +24,6 @@ public class EnemyControllerMovement : MonoBehaviour
 
     [Header("Enemy Movement Setting")]
     public float enemyMoveSpeed;
-    public SphereCollider enemyDetectionSphere;
-    public float enemyDetectionRange;
     public float enemyChasingRange;
 
     [Header("Enemy Attack System")]
@@ -92,7 +90,6 @@ public class EnemyControllerMovement : MonoBehaviour
     {
         if (enemyType == EnemyType.obstacle)
         {
-            enemyDetectionRange = 0;
             enemyChasingRange = 0;
             enemyAttackTriggerRange = 0;
             enemyAttackPointRange = 0;
@@ -118,7 +115,6 @@ public class EnemyControllerMovement : MonoBehaviour
     {
         enemyStartPosition = transform.position;
         navMeshAgent.speed = enemyMoveSpeed;
-        enemyDetectionSphere.radius = enemyDetectionRange;
         isEnemyReadyToAttack = true;
     }
     private void OnTriggerEnter(Collider player)
@@ -149,9 +145,10 @@ public class EnemyControllerMovement : MonoBehaviour
             }
             EnemyCheckFacing();
         }
-        else if(enemyType == EnemyType.chaseAndHit  ||
+        else if((enemyType == EnemyType.chaseAndHit  ||
                 enemyType == EnemyType.shooterTower ||
-                enemyType == EnemyType.shooterAndChase)
+                enemyType == EnemyType.shooterAndChase) 
+                && playerTransform != null)
         {
             EnemyCheckFacing();
             EnemyAnimationUpdate();
@@ -319,8 +316,6 @@ public class EnemyControllerMovement : MonoBehaviour
     #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, enemyDetectionRange);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, enemyChasingRange);
         Gizmos.color = Color.red;
