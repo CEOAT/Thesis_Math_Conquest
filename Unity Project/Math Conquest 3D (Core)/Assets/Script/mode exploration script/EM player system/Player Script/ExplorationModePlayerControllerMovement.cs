@@ -140,13 +140,27 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     }
     public void PlayerCheckFacingTarget(Transform targetEnemy)
     {
-        if (targetEnemy.position.x < transform.position.x)
+        if(transform.localScale.x > 0)
         {
-            spriteRenderer.flipX = true;
+            if (targetEnemy.position.x < transform.position.x)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else if (targetEnemy.position.x > transform.position.x)
+            {
+                spriteRenderer.flipX = false;
+            }
         }
-        else if (targetEnemy.position.x > transform.position.x)
+        else if(transform.localScale.x < 0)
         {
-            spriteRenderer.flipX = false;
+            if (targetEnemy.position.x < transform.position.x)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (targetEnemy.position.x > transform.position.x)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
     }
     public void PlayerAttackCancle()

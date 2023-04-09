@@ -189,7 +189,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!195 &6299237362717378434
@@ -232,12 +232,13 @@ MonoBehaviour:
     type: 3}
   enemyTrackPoint: {fileID: 6299237362763555998}
   enemyUiPointHeight: 1.5
+  enemyUiPointZ: 0
   enemySelectorPrefab: {fileID: 8443834629550702227, guid: 89e561cf4d207954e95157fd7f6e82eb,
     type: 3}
   isEnemySelectedUI: 0
   UIUnselectedAlpha: 0
   enemyName: Melee Slime
-  enemyHealthMax: 100
+  enemyHealthMax: 30
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
   enemyAttackDamage: 60
