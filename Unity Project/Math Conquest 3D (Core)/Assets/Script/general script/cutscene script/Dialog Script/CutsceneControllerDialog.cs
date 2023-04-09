@@ -73,6 +73,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void EndDialogCutscene()
     {
+        DialogManager.dialogText.text = "";
         DialogManager.DialogUI.SetActive(false);
         RemoveControl();
         GameController.AllowMovement();

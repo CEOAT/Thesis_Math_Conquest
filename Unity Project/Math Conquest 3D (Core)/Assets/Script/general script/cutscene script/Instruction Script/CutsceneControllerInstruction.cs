@@ -167,6 +167,7 @@ public class CutsceneControllerInstruction : MonoBehaviour
         ActiveObjectAtEndInstruction();
         DisableObjectAfterInstruction();
         DeactivateAfterEndInstruction();
+        GameController.EnablePauseGame();
     }
     private void ActiveObjectAtEndInstruction()
     {
