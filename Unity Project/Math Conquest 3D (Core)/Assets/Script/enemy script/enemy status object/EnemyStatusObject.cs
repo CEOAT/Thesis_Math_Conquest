@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyStatusObject : MonoBehaviour
 {
     public Transform enemyOwnDetailObject;
+    [SerializeField] public float enemyUiPointHeight;
+    [SerializeField] public float enemyUiPointZ;
 
     private void FixedUpdate()
     {
@@ -15,7 +17,7 @@ public class EnemyStatusObject : MonoBehaviour
     {
         if(enemyOwnDetailObject != null) 
         { 
-            transform.position = enemyOwnDetailObject.position + Vector3.up * 1.3f;
+            transform.position = enemyOwnDetailObject.position + new Vector3(0, enemyUiPointHeight, enemyUiPointZ);
         }
     }
     private void DetailObjectCheckDestroy()
