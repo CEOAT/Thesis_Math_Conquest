@@ -1,6 +1,6 @@
 ﻿// Updated for URP 10.2.1/release
 // https://github.com/Unity-Technologies/Graphics/blob/10.2.1/release/com.unity.render-pipelines.universal/Shaders/Lit.shader
-Shader "Universal Render Pipeline/Custom/Sprites Lit"
+Shader "URP/Custom/Sprites 2.5D Lit"
 {
     Properties
     {
