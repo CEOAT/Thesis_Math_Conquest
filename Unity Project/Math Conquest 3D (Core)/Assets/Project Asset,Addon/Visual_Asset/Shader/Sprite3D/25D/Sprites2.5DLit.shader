@@ -327,6 +327,6 @@ Shader "URP/Custom/Sprites 2.5D Lit"
 
 
     }
-    FallBack "Hidden/InternalErrorShader"
+    FallBack "Universal Render Pipeline/Custom/Sprites Unlit"
     // CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.LitShader"
 }
