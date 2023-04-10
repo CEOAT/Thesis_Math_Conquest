@@ -80,6 +80,7 @@ public class ExplorationModeGameController : MonoBehaviour
         PlayerInput.Disable();
         GameplayUiGroup.SetActive(false);
         CutsceneBlackBar.SetBool("isBlackBarMoveIn", true);
+        playerGameObject.gameObject.layer = LayerMask.NameToLayer("Default");
     }
     public void TriggerHideUi()
     {
@@ -94,6 +95,7 @@ public class ExplorationModeGameController : MonoBehaviour
         PlayerInput.Enable();
         GameplayUiGroup.SetActive(true);
         CutsceneBlackBar.SetBool("isBlackBarMoveIn", false);
+        playerGameObject.gameObject.layer = LayerMask.NameToLayer("Player");
     }
     #endregion
 
