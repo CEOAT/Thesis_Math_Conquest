@@ -42,7 +42,7 @@ half4 UniversalFragmentMeta(Varyings input) : SV_Target
 
     MetaInput metaInput;
     metaInput.Albedo = brdfData.diffuse + brdfData.specular * brdfData.roughness * 0.5;
-    metaInput.SpecularColor = surfaceData.specular;
+   // metaInput.SpecularColor = surfaceData.specular;
     metaInput.Emission = surfaceData.emission;
 
     return MetaFragment(metaInput);

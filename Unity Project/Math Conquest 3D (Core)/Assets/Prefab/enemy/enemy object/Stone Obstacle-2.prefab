@@ -108,7 +108,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3680b8a9f2f84ae458a7e0d52fe18b04, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -229,6 +229,8 @@ MonoBehaviour:
   enemyDetailPrefab: {fileID: 6903029698676314509, guid: 743233d8b41a19b408a3faaba83496e0,
     type: 3}
   enemyTrackPoint: {fileID: 8836731323394594132}
+  enemyUiPointHeight: 1.5
+  enemyUiPointZ: 0
   enemySelectorPrefab: {fileID: 8443834629550702227, guid: 89e561cf4d207954e95157fd7f6e82eb,
     type: 3}
   isEnemySelectedUI: 0
@@ -286,8 +288,6 @@ MonoBehaviour:
   isEnemyChasePlayer: 0
   enemyType: 0
   enemyMoveSpeed: 0
-  enemyDetectionSphere: {fileID: 8836731323689474892}
-  enemyDetectionRange: 0
   enemyChasingRange: 0
   enemyAttackPointTransform: {fileID: 8836731323615479327}
   enemyAttackTriggerRange: 0

@@ -17,6 +17,8 @@ public class EnemyControllerStatus : MonoBehaviour
     public GameObject enemyDetailPrefab;
     private GameObject enemyDetailObject;
     public GameObject enemyTrackPoint;
+    [SerializeField] private float enemyUiPointHeight = 1.5f;
+    [SerializeField] private float enemyUiPointZ = 0f;
 
     private TMP_Text enemyNameText;
     private Transform enemyHealthBarObject;
@@ -74,7 +76,10 @@ public class EnemyControllerStatus : MonoBehaviour
     private void SetupEnemyComponent()
     {
         enemyDetailObject = Instantiate(enemyDetailPrefab, transform.position, transform.rotation);
-        enemyDetailObject.GetComponent<EnemyStatusObject>().enemyOwnDetailObject = this.transform;
+        EnemyStatusObject enemyStatusObject = enemyDetailObject.GetComponent<EnemyStatusObject>();
+        enemyStatusObject.enemyOwnDetailObject = this.transform;
+        enemyStatusObject.enemyUiPointHeight = enemyUiPointHeight;
+        enemyStatusObject.enemyUiPointZ = enemyUiPointZ;
 
         enemyNameText = enemyDetailObject.transform.GetChild(0).GetComponent<TMP_Text>();
         enemyHealthBarObject = enemyDetailObject.transform.GetChild(1).transform;
