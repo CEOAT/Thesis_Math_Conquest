@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1931534147}
-  m_IndirectSpecularColor: {r: 0.09671548, g: 0.21786425, b: 0.36861145, a: 1}
+  m_IndirectSpecularColor: {r: 0.09671705, g: 0.21786618, b: 0.3686118, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2618,52 +2618,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &469832084
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 469832085}
-  - component: {fileID: 469832086}
-  m_Layer: 0
-  m_Name: Enemy Path Floor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &469832085
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469832084}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22, y: -10.56, z: -5.1}
-  m_LocalScale: {x: 3.5, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1142560052}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &469832086
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469832084}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &481790966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3473,7 +3427,7 @@ Transform:
   m_Children:
   - {fileID: 1211984234}
   m_Father: {fileID: 1142560052}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &509651699
 PrefabInstance:
@@ -7932,7 +7886,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 469832085}
   - {fileID: 501016716}
   - {fileID: 8392883156899547090}
   m_Father: {fileID: 0}
@@ -8968,7 +8921,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b3606b87c126e674f9873b4fb615d007, type: 2}
+      objectReference: {fileID: 2100000, guid: e6e3955431e59fa42a90ca876d18d9f5, type: 2}
     - target: {fileID: 6268476657572152509, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: m_RootOrder
@@ -9063,7 +9016,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerMaterialStart
       value: 
-      objectReference: {fileID: 2100000, guid: b3606b87c126e674f9873b4fb615d007, type: 2}
+      objectReference: {fileID: 2100000, guid: e6e3955431e59fa42a90ca876d18d9f5, type: 2}
     - target: {fileID: 6268476657887066481, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -9168,6 +9121,11 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.12
       objectReference: {fileID: 0}
+    - target: {fileID: 8836731323373598282, guid: 41bcbe89d89dad946aadf4a05c3d1e9c,
+        type: 3}
+      propertyPath: materialStart
+      value: 
+      objectReference: {fileID: 2100000, guid: e6e3955431e59fa42a90ca876d18d9f5, type: 2}
     - target: {fileID: 8836731323373598283, guid: 41bcbe89d89dad946aadf4a05c3d1e9c,
         type: 3}
       propertyPath: maximumAnswerValue
@@ -9198,7 +9156,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b3606b87c126e674f9873b4fb615d007, type: 2}
+      objectReference: {fileID: 2100000, guid: e6e3955431e59fa42a90ca876d18d9f5, type: 2}
     - target: {fileID: 8836731323373598294, guid: 41bcbe89d89dad946aadf4a05c3d1e9c,
         type: 3}
       propertyPath: m_RootOrder
@@ -15681,7 +15639,7 @@ MonoBehaviour:
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 1
   enemyAnimationState: 
-  materialStart: {fileID: 2100000, guid: b3606b87c126e674f9873b4fb615d007, type: 2}
+  materialStart: {fileID: 2100000, guid: e6e3955431e59fa42a90ca876d18d9f5, type: 2}
   materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
   particleDestroyedPrefab: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
     type: 3}
@@ -15717,7 +15675,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3606b87c126e674f9873b4fb615d007, type: 2}
+  - {fileID: 2100000, guid: e6e3955431e59fa42a90ca876d18d9f5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15956,7 +15914,7 @@ Transform:
   m_Children:
   - {fileID: 6299237362768363131}
   m_Father: {fileID: 1142560052}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8392883158408390787
 MonoBehaviour:
