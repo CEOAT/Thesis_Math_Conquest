@@ -25,7 +25,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public Animator InGameUiAnimator;
 
     [Header("Player Invincible System")]
-    public Material playerMaterialStart;
+    private Material playerMaterialStart;
     public Material playerMaterialDamaged;
     public GameObject playerInvincibleShieldPrefab;
 
@@ -49,6 +49,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerMaterialStart = spriteRenderer.material;
     }
     private void SetupControl()
     {
