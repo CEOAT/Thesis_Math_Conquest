@@ -11,7 +11,7 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
     [SerializeField] public List<float> maximumValueList;
     [SerializeField] public List<float> vairableList = new List<float>();
     
-
+    private ExplorationModeObjectInteractable InteractableObject;
     private ExplorationModePuzzleWorldSpaceWindow PuzzleWorldSpaceWindow;
 
     private void Awake()
@@ -23,6 +23,7 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
     private void SetupComponent()
     {
         PuzzleWorldSpaceWindow = GetComponent<ExplorationModePuzzleWorldSpaceWindow>();
+        InteractableObject = GetComponent<ExplorationModeObjectInteractable>();
     }
     private void SetupVariable()
     {
@@ -71,7 +72,11 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        LerpToNewValue();
+        if(PuzzleWorldSpaceWindow.isPuzzleWindowActive == true)
+        {
+            LerpToNewValue();
+            print("puzzle active");
+        }
     }
     public virtual void LerpToNewValue()
     {

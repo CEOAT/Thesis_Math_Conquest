@@ -16,7 +16,7 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     [SerializeField] private Transform inGameCanvas;
     [SerializeField] private GameObject puzzleWindowPrefab;
     private GameObject puzzleWindowObject;
-    private bool isPuzzleWindowActive = false;
+    [SerializeField] public bool isPuzzleWindowActive = false;
 
     [Header("Puzzle Problem and Description")]
     [SerializeField] private string puzzleProblem;
@@ -149,6 +149,16 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
         this.enabled = false;
         isPuzzleWindowActive = false;
     }
+    private void CloseWorldSpacePuzzleDeactived()
+    {
+        PlayerInput.Disable();
+        GameObject.Destroy(puzzleWindowObject);
+        worldSpaceCamera.SetActive(false);
+        GameController.AllowMovement();
+        this.enabled = false;
+        isPuzzleWindowActive = false;
+    }
+
     private void ClearAnswer()
     {
         puzzleInputFieldList[inputFieldSelectedIndex].text = "";
@@ -168,6 +178,11 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
         {
             puzzleInputFieldList[inputFieldSelectedIndex].ActivateInputField();
         }
+    }
+
+    private void OnDisable() 
+    {
+        CloseWorldSpacePuzzleDeactived();
     }
 }
 

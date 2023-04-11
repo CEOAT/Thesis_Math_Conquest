@@ -72,7 +72,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
             InteractionWindow = GetComponent<ExplorationModeObjectInteractableWindowUi>();
             InteractionWindow.enabled = false;
         }
-        if (interactionType == InteractionType.interactionWindowMultipleChoice)
+        else if (interactionType == InteractionType.interactionWindowMultipleChoice)
         {
             WorldSpaceWindow = GetComponent<ExplorationModePuzzleWorldSpaceWindow>();
             WorldSpaceWindow.enabled = false;

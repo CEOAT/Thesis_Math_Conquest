@@ -6,15 +6,19 @@ public class StageControllerSetActiveTrigger : MonoBehaviour
 {
     [SerializeField] List<GameObject> activeObjectList = new List<GameObject>();
     [SerializeField] List<GameObject> deactiveObjectList = new List<GameObject>();
+    [SerializeField] List<GameObject> reverseActiveObjectList = new List<GameObject>();
+    [SerializeField] private bool isSetActiveFalseAfterTrigger = true;
+    [SerializeField] private bool isDestroyAfterTrigger = false;
     [Sirenix.OdinInspector.ReadOnly] private bool isActivationDone;
     
     private void OnTriggerEnter(Collider player) 
     {
-        if(player.tag == "Player" && isActivationDone == false)
+        if(player.tag == "Player")
         {
             ActiveObject();
             DeactiveObject();
-            isActivationDone = true;
+            ReverseActiveObject();
+            CheckDeactivationType();
         }
     }
     private void ActiveObject()
@@ -37,6 +41,28 @@ public class StageControllerSetActiveTrigger : MonoBehaviour
                 if(deactiveObject != null)
                     deactiveObject.SetActive(false);
             }
+        }
+    }
+    private void ReverseActiveObject()
+    {
+        if(reverseActiveObjectList.Count > 0)
+        {
+            foreach(GameObject reverseActiveObject in reverseActiveObjectList)
+            {
+                if(reverseActiveObject != null)
+                    reverseActiveObject.SetActive(!reverseActiveObject.activeInHierarchy);
+            }
+        }
+    }
+    private void CheckDeactivationType()
+    {
+        if(isSetActiveFalseAfterTrigger == true)
+        {
+            this.gameObject.SetActive(false);
+        }
+        else if(isDestroyAfterTrigger == true)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
