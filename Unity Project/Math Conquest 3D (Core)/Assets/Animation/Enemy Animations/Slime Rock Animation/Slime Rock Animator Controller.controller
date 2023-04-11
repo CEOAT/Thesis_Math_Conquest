@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shooter Walk
+  m_Name: Slime Walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -23,7 +23,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ebc3133f2b0c67941b6eaea1af496bd3, type: 2}
+  m_Motion: {fileID: 7400000, guid: e3543dc3435e32949a62138dd1930da5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -36,7 +36,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shooter Attack
+  m_Name: Slime Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -52,7 +52,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bd59ac06459af9047957e1522ae76d25, type: 2}
+  m_Motion: {fileID: 7400000, guid: d62f1cf72c32451438580c7b17b90d38, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -72,9 +72,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0.0015730772
-  m_ExitTime: 0.9952586
+  m_TransitionDuration: 0.060000062
+  m_TransitionOffset: 0.34763637
+  m_ExitTime: 0.9708899
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -153,9 +153,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.9989474
+  m_TransitionDuration: 0.14134204
+  m_TransitionOffset: 0.07624996
+  m_ExitTime: 0.9432909
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -313,7 +313,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shooter Dead
+  m_Name: Slime Dead
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -326,7 +326,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e6bdc18261094df42b76a125383f13b5, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8bac99a5e96f41f4bba5210c2577b45b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -338,7 +338,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shooter Animator Controller
+  m_Name: Slime Rock Animator Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: triggerEnemyAttack
@@ -397,7 +397,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shooter Idle
+  m_Name: Slime Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -413,7 +413,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ebc3133f2b0c67941b6eaea1af496bd3, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3c309618c6b83bb49b8f0d386764a103, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -426,7 +426,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shooter Hurt
+  m_Name: Slime Hurt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -442,7 +442,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 43e4fb46d1ddbe94e8212daf215ea7e3, type: 2}
+  m_Motion: {fileID: 7400000, guid: f245f8bcaa4ce7048a94bfe88b39e10f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -468,7 +468,7 @@ AnimatorStateMachine:
     m_Position: {x: 600, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1165764775221986219}
-    m_Position: {x: 20, y: -60, z: 0}
+    m_Position: {x: 20, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 364113979483969165}
     m_Position: {x: 600, y: 200, z: 0}
@@ -525,9 +525,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.023144245
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.9739908
+  m_ExitTime: 1.0021392
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
