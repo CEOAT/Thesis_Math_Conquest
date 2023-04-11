@@ -93,12 +93,20 @@ public class ExplorationModeObjectTrap : MonoBehaviour
         {
             other.GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(trapDamage);
         }
+        else if (other.CompareTag("Enemy"))
+        {
+            other.GetComponent<EnemyControllerStatus>().EnemyTakenDamage(trapDamage * 2);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
             collision.collider.GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(trapDamage);
+        }
+        else if (collision.collider.CompareTag("Enemy"))
+        {
+            collision.collider.GetComponent<EnemyControllerStatus>().EnemyTakenDamage(trapDamage * 2);
         }
     }
 

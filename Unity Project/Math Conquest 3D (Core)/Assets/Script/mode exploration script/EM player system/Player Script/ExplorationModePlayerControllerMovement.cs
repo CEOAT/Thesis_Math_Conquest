@@ -13,6 +13,12 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     [Header("Player Interaction")]
     public Transform playerRaycastPoint;
 
+    [Header("Player Ground System")]
+    [SerializeField] private float playerGroudRaycastRange;
+    private Ray groundCheckRay;
+    private RaycastHit groundRayCastHit;
+    [SerializeField] private LayerMask groundLayerMask;
+
     [Header("Player Status")]
     public string playerStatus = "player status";
     public bool canControlCharacter = false;
@@ -72,6 +78,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             PlayerIdle();
             PlayerMove();
             PlayerRun();
+            PlayerFloating();
             PlayerAnimation();
         }
     }
@@ -129,6 +136,21 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         else
         {
             playerMoveSpeed = playerWalkSpeed;
+        }
+    }
+    private void PlayerFloating()
+    {
+        groundCheckRay = new Ray(transform.position, Vector3.down);
+        if(Physics.Raycast(groundCheckRay, out groundRayCastHit, playerGroudRaycastRange, groundLayerMask, QueryTriggerInteraction.Ignore))
+        {
+            Debug.DrawLine(groundCheckRay.origin, groundRayCastHit.point, Color.green);
+            animator.SetBool("isFloating", false);
+        }
+
+        else
+        {
+            Debug.DrawLine(groundCheckRay.origin, groundCheckRay.origin + groundCheckRay.direction * playerGroudRaycastRange, Color.green);
+            animator.SetBool("isFloating", true);
         }
     }
 
