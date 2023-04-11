@@ -172,6 +172,8 @@ public class EnemyControllerMovement : MonoBehaviour
     
     private void EnemyCheckFacing()
     {
+        if(playerTransform == null) { return; }
+
         if(enemyType == EnemyType.chaseAndHit ||
             enemyType == EnemyType.shooterAndChase)
         {
