@@ -57,6 +57,7 @@ public class CutsceneControllerDialog : MonoBehaviour
         DialogManager.dialogText.GetComponent<TMP_Text>();
         DialogManager.speakerImage.GetComponent<Image>();
         DialogManager.dialogButton.GetComponent<Animator>();
+
         speakerImageAnimator = DialogManager.speakerImage.GetComponent<Animator>();
     }
     
@@ -69,6 +70,9 @@ public class CutsceneControllerDialog : MonoBehaviour
             SetupDialog();
             PlayNextDialog();
             GameController.TriggerCutscene();
+            DialogManager.zetaAnimator.GetComponent<Animator>().SetBool("isZetaHumanForm", true);
+            Instantiate(DialogManager.zetaShapeShiftParticle, DialogManager.zetaAnimator.position + (Vector3.down * 0.2f), DialogManager.zetaAnimator.rotation);
+            
         }
     }
     private void EndDialogCutscene()
@@ -79,6 +83,9 @@ public class CutsceneControllerDialog : MonoBehaviour
         GameController.AllowMovement();
         DestroySpeakerEmotionEffectSprite();
         CountDialogSet();
+        DialogManager.zetaAnimator.GetComponent<Animator>().SetBool("isZetaHumanForm", false);
+        GameObject particleShifting = Instantiate(DialogManager.zetaShapeShiftParticle, DialogManager.zetaAnimator.position + (Vector3.down * 0.15f), DialogManager.zetaAnimator.rotation);
+        particleShifting.transform.localScale -= new Vector3(.5f,.5f,.5f);
 
         if (isDialogRepeatable == true)
         {

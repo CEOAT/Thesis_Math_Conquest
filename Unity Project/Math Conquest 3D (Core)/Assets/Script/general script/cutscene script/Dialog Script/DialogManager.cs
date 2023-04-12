@@ -13,4 +13,6 @@ public class DialogManager: MonoBehaviour
     [SerializeField] public TMP_Text dialogText;
     [SerializeField] public Animator dialogButton;
     [SerializeField] public GameObject backgroundTransitionPrefab; 
+    [SerializeField] public Transform zetaAnimator;
+    [SerializeField] public GameObject zetaShapeShiftParticle;
 }
