@@ -176,6 +176,7 @@ public class ExplorationModeGameController : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         GameOverWindowGroup.SetActive(true);
+        playerGameObject.transform.position += Vector3.up * 500;
     }
 
     // In-Game Menu UI
