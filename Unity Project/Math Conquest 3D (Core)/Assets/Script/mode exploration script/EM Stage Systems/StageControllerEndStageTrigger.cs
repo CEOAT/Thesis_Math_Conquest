@@ -43,11 +43,12 @@ public class StageControllerEndStageTrigger : MonoBehaviour
     }
     private IEnumerator EndStageSequence()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.5f);
         endStageCanvasObject = Instantiate(endStageCanvasPrefab).transform;
         
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         endStageWindowObject = Instantiate(endStageWindowPrefab, endStageCanvasObject.transform).transform;
+        Destroy(GameController.playerGameObject.GetComponent<Rigidbody>());
         GameController.playerGameObject.position += new Vector3(0, 100, 0);
         AssignStringToText();
         SaveData.SaveGameEndStage();
@@ -55,7 +56,7 @@ public class StageControllerEndStageTrigger : MonoBehaviour
     private void AssignStringToText()
     {
         endStageWindowObject.GetChild(1).GetComponent<TMP_Text>().text = stageName;
-        endStageWindowObject.GetChild(2).GetComponent<TMP_Text>().text = ScoreController.CheckTime().ToString();
+        endStageWindowObject.GetChild(2).GetComponent<TMP_Text>().text = ScoreController.CheckTime();
         endStageWindowObject.GetChild(3).GetComponent<TMP_Text>().text = ScoreController.CheckGrade().ToString();
         endStageWindowObject.GetChild(4).GetComponent<Button>().onClick.AddListener(GameController.MenuReturnToStageSelection);
         endStageWindowObject.GetChild(5).GetComponent<Button>().onClick.AddListener(GameController.MenuRestartStage);

@@ -29,9 +29,10 @@ public class StageControllerEndStageScore : MonoBehaviour
         }
     }
 
-    public int CheckTime()
+    public string CheckTime()
     {
-        return timeCount;
+        string timeText = $"{timeCount/60} Minute {timeCount%60} Second";
+        return timeText;
     }
     public string CheckGrade()
     {

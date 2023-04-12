@@ -138,18 +138,53 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             playerMoveSpeed = playerWalkSpeed;
         }
     }
+
+    private bool isRayLeftOnGround;
+    private bool isRayRightOnGround;
     private void PlayerFloating()
     {
-        groundCheckRay = new Ray(transform.position, Vector3.down);
+        CheckRayLeft();
+        CheckRayRight();
+        CheckIfPlayerFloating();
+    }
+    private void CheckRayLeft()
+    {
+        groundCheckRay = new Ray(transform.position, Vector3.down + (Vector3.left * 0.5f));
         if(Physics.Raycast(groundCheckRay, out groundRayCastHit, playerGroudRaycastRange, groundLayerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(groundCheckRay.origin, groundRayCastHit.point, Color.green);
-            animator.SetBool("isFloating", false);
+            isRayLeftOnGround = false;
         }
 
         else
         {
-            Debug.DrawLine(groundCheckRay.origin, groundCheckRay.origin + groundCheckRay.direction * playerGroudRaycastRange, Color.green);
+            Debug.DrawLine(groundCheckRay.origin, groundCheckRay.origin + groundCheckRay.direction * playerGroudRaycastRange, Color.red);
+            isRayLeftOnGround = true;
+        }
+    }
+    private void CheckRayRight()
+    {
+        groundCheckRay = new Ray(transform.position, Vector3.down + (Vector3.right * 0.5f));
+        if(Physics.Raycast(groundCheckRay, out groundRayCastHit, playerGroudRaycastRange, groundLayerMask, QueryTriggerInteraction.Ignore))
+        {
+            Debug.DrawLine(groundCheckRay.origin, groundRayCastHit.point, Color.green);
+            isRayRightOnGround = false;
+        }
+
+        else
+        {
+            Debug.DrawLine(groundCheckRay.origin, groundCheckRay.origin + groundCheckRay.direction * playerGroudRaycastRange, Color.red);
+            isRayRightOnGround = true;
+        }
+    }
+    private void CheckIfPlayerFloating()
+    {
+        if(isRayLeftOnGround == false && isRayRightOnGround == false)
+        {
+            animator.SetBool("isFloating", false);
+        }
+        else if(isRayLeftOnGround == true && isRayRightOnGround == true)
+        {
             animator.SetBool("isFloating", true);
         }
     }

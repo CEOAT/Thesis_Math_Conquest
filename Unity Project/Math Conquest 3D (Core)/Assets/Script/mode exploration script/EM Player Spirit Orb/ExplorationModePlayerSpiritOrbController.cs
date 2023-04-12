@@ -8,6 +8,7 @@ public class ExplorationModePlayerSpiritOrbController : MonoBehaviour
     public Transform playerTransform;
     public Transform spiritFollowPointTransform;
     public Transform spiritFollowPointCurrent;
+    [SerializeField] private float followSpeed = 1.5f;
 
     [Header("Spirit Sprite")]
     public SpriteRenderer SpiritSprite;
@@ -30,7 +31,7 @@ public class ExplorationModePlayerSpiritOrbController : MonoBehaviour
     }
     private void SpiritMoveToFollowPoint()
     {
-        transform.position = Vector3.Lerp(transform.position, spiritFollowPointCurrent.position, Mathf.Clamp(Time.deltaTime, 0f, 1f) * 1.5f);
+        transform.position = Vector3.Lerp(transform.position, spiritFollowPointCurrent.position, Mathf.Clamp(Time.deltaTime, 0f, 1f) * followSpeed);
     }
     private void CheckFacing()
     {

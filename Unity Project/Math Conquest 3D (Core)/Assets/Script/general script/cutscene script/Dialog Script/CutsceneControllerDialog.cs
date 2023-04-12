@@ -71,8 +71,8 @@ public class CutsceneControllerDialog : MonoBehaviour
             PlayNextDialog();
             GameController.TriggerCutscene();
             DialogManager.zetaAnimator.GetComponent<Animator>().SetBool("isZetaHumanForm", true);
-            Instantiate(DialogManager.zetaShapeShiftParticle, DialogManager.zetaAnimator.position + (Vector3.down * 0.2f), DialogManager.zetaAnimator.rotation);
-            
+            GameObject particleShifting = Instantiate(DialogManager.zetaShapeShiftParticle, DialogManager.zetaAnimator.position + (Vector3.down * 0.2f), DialogManager.zetaAnimator.rotation);
+            Destroy(particleShifting, 1f);
         }
     }
     private void EndDialogCutscene()
@@ -86,6 +86,7 @@ public class CutsceneControllerDialog : MonoBehaviour
         DialogManager.zetaAnimator.GetComponent<Animator>().SetBool("isZetaHumanForm", false);
         GameObject particleShifting = Instantiate(DialogManager.zetaShapeShiftParticle, DialogManager.zetaAnimator.position + (Vector3.down * 0.15f), DialogManager.zetaAnimator.rotation);
         particleShifting.transform.localScale -= new Vector3(.5f,.5f,.5f);
+        Destroy(particleShifting, 1f);
 
         if (isDialogRepeatable == true)
         {
@@ -165,6 +166,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         if(dialogIndex > dialogSettList[dialogSetIndex].dialogClass.DialogSet.Count - 1) { return; }
         DialogManager.speakerText.text = dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].speakerString;
+        DialogManager.dialogText.text = "";
         SetSpeakerImage();
         SetBackgroundImage();
         PlaySpeakerAnimation();
@@ -296,7 +298,6 @@ public class CutsceneControllerDialog : MonoBehaviour
         canForceEndDialog = false;
         yield return new WaitForSeconds(backgroundTransitionCurrentWaitTime);
 
-        DialogManager.dialogText.text = "";
         isDialogActive = true;
         canForceEndDialog = true;
         foreach (char letterOfDialog in dialog.ToCharArray())
