@@ -189,15 +189,27 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         }
     }
 
+    private int attackCount = 1;
     public void PlayerAttackPerform()
     {
         animator.SetTrigger("triggerAttack");
+        CountAttack();
         PlayerWait();
         PlayerDisabledMovement();
     }
+    private void CountAttack()
+    {
+        animator.SetInteger("intAttackCount", attackCount);
+        attackCount++;
+        if(attackCount > 3) { attackCount = 1; }
+    }
+
+    [Header("Mirror Setting")]
+    [SerializeField] private bool isPlayerMirror = false;
+
     public void PlayerCheckFacingTarget(Transform targetEnemy)
     {
-        if(transform.localScale.x > 0)
+        if(!isPlayerMirror)
         {
             if (targetEnemy.position.x < transform.position.x)
             {
@@ -208,7 +220,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
         }
-        else if(transform.localScale.x < 0)
+        else
         {
             if (targetEnemy.position.x < transform.position.x)
             {
