@@ -387,7 +387,7 @@ public class CutsceneControllerDialog : MonoBehaviour
             StartDialogCutscene();
         }
     }
-    private void SetupControl()
+    public void SetupControl()
     {
         playerInput = new MasterInput();
         playerInput.PlayerControlGeneral.NextDialog.performed += context => PlayNextDialog();
@@ -411,7 +411,7 @@ public class CutsceneControllerDialogTester : Editor
         CutsceneControllerDialog dialog = (CutsceneControllerDialog)target;
 
         EditorGUI.BeginDisabledGroup(dialog.DialogManager.DialogUI.activeSelf == true);
-        if (GUILayout.Button("Start Dialog")) {dialog.StartDialogCutscene();}
+        if (GUILayout.Button("Start Dialog")) {dialog.StartDialogCutscene(); dialog.SetupControl();}
         EditorGUI.EndDisabledGroup();
 
         EditorGUI.BeginDisabledGroup(dialog.DialogManager.DialogUI.activeSelf == false);

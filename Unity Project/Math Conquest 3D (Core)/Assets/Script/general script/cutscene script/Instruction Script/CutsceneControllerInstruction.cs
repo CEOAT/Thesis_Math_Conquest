@@ -9,17 +9,12 @@ using Sirenix.OdinInspector;
 public class CutsceneControllerInstruction : MonoBehaviour
 {
     [Header("Instruction Page Number")]
-    [ReadOnly] public int pageCurrent;
-    [ReadOnly] public int pageTotal;
-    [ReadOnly] public int elementInPageTotal;
+    private int pageCurrent;
+    private int pageTotal;
+    private int elementInPageTotal;
 
-    [Header("Instruction Page Objects")]
-    public GameObject instructionPageUiGroup;
-    public TMP_Text pageNumber;
-    public GameObject buttonNextPageObject;
-    public TMP_Text buttonNextPageText;
-    public GameObject buttonPreviousPageObject;
-    public TMP_Text buttonPreviousPageText;
+    [Header("Instruction Manager")]
+    [SerializeField] public InstructionManager InstructionManager;
 
     [Header("Game Controller Object")]
     public ExplorationModeGameController GameController;
@@ -49,9 +44,9 @@ public class CutsceneControllerInstruction : MonoBehaviour
     }
     private void SetupComponent()
     {
-        pageNumber.GetComponent<TMP_Text>();
-        buttonNextPageText.GetComponent<TMP_Text>();
-        buttonPreviousPageText.GetComponent<TMP_Text>();
+        InstructionManager.pageNumber.GetComponent<TMP_Text>();
+        InstructionManager.buttonNextPageText.GetComponent<TMP_Text>();
+        InstructionManager.buttonPreviousPageText.GetComponent<TMP_Text>();
     }
     private void SetupVariable()
     {
@@ -71,7 +66,7 @@ public class CutsceneControllerInstruction : MonoBehaviour
 
     private void Start()
     {
-        instructionPageUiGroup.SetActive(false);
+        InstructionManager.instructionPageUiGroup.SetActive(false);
     }
 #endregion
 
@@ -114,13 +109,13 @@ public class CutsceneControllerInstruction : MonoBehaviour
 #region event related function
     private void ButtonSetEvent()
     {
-        buttonNextPageObject.GetComponent<Button>().onClick.AddListener(NextPage);
-        buttonPreviousPageObject.GetComponent<Button>().onClick.AddListener(PreviousPage);
+        InstructionManager.buttonNextPageObject.GetComponent<Button>().onClick.AddListener(NextPage);
+        InstructionManager.buttonPreviousPageObject.GetComponent<Button>().onClick.AddListener(PreviousPage);
     }
     private void ButtonRemoveEvent()
     {
-        buttonNextPageObject.GetComponent<Button>().onClick.RemoveAllListeners();
-        buttonPreviousPageObject.GetComponent<Button>().onClick.RemoveAllListeners();
+        InstructionManager.buttonNextPageObject.GetComponent<Button>().onClick.RemoveAllListeners();
+        InstructionManager.buttonPreviousPageObject.GetComponent<Button>().onClick.RemoveAllListeners();
     }
     private void DisplayFirstPage()
     {
@@ -158,7 +153,7 @@ public class CutsceneControllerInstruction : MonoBehaviour
         ButtonRemoveEvent();
         PlayerInput.Disable();
 
-        instructionPageUiGroup.SetActive(false);
+        InstructionManager.instructionPageUiGroup.SetActive(false);
         HideLastPageElementNextButton();
 
         pageCurrent = pageTotal;
@@ -238,22 +233,22 @@ public class CutsceneControllerInstruction : MonoBehaviour
 
     private void CheckCurrentPageUi()
     {
-        pageNumber.text = $"{pageCurrent} of {pageTotal}";
+        InstructionManager.pageNumber.text = $"{pageCurrent} of {pageTotal}";
 
         if (pageCurrent == pageTotal)
         {
-            buttonNextPageText.text = "End";
-            buttonPreviousPageObject.SetActive(true);
+            InstructionManager.buttonNextPageText.text = "End";
+            InstructionManager.buttonPreviousPageObject.SetActive(true);
         }
         else if(pageCurrent > 1 && pageCurrent < pageTotal)
         {
-            buttonNextPageText.text = "Next";
-            buttonPreviousPageObject.SetActive(true);
+            InstructionManager.buttonNextPageText.text = "Next";
+            InstructionManager.buttonPreviousPageObject.SetActive(true);
         }
         else if (pageCurrent == 1)
         {
-            buttonNextPageText.text = "Next";
-            buttonPreviousPageObject.SetActive(false);
+            InstructionManager.buttonNextPageText.text = "Next";
+            InstructionManager.buttonPreviousPageObject.SetActive(false);
         }
     }
 #endregion
@@ -269,7 +264,7 @@ public class CutsceneControllerInstruction : MonoBehaviour
     public void StartInstructionCutscene()
     {
         PlayerInput.Enable();
-        instructionPageUiGroup.SetActive(true);
+        InstructionManager.instructionPageUiGroup.SetActive(true);
         DisplayFirstPage();
         GameController.TriggerCutscene();
         GameController.DisablePauseGame();
@@ -287,15 +282,15 @@ public class CutsceneControllerInstructionTester : Editor
 
         CutsceneControllerInstruction instruction = (CutsceneControllerInstruction)target;
 
-        EditorGUI.BeginDisabledGroup(instruction.instructionPageUiGroup.activeSelf == true);
+        EditorGUI.BeginDisabledGroup(instruction.InstructionManager.instructionPageUiGroup.activeSelf == true);
         if (GUILayout.Button("Start Instuction")) { instruction.StartInstructionCutscene(); }
         EditorGUI.EndDisabledGroup();
 
-        EditorGUI.BeginDisabledGroup(instruction.instructionPageUiGroup.activeSelf == false);
+        EditorGUI.BeginDisabledGroup(instruction.InstructionManager.instructionPageUiGroup.activeSelf == false);
         if (GUILayout.Button("Next Page")) { instruction.NextPage(); }
         EditorGUI.EndDisabledGroup();
 
-        EditorGUI.BeginDisabledGroup(instruction.instructionPageUiGroup.activeSelf == false);
+        EditorGUI.BeginDisabledGroup(instruction.InstructionManager.instructionPageUiGroup.activeSelf == false);
         if (GUILayout.Button("Previous Page")) { instruction.PreviousPage(); }
         EditorGUI.EndDisabledGroup();
     }

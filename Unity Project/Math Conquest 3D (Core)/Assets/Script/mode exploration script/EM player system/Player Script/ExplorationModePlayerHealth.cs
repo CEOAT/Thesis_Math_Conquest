@@ -129,7 +129,7 @@ public class ExplorationModePlayerHealth : MonoBehaviour
     // test button
     public void TestDamagePlayer()
     {
-        PlayerTakenDamage(50f);
+        PlayerTakenDamage(10f);
     }
 }
 

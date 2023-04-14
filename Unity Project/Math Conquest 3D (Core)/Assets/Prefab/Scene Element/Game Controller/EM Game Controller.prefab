@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5876758486017747192}
   - component: {fileID: 8543283494750403515}
   - component: {fileID: 1684701009}
+  - component: {fileID: 8005649171096536387}
   m_Layer: 0
   m_Name: EM Game Controller
   m_TagString: Untagged
@@ -78,6 +79,8 @@ MonoBehaviour:
   GameController: {fileID: 4994313322238069128}
   SaveController: {fileID: 8543283494750403515}
   checkpointCurrentIndex: 0
+  isReadyToCreateEnterEffect: 0
+  checkpointEnterParticleEffect: {fileID: 0}
   checkpointList:
   - {fileID: 0}
   - {fileID: 0}
@@ -113,4 +116,25 @@ MonoBehaviour:
   speakerEffectSpawnpoint: {fileID: 0}
   dialogText: {fileID: 0}
   dialogButton: {fileID: 0}
-  backgroundTransitionPrefab: {fileID: 0}
+  backgroundTransitionPrefab: {fileID: 4722997382980211500, guid: ce39cc120c0ee774d84e2a71faa93cc8,
+    type: 3}
+  zetaAnimator: {fileID: 0}
+  zetaShapeShiftParticle: {fileID: 0}
+--- !u!114 &8005649171096536387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4994313322238069129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ccee92c4437994ab57e2c4229dc061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructionPageUiGroup: {fileID: 0}
+  pageNumber: {fileID: 0}
+  buttonNextPageObject: {fileID: 0}
+  buttonNextPageText: {fileID: 0}
+  buttonPreviousPageObject: {fileID: 0}
+  buttonPreviousPageText: {fileID: 0}

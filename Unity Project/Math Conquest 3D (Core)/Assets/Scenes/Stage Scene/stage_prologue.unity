@@ -856,75 +856,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1001 &162283909
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8836731323373598291, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone Obstacle-1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 53.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -8.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836731323373598294, guid: 332aa9d088db5d543bca553e1e578fcd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 332aa9d088db5d543bca553e1e578fcd, type: 3}
 --- !u!1 &196580090
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,6 +1988,11 @@ PrefabInstance:
       propertyPath: GameController
       value: 
       objectReference: {fileID: 1390102367}
+    - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
+        type: 3}
+      propertyPath: InstructionManager
+      value: 
+      objectReference: {fileID: 1877917146}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
       propertyPath: buttonNextPageText
@@ -3211,7 +3147,7 @@ PrefabInstance:
     - target: {fileID: 4676851992140006750, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
@@ -3223,6 +3159,11 @@ PrefabInstance:
       propertyPath: GameController
       value: 
       objectReference: {fileID: 1390102367}
+    - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
+        type: 3}
+      propertyPath: InstructionManager
+      value: 
+      objectReference: {fileID: 1877917146}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
       propertyPath: buttonNextPageText
@@ -5633,9 +5574,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1734127907}
     m_Modifications:
+    - target: {fileID: 909731488461213599, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909731490353994238, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1208461748}
+    - target: {fileID: 909731490353994238, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayerTypeAnswerAnimation
+      objectReference: {fileID: 0}
     - target: {fileID: 2808984493866788277, guid: be224cfe16c7edc41bf5d9174348023e,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692517890659639632, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3692517891013600404, guid: be224cfe16c7edc41bf5d9174348023e,
@@ -5973,6 +5934,11 @@ PrefabInstance:
       propertyPath: GameController
       value: 
       objectReference: {fileID: 1390102367}
+    - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
+        type: 3}
+      propertyPath: InstructionManager
+      value: 
+      objectReference: {fileID: 1877917146}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
       propertyPath: buttonNextPageText
@@ -9964,6 +9930,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.0659309
       objectReference: {fileID: 0}
+    - target: {fileID: 729755037, guid: 49c1a2e6ee95d55428c5990d8699738e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.92200005
+      objectReference: {fileID: 0}
     - target: {fileID: 2430912693709566475, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: MaxDistance
@@ -10666,7 +10636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1263495947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11170,6 +11140,11 @@ PrefabInstance:
       objectReference: {fileID: 1390102367}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
+      propertyPath: InstructionManager
+      value: 
+      objectReference: {fileID: 1877917146}
+    - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
+        type: 3}
       propertyPath: buttonNextPageText
       value: 
       objectReference: {fileID: 499785045}
@@ -11555,6 +11530,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4277182931813492511, guid: 7d84c7c9b69f303438dfb28f1399db61,
         type: 3}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: pageNumber
+      value: 
+      objectReference: {fileID: 1477367902}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: buttonNextPageText
+      value: 
+      objectReference: {fileID: 499785045}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: buttonNextPageObject
+      value: 
+      objectReference: {fileID: 1477367905}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: buttonPreviousPageText
+      value: 
+      objectReference: {fileID: 1477367903}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: instructionPageUiGroup
+      value: 
+      objectReference: {fileID: 1477367906}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: buttonPreviousPageObject
+      value: 
+      objectReference: {fileID: 1477367904}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
 --- !u!114 &1390102367 stripped
@@ -11683,7 +11688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1430954497
 Transform:
   m_ObjectHideFlags: 0
@@ -12919,6 +12924,11 @@ PrefabInstance:
       propertyPath: GameController
       value: 
       objectReference: {fileID: 1390102367}
+    - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
+        type: 3}
+      propertyPath: InstructionManager
+      value: 
+      objectReference: {fileID: 1877917146}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
       propertyPath: buttonNextPageText
@@ -14995,6 +15005,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1877917146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1390102366}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ccee92c4437994ab57e2c4229dc061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1878070856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16616,17 +16638,17 @@ PrefabInstance:
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.46
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9961773
+      value: -6.85
       objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.638327
+      value: -22.8
       objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
@@ -16641,12 +16663,12 @@ PrefabInstance:
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9914449
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.13052624
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
@@ -16681,17 +16703,17 @@ PrefabInstance:
     - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 39.46
       objectReference: {fileID: 0}
     - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 8.846177
       objectReference: {fileID: 0}
     - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -42.438324
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 182feb26373d01e4c94cd767a22709ac, type: 3}
@@ -16991,6 +17013,11 @@ PrefabInstance:
       propertyPath: GameController
       value: 
       objectReference: {fileID: 1390102367}
+    - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
+        type: 3}
+      propertyPath: InstructionManager
+      value: 
+      objectReference: {fileID: 1877917146}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
       propertyPath: buttonNextPageText
