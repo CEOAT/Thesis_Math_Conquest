@@ -23,7 +23,6 @@ public class ExplorationModePlayerAttackSystem : MonoBehaviour
     public TMP_Text playerAnswerText;
     public Animator playerAnswerAnimator;
     public AnimationClip playerAnswerTextAnimationType;
-    public AnimationClip playerAnswerTextAnimationClear;
 
     [Header("Auto Add Target System")]
     public List<Transform> enemyList = new List<Transform>();
