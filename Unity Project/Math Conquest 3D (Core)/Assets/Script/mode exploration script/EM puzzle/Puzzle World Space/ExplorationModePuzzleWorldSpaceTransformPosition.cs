@@ -6,11 +6,16 @@ public class ExplorationModePuzzleWorldSpaceTransformPosition : ExplorationModeP
 {
     private  Vector3 positionInitial;
     private Vector3 positionNew;
+    private bool isCompleteAssignValue;
 
     private void Start()
     {
-        positionInitial = objectWorldSpacePuzzle.localPosition;
-        positionNew = positionInitial;
+        if(isCompleteAssignValue == false)
+        {
+            positionInitial = objectWorldSpacePuzzle.localPosition;
+            positionNew = positionInitial;
+            isCompleteAssignValue = true;
+        }
     }
 
     public override void ApplyValueToObject()
@@ -30,6 +35,6 @@ public class ExplorationModePuzzleWorldSpaceTransformPosition : ExplorationModeP
 
     public override void LerpToNewValue()
     {
-        objectWorldSpacePuzzle.localPosition = Vector3.Lerp(objectWorldSpacePuzzle.localPosition, positionNew, 0.1f);
+        objectWorldSpacePuzzle.localPosition = Vector3.Lerp(objectWorldSpacePuzzle.localPosition, positionNew, base.lerpingSpeed);
     }
 }

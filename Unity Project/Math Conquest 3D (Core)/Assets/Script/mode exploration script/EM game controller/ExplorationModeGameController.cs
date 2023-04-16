@@ -81,6 +81,7 @@ public class ExplorationModeGameController : MonoBehaviour
         GameplayUiGroup.SetActive(false);
         CutsceneBlackBar.SetBool("isBlackBarMoveIn", true);
         playerGameObject.gameObject.layer = LayerMask.NameToLayer("Default");
+        playerGameObject.GetComponent<Rigidbody>().useGravity = false;
     }
     public void TriggerHideUi()
     {
@@ -96,6 +97,7 @@ public class ExplorationModeGameController : MonoBehaviour
         GameplayUiGroup.SetActive(true);
         CutsceneBlackBar.SetBool("isBlackBarMoveIn", false);
         playerGameObject.gameObject.layer = LayerMask.NameToLayer("Player");
+        playerGameObject.GetComponent<Rigidbody>().useGravity = true;
     }
     #endregion
 
