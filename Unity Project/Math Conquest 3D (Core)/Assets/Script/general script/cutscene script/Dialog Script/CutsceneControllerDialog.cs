@@ -24,7 +24,7 @@ public class CutsceneControllerDialog : MonoBehaviour
     private GameObject speakerEmotionEffectObject;
 
     [Header("Dialog Typing and Waiting Time")]
-    private float typeLetterInterval = 0.075f;
+    private float typeLetterInterval = 0.035f;
     private float nextDialogWaitTime = 0.2f;
     private float backgroundTransitionMaxtWaitTime = 0.3f;
     private float backgroundTransitionCurrentWaitTime = 0f;

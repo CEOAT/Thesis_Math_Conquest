@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
     [SerializeField] public List<float> minimumValueList;
     [SerializeField] public List<float> maximumValueList;
     [SerializeField] public List<float> vairableList = new List<float>();
+    [SerializeField] public float lerpingSpeed = .1f;
+    [SerializeField] public bool isPlayerMoveAlongObject;
+    [ShowIf("isPlayerMoveAlongObject")] public float playerStandingOffset;
+
     
     private ExplorationModeObjectInteractable InteractableObject;
     private ExplorationModePuzzleWorldSpaceWindow PuzzleWorldSpaceWindow;
@@ -75,12 +80,21 @@ public class ExplorationModePuzzleWorldSpaceTransform : MonoBehaviour
         if(PuzzleWorldSpaceWindow.isPuzzleWindowActive == true)
         {
             LerpToNewValue();
+            MovePlayWithObject();
             print("puzzle active");
         }
     }
     public virtual void LerpToNewValue()
     {
         // add lerping method here
+    }
+    private void MovePlayWithObject()
+    {
+        if(isPlayerMoveAlongObject)
+        {
+            InteractableObject.GameController.playerGameObject.transform.position = objectWorldSpacePuzzle.position + (Vector3.up * playerStandingOffset);
+            transform.position = objectWorldSpacePuzzle.position + new Vector3(0, playerStandingOffset + 1.5f, 0.25f);
+        }
     }
 
     private void OnDisable()

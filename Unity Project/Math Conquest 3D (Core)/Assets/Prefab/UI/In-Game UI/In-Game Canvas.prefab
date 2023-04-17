@@ -198,11 +198,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog UI Group
       objectReference: {fileID: 0}
-    - target: {fileID: 2109669961796371669, guid: 9c10f1258aa41e746943c85992ea98d2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2109669961796371670, guid: 9c10f1258aa41e746943c85992ea98d2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -308,42 +303,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2109669962453444605, guid: 9c10f1258aa41e746943c85992ea98d2,
-        type: 3}
-      propertyPath: m_text
-      value: "\u0E2A\u0E1B\u0E35\u0E01\u0E40\u0E01\u0E2D\u0E23\u0E4C"
-      objectReference: {fileID: 0}
-    - target: {fileID: 2109669962999466873, guid: 9c10f1258aa41e746943c85992ea98d2,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2109669962999466873, guid: 9c10f1258aa41e746943c85992ea98d2,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2109669962999466873, guid: 9c10f1258aa41e746943c85992ea98d2,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2109669962999466873, guid: 9c10f1258aa41e746943c85992ea98d2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -559
-      objectReference: {fileID: 0}
-    - target: {fileID: 2109669962999466873, guid: 9c10f1258aa41e746943c85992ea98d2,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2109669962999466874, guid: 9c10f1258aa41e746943c85992ea98d2,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 8bfe9e911d8252b49bff66b7e0eb6d9d,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c10f1258aa41e746943c85992ea98d2, type: 3}
 --- !u!224 &3348840641786616997 stripped
@@ -352,32 +311,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3692517889949718643}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3348840642957497099 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2109669962999466872, guid: 9c10f1258aa41e746943c85992ea98d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3692517889949718643}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &8132618680668593009
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3348840642957497099}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8e57a1129ffa80f4eaa33c22e5a0b114, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3692517890082755580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,6 +318,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3692517891013600404}
     m_Modifications:
+    - target: {fileID: 4584231818692481293, guid: 174f37ef83c4e9245bed5805502a4989,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4584231818934328416, guid: 174f37ef83c4e9245bed5805502a4989,
         type: 3}
       propertyPath: m_Name
@@ -494,6 +432,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584231820582155428, guid: 174f37ef83c4e9245bed5805502a4989,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174f37ef83c4e9245bed5805502a4989, type: 3}

@@ -153,13 +153,13 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         if(Physics.Raycast(groundCheckRay, out groundRayCastHit, playerGroudRaycastRange, groundLayerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(groundCheckRay.origin, groundRayCastHit.point, Color.green);
-            isRayLeftOnGround = false;
+            isRayLeftOnGround = true;
         }
 
         else
         {
             Debug.DrawLine(groundCheckRay.origin, groundCheckRay.origin + groundCheckRay.direction * playerGroudRaycastRange, Color.red);
-            isRayLeftOnGround = true;
+            isRayLeftOnGround = false;
         }
     }
     private void CheckRayRight()
@@ -168,24 +168,24 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         if(Physics.Raycast(groundCheckRay, out groundRayCastHit, playerGroudRaycastRange, groundLayerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(groundCheckRay.origin, groundRayCastHit.point, Color.green);
-            isRayRightOnGround = false;
+            isRayRightOnGround = true;
         }
 
         else
         {
             Debug.DrawLine(groundCheckRay.origin, groundCheckRay.origin + groundCheckRay.direction * playerGroudRaycastRange, Color.red);
-            isRayRightOnGround = true;
+            isRayRightOnGround = false;
         }
     }
     private void CheckIfPlayerFloating()
     {
         if(isRayLeftOnGround == false && isRayRightOnGround == false)
         {
-            animator.SetBool("isFloating", false);
-        }
-        else if(isRayLeftOnGround == true && isRayRightOnGround == true)
-        {
             animator.SetBool("isFloating", true);
+        }
+        else if(isRayLeftOnGround == true || isRayRightOnGround == true)
+        {
+            animator.SetBool("isFloating", false);
         }
     }
 

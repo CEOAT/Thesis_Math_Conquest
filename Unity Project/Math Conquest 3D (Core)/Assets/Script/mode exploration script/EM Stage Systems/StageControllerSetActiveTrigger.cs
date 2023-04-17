@@ -15,8 +15,8 @@ public class StageControllerSetActiveTrigger : MonoBehaviour
     {
         if(player.tag == "Player")
         {
-            ActiveObject();
             DeactiveObject();
+            ActiveObject();
             ReverseActiveObject();
             CheckDeactivationType();
         }

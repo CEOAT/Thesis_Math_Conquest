@@ -33,6 +33,6 @@ public class ExplorationModePuzzleWorldSpaceTransformRotation : ExplorationModeP
 
     public override void LerpToNewValue()
     {
-        objectWorldSpacePuzzle.rotation = Quaternion.Lerp(objectWorldSpacePuzzle.rotation, Quaternion.Euler(vectorRotationNew), 0.1f);
+        objectWorldSpacePuzzle.rotation = Quaternion.Lerp(objectWorldSpacePuzzle.rotation, Quaternion.Euler(vectorRotationNew), base.lerpingSpeed);
     }
 }
