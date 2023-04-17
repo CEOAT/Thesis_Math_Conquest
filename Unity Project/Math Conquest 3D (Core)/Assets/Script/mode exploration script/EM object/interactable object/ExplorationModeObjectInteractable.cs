@@ -272,28 +272,24 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
         }
     }
 
-    private void CheckEnemyInRange()
+    [SerializeField] private LayerMask layerMask;
+    private bool isNoEnemyInRange;
+    public bool CheckNoEnemyInRange()
     {
-        // if (PlayerMovement.canControlCharacter == false) { return; }
+        isNoEnemyInRange = true;
 
-        // interactableObject = Physics.OverlapSphere(
-        //         transform.position,
-        //         0.5f,
-        //         interactableLayerMask);
+        Collider[] enemyArray = Physics.OverlapSphere(transform.position, enemyCheckRange, layerMask);
 
-        // if (interactableObject.Length != 0)
-        // {
-        //     if (interactableObject[0].transform.CompareTag("Interactable") == true)
-        //     {
-        //         ExplorationModeObjectInteractable InteractableObject = interactableObject[0].transform.GetComponent<ExplorationModeObjectInteractable>();
-        //         if (InteractableObject.isReadyToInteract == true)
-        //         {
-        //             InteractableObject.Interacted();
-        //             PlayerMovement.PlayerWait();
-        //             PlayerMovement.PlayerInteract();
-        //         }
-        //     }
-        // }
+        foreach(Collider gameObject in enemyArray)
+        {
+            if(gameObject.tag == "Enemy")
+            {
+                isNoEnemyInRange = false;
+                break;
+            }
+        }
+
+        return isNoEnemyInRange;
     }
     private void OnDrawGizmosSelected()
     {

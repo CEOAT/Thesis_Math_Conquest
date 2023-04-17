@@ -52,7 +52,9 @@ public class ExplorationModePlayerControllerInteraction : MonoBehaviour
             if (interactableObject[0].transform.CompareTag("Interactable") == true)
             {
                 ExplorationModeObjectInteractable InteractableObject = interactableObject[0].transform.GetComponent<ExplorationModeObjectInteractable>();
-                if (InteractableObject.isReadyToInteract == true && InteractableObject.interactionType != ExplorationModeObjectInteractable.InteractionType.uninteractable)
+                if (InteractableObject.isReadyToInteract == true 
+                && InteractableObject.interactionType != ExplorationModeObjectInteractable.InteractionType.uninteractable
+                && InteractableObject.CheckNoEnemyInRange() == true)
                 {
                     InteractableObject.Interacted();
                     PlayerMovement.PlayerWait();
