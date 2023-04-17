@@ -30,6 +30,6 @@ public class ExplorationModePuzzleWorldSpaceTransformSize : ExplorationModePuzzl
 
     public override void LerpToNewValue()
     {
-        objectWorldSpacePuzzle.localScale = Vector3.Lerp(objectWorldSpacePuzzle.localScale, sizeNew, 0.1f);
+        objectWorldSpacePuzzle.localScale = Vector3.Lerp(objectWorldSpacePuzzle.localScale, sizeNew, base.lerpingSpeed);
     }
 }

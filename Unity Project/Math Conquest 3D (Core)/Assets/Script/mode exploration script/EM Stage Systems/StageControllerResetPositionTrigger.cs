@@ -28,6 +28,7 @@ public class StageControllerResetPositionTrigger : MonoBehaviour
         if(player.tag == "Player")
         {
             ResetPostion();
+            this.gameObject.SetActive(false);
         }
     }
     private void ResetPostion()

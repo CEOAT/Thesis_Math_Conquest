@@ -91,7 +91,8 @@ public class ExplorationModeObjectTrap : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<ExplorationModePlayerHealth>().PlayerTakenDamage(trapDamage);
+            if(other.TryGetComponent<ExplorationModePlayerHealth>(out ExplorationModePlayerHealth playerHealth))
+                playerHealth.PlayerTakenDamage(trapDamage);
         }
         else if (other.CompareTag("Enemy"))
         {
