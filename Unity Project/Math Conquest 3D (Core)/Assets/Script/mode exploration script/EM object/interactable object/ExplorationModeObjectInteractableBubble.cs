@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExplorationModeObjectInteractableBubble : MonoBehaviour
 {
     [Header("Interact Bubble")]
-    public GameObject interactableBubbbleObject;
+    [SerializeField] public GameObject interactableBubbbleObject;
     private Animator interactableBubbbleAnimator;
     private ExplorationModeObjectInteractable ObjectInteractable;
 
@@ -59,19 +59,18 @@ public class ExplorationModeObjectInteractableBubble : MonoBehaviour
         {
             interactableBubbbleObject.SetActive(true);
             ResetAnimatoTrigger();
-            interactableBubbbleAnimator.SetTrigger("trigger Interaction UI Pop Up");
+            interactableBubbbleAnimator.SetBool("boolIsUIPopUp", true);
         }
     }
     private void PlayerBubbleLeaveAnimation()
     {
         if (leaveAnimation == LeaveAnimation.fadeDown)
         {
-            interactableBubbbleAnimator.SetTrigger("trigger Interaction UI Fade Down");
+            interactableBubbbleAnimator.SetBool("boolIsUIPopUp", false);
         }
     }
     private void ResetAnimatoTrigger()
     {
-        interactableBubbbleAnimator.ResetTrigger("trigger Interaction UI Pop Up");
-        interactableBubbbleAnimator.ResetTrigger("trigger Interaction UI Fade Down");
+        interactableBubbbleAnimator.SetBool("boolIsUIPopUp", false);
     }
 }

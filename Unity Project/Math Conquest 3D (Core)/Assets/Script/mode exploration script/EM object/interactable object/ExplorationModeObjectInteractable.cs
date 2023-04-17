@@ -7,13 +7,17 @@ using System;
 public class ExplorationModeObjectInteractable : MonoBehaviour
 {
     [Header("Interaction Setting")]
-    [Tooltip("Type of interaction")] public InteractionType interactionType;
+    [Tooltip("Type of interaction")] [SerializeField] public InteractionType interactionType;
     public enum InteractionType
     {
         interactionWindow,
         interactionWindowMultipleChoice,
-        instance
+        instance,
+        uninteractable
     };
+
+    [Header("Enemy Prohibitation")]
+    [SerializeField] public float enemyCheckRange;
 
     [Header("Repeat Interact Cooldown")]
     public bool isRepeatableInteractionOrStatic = false;
@@ -33,7 +37,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
     public bool isInteractionDone = false;
 
     public GameObject reactionObject;
-    [Tooltip("Type of reaction")] public ReactionType reactionType;
+    [Tooltip("Type of reaction")] [SerializeField] public ReactionType reactionType;
     public enum ReactionType
     {
         moveObjectUp,
@@ -44,7 +48,7 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
 
 
     [Header("Interaction Bubble")]
-    public GameObject interactionBubbleObject;
+    [SerializeField] public GameObject interactionBubbleObject;
 
     [Header("Game Controller")]
     public ExplorationModeGameController GameController;
@@ -70,12 +74,18 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
         if (interactionType == InteractionType.interactionWindow)
         {
             InteractionWindow = GetComponent<ExplorationModeObjectInteractableWindowUi>();
-            InteractionWindow.enabled = false;
+            if(WorldSpaceWindow != null)
+                InteractionWindow.enabled = false;
         }
         else if (interactionType == InteractionType.interactionWindowMultipleChoice)
         {
             WorldSpaceWindow = GetComponent<ExplorationModePuzzleWorldSpaceWindow>();
-            WorldSpaceWindow.enabled = false;
+            if(WorldSpaceWindow != null)
+                WorldSpaceWindow.enabled = false;
+        }
+        else if (interactionType == InteractionType.uninteractable)
+        {
+            interactionBubbleObject.GetComponent<Animator>().SetBool("boolIsUninteractable", true);
         }
     }
 
@@ -260,6 +270,35 @@ public class ExplorationModeObjectInteractable : MonoBehaviour
         {
             interactionBubbleObject.SetActive(false);
         }
+    }
+
+    private void CheckEnemyInRange()
+    {
+        // if (PlayerMovement.canControlCharacter == false) { return; }
+
+        // interactableObject = Physics.OverlapSphere(
+        //         transform.position,
+        //         0.5f,
+        //         interactableLayerMask);
+
+        // if (interactableObject.Length != 0)
+        // {
+        //     if (interactableObject[0].transform.CompareTag("Interactable") == true)
+        //     {
+        //         ExplorationModeObjectInteractable InteractableObject = interactableObject[0].transform.GetComponent<ExplorationModeObjectInteractable>();
+        //         if (InteractableObject.isReadyToInteract == true)
+        //         {
+        //             InteractableObject.Interacted();
+        //             PlayerMovement.PlayerWait();
+        //             PlayerMovement.PlayerInteract();
+        //         }
+        //     }
+        // }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), enemyCheckRange);
     }
 }
 
