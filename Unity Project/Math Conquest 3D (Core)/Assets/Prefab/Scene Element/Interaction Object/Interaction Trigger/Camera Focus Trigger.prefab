@@ -5083,7 +5083,7 @@ GameObject:
   - component: {fileID: 6961214567456282624}
   - component: {fileID: 6961214567456282751}
   m_Layer: 0
-  m_Name: World Space Camera
+  m_Name: Focus Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5210,7 +5210,7 @@ MonoBehaviour:
   interactionType: 1
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
-  isNeedReenterTrigger: 1
+  isNeedReenterTrigger: 0
   interactionCooldownTime: 1
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
@@ -5222,6 +5222,9 @@ MonoBehaviour:
   reactionType: 0
   interactionBubbleObject: {fileID: 4931970384010168574}
   GameController: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7973610337267776853
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -90,7 +90,7 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     private void SetInputFieldList()
     {
         puzzleInputFieldList.Clear();
-        for(int i = 2; i <= puzzleWindowObject.transform.childCount - 1; i++)
+        for(int i = 2; i <= puzzleWindowObject.transform.childCount - 3; i++)
         {
             puzzleInputFieldList.Add(puzzleWindowObject.transform.GetChild(i).GetComponent<TMP_InputField>());
         }
