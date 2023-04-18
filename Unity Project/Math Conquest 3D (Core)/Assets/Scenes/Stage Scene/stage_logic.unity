@@ -2198,6 +2198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6268476657572152515, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1193782058}
+    - target: {fileID: 6268476657572152515, guid: 49c1a2e6ee95d55428c5990d8699738e,
+        type: 3}
       propertyPath: playerRunSpeed
       value: 45000
       objectReference: {fileID: 0}
@@ -3532,6 +3537,9 @@ MonoBehaviour:
   - {fileID: 236185108}
   deactiveObjectList:
   - {fileID: 1947825902}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!1 &384522988
 GameObject:
   m_ObjectHideFlags: 0
@@ -4853,6 +4861,9 @@ MonoBehaviour:
   - {fileID: 1019889401}
   - {fileID: 1169166414}
   - {fileID: 1508325042}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &537529721
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4917,6 +4928,9 @@ MonoBehaviour:
   - {fileID: 1019889401}
   - {fileID: 1169166414}
   - {fileID: 1508325042}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &538708928
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4981,6 +4995,9 @@ MonoBehaviour:
   - {fileID: 1716443743}
   - {fileID: 933137363}
   - {fileID: 1911383663}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &548928016
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6146,6 +6163,9 @@ MonoBehaviour:
   - {fileID: 1169166414}
   deactiveObjectList:
   - {fileID: 1308145644689508329}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &638338083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10538,6 +10558,9 @@ MonoBehaviour:
   - {fileID: 1716443743}
   - {fileID: 933137363}
   - {fileID: 1911383663}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &1096168187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10949,6 +10972,9 @@ MonoBehaviour:
   - {fileID: 1508325042}
   deactiveObjectList:
   - {fileID: 1308145644689508329}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &1124707606
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11011,6 +11037,9 @@ MonoBehaviour:
   - {fileID: 1019889401}
   deactiveObjectList:
   - {fileID: 1308145644689508329}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &1143187752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11375,6 +11404,12 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &1193782058 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6312665207949446614, guid: 182feb26373d01e4c94cd767a22709ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 1788088675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1194265430
 GameObject:
   m_ObjectHideFlags: 0
@@ -12829,6 +12864,9 @@ MonoBehaviour:
   activeObjectList:
   - {fileID: 1951907158}
   deactiveObjectList: []
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!1 &1373261606
 GameObject:
   m_ObjectHideFlags: 0
@@ -15476,6 +15514,9 @@ MonoBehaviour:
   - {fileID: 1308145644689508329}
   deactiveObjectList:
   - {fileID: 1951907158}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &1602600319
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15641,6 +15682,9 @@ MonoBehaviour:
   - {fileID: 1716443743}
   - {fileID: 933137363}
   - {fileID: 1911383663}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &1633279149
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17068,11 +17112,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6312665208738329665, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: Damping.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6312665208738329665, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: Damping.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6312665208738329665, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: Damping.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6312665209189785216, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 197249747}
+    - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6312665209189785217, guid: 182feb26373d01e4c94cd767a22709ac,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -19745,6 +19809,9 @@ MonoBehaviour:
   - {fileID: 1019889401}
   - {fileID: 1169166414}
   - {fileID: 1508325042}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!65 &2057947983
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19942,6 +20009,9 @@ MonoBehaviour:
   - {fileID: 1308145644689508329}
   deactiveObjectList:
   - {fileID: 1951907158}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!114 &2079566261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21435,6 +21505,9 @@ MonoBehaviour:
   activeObjectList:
   - {fileID: 1951907158}
   deactiveObjectList: []
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
 --- !u!114 &7918076989435813864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21454,3 +21527,6 @@ MonoBehaviour:
   - {fileID: 236185108}
   deactiveObjectList:
   - {fileID: 1947825902}
+  reverseActiveObjectList: []
+  isSetActiveFalseAfterTrigger: 1
+  isDestroyAfterTrigger: 0
