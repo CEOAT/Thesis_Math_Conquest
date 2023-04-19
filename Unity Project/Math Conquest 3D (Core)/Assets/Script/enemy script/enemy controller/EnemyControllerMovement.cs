@@ -52,7 +52,7 @@ public class EnemyControllerMovement : MonoBehaviour
     private Animator animator;
 
     [Header("Enemy Meterial")]
-    public Material materialStart;
+    private Material materialStart;
     public Material materialDamaged;
 
     [Header("Enemy Destroy Particle")]
@@ -85,6 +85,7 @@ public class EnemyControllerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         EnemyStatus = GetComponent<EnemyControllerStatus>();
+        materialStart = GetComponent<SpriteRenderer>().material;
     }
     private void SetupEnemyType()
     {
