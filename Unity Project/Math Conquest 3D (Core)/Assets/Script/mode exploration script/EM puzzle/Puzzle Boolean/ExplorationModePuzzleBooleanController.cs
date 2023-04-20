@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplorationModePuzzleBooleanController : MonoBehaviour
 {
-    public string booleanAnswerString;
+    [SerializeField] public List<string> booleanAnswerStringList = new List<string>();
     public string booleanSwitchString;
     public int booleanNodeCount = 0;
 
@@ -36,7 +36,7 @@ public class ExplorationModePuzzleBooleanController : MonoBehaviour
         {
             for (int i = 0; i < booleanNodeCount; i++)
             {
-                booleanAnswerString += booleanString[Random.Range(0,2)];
+                //booleanAnswerString += booleanString[Random.Range(0,2)];
             }
         }
     }
@@ -65,10 +65,27 @@ public class ExplorationModePuzzleBooleanController : MonoBehaviour
     }
     private void CheckBooleanAnswer()
     {
-        if (booleanAnswerString == booleanSwitchString)
+        if (LoopCheckBooleanAnswer())
         {
             doorObject.GetComponent<Animation>().Play();
             CancelInvoke("CheckSwtichActivation");
         }
+    }
+
+    private int count;
+    private bool isAnswerCorrect;
+    private bool LoopCheckBooleanAnswer()
+    {
+        count = 0;
+        isAnswerCorrect = false;
+        foreach(string answer in booleanAnswerStringList)
+        {
+            if(booleanSwitchString == booleanAnswerStringList[count])
+            {
+                isAnswerCorrect = true;
+            }
+            count++;
+        }
+        return isAnswerCorrect;
     }
 }
