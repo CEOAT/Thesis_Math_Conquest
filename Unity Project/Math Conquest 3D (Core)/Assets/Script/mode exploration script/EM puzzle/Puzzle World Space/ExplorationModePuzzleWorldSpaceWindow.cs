@@ -66,6 +66,8 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     private void EnableWorldSpacePuzzleCutscenAndInput()
     {
         GameController.TriggerCutscene();
+        GameController.playerGameObject.GetComponent<Rigidbody>().useGravity = false;
+        GameController.playerGameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
     private IEnumerator CreatePuzzleWindow()
     {
@@ -146,6 +148,8 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
         GameController.AllowMovement();
+        GameController.playerGameObject.GetComponent<Rigidbody>().useGravity = true;
+        GameController.playerGameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
         this.enabled = false;
         isPuzzleWindowActive = false;
     }
