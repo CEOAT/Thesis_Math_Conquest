@@ -5,7 +5,6 @@ using UnityEngine;
 public class ExplorationModeObjectInteractableBubble : MonoBehaviour
 {
     [Header("Interact Bubble")]
-    [SerializeField] public GameObject interactableBubbbleObject;
     private Animator interactableBubbbleAnimator;
     private ExplorationModeObjectInteractable ObjectInteractable;
 
@@ -27,7 +26,7 @@ public class ExplorationModeObjectInteractableBubble : MonoBehaviour
     }
     private void SetupComponent()
     {
-        interactableBubbbleAnimator = interactableBubbbleObject.GetComponent<Animator>();
+        interactableBubbbleAnimator = ObjectInteractable.interactionBubbleObject.GetComponent<Animator>();
         ObjectInteractable = GetComponent<ExplorationModeObjectInteractable>();
     }
 
@@ -57,7 +56,7 @@ public class ExplorationModeObjectInteractableBubble : MonoBehaviour
 
         if (entryAnimation == EntryAnimation.popIn)
         {
-            interactableBubbbleObject.SetActive(true);
+            ObjectInteractable.interactionBubbleObject.SetActive(true);
             ResetAnimatoTrigger();
             interactableBubbbleAnimator.SetBool("boolIsUIPopUp", true);
         }
