@@ -8,6 +8,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public float playerMoveSpeed = 5f;
     public float playerWalkSpeed = 5f;
     public float playerRunSpeed = 10f;
+    [SerializeField] private bool flipModifier = false;
     public bool isBoostSpeed = false;
 
     [Header("Player Interaction")]
@@ -31,7 +32,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public Animator InGameUiAnimator;
 
     [Header("Player Invincible System")]
-    public Material playerMaterialStart;
+    private Material playerMaterialStart;
     public Material playerMaterialDamaged;
     public GameObject playerInvincibleShieldPrefab;
 
@@ -55,6 +56,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerMaterialStart = spriteRenderer.material;
     }
     private void SetupControl()
     {
@@ -335,7 +337,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             animator.SetBool("isRunUp", false);
             animator.SetBool("isRunDown", false);
             animator.SetBool("isRunSide", true);
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = flipModifier;
         }
         if (playerStatus == "run left")
         {
@@ -343,7 +345,7 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
             animator.SetBool("isRunUp", false);
             animator.SetBool("isRunDown", false);
             animator.SetBool("isRunSide", true);
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = !flipModifier;
         }
         if (playerStatus == "interact")
         {
