@@ -86,13 +86,13 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
     }
     private void SetPuzzleWindowComponent()
     {
-        textPuzzleProblem = puzzleWindowObject.transform.GetChild(0).GetComponent<TMP_Text>();
-        textPuzzleDescription = puzzleWindowObject.transform.GetChild(1).GetComponent<TMP_Text>();
+        textPuzzleProblem = puzzleWindowObject.transform.GetChild(1).GetComponent<TMP_Text>();
+        textPuzzleDescription = puzzleWindowObject.transform.GetChild(2).GetComponent<TMP_Text>();
     }
     private void SetInputFieldList()
     {
         puzzleInputFieldList.Clear();
-        for(int i = 2; i <= puzzleWindowObject.transform.childCount - 3; i++)
+        for(int i = 3; i <= puzzleWindowObject.transform.childCount - 6; i++)
         {
             puzzleInputFieldList.Add(puzzleWindowObject.transform.GetChild(i).GetComponent<TMP_InputField>());
         }

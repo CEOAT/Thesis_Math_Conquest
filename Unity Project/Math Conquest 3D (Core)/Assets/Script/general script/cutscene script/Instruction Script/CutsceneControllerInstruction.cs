@@ -9,7 +9,7 @@ using Sirenix.OdinInspector;
 public class CutsceneControllerInstruction : MonoBehaviour
 {
     [Header("Instruction Page Number")]
-    private int pageCurrent;
+    [ReadOnly] private int pageCurrent;
     private int pageTotal;
     private int elementInPageTotal;
 
@@ -219,6 +219,11 @@ public class CutsceneControllerInstruction : MonoBehaviour
     // press previous page button
     public void PreviousPage()
     {
+        if(pageCurrent == 1)
+        {
+            return;
+        }
+
         StopAllCoroutines();
 
         if (pageCurrent > 1)

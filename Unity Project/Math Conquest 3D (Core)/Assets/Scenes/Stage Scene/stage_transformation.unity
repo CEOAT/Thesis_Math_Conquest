@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09671548, g: 0.21786425, b: 0.36861145, a: 1}
+  m_IndirectSpecularColor: {r: 0.09671705, g: 0.21786618, b: 0.3686118, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -604,7 +604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 287420360}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &25584480
@@ -1244,7 +1243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 881314783}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &53280479
@@ -1263,7 +1261,7 @@ MonoBehaviour:
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
   isNeedReenterTrigger: 0
-  interactionCooldownTime: 3
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
@@ -2223,6 +2221,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &128878561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3248,6 +3247,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &218355803
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3630,6 +3630,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 0
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &264427014
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4714,7 +4715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 1530399774}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &323912340
@@ -4732,8 +4732,8 @@ MonoBehaviour:
   interactionType: 1
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
-  isNeedReenterTrigger: 1
-  interactionCooldownTime: 1
+  isNeedReenterTrigger: 0
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
@@ -6026,7 +6026,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 1523849194}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &444415302
@@ -6045,7 +6044,7 @@ MonoBehaviour:
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
   isNeedReenterTrigger: 0
-  interactionCooldownTime: 3
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
@@ -6465,7 +6464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 116648679}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &497172168
@@ -6483,8 +6481,8 @@ MonoBehaviour:
   interactionType: 1
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
-  isNeedReenterTrigger: 1
-  interactionCooldownTime: 1
+  isNeedReenterTrigger: 0
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
@@ -8436,7 +8434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 397461663}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &633007706
@@ -8455,7 +8452,7 @@ MonoBehaviour:
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
   isNeedReenterTrigger: 0
-  interactionCooldownTime: 3
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
@@ -8745,6 +8742,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 0
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &665294800
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8887,7 +8885,7 @@ PrefabInstance:
     - target: {fileID: 2439483049520892422, guid: be224cfe16c7edc41bf5d9174348023e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2644082552345685263, guid: be224cfe16c7edc41bf5d9174348023e,
         type: 3}
@@ -9917,6 +9915,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 0
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &757333436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14258,6 +14257,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &1052655815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15321,6 +15321,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 0
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!4 &1147436500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4505204895536170, guid: a77b4654fc33b0e4f9e776abad04b55d,
@@ -16265,7 +16266,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 29d8c6931cb119d48b3db58654d458ae, type: 2}
+      objectReference: {fileID: 2100000, guid: b52efd39fbdf60947b043904311b84bd, type: 2}
     - target: {fileID: 6268476657572152509, guid: 49c1a2e6ee95d55428c5990d8699738e,
         type: 3}
       propertyPath: m_RootOrder
@@ -17842,6 +17843,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 0
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &1332425556
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20818,7 +20820,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 794478564}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &1548761572
@@ -20836,8 +20837,8 @@ MonoBehaviour:
   interactionType: 1
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
-  isNeedReenterTrigger: 1
-  interactionCooldownTime: 1
+  isNeedReenterTrigger: 0
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
@@ -22860,6 +22861,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &1705048717
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23603,6 +23605,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!114 &1826332875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24094,6 +24097,16 @@ PrefabInstance:
       propertyPath: GameController
       value: 
       objectReference: {fileID: 1390102367}
+    - target: {fileID: 6498054456941124194, guid: e8d77732115c5b54aa3c1719d62e0611,
+        type: 3}
+      propertyPath: isNeedReenterTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498054456941124194, guid: e8d77732115c5b54aa3c1719d62e0611,
+        type: 3}
+      propertyPath: interactionCooldownTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6498054456941124204, guid: e8d77732115c5b54aa3c1719d62e0611,
         type: 3}
       propertyPath: m_Name
@@ -24219,6 +24232,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!114 &1865804579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25889,6 +25903,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 0
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!1001 &1988347364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26653,6 +26668,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!114 &2030729023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27692,6 +27708,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!1001 &2105164606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27819,6 +27836,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!135 &2115580849
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -78225,6 +78243,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &3097910926987852809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78329,6 +78348,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &3097910927304880335
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78610,6 +78630,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!65 &3097910928091296761
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79055,7 +79076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 930991202309885034}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &5713772586074711195
@@ -79070,7 +79090,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 930991202191946384}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &5787311654602522670
@@ -79232,8 +79251,8 @@ MonoBehaviour:
   interactionType: 1
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
-  isNeedReenterTrigger: 1
-  interactionCooldownTime: 1
+  isNeedReenterTrigger: 0
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
@@ -79423,8 +79442,8 @@ MonoBehaviour:
   interactionType: 1
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
-  isNeedReenterTrigger: 1
-  interactionCooldownTime: 1
+  isNeedReenterTrigger: 0
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
@@ -79467,7 +79486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 1618382932}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!114 &6960112115269182080
@@ -79696,6 +79714,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 1
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!224 &7391672214264569164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79752,7 +79771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 3245794595200291233}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!4 &8740792969336450594
@@ -79980,7 +79998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef33cff305c93b94abff9ed07eca3e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableBubbbleObject: {fileID: 1222910292}
   entryAnimation: 0
   leaveAnimation: 0
 --- !u!1 &8920876002764989762
@@ -80034,7 +80051,7 @@ MonoBehaviour:
   enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
   isNeedReenterTrigger: 0
-  interactionCooldownTime: 3
+  interactionCooldownTime: 2
   isWaitReenter: 0
   PlayerInteractionDisableTime: 1.25
   isReactionTriggerCutscene: 0
