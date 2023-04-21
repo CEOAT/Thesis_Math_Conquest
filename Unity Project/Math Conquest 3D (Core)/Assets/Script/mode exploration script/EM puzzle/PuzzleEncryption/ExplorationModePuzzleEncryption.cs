@@ -61,8 +61,9 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
         if (usedWordList.Count == 0)
         {
             wordToEncrypt = wordList[Random.Range(0, wordList.Count)];
+            usedWordList.Add(wordToEncrypt);
         }
-        else if (usedWordList.Count > 0 && usedWordList.Count <= wordList.Count)
+        else if (usedWordList.Count > 0)
         {
             do
             {
@@ -75,7 +76,8 @@ public class ExplorationModePuzzleEncryption : MonoBehaviour
                         isUsedWord = true;
                     }
                 }
-            } while (usedWordList.Contains(wordToEncrypt) == false && isUsedWord == true);
+            } while (isUsedWord == true);
+            
             usedWordList.Add(wordToEncrypt);
         }
     }
