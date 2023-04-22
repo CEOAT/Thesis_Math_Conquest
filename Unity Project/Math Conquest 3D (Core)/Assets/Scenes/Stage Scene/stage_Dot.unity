@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 40345548}
   - component: {fileID: 40345547}
   m_Layer: 0
-  m_Name: FOV_1
+  m_Name: FOV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blendMode: 1
   scaleMode: 0
-  color: {r: 0.23529412, g: 2.9960785, b: 0, a: 0.74509805}
+  color: {r: 0.4552863, g: 1, b: 0.2688679, a: 1}
   detailLevel: 2
   renderQueue: -1
   zTest: 4
@@ -323,9 +323,9 @@ MonoBehaviour:
   colorOuterEnd: {r: 1, g: 1, b: 1, a: 1}
   geometry: 0
   angUnitInput: 1
-  angRadiansStart: 0.7853982
-  angRadiansEnd: -0.7853982
-  radius: 11.24
+  angRadiansStart: 1.5707964
+  angRadiansEnd: -1.5707964
+  radius: 2.7
   radiusSpace: 0
   thickness: 0.5
   thicknessSpace: 0
@@ -1375,6 +1375,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3692517891013600405, guid: be224cfe16c7edc41bf5d9174348023e,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 3692517891013600489, guid: be224cfe16c7edc41bf5d9174348023e,
         type: 3}
       propertyPath: m_Name
@@ -2368,7 +2373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f4850c1b1908b48836b6a7d2aa5626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectionAngle: 180
+  DetectionAngle: 45
   DetectionRadius: 3
   Cone: {fileID: 40345549}
 --- !u!4 &1135943124
