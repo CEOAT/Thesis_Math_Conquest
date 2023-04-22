@@ -40,6 +40,7 @@ public class EnemyControllerStatus : MonoBehaviour
     public float enemyHealthMax;
     public float enemyHealthCurrent;
     public float enemyTimeToSelfDestroy = 2f;
+    [SerializeField] private float falseAnswerPanalty = 5f;
     private bool isEnemyDeadCheck = false;
 
     [Header("Enemy Damage")]
@@ -202,13 +203,13 @@ public class EnemyControllerStatus : MonoBehaviour
     #region False Reaction
     private void FalseReactionHeal()
     {
-        if (enemyHealthCurrent + 10 > enemyHealthMax)
+        if (enemyHealthCurrent + falseAnswerPanalty > enemyHealthMax)
         {
             enemyHealthCurrent = enemyHealthMax;
         }
         else
         {
-            enemyHealthCurrent += 10;
+            enemyHealthCurrent += falseAnswerPanalty;
         }
     }
     #endregion

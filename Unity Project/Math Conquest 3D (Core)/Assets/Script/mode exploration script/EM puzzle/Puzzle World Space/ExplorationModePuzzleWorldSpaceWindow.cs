@@ -161,6 +161,8 @@ public class ExplorationModePuzzleWorldSpaceWindow : MonoBehaviour
         GameController.AllowMovement();
         this.enabled = false;
         isPuzzleWindowActive = false;
+        GameController.playerGameObject.GetComponent<Rigidbody>().useGravity = true;
+        GameController.playerGameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
     }
 
     private void ClearAnswer()

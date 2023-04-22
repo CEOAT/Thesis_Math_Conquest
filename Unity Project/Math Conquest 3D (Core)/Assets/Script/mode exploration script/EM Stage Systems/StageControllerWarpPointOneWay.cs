@@ -22,6 +22,7 @@ public class StageControllerWarpPointOneWay : MonoBehaviour
     [SerializeField] private float movePlayerWaitTime = 0.5f;
     [SerializeField] private float playerControlWaitTime = 0.5f;
     [SerializeField] private bool isWarpPointDestroyAfterTrigger;
+    [SerializeField] private bool isWarpPointFallTrigger = false;
 
     private void OnTriggerEnter(Collider player)
     {
@@ -64,8 +65,12 @@ public class StageControllerWarpPointOneWay : MonoBehaviour
         Transform transitionInImageObject = Instantiate(transitionInImagePrefab.transform);
         SetTransitionToCanvas(transitionInImageObject);
         GameController.TriggerCutscene();
-        GameController.playerGameObject.GetComponent<Rigidbody>().useGravity = false;
-        GameController.playerGameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+        if(isWarpPointFallTrigger == true)
+        {
+            GameController.playerGameObject.GetComponent<Rigidbody>().useGravity = false;
+            GameController.playerGameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
 
         yield return new WaitForSeconds(transitionWaitTime);
         MovePlayerToExitPoint();
@@ -76,8 +81,11 @@ public class StageControllerWarpPointOneWay : MonoBehaviour
         Destroy(transitionInImageObject.gameObject);
 
         yield return new WaitForSeconds(playerControlWaitTime);
-        GameController.playerGameObject.GetComponent<Rigidbody>().useGravity = true;
-        GameController.playerGameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
+        if(isWarpPointFallTrigger == true)
+        {
+            GameController.playerGameObject.GetComponent<Rigidbody>().useGravity = true;
+            GameController.playerGameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
+        }
         GameController.AllowMovement();
 
         if (isWarpPointDestroyAfterTrigger == true)
