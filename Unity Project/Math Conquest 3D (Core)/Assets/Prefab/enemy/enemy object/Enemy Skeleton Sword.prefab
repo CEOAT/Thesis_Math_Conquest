@@ -80,8 +80,6 @@ GameObject:
   - component: {fileID: 765691967920711286}
   - component: {fileID: 765691967920711285}
   - component: {fileID: 765691967920711284}
-  - component: {fileID: 765691967920711283}
-  - component: {fileID: 765691967920711282}
   m_Layer: 7
   m_Name: Enemy Skeleton Sword
   m_TagString: Enemy
@@ -249,15 +247,17 @@ MonoBehaviour:
     type: 3}
   enemyTrackPoint: {fileID: 765691967450485449}
   enemyUiPointHeight: 1.5
+  enemyUiPointZ: 0
   enemySelectorPrefab: {fileID: 8443834629550702227, guid: 89e561cf4d207954e95157fd7f6e82eb,
     type: 3}
   isEnemySelectedUI: 0
   UIUnselectedAlpha: 0
-  enemyName: Sword Skeletion
-  enemyHealthMax: 100
+  enemyName: Sword Skeleton
+  enemyHealthMax: 40
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
-  enemyAttackDamage: 60
+  falseAnswerPanalty: 3
+  enemyAttackDamage: 10
   isEnemySturdyFromAttack: 0
   enemyState: 
   isEnemyTakenDamage: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useAddition: 1
-  useSubtraction: 0
+  useSubtraction: 1
   useMultiplication: 0
   useDivision: 0
   decimalSetting: 0
@@ -285,7 +285,7 @@ MonoBehaviour:
   negativeAB: 0
   isAllowOne: 0
   minimumAnswerValue: 0
-  maximumAnswerValue: 5
+  maximumAnswerValue: 15
   isEquation: 1
   equationSetting: 2
   valueA: 0
@@ -322,7 +322,6 @@ MonoBehaviour:
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 0.75
   enemyAnimationState: 
-  materialStart: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
   particleDestroyedPrefab: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
     type: 3}
@@ -345,7 +344,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765691967920711281}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcf9500239342554cb100bab7ecce83b, type: 3}
   m_Name: 
@@ -356,49 +355,10 @@ MonoBehaviour:
   healthDrainValue: 5
   isHealthRegen: 0
   isStartRegenOnEncounterPlayer: 1
-  healthRegenInterval: 0.1
-  healthRegenValue: 5
-  stopChaseModifyType: 0
-  isHealthRemovedWhenCollide: 1
---- !u!114 &765691967920711283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765691967920711281}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef617ad1ceaa8a843b97004098b1e9d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 5806514786225387796, guid: 98964b5438af51f4c905d972eb98357f,
-    type: 3}
-  bombStartForce: 0
-  bombSpawnOffset: {x: 0, y: 0.2, z: 0}
-  isBombHarmEnemy: 1
-  isBombHasCountdown: 0
-  bombCountdownTime: 3
-  isDropBombOnDead: 1
-  isConstantCreateBomb: 0
-  bombDropInterval: 2
---- !u!114 &765691967920711282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765691967920711281}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c4641d2355ae747b83a9f6e9c585d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagecircleSize: 0.5
-  damagecircleDamage: 2
-  damagecirclePrefab: {fileID: 2246264508662033518, guid: 29410577460d8634da4048d2b8c3767f,
-    type: 3}
-  isDamageCircleActiveAllTime: 0
+  healthRegenInterval: 0
+  healthRegenValue: 0
+  stopChaseModifyType: 1
+  isHealthRemovedWhenCollide: 0
 --- !u!1 &765691967953526563
 GameObject:
   m_ObjectHideFlags: 0
