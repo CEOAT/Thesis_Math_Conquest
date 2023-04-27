@@ -62,9 +62,8 @@ GameObject:
   - component: {fileID: 6299237362717378438}
   - component: {fileID: 6299237362717378433}
   - component: {fileID: 6299237362717378432}
-  - component: {fileID: 8392883158391198096}
-  - component: {fileID: 8392883158391198099}
-  - component: {fileID: 8392883158391198053}
+  - component: {fileID: 6241098137073204426}
+  - component: {fileID: 2652864806810049258}
   m_Layer: 7
   m_Name: Enemy Slime Glass Melee
   m_TagString: Enemy
@@ -241,6 +240,7 @@ MonoBehaviour:
   enemyHealthMax: 30
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
+  falseAnswerPanalty: 5
   enemyAttackDamage: 60
   isEnemySturdyFromAttack: 0
   enemyState: 
@@ -306,7 +306,6 @@ MonoBehaviour:
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 1
   enemyAnimationState: 
-  materialStart: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
   particleDestroyedPrefab: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
     type: 3}
@@ -322,67 +321,122 @@ MonoBehaviour:
   EventOnEnemyDead:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8392883158391198096
+--- !u!82 &6241098137073204426
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6299237362717378457}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2da952673dd964944a862fd23f8c7427, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &2652864806810049258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6299237362717378457}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcf9500239342554cb100bab7ecce83b, type: 3}
+  m_Script: {fileID: 11500000, guid: bc709471756bf974d91a4b214f0cb7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHealthDrain: 0
-  isStartDrainOnEncounterPlayer: 1
-  healthDrainInterval: 0.1
-  healthDrainValue: 5
-  isHealthRegen: 0
-  isStartRegenOnEncounterPlayer: 1
-  healthRegenInterval: 0.1
-  healthRegenValue: 5
-  stopChaseModifyType: 0
-  isHealthRemovedWhenCollide: 1
---- !u!114 &8392883158391198099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6299237362717378457}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef617ad1ceaa8a843b97004098b1e9d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 5806514786225387796, guid: 98964b5438af51f4c905d972eb98357f,
-    type: 3}
-  bombStartForce: 0
-  bombSpawnOffset: {x: 0, y: 0.2, z: 0}
-  isBombHarmEnemy: 1
-  isBombHasCountdown: 0
-  bombCountdownTime: 3
-  isDropBombOnDead: 1
-  isConstantCreateBomb: 0
-  bombDropInterval: 2
---- !u!114 &8392883158391198053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6299237362717378457}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c4641d2355ae747b83a9f6e9c585d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagecircleSize: 0.5
-  damagecircleDamage: 2
-  damagecirclePrefab: {fileID: 2246264508662033518, guid: 29410577460d8634da4048d2b8c3767f,
-    type: 3}
-  isDamageCircleActiveAllTime: 0
+  audioList:
+    animationClip:
+    - {fileID: 7400000, guid: 0b23ee81e1bd1e54ab6dcabfce305be3, type: 2}
+    - {fileID: 7400000, guid: f907a281a7a7d8448b760729138d67a7, type: 2}
+    soundEffectList:
+    - {fileID: 8300000, guid: 04386c3044b80894681683809aaa7315, type: 3}
+    - {fileID: 8300000, guid: 6266426a7c102bf4d9643503a69dc3d9, type: 3}
+  currentAnimation: 
 --- !u!1 &6299237362763555998
 GameObject:
   m_ObjectHideFlags: 0

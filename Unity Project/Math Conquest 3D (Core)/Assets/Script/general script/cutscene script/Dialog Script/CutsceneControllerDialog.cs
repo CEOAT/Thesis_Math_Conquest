@@ -130,6 +130,8 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         if (isWaitingAfterDialogEnd == false)
         {
+            StopDialogButtonConfirmAnimation();
+            PlayDialogButtonConfirmAnimation();
             CheckDialogUiActivation();
             CheckDialogQueue();
             CheckDialogPlaying();
@@ -171,7 +173,6 @@ public class CutsceneControllerDialog : MonoBehaviour
         SetBackgroundImage();
         PlaySpeakerAnimation();
         PlaySpeakerEmotionEffect();
-        PlayDialogButtonConfirmAnimation();
         PlayDialogButtonTypeAnimation();
         StartCoroutine(TypeDialog(dialogSettList[dialogSetIndex].dialogClass.DialogSet[dialogIndex].dialogString));
     }
@@ -313,6 +314,7 @@ public class CutsceneControllerDialog : MonoBehaviour
         canForceEndDialog = false;
         dialogIndex++;
 
+        StopDialogButtonConfirmAnimation();
         StartCoroutine(DialogEndWaiting());
 
         isDialogActive = false;
@@ -330,7 +332,14 @@ public class CutsceneControllerDialog : MonoBehaviour
     }
     private void PlayDialogButtonConfirmAnimation()
     {
-        DialogManager.dialogButton.SetTrigger("triggerDialogButtonConfirm");
+        if(dialogIndex > 0)
+        {
+            DialogManager.dialogButton.SetBool("isDialogButtonConfirm", true);
+        }
+    }
+    private void StopDialogButtonConfirmAnimation()
+    {
+        DialogManager.dialogButton.SetBool("isDialogButtonConfirm", false);
     }
 
     IEnumerator DialogEndWaiting()

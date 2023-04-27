@@ -48,8 +48,9 @@ public class StageControllerEndStageTrigger : MonoBehaviour
         
         yield return new WaitForSeconds(3f);
         endStageWindowObject = Instantiate(endStageWindowPrefab, endStageCanvasObject.transform).transform;
-        Destroy(GameController.playerGameObject.GetComponent<Rigidbody>());
-        GameController.playerGameObject.position += new Vector3(0, 100, 0);
+        GameController.playerGameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        GameController.playerGameObject.GetComponent<Rigidbody>().useGravity = false;
+        GameController.playerGameObject.position =  new Vector3(0, 2000, 0);;
         AssignStringToText();
         SaveData.SaveGameEndStage();
     }
