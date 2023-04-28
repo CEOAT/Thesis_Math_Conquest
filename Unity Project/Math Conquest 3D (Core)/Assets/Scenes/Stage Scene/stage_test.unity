@@ -1751,6 +1751,12 @@ Transform:
   m_Father: {fileID: 999906937}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &430672173 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3049892996716490218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &434937616 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 765691968437750708, guid: dd5ad46b3131b6c4493b114b7ea7eb87,
@@ -1835,6 +1841,7 @@ MonoBehaviour:
   movePlayerWaitTime: 0.5
   playerControlWaitTime: 0.5
   isWarpPointDestroyAfterTrigger: 0
+  isWarpPointFallTrigger: 0
 --- !u!65 &474739084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2859,6 +2866,11 @@ PrefabInstance:
       propertyPath: windowGroup
       value: 
       objectReference: {fileID: 1849831223}
+    - target: {fileID: 8129930326973036190, guid: d36adb5a0b272eb4886f4fb1545f7224,
+        type: 3}
+      propertyPath: GameController
+      value: 
+      objectReference: {fileID: 1684701008}
     - target: {fileID: 8129930326973036190, guid: d36adb5a0b272eb4886f4fb1545f7224,
         type: 3}
       propertyPath: windowInputField
@@ -4260,6 +4272,7 @@ MonoBehaviour:
   movePlayerWaitTime: 0.5
   playerControlWaitTime: 0.5
   isWarpPointDestroyAfterTrigger: 0
+  isWarpPointFallTrigger: 0
 --- !u!65 &741261671
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4784,6 +4797,8 @@ Transform:
   - {fileID: 474739082}
   - {fileID: 741261669}
   - {fileID: 974040508}
+  - {fileID: 430672173}
+  - {fileID: 1056956104}
   m_Father: {fileID: 757517615}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5520,6 +5535,7 @@ MonoBehaviour:
   movePlayerWaitTime: 0.5
   playerControlWaitTime: 0.5
   isWarpPointDestroyAfterTrigger: 0
+  isWarpPointFallTrigger: 0
 --- !u!65 &974040510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6306,6 +6322,12 @@ MonoBehaviour:
   dropType: 2
   forceMinimum: 4
   forceMaximum: 6
+--- !u!4 &1056956104 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+    type: 3}
+  m_PrefabInstance: {fileID: 8381706665784301456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1062494869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8256324918305056394, guid: 5e7ac06759ddd7240be05ec9ba358883,
@@ -8877,7 +8899,6 @@ MonoBehaviour:
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 0.75
   enemyAnimationState: 
-  materialStart: {fileID: 0}
   materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
   particleDestroyedPrefab: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
     type: 3}
@@ -8950,6 +8971,7 @@ MonoBehaviour:
   enemyHealthMax: 100
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
+  falseAnswerPanalty: 5
   enemyAttackDamage: 60
   isEnemySturdyFromAttack: 0
   enemyState: 
@@ -9408,6 +9430,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rune
       objectReference: {fileID: 0}
+    - target: {fileID: 120462, guid: f254298f50dcd524fa00543fb8b5dab9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 402868, guid: f254298f50dcd524fa00543fb8b5dab9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -9700,9 +9726,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameController: {fileID: 1684701008}
   canvasTransform: {fileID: 9157653735101942396}
-  transitionInImagePrefab: {fileID: 4722997382980211500, guid: 83ede92558b90bd44b87f832a118eb14,
+  transitionInImagePrefab: {fileID: 4722997382980211500, guid: 57847c4d9ab58eb46a4b0a37346b9178,
     type: 3}
-  transitionOutImagePrefab: {fileID: 4722997382980211500, guid: ce39cc120c0ee774d84e2a71faa93cc8,
+  transitionOutImagePrefab: {fileID: 4722997382980211500, guid: bd331852b733e9f4f98459aa316bfc37,
     type: 3}
   warpPointExitList:
   - {fileID: 341181732}
@@ -9711,6 +9737,7 @@ MonoBehaviour:
   movePlayerWaitTime: 0.5
   playerControlWaitTime: 0.5
   isWarpPointDestroyAfterTrigger: 0
+  isWarpPointFallTrigger: 0
 --- !u!1001 &1728340287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11405,6 +11432,7 @@ MonoBehaviour:
   enemyHealthMax: 100
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
+  falseAnswerPanalty: 5
   enemyAttackDamage: 60
   isEnemySturdyFromAttack: 0
   enemyState: 
@@ -11440,7 +11468,6 @@ MonoBehaviour:
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 3
   enemyAnimationState: 
-  materialStart: {fileID: 0}
   materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
   particleDestroyedPrefab: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
     type: 3}
@@ -11714,6 +11741,7 @@ MonoBehaviour:
   enemyHealthMax: 100
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
+  falseAnswerPanalty: 5
   enemyAttackDamage: 0
   isEnemySturdyFromAttack: 0
   enemyState: 
@@ -11779,7 +11807,6 @@ MonoBehaviour:
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 0
   enemyAnimationState: 
-  materialStart: {fileID: 0}
   materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
   particleDestroyedPrefab: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
     type: 3}
@@ -12061,6 +12088,90 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &3049892996716490218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 821390547}
+    m_Modifications:
+    - target: {fileID: 3049892997141849284, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: GameController
+      value: 
+      objectReference: {fileID: 1684701008}
+    - target: {fileID: 3049892997141849284, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: canvasTransform
+      value: 
+      objectReference: {fileID: 9157653735101942396}
+    - target: {fileID: 3049892997141849286, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_Name
+      value: Warp Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849286, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.088
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.162
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049892997141849287, guid: 931abb10565a288438ed6a5d316190bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 931abb10565a288438ed6a5d316190bb, type: 3}
 --- !u!4 &3656909445617909222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8917456730328113073, guid: 3e8885c4eb7769c47ab3ce742cc67bbe,
@@ -12604,6 +12715,7 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 0
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
 --- !u!1001 &5295908128440509015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13541,6 +13653,90 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e7ac06759ddd7240be05ec9ba358883, type: 3}
+--- !u!1001 &8381706665784301456
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 821390547}
+    m_Modifications:
+    - target: {fileID: 8381706665479047511, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_Name
+      value: Warp Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047511, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.088
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.259
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.162
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047512, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381706665479047513, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: GameController
+      value: 
+      objectReference: {fileID: 1684701008}
+    - target: {fileID: 8381706665479047513, guid: 4083be4534c2d5b419ac76ea35387d69,
+        type: 3}
+      propertyPath: canvasTransform
+      value: 
+      objectReference: {fileID: 9157653735101942396}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4083be4534c2d5b419ac76ea35387d69, type: 3}
 --- !u!1001 &8392883156763949797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13781,7 +13977,6 @@ MonoBehaviour:
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 0
   enemyAnimationState: 
-  materialStart: {fileID: 0}
   materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
   particleDestroyedPrefab: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
     type: 3}
@@ -13824,6 +14019,7 @@ MonoBehaviour:
   enemyHealthMax: 100
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
+  falseAnswerPanalty: 5
   enemyAttackDamage: 60
   isEnemySturdyFromAttack: 0
   enemyState: 
@@ -14132,7 +14328,6 @@ MonoBehaviour:
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 0
   enemyAnimationState: 
-  materialStart: {fileID: 0}
   materialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a, type: 2}
   particleDestroyedPrefab: {fileID: 1153730961705006, guid: 024d3a8bcbce8cb48a377040c5d973ee,
     type: 3}
@@ -14175,6 +14370,7 @@ MonoBehaviour:
   enemyHealthMax: 200
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
+  falseAnswerPanalty: 5
   enemyAttackDamage: 60
   isEnemySturdyFromAttack: 0
   enemyState: 
@@ -14592,3 +14788,4 @@ MonoBehaviour:
   reverseActiveObjectList: []
   isSetActiveFalseAfterTrigger: 0
   isDestroyAfterTrigger: 0
+  isActiveWhenLeaveTrigger: 0
