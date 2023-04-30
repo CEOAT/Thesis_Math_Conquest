@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Shapes;
 using TMPro;
 using Unity.Mathematics;
@@ -9,15 +10,40 @@ using Quaternion = System.Numerics.Quaternion;
 
 public class StatueDectection : ImmediateModeShapeDrawer
 {
+    [Serializable]
+    public enum DetectDirection
+    {
+        Blue_Front,
+        Blue_Back,
+        Red_Left,
+        Red_Right,
+        
+    }
+    
     [Header("Statue FOV Configuration")]
+    [SerializeField] private  DetectDirection  detectDirection;
     [SerializeField] private float DetectionAngle;
     [SerializeField] private float DetectionRadius;
-    [SerializeField] private bool Isfocus;
+    [SerializeField] private GameObject focusparent;
+    [SerializeField] private bool isfocus;
     [SerializeField] private Color selectcolor;
     [SerializeField] private GameObject LineUI;
     [SerializeField] private TextMeshProUGUI lineTxT;
     private ExplorationModePlayerControllerMovement _player;
     
+     
+
+    public bool Isfocus
+    {
+        get => isfocus;
+        set => isfocus = value;
+    }
+    public DetectDirection DetectDirectionVector
+    {
+        get => detectDirection;
+        set => detectDirection = value;
+    }
+
     [Header("Shape Visual")]
    [SerializeField] private Disc Cone;
    [SerializeField] private Line PlayerDistanceLine;
@@ -25,12 +51,9 @@ public class StatueDectection : ImmediateModeShapeDrawer
 
     private Color tempColor;
    
-    //-right = blue
-    //forward = red
+  
     void Start()
     {
-        Cone.transform.LookAt(this.transform,this.transform.forward);
-  
         
         tempColor = Cone.Color;
         var tempPlayer = FindObjectOfType<ExplorationModePlayerControllerMovement>();
@@ -40,9 +63,45 @@ public class StatueDectection : ImmediateModeShapeDrawer
     
     void Update()
     {
+        OnSelectThis();
         UpdateConeAngle();
         lookforPlayer();
         UiDistance();
+        ChangeVectorDirection();
+    }
+    //-right = blue
+    //forward = red
+    public void ChangeVectorDirection()
+    {
+        switch (detectDirection)
+        {
+            case DetectDirection.Blue_Front :
+                Cone.transform.LookAt(this.transform,-this.transform.right);
+                break;
+            case DetectDirection.Blue_Back :
+                Cone.transform.LookAt(this.transform,this.transform.right);
+                break;
+            case DetectDirection.Red_Left :
+                Cone.transform.LookAt(this.transform,-this.transform.forward);
+                break;
+            case DetectDirection.Red_Right :
+                Cone.transform.LookAt(this.transform,this.transform.forward);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void OnSelectThis()
+    {
+        if (!Isfocus)
+        {
+            focusparent.SetActive(false);
+        }
+        else
+        {
+            focusparent.SetActive(true);
+        }
     }
 
     public void UiDistance()
@@ -109,7 +168,8 @@ public class StatueDectection : ImmediateModeShapeDrawer
 
             // set static parameter to draw in the local space of this object
             Draw.Matrix = transform.localToWorldMatrix;
-
+            
+            if(!Isfocus) return;
             // draw lines
             Draw.Line( Vector3.zero, Vector3.right,   Color.red   );
             Draw.Line( Vector3.zero, Vector3.up,      Color.green );
