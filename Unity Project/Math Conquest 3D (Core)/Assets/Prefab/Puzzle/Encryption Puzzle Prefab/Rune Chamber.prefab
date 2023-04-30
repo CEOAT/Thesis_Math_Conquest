@@ -138,9 +138,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9101899440532919896}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.31489104, z: -0, w: 0.94912785}
+  m_LocalPosition: {x: -52.186, y: -21.01, z: 29.688}
+  m_LocalScale: {x: 1.4243, y: 1.4243, z: 1.4243}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9101899441543044610}
@@ -151,7 +151,7 @@ Transform:
   - {fileID: 9101899440727560567}
   m_Father: {fileID: 9101899441476939725}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -36.708, z: 0}
 --- !u!1 &9101899441476939726
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,9 +214,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fa6594c6cb3f0408ac6f1cbec5848e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionType: 1
+  interactionType: 2
+  enemyCheckRange: 0
   isRepeatableInteractionOrStatic: 1
+  isNeedReenterTrigger: 1
   interactionCooldownTime: 3
+  isWaitReenter: 0
   PlayerInteractionDisableTime: 3
   isReactionTriggerCutscene: 1
   ReactionCutsceneDelayTime: 6
@@ -226,6 +229,9 @@ MonoBehaviour:
   reactionType: 0
   interactionBubbleObject: {fileID: 0}
   GameController: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &9101899441476939724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,11 +245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeControllerCamera: {fileID: 9101899439708838356}
-  nodeCompleteActiveEntryTime: 2
+  nodeCompleteActiveEntryTime: 4
   nodeCompleteActiveExitTime: 4
   nodeCompleteCameraBlendTime: 3
   nodeObjectList:
-  - {fileID: 0}
   - {fileID: 0}
   nodeActivationList: 
 --- !u!1 &9101899441585174673
@@ -259,6 +264,7 @@ GameObject:
   - component: {fileID: 9101899441587617577}
   - component: {fileID: 9131016044417002467}
   - component: {fileID: 9131016044417002466}
+  - component: {fileID: 4427383430521646058}
   m_Layer: 0
   m_Name: Rune Door Object
   m_TagString: Untagged
@@ -273,14 +279,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9101899441585174673}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.49335, y: 0.72, z: -0.98623}
-  m_LocalScale: {x: 1.4414823, y: 0.8828503, z: 1.4414823}
+  m_LocalRotation: {x: -0, y: -0.31147984, z: -0, w: 0.95025283}
+  m_LocalPosition: {x: -57.14, y: -7.3993006, z: 30.55}
+  m_LocalScale: {x: 5.0254054, y: 3.0778604, z: 2.788296}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9101899441476939725}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -36.297, z: 0}
 --- !u!33 &9101899441588257497
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -364,6 +370,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4427383430521646058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101899441585174673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc709471756bf974d91a4b214f0cb7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioList:
+    animationClip: []
+    soundEffectList: []
+  currentAnimation: 
 --- !u!1001 &9101899439704170143
 PrefabInstance:
   m_ObjectHideFlags: 0
