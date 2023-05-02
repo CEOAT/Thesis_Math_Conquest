@@ -240,7 +240,12 @@ public class CutsceneControllerInstruction : MonoBehaviour
     {
         InstructionManager.pageNumber.text = $"{pageCurrent} of {pageTotal}";
 
-        if (pageCurrent == pageTotal)
+        if(pageTotal == 1)
+        {
+            InstructionManager.buttonNextPageText.text = "End";
+            InstructionManager.buttonPreviousPageObject.SetActive(false);
+        }
+        else if (pageCurrent == pageTotal)
         {
             InstructionManager.buttonNextPageText.text = "End";
             InstructionManager.buttonPreviousPageObject.SetActive(true);
