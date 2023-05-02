@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Shapes;
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,6 +12,11 @@ using Quaternion = System.Numerics.Quaternion;
 
 public class StatueDectection : ImmediateModeShapeDrawer
 {
+    public enum DotMode
+    {
+        DotNormDirection,
+        DotDetection,
+    }
     [Serializable]
     public enum DetectDirection
     {
@@ -19,42 +26,65 @@ public class StatueDectection : ImmediateModeShapeDrawer
         Red_Right,
         
     }
+
+    [Header("Statue DotProduct mode")] 
+    [SerializeField] private DotMode DotProductMode;
     
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [Header("Statue FOV Configuration")]
     [SerializeField] private  DetectDirection  detectDirection;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private float DetectionAngle;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private float DetectionRadius;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private GameObject focusparent;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private bool isfocus;
-    [SerializeField] private Color selectcolor;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private GameObject LineUI;
-    [SerializeField] private TextMeshProUGUI lineTxT;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
+    [SerializeField] private GameObject RadiusUI;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
+    [SerializeField] private TextMeshProUGUI linetxt;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
+    [SerializeField] private TextMeshProUGUI radiustxt;
+    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     private ExplorationModePlayerControllerMovement _player;
     
-     
-
-    public bool Isfocus
-    {
-        get => isfocus;
-        set => isfocus = value;
-    }
-    public DetectDirection DetectDirectionVector
-    {
-        get => detectDirection;
-        set => detectDirection = value;
-    }
-
-    [Header("Shape Visual")]
-   [SerializeField] private Disc Cone;
-   [SerializeField] private Line PlayerDistanceLine;
+    [Header("Statue DotProduct Normalize Configuration")]
+    
+    [Header("Shape Visual for Detection")]
+    [SerializeField] private Disc Cone;
+    [SerializeField] private Line PlayerDistanceLine;
+    [Header("Shape Visual for DotProduct normalize")]
+    [SerializeField] private Disc AngleArea;
+    [SerializeField] private Line VectorNormalize;
+    
    
-
-    private Color tempColor;
+   public bool Isfocus
+   {
+       get => isfocus;
+       set => isfocus = value;
+   }
+   public DetectDirection DetectDirectionVector
+   {
+       get => detectDirection;
+       set => detectDirection = value;
+   }
+   public float Radius
+   {
+       get => DetectionRadius;
+       set => DetectionRadius = value;
+   }
+   
+   private Coroutine tempCoroutine;
+   private Color tempColor;
    
   
     void Start()
     {
-        
+        DotModeConfiguration();
         tempColor = Cone.Color;
         var tempPlayer = FindObjectOfType<ExplorationModePlayerControllerMovement>();
         _player = tempPlayer.GetComponent<ExplorationModePlayerControllerMovement>();
@@ -64,13 +94,85 @@ public class StatueDectection : ImmediateModeShapeDrawer
     void Update()
     {
         OnSelectThis();
-        UpdateConeAngle();
-        lookforPlayer();
-        UiDistance();
-        ChangeVectorDirection();
+        if (DotProductMode == DotMode.DotNormDirection)
+        {
+            UpdateConeAngle();
+            lookforPlayer();
+            UiDistance();
+            ChangeVectorDirection();
+        }
     }
     //-right = blue
     //forward = red
+
+
+    public void DotModeConfiguration()
+    {
+        switch (DotProductMode)
+        {
+            case DotMode.DotNormDirection :
+                focusparent = focusparent.transform.Find("DotDirection").gameObject;
+                break;
+            case DotMode.DotDetection :
+                focusparent = focusparent.transform.Find("DotDetection").gameObject;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ConfigurationVisual()
+    {
+        switch (DotProductMode)
+        {
+            case DotMode.DotNormDirection :
+                
+                break;
+            case DotMode.DotDetection :
+             
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void OnSelectThis()
+    {
+        
+        if (!Isfocus)
+        {
+            focusparent.SetActive(false);
+        }
+        else
+        {
+            focusparent.SetActive(true);
+        }
+    }
+
+    public void UnSelectThis()
+    {
+        isfocus = false;
+        if (!Isfocus)
+        {
+            focusparent.SetActive(false);
+        }
+        else
+        {
+            focusparent.SetActive(true);
+        }
+    }
+
+    public void DisableVisual(bool enable = false)
+    {
+        Cone.enabled = enable;
+    }
+    public void EnableVisual(bool enable = true)
+    {
+        Cone.enabled = enable;
+    }
+
+    #region DotDetection
+
     public void ChangeVectorDirection()
     {
         switch (detectDirection)
@@ -92,25 +194,15 @@ public class StatueDectection : ImmediateModeShapeDrawer
         }
     }
 
-    public void OnSelectThis()
-    {
-        if (!Isfocus)
-        {
-            focusparent.SetActive(false);
-        }
-        else
-        {
-            focusparent.SetActive(true);
-        }
-    }
-
     public void UiDistance()
     {
         float tempDistance = Vector3.Distance(_player.transform.position, transform.position);
         Vector3 tempvec = Vector3.Lerp(_player.transform.position, this.transform.position, 0.5f);
         tempvec.y = transform.position.y;
         LineUI.transform.position = tempvec;
-        lineTxT.text = Mathf.Round(tempDistance).ToString();
+        linetxt.text = tempDistance.ToString("F1");
+        RadiusUI.transform.position =  Vector3.Lerp(this.transform.position,Cone.transform.position + Cone.transform.right*Cone.Radius,1) ;
+        radiustxt.text = "Radius : " + DetectionRadius;
     }
 
     public void UpdateConeAngle()
@@ -140,6 +232,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
         {
             if (Vector3.Dot(toPlayer.normalized,Cone.transform.right) > Mathf.Cos(DetectionAngle* 0.5f * Mathf.Deg2Rad) )
             {
+                OnDetected();
                 Cone.Color = new Color(1,0,0,0.5f);
             }
             else
@@ -156,7 +249,23 @@ public class StatueDectection : ImmediateModeShapeDrawer
 
     #endregion
     
+    public void OnDetected()
+    {
+        if(tempCoroutine!=null) return;
+        tempCoroutine=  StartCoroutine(PunishPlayer());
+    }
 
+    IEnumerator PunishPlayer()
+    {
+        if(_player.TryGetComponent<ExplorationModePlayerHealth>(out ExplorationModePlayerHealth playerHealth))
+            playerHealth.PlayerTakenDamage(35f);
+        yield return new WaitForSeconds(0.5f);
+        tempCoroutine = null;
+    }
+    
+
+    #endregion
+    
     public override void DrawShapes( Camera cam ){
 
         using( Draw.Command( cam ) ){
@@ -171,12 +280,32 @@ public class StatueDectection : ImmediateModeShapeDrawer
             
             if(!Isfocus) return;
             // draw lines
-            Draw.Line( Vector3.zero, Vector3.right,   Color.red   );
-            Draw.Line( Vector3.zero, Vector3.up,      Color.green );
-            Draw.Line( Vector3.zero, Vector3.forward, Color.blue  );
+            if (DotProductMode == DotMode.DotNormDirection)
+            {
+                Draw.Line( Vector3.zero, Vector3.right*1.25f,   Color.white   );
+            }
+            if (DotProductMode == DotMode.DotDetection)
+            {
+                Draw.Line( Vector3.zero, Vector3.right*1f,   Color.red   );
+                Draw.Line( Vector3.zero, Vector3.forward*1f, Color.blue  );
+            }
+        
         }
 
     }
+    
+    
 
     
+}
+
+public class FolderGroupAttributeDrawer : PropertyGroupAttribute
+{
+    public float R, G, B, A;
+
+    public FolderGroupAttributeDrawer(string path) : base(path)
+    {
+        
+    }
+     
 }

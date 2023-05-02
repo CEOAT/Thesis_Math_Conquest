@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,7 +8,7 @@ public class LineOfsightManager : MonoBehaviour
 {
     [SerializeField] private List<StatueDectection> StatuePuzzle = new List<StatueDectection>();
     [SerializeField] private TMP_Dropdown VecDirection_Dropdown;
-
+    [SerializeField] private TextMeshProUGUI Radius;
     [SerializeField]private List<string> VectorNotation_UnityTransform;
     // Start is called before the first frame update
 
@@ -16,8 +17,37 @@ public class LineOfsightManager : MonoBehaviour
     {
         VecDirection_Dropdown.ClearOptions();
         VecDirection_Dropdown.AddOptions(VectorNotation_UnityTransform);
-        GetCurrentDirection();
+        GetCurrentStatus();
+        StatuePuzzle[_currentStatueIndex].OnSelectThis();
+    }
+
+    public void EnableThisPuzzle()
+    {
+        VecDirection_Dropdown.ClearOptions();
+        VecDirection_Dropdown.AddOptions(VectorNotation_UnityTransform);
+        EnebleThisPuzzle();
+        GetCurrentStatus();
         StatuePuzzle[_currentStatueIndex].Isfocus = true;
+    }
+
+    public void DisableThisPuzzle()
+    {
+        foreach (var VARIABLE in StatuePuzzle)
+        {
+            VARIABLE.Isfocus = false;
+            VARIABLE.DisableVisual();
+            VARIABLE.UnSelectThis();
+            VARIABLE.enabled = false;
+        }
+    }
+
+    public void EnebleThisPuzzle()
+    {
+        foreach (var VARIABLE in StatuePuzzle)
+        {
+            VARIABLE.EnableVisual();
+            VARIABLE.enabled = true;
+        }
     }
 
     public void nextStatue()
@@ -25,7 +55,7 @@ public class LineOfsightManager : MonoBehaviour
         int tempAllIndex = StatuePuzzle.Count;
         _currentStatueIndex++;
         _currentStatueIndex = _currentStatueIndex %tempAllIndex ;
-        GetCurrentDirection();
+        GetCurrentStatus();
         foreach (var VARIABLE in StatuePuzzle)
         {
             VARIABLE.Isfocus = false;
@@ -35,9 +65,25 @@ public class LineOfsightManager : MonoBehaviour
         Debug.Log(_currentStatueIndex);
     }
 
+    public void IncreaseRadius()
+    {
+        var temp_radius = Mathf.Clamp(StatuePuzzle[_currentStatueIndex].Radius, 2.5f, 8.5f);
+        temp_radius += 0.5f;
+        StatuePuzzle[_currentStatueIndex].Radius = temp_radius;
+        Radius.text = "Radius : " + temp_radius;
+            
+    }
+    public void decreaseRadius()
+    {
+        var temp_radius = Mathf.Clamp(StatuePuzzle[_currentStatueIndex].Radius, 2.5f, 8.5f);
+        temp_radius -= 0.5f;
+        StatuePuzzle[_currentStatueIndex].Radius = temp_radius;
+        Radius.text = "Radius : " + temp_radius;
+    }
+
    
 
-    public void GetCurrentDirection()
+    public void GetCurrentStatus()
     {
         switch (StatuePuzzle[_currentStatueIndex].DetectDirectionVector)
         {
@@ -56,6 +102,8 @@ public class LineOfsightManager : MonoBehaviour
             default:
                 break;;
         }
+
+        Radius.text = "Radius : " + StatuePuzzle[_currentStatueIndex].Radius;
     }
     public void SetCurrentDirection()
     {
