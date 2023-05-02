@@ -18,7 +18,8 @@ public class ExplorationModeItemObject : MonoBehaviour
     private void OnCollisionEnter(Collision ground) 
     {
         if(ground.collider.tag == "Untagged"
-        || ground.collider.tag == "Ground")
+        || ground.collider.tag == "Ground"
+        || ground.collider.tag == "Environment")
         {
             ChangeColliderToTrigger();
         }

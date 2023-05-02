@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 8836731323373598282}
   - component: {fileID: 8641641572569297589}
   - component: {fileID: 931249201929852988}
+  - component: {fileID: 3898187488901593013}
   m_Layer: 7
   m_Name: Stone Obstacle-1
   m_TagString: Enemy
@@ -436,6 +437,33 @@ MonoBehaviour:
     soundEffectList:
     - {fileID: 8300000, guid: b4205ef02f205d547952a400659d00ef, type: 3}
   currentAnimation: 
+--- !u!114 &3898187488901593013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8836731323373598291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3595df40b94e56449d17fbacc02d9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropPrefabList:
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 413501a302979a74b9e0b4d42616d729, type: 3}
+  - {fileID: 6277640892281659787, guid: ae51bf04399302e45af111e23652d1a4, type: 3}
+  - {fileID: 6277640892281659787, guid: 2b237199464ce354e93240481b4a8fc1, type: 3}
+  itemDropRateList:
+  - 10
+  - 10
+  - 1
+  - 1
+  - 1
+  dropType: 1
+  forceMinimum: 2.5
+  forceMaximum: 5
 --- !u!1 &8836731323394594132
 GameObject:
   m_ObjectHideFlags: 0

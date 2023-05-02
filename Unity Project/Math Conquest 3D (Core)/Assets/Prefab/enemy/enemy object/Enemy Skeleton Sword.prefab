@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 765691967920711284}
   - component: {fileID: 7142441626787183587}
   - component: {fileID: 2625135036343302977}
+  - component: {fileID: 6790826517020050611}
   m_Layer: 7
   m_Name: Enemy Skeleton Sword
   m_TagString: Enemy
@@ -359,7 +360,7 @@ MonoBehaviour:
   isStartRegenOnEncounterPlayer: 1
   healthRegenInterval: 0
   healthRegenValue: 0
-  stopChaseModifyType: 1
+  stopChaseModifyType: 0
   isHealthRemovedWhenCollide: 0
 --- !u!82 &7142441626787183587
 AudioSource:
@@ -517,6 +518,33 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 54486b89b39714746a0fe996e714eec8, type: 3}
     - {fileID: 8300000, guid: 54486b89b39714746a0fe996e714eec8, type: 3}
   currentAnimation: 
+--- !u!114 &6790826517020050611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765691967920711281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3595df40b94e56449d17fbacc02d9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropPrefabList:
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 413501a302979a74b9e0b4d42616d729, type: 3}
+  - {fileID: 6277640892281659787, guid: ae51bf04399302e45af111e23652d1a4, type: 3}
+  - {fileID: 6277640892281659787, guid: 2b237199464ce354e93240481b4a8fc1, type: 3}
+  itemDropRateList:
+  - 10
+  - 10
+  - 1
+  - 1
+  - 1
+  dropType: 1
+  forceMinimum: 2.5
+  forceMaximum: 5
 --- !u!1 &765691967953526563
 GameObject:
   m_ObjectHideFlags: 0

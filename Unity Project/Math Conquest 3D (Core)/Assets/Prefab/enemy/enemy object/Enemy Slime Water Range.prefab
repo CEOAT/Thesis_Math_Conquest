@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 262374078321645899}
   - component: {fileID: 7629421891253252521}
   - component: {fileID: 5855064235882644071}
+  - component: {fileID: 2451675064906096330}
   m_Layer: 7
   m_Name: Enemy Slime Water Range
   m_TagString: Enemy
@@ -464,6 +465,33 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 99d1751d53674eb41bcf43ce99db3642, type: 3}
     - {fileID: 8300000, guid: 22004a13b4609df4d83c402f889fc648, type: 3}
   currentAnimation: 
+--- !u!114 &2451675064906096330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262374078321645906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3595df40b94e56449d17fbacc02d9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropPrefabList:
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 413501a302979a74b9e0b4d42616d729, type: 3}
+  - {fileID: 6277640892281659787, guid: ae51bf04399302e45af111e23652d1a4, type: 3}
+  - {fileID: 6277640892281659787, guid: 2b237199464ce354e93240481b4a8fc1, type: 3}
+  itemDropRateList:
+  - 10
+  - 10
+  - 1
+  - 1
+  - 1
+  dropType: 1
+  forceMinimum: 2.5
+  forceMaximum: 5
 --- !u!1 &262374078367758933
 GameObject:
   m_ObjectHideFlags: 0

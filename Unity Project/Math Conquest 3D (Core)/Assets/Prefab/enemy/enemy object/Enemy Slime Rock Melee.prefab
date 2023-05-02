@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 5514547097554286127}
   - component: {fileID: 864295086559622785}
   - component: {fileID: 3970795995324625342}
+  - component: {fileID: 4282001998784245438}
   m_Layer: 7
   m_Name: Enemy Slime Rock Melee
   m_TagString: Enemy
@@ -352,9 +353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132bfee9f9471e546bfef19b23049cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useAddition: 1
+  useAddition: 0
   useSubtraction: 0
-  useMultiplication: 0
+  useMultiplication: 1
   useDivision: 0
   decimalSetting: 0
   decimalPostion: 0
@@ -362,9 +363,9 @@ MonoBehaviour:
   negativeNon: 1
   negativeA: 0
   negativeAB: 0
-  isAllowOne: 0
-  minimumAnswerValue: 0
-  maximumAnswerValue: 5
+  isAllowOne: 1
+  minimumAnswerValue: 1
+  maximumAnswerValue: 20
   isEquation: 0
   equationSetting: 0
   valueA: 0
@@ -594,3 +595,30 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 2aaec3d14f7133449b4341adbf4ed7a9, type: 3}
     - {fileID: 8300000, guid: 22004a13b4609df4d83c402f889fc648, type: 3}
   currentAnimation: 
+--- !u!114 &4282001998784245438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040467522304417830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3595df40b94e56449d17fbacc02d9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropPrefabList:
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 413501a302979a74b9e0b4d42616d729, type: 3}
+  - {fileID: 6277640892281659787, guid: ae51bf04399302e45af111e23652d1a4, type: 3}
+  - {fileID: 6277640892281659787, guid: 2b237199464ce354e93240481b4a8fc1, type: 3}
+  itemDropRateList:
+  - 10
+  - 10
+  - 1
+  - 1
+  - 1
+  dropType: 1
+  forceMinimum: 2.5
+  forceMaximum: 5
