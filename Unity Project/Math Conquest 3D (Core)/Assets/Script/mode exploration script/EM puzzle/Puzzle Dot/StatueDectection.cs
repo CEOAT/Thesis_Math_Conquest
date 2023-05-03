@@ -37,9 +37,9 @@ public class StatueDectection : ImmediateModeShapeDrawer
     [SerializeField] private float DetectionAngle;
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private float DetectionRadius;
-    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
+ 
     [SerializeField] private GameObject focusparent;
-    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
+    [SerializeField] private GameObject ShapeGroup;
     [SerializeField] private bool isfocus;
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private GameObject LineUI;
@@ -49,8 +49,8 @@ public class StatueDectection : ImmediateModeShapeDrawer
     [SerializeField] private TextMeshProUGUI linetxt;
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private TextMeshProUGUI radiustxt;
-    [FolderGroupAttributeDrawer("Statue FOV Configuration")]
-    private ExplorationModePlayerControllerMovement _player;
+   
+  
     
     [FolderGroupAttributeDrawer("Statue Dot Configuration")]
     [Header("Statue DotProduct Normalize Configuration")] 
@@ -62,8 +62,17 @@ public class StatueDectection : ImmediateModeShapeDrawer
     [Header("Shape Visual for DotProduct normalize")]
     [SerializeField] private Disc AngleArea;
     [SerializeField] private Line VectorNormalize;
+
+  
+    #region private_var
+    private ExplorationModePlayerControllerMovement _player;
+   private Coroutine tempCoroutine;
+   private Color tempColor;
+   private float DotproductPuzzle;
+   private bool PuzzleDotMatch;
+   #endregion
     
-   
+   #region Capsule_Var
    public bool Isfocus
    {
        get => isfocus;
@@ -79,12 +88,12 @@ public class StatueDectection : ImmediateModeShapeDrawer
        get => DetectionRadius;
        set => DetectionRadius = value;
    }
-   
-   private Coroutine tempCoroutine;
-   private Color tempColor;
-   
-  
-    void Start()
+   public float ThisDotproductvar => DotproductPuzzle;
+
+   public bool ThisPuzzleDotMatch => PuzzleDotMatch;
+
+   #endregion
+   void Start()
     {
         DotModeConfiguration();
         tempColor = Cone.Color;
@@ -171,18 +180,19 @@ public class StatueDectection : ImmediateModeShapeDrawer
 
     public void DisableVisual(bool enable = false)
     {
-        Cone.enabled = enable;
+        ShapeGroup.SetActive(enable);
     }
     public void EnableVisual(bool enable = true)
     {
-        Cone.enabled = enable;
+        ShapeGroup.SetActive(enable);
     }
 
     #region DotNormalize
 
     public void LineToTarget()
     {
-        var tempvec =  (VectorNormalize.transform.worldToLocalMatrix* (target.transform.position-VectorNormalize.transform.position)).normalized *2f;
+        var tempTargetVector = target.transform.position - VectorNormalize.transform.position;
+        var tempvec =  (VectorNormalize.transform.worldToLocalMatrix* (tempTargetVector)).normalized *2f;
         tempvec.y = 0f;
         VectorNormalize.End = tempvec;
     }
@@ -205,14 +215,17 @@ public class StatueDectection : ImmediateModeShapeDrawer
                 break;
         }
 
+        DotproductPuzzle = Vector3.Dot(VectorNormalize.End.normalized, Vector3.forward);
         
         var tempInverselerp = Mathf.InverseLerp(-45f, 45f, AngleArea.AngRadiansEnd*Mathf.Rad2Deg);
         if ( tempInverselerp <= 0.65 && tempInverselerp>=0.35f)
         {
             VectorNormalize.Color = new Color(0.8f,1,0,1f);
+            PuzzleDotMatch = true;
         }
         else
         {
+            PuzzleDotMatch = false;
             VectorNormalize.Color = Color.white;
         }
         

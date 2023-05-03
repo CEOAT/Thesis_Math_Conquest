@@ -64,6 +64,8 @@ public class VectorDirection : MonoBehaviour
       RotateCharacterPreviewBy(rotYEuler);
    }
    
+   
+   
    public void RotateCharacterPreviewBy(float rotationAngleEulerY)
    {
       var localAngles = this.transform.localEulerAngles;
