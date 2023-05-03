@@ -52,7 +52,9 @@ public class StatueDectection : ImmediateModeShapeDrawer
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     private ExplorationModePlayerControllerMovement _player;
     
-    [Header("Statue DotProduct Normalize Configuration")]
+    [FolderGroupAttributeDrawer("Statue Dot Configuration")]
+    [Header("Statue DotProduct Normalize Configuration")] 
+    [SerializeField] private Transform target;
     
     [Header("Shape Visual for Detection")]
     [SerializeField] private Disc Cone;
@@ -95,6 +97,11 @@ public class StatueDectection : ImmediateModeShapeDrawer
     {
         OnSelectThis();
         if (DotProductMode == DotMode.DotNormDirection)
+        {
+            LineToTarget();
+            UnderLineAngle();
+        }
+        if (DotProductMode == DotMode.DotDetection)
         {
             UpdateConeAngle();
             lookforPlayer();
@@ -170,6 +177,48 @@ public class StatueDectection : ImmediateModeShapeDrawer
     {
         Cone.enabled = enable;
     }
+
+    #region DotNormalize
+
+    public void LineToTarget()
+    {
+        var tempvec =  (VectorNormalize.transform.worldToLocalMatrix* (target.transform.position-VectorNormalize.transform.position)).normalized *2f;
+        tempvec.y = 0f;
+        VectorNormalize.End = tempvec;
+    }
+
+    public void UnderLineAngle()
+    {
+      //  Debug.Log((VectorNormalize.End).normalized);
+      //  Debug.Log(Mathf.Acos(Vector3.Dot(VectorNormalize.End.normalized,Vector3.right))*0.5f*Mathf.Rad2Deg);
+        AngleArea.AngRadiansEnd = Mathf.Acos(Vector3.Dot(VectorNormalize.End.normalized, Vector3.forward));
+        switch (VectorNormalize.End.x)
+        {
+            case <0 :
+                if (AngleArea.AngRadiansEnd > 0) AngleArea.AngRadiansEnd = Mathf.Clamp(-AngleArea.AngRadiansEnd,-360f,0f);
+                break;
+            case >0 :
+                if (AngleArea.AngRadiansEnd < 0) AngleArea.AngRadiansEnd = Mathf.Clamp(AngleArea.AngRadiansEnd,0f,360f);
+                break;
+            default:
+                AngleArea.AngRadiansEnd = 0f;
+                break;
+        }
+
+        
+        var tempInverselerp = Mathf.InverseLerp(-45f, 45f, AngleArea.AngRadiansEnd*Mathf.Rad2Deg);
+        if ( tempInverselerp <= 0.65 && tempInverselerp>=0.35f)
+        {
+            VectorNormalize.Color = new Color(0.8f,1,0,1f);
+        }
+        else
+        {
+            VectorNormalize.Color = Color.white;
+        }
+        
+    }
+
+    #endregion
 
     #region DotDetection
 
@@ -282,7 +331,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
             // draw lines
             if (DotProductMode == DotMode.DotNormDirection)
             {
-                Draw.Line( Vector3.zero, Vector3.right*1.25f,   Color.white   );
+                Draw.Line( Vector3.zero, Vector3.forward*2f,   Color.yellow   );
             }
             if (DotProductMode == DotMode.DotDetection)
             {

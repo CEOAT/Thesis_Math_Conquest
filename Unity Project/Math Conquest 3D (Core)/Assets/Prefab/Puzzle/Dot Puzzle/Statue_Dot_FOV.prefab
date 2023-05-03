@@ -63,11 +63,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777162544271047793}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 34159746310646476}
+  m_Father: {fileID: 4557597029338252375}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!114 &8321822999112823751
@@ -202,7 +202,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4557597029338252375}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &5564690012573199589
 MonoBehaviour:
@@ -350,7 +350,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4557597029338252375}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &2066087350552566632
 ParticleSystem:
@@ -5229,6 +5229,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 121341682980403246}
   - {fileID: 1979094894731628254}
   - {fileID: 6108567306746668132}
   m_Father: {fileID: 8394556071177989563}
@@ -10412,7 +10413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &34159746310646476
 Transform:
   m_ObjectHideFlags: 0
@@ -10425,7 +10426,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 121341682980403246}
   - {fileID: 1835293950931523958}
   m_Father: {fileID: 8394556071941443760}
   m_RootOrder: 0
@@ -10816,6 +10816,7 @@ MonoBehaviour:
   RadiusUI: {fileID: 8862288683455601049}
   linetxt: {fileID: 8394556070475142696}
   radiustxt: {fileID: 0}
+  target: {fileID: 0}
   Cone: {fileID: 8394556072081779229}
   PlayerDistanceLine: {fileID: 8394556070377434408}
   AngleArea: {fileID: 8321822999112823751}
@@ -11380,7 +11381,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 34159746310646476}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &802434827226628335
 MonoBehaviour:
@@ -11440,7 +11441,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9080065363359855734}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
