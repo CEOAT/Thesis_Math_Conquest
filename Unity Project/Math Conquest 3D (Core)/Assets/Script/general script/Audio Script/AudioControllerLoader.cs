@@ -18,7 +18,7 @@ public class AudioControllerLoader : MonoBehaviour
     private void LoadAudioSetting()
     {
         audioMixer.SetFloat("Master_Volume", PlayerPrefs.GetFloat("Master_Volume", 0));
-        audioMixer.SetFloat("Effect_Volume", PlayerPrefs.GetFloat("Effect_Volume", 0));
+        audioMixer.SetFloat("SFX_Volume", PlayerPrefs.GetFloat("SFX_Volume", 0));
         audioMixer.SetFloat("Ambient_Volume", PlayerPrefs.GetFloat("Ambient_Volume", 0));
         audioMixer.SetFloat("BGM_Volume", PlayerPrefs.GetFloat("BGM_Volume", 0));
     }
