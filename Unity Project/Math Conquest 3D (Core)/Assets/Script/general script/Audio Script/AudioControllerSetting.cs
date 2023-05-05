@@ -26,7 +26,7 @@ public class AudioControllerSetting : MonoBehaviour
         silder.value = PlayerPrefs.GetFloat(audioGroupName + "_Silder", 1);;
     }
 
-    public void SetAudioVolumeMaster()
+    public void SetAudioVolume()
     {
         audioValue = Mathf.Log10(silder.value) * 20;
         audioMixer.SetFloat(audioGroupName, audioValue);
