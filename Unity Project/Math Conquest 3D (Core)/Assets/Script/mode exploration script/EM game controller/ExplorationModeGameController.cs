@@ -11,6 +11,8 @@ public class ExplorationModeGameController : MonoBehaviour
     [SerializeField] public GameObject GamePauseWindowGroup;
     [SerializeField] public GameObject GameOverWindowGroup;
     [SerializeField] public GameObject GameplayUiGroup;
+    [SerializeField] public GameObject KnowledgeUiGroup;
+    [SerializeField] public GameObject SettingUiGroup;
     [SerializeField] public GameObject ObjectiveText;
     [SerializeField] public Animator CutsceneBlackBar;
     [SerializeField] private GameObject LoadingCanvas;
@@ -136,6 +138,10 @@ public class ExplorationModeGameController : MonoBehaviour
     }
     private void PauseGame()
     {
+        if(KnowledgeUiGroup.activeSelf == true || SettingUiGroup.activeSelf == true)
+        {
+            return;
+        }
         StartCoroutine(PauseGameSequence());
     }
     private IEnumerator PauseGameSequence()
@@ -224,6 +230,13 @@ public class ExplorationModeGameController : MonoBehaviour
 
     public void MenuQuitGame()
     {
+        StartCoroutine(QuitGameSequence());
+    }
+    private IEnumerator QuitGameSequence()
+    {
+        Time.timeScale = 1f;
+        Instantiate(LoadingCanvas);
+        yield return new WaitForSeconds(2f);
         Application.Quit();
     }
     #endregion
