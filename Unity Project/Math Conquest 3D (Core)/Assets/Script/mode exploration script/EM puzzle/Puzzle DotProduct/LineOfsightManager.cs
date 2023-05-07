@@ -9,6 +9,7 @@ public class LineOfsightManager : MonoBehaviour
     [SerializeField] private List<StatueDectection> StatuePuzzle = new List<StatueDectection>();
     [SerializeField] private TMP_Dropdown VecDirection_Dropdown;
     [SerializeField] private TextMeshProUGUI Radius;
+    [SerializeField] private TextMeshProUGUI VectorMagnitude;
     [SerializeField]private List<string> VectorNotation_UnityTransform;
     // Start is called before the first frame update
 
@@ -20,6 +21,10 @@ public class LineOfsightManager : MonoBehaviour
         GetCurrentStatus();
         StatuePuzzle[_currentStatueIndex].OnSelectThis();
     }
+    private void Update()
+    {
+        VectorMagnitude.text = $"|A| : {StatuePuzzle[_currentStatueIndex].PlayerToStatueVector3.magnitude.ToString("F1")}";
+    }
 
     public void EnableThisPuzzle()
     {
@@ -28,6 +33,7 @@ public class LineOfsightManager : MonoBehaviour
         EnebleThisPuzzle();
         GetCurrentStatus();
         StatuePuzzle[_currentStatueIndex].Isfocus = true;
+        StatuePuzzle[_currentStatueIndex].OnSelectThis();
     }
 
     public void DisableThisPuzzle()
@@ -59,9 +65,11 @@ public class LineOfsightManager : MonoBehaviour
         foreach (var VARIABLE in StatuePuzzle)
         {
             VARIABLE.Isfocus = false;
+            VARIABLE.UnSelectThis();
         }
-        StatuePuzzle[_currentStatueIndex].Isfocus = true;
       
+        StatuePuzzle[_currentStatueIndex].Isfocus = true;
+        StatuePuzzle[_currentStatueIndex].OnSelectThis();
         Debug.Log(_currentStatueIndex);
     }
 

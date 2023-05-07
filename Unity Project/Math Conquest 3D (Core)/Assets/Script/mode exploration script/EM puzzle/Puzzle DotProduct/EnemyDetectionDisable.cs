@@ -11,12 +11,14 @@ public class EnemyDetectionDisable : MonoBehaviour
     private void OnEnable()
     {
         Canvas.SetActive(true);
+        ThisPuzzleManager.enabled = true;
         ThisPuzzleManager.EnableThisPuzzle();
     }
 
     private void OnDisable()
     {
         Canvas.SetActive(false);
+        ThisPuzzleManager.enabled = false;
         ThisPuzzleManager.DisableThisPuzzle();
     }
 }

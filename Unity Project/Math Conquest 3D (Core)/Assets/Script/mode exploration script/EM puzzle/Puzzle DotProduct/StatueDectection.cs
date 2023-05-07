@@ -16,7 +16,23 @@ public class StatueDectection : ImmediateModeShapeDrawer
     {
         DotNormDirection,
         DotDetection,
+        Compass,
     }
+
+    [Header("Statue DotProduct mode")] 
+    [SerializeField] private DotMode DotProductMode;
+    
+
+    #region Status Compass Configuration
+    [FolderGroupAttributeDrawer("Statue Compass Configuration")]
+    [SerializeField] private Transform CompassObject;
+    [FolderGroupAttributeDrawer("Statue Compass Configuration")]
+    [SerializeField] private DetectDirection CompassDirection;
+    [SerializeField] private TextMeshProUGUI Compasstxt;
+    #endregion
+
+    #region Statue FOV Configuration
+    
     [Serializable]
     public enum DetectDirection
     {
@@ -24,11 +40,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
         Blue_Back,
         Red_Left,
         Red_Right,
-        
     }
-
-    [Header("Statue DotProduct mode")] 
-    [SerializeField] private DotMode DotProductMode;
     
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [Header("Statue FOV Configuration")]
@@ -37,10 +49,6 @@ public class StatueDectection : ImmediateModeShapeDrawer
     [SerializeField] private float DetectionAngle;
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private float DetectionRadius;
- 
-    [SerializeField] private GameObject focusparent;
-    [SerializeField] private GameObject ShapeGroup;
-    [SerializeField] private bool isfocus;
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private GameObject LineUI;
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
@@ -49,20 +57,29 @@ public class StatueDectection : ImmediateModeShapeDrawer
     [SerializeField] private TextMeshProUGUI linetxt;
     [FolderGroupAttributeDrawer("Statue FOV Configuration")]
     [SerializeField] private TextMeshProUGUI radiustxt;
-   
+
+    #endregion
   
-    
+    #region Statue Dot Configuration
     [FolderGroupAttributeDrawer("Statue Dot Configuration")]
     [Header("Statue DotProduct Normalize Configuration")] 
     [SerializeField] private Transform target;
-    
+    #endregion
+
+    #region Shapes Visual
     [Header("Shape Visual for Detection")]
     [SerializeField] private Disc Cone;
     [SerializeField] private Line PlayerDistanceLine;
     [Header("Shape Visual for DotProduct normalize")]
     [SerializeField] private Disc AngleArea;
     [SerializeField] private Line VectorNormalize;
-
+    [Header("Shape Visual for Compass ")]
+    [SerializeField] private Line VectorCompass;
+    #endregion
+    [Space]
+    [SerializeField] private GameObject focusparent;
+    [SerializeField] private GameObject ShapeGroup;
+    [SerializeField] private bool isfocus;
   
     #region private_var
     private ExplorationModePlayerControllerMovement _player;
@@ -70,6 +87,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
    private Color tempColor;
    private float DotproductPuzzle;
    private bool PuzzleDotMatch;
+   private Vector3 playerToStatueVector3;
    #endregion
     
    #region Capsule_Var
@@ -91,6 +109,9 @@ public class StatueDectection : ImmediateModeShapeDrawer
    public float ThisDotproductvar => DotproductPuzzle;
 
    public bool ThisPuzzleDotMatch => PuzzleDotMatch;
+   public Vector3 PlayerToStatueVector3 => playerToStatueVector3;
+    
+   [HideInInspector] public string DotproductInfo;
 
    #endregion
    void Start()
@@ -104,7 +125,10 @@ public class StatueDectection : ImmediateModeShapeDrawer
     
     void Update()
     {
-        OnSelectThis();
+        if (DotProductMode == DotMode.Compass)
+        {
+            UpdateCompassLine();
+        }
         if (DotProductMode == DotMode.DotNormDirection)
         {
             LineToTarget();
@@ -132,29 +156,18 @@ public class StatueDectection : ImmediateModeShapeDrawer
             case DotMode.DotDetection :
                 focusparent = focusparent.transform.Find("DotDetection").gameObject;
                 break;
-            default:
-                break;
-        }
-    }
-
-    private void ConfigurationVisual()
-    {
-        switch (DotProductMode)
-        {
-            case DotMode.DotNormDirection :
-                
-                break;
-            case DotMode.DotDetection :
-             
+            case DotMode.Compass :
+                focusparent = focusparent.transform.Find("DotCompass").gameObject;
                 break;
             default:
                 break;
         }
     }
+    
 
     public void OnSelectThis()
     {
-        
+        isfocus = true;
         if (!Isfocus)
         {
             focusparent.SetActive(false);
@@ -186,6 +199,59 @@ public class StatueDectection : ImmediateModeShapeDrawer
     {
         ShapeGroup.SetActive(enable);
     }
+
+    #region DotCompass
+
+    public void UpdateCompassLine()
+    {
+        VectorCompass.End =   CompassObject.position - this.transform.position  ;
+        switch (CompassDirection)
+        {
+            case DetectDirection.Blue_Front :
+            case DetectDirection.Blue_Back :
+                if (Vector3.Dot(CompassObject.forward, (this.transform.position - CompassObject.position).normalized )> 0)
+                {
+                    var tempDot = Vector3.Dot(CompassObject.forward,
+                        (this.transform.position - CompassObject.position).normalized);
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot}"+ "\n ค่า Dot มากกว่า 0 อยู่ในทิศเดียวกับ vector foward ";
+                    DotproductInfo = thaiInfo;
+                    Compasstxt.text = "Front Side";
+                }
+                else
+                {
+                    var tempDot = Vector3.Dot(CompassObject.forward,
+                        (this.transform.position - CompassObject.position).normalized);
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot}"+"\n ค่า Dot มากกว่า 0 อยู่ในทิศตรงข้ามกับ vector foward ";
+                    DotproductInfo = thaiInfo;
+                    Compasstxt.text = "Back Side";
+                }
+                break;
+            case DetectDirection.Red_Left :
+            case DetectDirection.Red_Right:
+                if (Vector3.Dot(CompassObject.right, (this.transform.position - CompassObject.position).normalized )> 0)
+                {
+                    var tempDot = Vector3.Dot(CompassObject.right,
+                        (this.transform.position - CompassObject.position).normalized);
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot}"+"\n ค่า Dot  มากกว่า 0 อยู่ในทิศเดียวกับ vector Right ";
+                    DotproductInfo = thaiInfo;
+                    Compasstxt.text = "Right Side";
+                }
+                else
+                {
+                    var tempDot = Vector3.Dot(CompassObject.right,
+                        (this.transform.position - CompassObject.position).normalized);
+                    string thaiInfo =  $"DotProduct(A,B) : {tempDot}"+ "\n ค่า Dot  มากกว่า 0 อยู่ในทิศเดียวกับ vector Left ";
+                    DotproductInfo = thaiInfo;
+                    Compasstxt.text = "Left Side";
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    
+
+    #endregion
 
     #region DotNormalize
 
@@ -262,7 +328,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
         Vector3 tempvec = Vector3.Lerp(_player.transform.position, this.transform.position, 0.5f);
         tempvec.y = transform.position.y;
         LineUI.transform.position = tempvec;
-        linetxt.text = tempDistance.ToString("F1");
+        linetxt.text = "|A|: "+ tempDistance.ToString("F1");
         RadiusUI.transform.position =  Vector3.Lerp(this.transform.position,Cone.transform.position + Cone.transform.right*Cone.Radius,1) ;
         radiustxt.text = "Radius : " + DetectionRadius;
     }
@@ -288,6 +354,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
         tempPlayerPose.y = 0;
         Vector3 toPlayer = tempPlayerPose - enemyPostion;
         toPlayer.y = 0;
+        playerToStatueVector3 = toPlayer;
         Vector3 tempPlayerScanLine = this.transform.worldToLocalMatrix*  toPlayer;
         PlayerDistanceLine.End = tempPlayerScanLine ;
         if (toPlayer.magnitude <= DetectionRadius)
@@ -342,6 +409,30 @@ public class StatueDectection : ImmediateModeShapeDrawer
             
             if(!Isfocus) return;
             // draw lines
+            if (DotProductMode == DotMode.Compass)
+            {
+                Draw.Matrix = CompassObject.localToWorldMatrix;
+                switch (CompassDirection)
+                {
+                       
+                    case DetectDirection.Blue_Front :
+                        Draw.Line( Vector3.zero,  Vector3.forward,   Color.blue   );
+                        Draw.Cone(Vector3.forward,Vector3.forward,0.1f,0.5f, Color.blue);
+                        break;
+                    case DetectDirection.Blue_Back :
+                        Draw.Line( Vector3.zero,  -Vector3.forward,   Color.cyan   );
+                        Draw.Cone(-Vector3.forward,Vector3.forward,0.1f,0.5f,Color.cyan  );
+                        break;
+                    case DetectDirection.Red_Right :
+                        Draw.Line( Vector3.zero,  Vector3.right,   Color.red   );
+                        Draw.Cone(Vector3.right,Vector3.right,0.1f,0.5f,Color.red   );
+                        break;
+                    case DetectDirection.Red_Left :
+                        Draw.Line( Vector3.zero, -Vector3.right ,   new Color(0.7f,0.2f,0)   );
+                        Draw.Cone(-Vector3.right,-Vector3.right,0.1f,0.5f,new Color(0.7f,0.2f,0)  );
+                        break;
+                }
+            }
             if (DotProductMode == DotMode.DotNormDirection)
             {
                 Draw.Line( Vector3.zero, Vector3.forward*2f,   Color.yellow   );
@@ -355,10 +446,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
         }
 
     }
-    
-    
-
-    
+  
 }
 
 public class FolderGroupAttributeDrawer : PropertyGroupAttribute

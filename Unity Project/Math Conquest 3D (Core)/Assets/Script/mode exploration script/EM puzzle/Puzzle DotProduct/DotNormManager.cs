@@ -18,12 +18,23 @@ public class DotNormManager : MonoBehaviour
 
     public void EnableThisPuzzle()
     {
-        
+        StatuePuzzle[_currentStatueIndex].OnSelectThis();
+        foreach (var VARIABLE in StatuePuzzle)
+        {
+            VARIABLE.EnableVisual();
+            VARIABLE.enabled = true;
+        }
     }
 
     public void DisableThisPuzzle()
     {
-        
+        foreach (var VARIABLE in StatuePuzzle)
+        {
+            VARIABLE.Isfocus = false;
+            VARIABLE.DisableVisual();
+            VARIABLE.UnSelectThis();
+            VARIABLE.enabled = false;
+        }
     }
 
     private void Update()
@@ -41,34 +52,40 @@ public class DotNormManager : MonoBehaviour
         foreach (var VARIABLE in StatuePuzzle)
         {
             VARIABLE.Isfocus = false;
+            VARIABLE.UnSelectThis();
         }
+        
         StatuePuzzle[_currentStatueIndex].Isfocus = true;
+        StatuePuzzle[_currentStatueIndex].OnSelectThis(); 
     }
 
     private Coroutine Right, left,StatueMatch;
     private bool puzzlepased = false;
     public void GetCurrentStatus()
     {
-        if(puzzlepased) return;
-        var temppass = 0;
-        foreach (var statue in StatuePuzzle)
+        if (!puzzlepased)
         {
-            if(statue.ThisPuzzleDotMatch)
+            var temppass = 0;
+            foreach (var statue in StatuePuzzle)
             {
-                temppass++;
+                if(statue.ThisPuzzleDotMatch)
+                {
+                    temppass++;
+                }
+            }
+            if (temppass == StatuePuzzle.Count)
+            {
+                puzzlepased = true;
+                StartCoroutine(DotPuzzleEventDone());
             }
         }
-        if (temppass == StatuePuzzle.Count)
-        {
-            puzzlepased = true;
-            StartCoroutine(DotPuzzleEventDone());
-        }
+       
     }
 
     IEnumerator DotPuzzleEventDone()
     {
-        var tempBlockAnimation = WayBlock.GetComponent<Animation>();
-        tempBlockAnimation.Play();
+        var tempBlockAnimation = WayBlock.GetComponent<Animator>();
+        tempBlockAnimation.Play("RockMove");
         yield return null;
     }
 
