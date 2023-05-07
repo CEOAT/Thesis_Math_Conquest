@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5514547097924491658}
   m_Layer: 0
   m_Name: Enemy Slime Rock Melee
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,6 +157,9 @@ GameObject:
   - component: {fileID: 8040467522304417854}
   - component: {fileID: 8040467522304417855}
   - component: {fileID: 5514547097554286127}
+  - component: {fileID: 864295086559622785}
+  - component: {fileID: 3970795995324625342}
+  - component: {fileID: 4282001998784245438}
   m_Layer: 7
   m_Name: Enemy Slime Rock Melee
   m_TagString: Enemy
@@ -333,8 +336,9 @@ MonoBehaviour:
   enemyHealthMax: 60
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
+  falseAnswerPanalty: 5
   enemyAttackDamage: 2.5
-  isEnemySturdyFromAttack: 1
+  isEnemySturdyFromAttack: 0
   enemyState: 
   isEnemyTakenDamage: 0
 --- !u!114 &8040467522304417854
@@ -349,9 +353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132bfee9f9471e546bfef19b23049cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useAddition: 1
+  useAddition: 0
   useSubtraction: 0
-  useMultiplication: 0
+  useMultiplication: 1
   useDivision: 0
   decimalSetting: 0
   decimalPostion: 0
@@ -359,9 +363,9 @@ MonoBehaviour:
   negativeNon: 1
   negativeA: 0
   negativeAB: 0
-  isAllowOne: 0
-  minimumAnswerValue: 0
-  maximumAnswerValue: 5
+  isAllowOne: 1
+  minimumAnswerValue: 1
+  maximumAnswerValue: 20
   isEquation: 0
   equationSetting: 0
   valueA: 0
@@ -435,3 +439,187 @@ MonoBehaviour:
   healthRegenValue: 1
   stopChaseModifyType: 0
   isHealthRemovedWhenCollide: 0
+--- !u!82 &864295086559622785
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040467522304417830}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 3284485304371308120, guid: 8474e6ece79a027468c5ce4c9fde2090,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.05
+      value: 1
+      inSlope: -20.007967
+      outSlope: -20.007967
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1
+      value: 0.5
+      inSlope: -5.0019917
+      outSlope: -5.0019917
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2
+      value: 0.25
+      inSlope: -1.2504979
+      outSlope: -1.2504979
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.4
+      value: 0.125
+      inSlope: -0.31262448
+      outSlope: -0.31262448
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.75391847
+      value: 0.024841309
+      inSlope: -0.07815612
+      outSlope: -0.07815612
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.05001994
+      outSlope: -0.05001994
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3970795995324625342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040467522304417830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc709471756bf974d91a4b214f0cb7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioList:
+    animationClip:
+    - {fileID: 7400000, guid: e3543dc3435e32949a62138dd1930da5, type: 2}
+    - {fileID: 7400000, guid: f245f8bcaa4ce7048a94bfe88b39e10f, type: 2}
+    - {fileID: 7400000, guid: d62f1cf72c32451438580c7b17b90d38, type: 2}
+    - {fileID: 7400000, guid: 8bac99a5e96f41f4bba5210c2577b45b, type: 2}
+    soundEffectList:
+    - {fileID: 8300000, guid: 04386c3044b80894681683809aaa7315, type: 3}
+    - {fileID: 8300000, guid: 54d56eeaace7ae6479fbec0741efcdbc, type: 3}
+    - {fileID: 8300000, guid: 2aaec3d14f7133449b4341adbf4ed7a9, type: 3}
+    - {fileID: 8300000, guid: 22004a13b4609df4d83c402f889fc648, type: 3}
+  currentAnimation: 
+--- !u!114 &4282001998784245438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040467522304417830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3595df40b94e56449d17fbacc02d9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropPrefabList:
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 49ff39f8ee730af45885f9cb846b796f, type: 3}
+  - {fileID: 6277640892281659787, guid: 413501a302979a74b9e0b4d42616d729, type: 3}
+  - {fileID: 6277640892281659787, guid: ae51bf04399302e45af111e23652d1a4, type: 3}
+  - {fileID: 6277640892281659787, guid: 2b237199464ce354e93240481b4a8fc1, type: 3}
+  itemDropRateList:
+  - 10
+  - 10
+  - 1
+  - 1
+  - 1
+  dropType: 1
+  forceMinimum: 2.5
+  forceMaximum: 5

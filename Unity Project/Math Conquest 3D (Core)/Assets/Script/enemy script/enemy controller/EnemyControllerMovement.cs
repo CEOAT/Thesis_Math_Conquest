@@ -175,7 +175,7 @@ public class EnemyControllerMovement : MonoBehaviour
     {
         if(playerTransform == null) { return; }
 
-        if(enemyType == EnemyType.chaseAndHit)
+        if(enemyType == EnemyType.chaseAndHit || enemyType == EnemyType.shooterAndChase)
         {
             if (navMeshAgent.velocity.x > 0)
             {

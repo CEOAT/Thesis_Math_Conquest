@@ -11,8 +11,11 @@ public class ExplorationModeGameController : MonoBehaviour
     [SerializeField] public GameObject GamePauseWindowGroup;
     [SerializeField] public GameObject GameOverWindowGroup;
     [SerializeField] public GameObject GameplayUiGroup;
+    [SerializeField] public GameObject KnowledgeUiGroup;
+    [SerializeField] public GameObject SettingUiGroup;
     [SerializeField] public GameObject ObjectiveText;
     [SerializeField] public Animator CutsceneBlackBar;
+    [SerializeField] private GameObject LoadingCanvas;
 
     [Header("Game Over Object")]
     [SerializeField] public GameObject WorldSpaceBlackScreenCube;
@@ -135,6 +138,10 @@ public class ExplorationModeGameController : MonoBehaviour
     }
     private void PauseGame()
     {
+        if(KnowledgeUiGroup.activeSelf == true || SettingUiGroup.activeSelf == true)
+        {
+            return;
+        }
         StartCoroutine(PauseGameSequence());
     }
     private IEnumerator PauseGameSequence()
@@ -190,23 +197,46 @@ public class ExplorationModeGameController : MonoBehaviour
     }
     public void MenuLoadCheckPoint()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(ChangeSceneSequenceRestartStage());
     }
     public void MenuRestartStage()
     {
         SaveController.RestartCheckpoint();
+        StartCoroutine(ChangeSceneSequenceRestartStage());
+    }
+    private IEnumerator ChangeSceneSequenceRestartStage()
+    {
+        Time.timeScale = 1f;
+        Instantiate(LoadingCanvas);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
     public void MenuReturnToStageSelection()
     {
-        SceneManager.LoadScene(0);
+        StartCoroutine(ChangeSceneSequenceMenu());
     }
     public void MenuReturnToMenu()
     {
+        StartCoroutine(ChangeSceneSequenceMenu());
+    }
+    private IEnumerator ChangeSceneSequenceMenu()
+    {
+        Time.timeScale = 1f;
+        Instantiate(LoadingCanvas);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(0);
     }
+
     public void MenuQuitGame()
     {
+        StartCoroutine(QuitGameSequence());
+    }
+    private IEnumerator QuitGameSequence()
+    {
+        Time.timeScale = 1f;
+        Instantiate(LoadingCanvas);
+        yield return new WaitForSeconds(2f);
         Application.Quit();
     }
     #endregion

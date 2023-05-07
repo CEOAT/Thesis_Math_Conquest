@@ -21,25 +21,31 @@ public class SaveController : MonoBehaviour
         PlayerPrefs.SetString("StageName", "NoStage");
         PlayerPrefs.SetString("CheckpointName","Checkpoint-1");
         PlayerPrefs.SetInt("CheckpointIndex", 0);
-        FindStageClearByName(stageName);
+        SaveCompleteStage(stageName);
     }
-    private void FindStageClearByName(string stageName)
+    private void SaveCompleteStage(string stageName)
     {
         StageSaveData checkpointSaveData = new StageSaveData();
+        string saveFilePath = Application.dataPath + $"/Streaming Assets/Save File/MQ save file.Json";
+        if(System.IO.File.Exists(saveFilePath))
+        {
+            string loadJson = File.ReadAllText(saveFilePath);
+            checkpointSaveData = JsonUtility.FromJson<StageSaveData>(loadJson);
+        }
         
         switch(stageName)
         {
             case "stage_test":{
                 checkpointSaveData.isStageClearTest = true; break;}
-            case "stage_transformation":{
+            case "stage_prologue":{
                 checkpointSaveData.isStageClear1 = true; break;}
-            case "stage_logic":{
+            case "stage_transformation":{
                 checkpointSaveData.isStageClear2 = true; break;}
-            case "stage_encryption":{
+            case "stage_logic":{
                 checkpointSaveData.isStageClear3 = true; break;}
-            case "stage_vector":{
+            case "stage_encryption":{
                 checkpointSaveData.isStageClear4 = true; break;}
-            case "stage_trigonometry":{
+            case "stage_vector":{
                 checkpointSaveData.isStageClear5 = true; break;}
             case "stage_final":{
                 checkpointSaveData.isStageClear6 = true; break;}
@@ -75,15 +81,15 @@ public class SaveController : MonoBehaviour
 
         switch(stageName)
         {
-            case "stage_transformation":{
+            case "stage_prologue":{
                 isStageActive = checkpointSaveData.isStageClear1; break;}
-            case "stage_logic":{
+            case "stage_transformation":{
                 isStageActive = checkpointSaveData.isStageClear2; break;}
-            case "stage_encryption":{
+            case "stage_logic":{
                 isStageActive = checkpointSaveData.isStageClear3; break;}
-            case "stage_vector":{
+            case "stage_encryption":{
                 isStageActive = checkpointSaveData.isStageClear4; break;}
-            case "stage_trigonometry":{
+            case "stage_vector":{
                 isStageActive = checkpointSaveData.isStageClear5; break;}
             case "stage_final":{
                 isStageActive = checkpointSaveData.isStageClear6; break;}

@@ -274,11 +274,20 @@ public class ExplorationModePlayerControllerMovement : MonoBehaviour
     public void PlayerDead()
     {
         animator.SetTrigger("triggerDead");
-        Destroy(rigidbody);
-        GetComponent<CapsuleCollider>().center = transform.position + new Vector3(0, 50, 0);
+        rigidbody.useGravity = false;
+        rigidbody.isKinematic = true;
+        GetComponent<CapsuleCollider>().center = new Vector3(0, 1000, 0);
 
         CheckPlayerDeadFacing();
         PlayerWait();
+
+        StartCoroutine(PlayerDeadSquence());
+    }
+    private IEnumerator PlayerDeadSquence()
+    {
+        yield return new WaitForSeconds(3f);
+        transform.position = new Vector3(0, 1000, 0);
+        GetComponent<CapsuleCollider>().center = new Vector3(0, 0, 0);
     }
     public void CheckPlayerDeadFacing()
     {

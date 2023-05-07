@@ -353,6 +353,8 @@ MonoBehaviour:
   enemyDetailPrefab: {fileID: 6903029698676314509, guid: 743233d8b41a19b408a3faaba83496e0,
     type: 3}
   enemyTrackPoint: {fileID: 178136240665459405}
+  enemyUiPointHeight: 1.5
+  enemyUiPointZ: 0
   enemySelectorPrefab: {fileID: 8443834629550702227, guid: 89e561cf4d207954e95157fd7f6e82eb,
     type: 3}
   isEnemySelectedUI: 0
@@ -361,7 +363,9 @@ MonoBehaviour:
   enemyHealthMax: 100
   enemyHealthCurrent: 0
   enemyTimeToSelfDestroy: 2
+  falseAnswerPanalty: 5
   enemyAttackDamage: 10
+  isEnemySturdyFromAttack: 0
   enemyState: 
   isEnemyTakenDamage: 0
 --- !u!114 &7959769359368755677
@@ -406,10 +410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69732ec146a08c42aec6a2f101dbf4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemyChasePlayer: 0
   enemyType: 1
   enemyMoveSpeed: 2
-  enemyDetectionSphere: {fileID: 35831763666415611}
-  enemyDetectionRange: 7
   enemyChasingRange: 10
   enemyAttackPointTransform: {fileID: 8404949775544097395}
   enemyAttackTriggerRange: 0.56
@@ -421,8 +424,22 @@ MonoBehaviour:
   isEnemyCheckingAttack: 0
   enemyCheckingAttackIntervalTime: 1
   isEnemyReadyToAttack: 0
-  isEnemyWaitToAttack: 0
+  isEnemyWaitFromAttack: 0
   enemyAttackWaitTime: 1
   isEnemyWaitToRecover: 0
   enemyHurtRevoceryTime: 0
   enemyAnimationState: 
+  materialDamaged: {fileID: 0}
+  particleDestroyedPrefab: {fileID: 0}
+  enemyBulletPrefab: {fileID: 0}
+  enemyShootDistance: 0
+  enemyShootPointOffset: {x: 0, y: 0, z: 0}
+  EventOnEnemyStartChase:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnEnemyStopChase:
+    m_PersistentCalls:
+      m_Calls: []
+  EventOnEnemyDead:
+    m_PersistentCalls:
+      m_Calls: []

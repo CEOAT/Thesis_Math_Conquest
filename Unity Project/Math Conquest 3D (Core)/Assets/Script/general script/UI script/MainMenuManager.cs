@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private MathConButtonMenuNavigation[] ButtonEvents;
     [SerializeField] private LoadSceneButton_Mainmenu[] ButtonScene;
     public Image transistion;
+    [SerializeField] private GameObject loadingPrefab;
     private string tempscene;
 
     public void playtransistion()
@@ -83,7 +85,29 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(ChangeTransistionMaterial());
     }
 
-   
+    public void ConfirmEnterStage(string stageName)
+    {
+        StartCoroutine(LoadingStageSequence(stageName));
+    }
+
+    private RectTransform zetaRectTransform;
+    private IEnumerator LoadingStageSequence(string stageName)
+    {
+        zetaRectTransform = Instantiate(loadingPrefab).transform.GetChild(1).GetComponent<RectTransform>();
+
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(stageName);
+
+        // AsyncOperation loadAsyncOperation = SceneManager.LoadSceneAsync(stageName);
+
+        // while(!loadAsyncOperation.isDone)
+        // {
+        //     float progressValue = Mathf.Clamp01(loadAsyncOperation.progress / 0.9f);
+        //     zetaRectTransform.anchoredPosition = new Vector2(zetaRectTransform.position.x, zetaRectTransform.position.y + 10);
+        //     yield return null;
+        // }
+    }
+
     public void ExitGame()
     {
         Application.Quit();

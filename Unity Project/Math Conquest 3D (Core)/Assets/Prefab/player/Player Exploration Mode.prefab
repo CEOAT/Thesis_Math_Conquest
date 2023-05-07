@@ -5076,8 +5076,6 @@ MonoBehaviour:
   playerAnswerAnimator: {fileID: 847608154}
   playerAnswerTextAnimationType: {fileID: 7400000, guid: 9dcfd95c15b7f734c8a917574001a818,
     type: 2}
-  playerAnswerTextAnimationClear: {fileID: 7400000, guid: adb5d7ba4265e114691f2f24c5df36df,
-    type: 2}
   enemyList: []
   enemyCurrentSelected: {fileID: 0}
   enemyCurrentSelectedIndex: 0
@@ -5454,7 +5452,8 @@ AudioSource:
   m_GameObject: {fileID: 6268476657572152510}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3284485304371308120, guid: 8474e6ece79a027468c5ce4c9fde2090,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -5465,8 +5464,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 6.335084
+  MaxDistance: 13.1
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -5501,7 +5500,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.6
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5556,6 +5555,7 @@ MonoBehaviour:
   playerMoveSpeed: 15000
   playerWalkSpeed: 15000
   playerRunSpeed: 30000
+  flipModifier: 0
   isBoostSpeed: 0
   playerRaycastPoint: {fileID: 6268476656281153988}
   playerGroudRaycastRange: 1.5
@@ -5567,12 +5567,11 @@ MonoBehaviour:
   playerRecoveryTimeUsed: 0.2
   playerRecoveryTimeCount: 0
   InGameUiAnimator: {fileID: 0}
-  playerMaterialStart: {fileID: 2100000, guid: 656e3625fdc343d45859fd764cdc1ca8, type: 2}
   playerMaterialDamaged: {fileID: 2100000, guid: f95c20536dcc17d43ba2b696cd95437a,
     type: 2}
   playerInvincibleShieldPrefab: {fileID: 8036467604294347934, guid: 4e1f4309cf66e3c488c193a6b2af8dc1,
     type: 3}
-  isPlayerMirror: 0
+  isPlayerMirror: 1
 --- !u!114 &6268476657572152514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5638,11 +5637,23 @@ MonoBehaviour:
     - {fileID: 7400000, guid: 698c326269469554b9d324e0de1f92df, type: 2}
     - {fileID: 7400000, guid: ba5ceaeaee1654741b20e538b45b3d82, type: 2}
     - {fileID: 7400000, guid: e3ee71dd1fb79634e910f01053dc77ab, type: 2}
+    - {fileID: 7400000, guid: 4931e34b9ab40d54ab0d643eb404a7b7, type: 2}
+    - {fileID: 7400000, guid: 9da8673c7895c034cbfaf50328687034, type: 2}
+    - {fileID: 7400000, guid: 6339f8e455d38044e8d26f541dbc98bf, type: 2}
+    - {fileID: 7400000, guid: 75f075477c390894bafad4f61bc1fcd9, type: 2}
+    - {fileID: 7400000, guid: fb67c5b33d202a54a96cd32b0f307f5a, type: 2}
+    - {fileID: 7400000, guid: 6bbc4d9d2fccfa148b2d22cdb9b3927d, type: 2}
     soundEffectList:
     - {fileID: 8300000, guid: da11979fda0cb80489c8ea82b0787691, type: 3}
     - {fileID: 8300000, guid: da11979fda0cb80489c8ea82b0787691, type: 3}
     - {fileID: 8300000, guid: da11979fda0cb80489c8ea82b0787691, type: 3}
     - {fileID: 8300000, guid: 1d685ab675989174584a0df28e3459bb, type: 3}
+    - {fileID: 8300000, guid: 1d685ab675989174584a0df28e3459bb, type: 3}
+    - {fileID: 8300000, guid: 1d685ab675989174584a0df28e3459bb, type: 3}
+    - {fileID: 8300000, guid: da7fd4d6f3b8621479108f37462bdffd, type: 3}
+    - {fileID: 8300000, guid: bf7d0f057ff8b2a4787b51c8057a3fc5, type: 3}
+    - {fileID: 8300000, guid: 3b58f81c406029c499a411d9d9c29259, type: 3}
+    - {fileID: 8300000, guid: 7c29a3b43cbfa9245835f72931529de6, type: 3}
   currentAnimation: 
 --- !u!1 &6268476657887066480
 GameObject:

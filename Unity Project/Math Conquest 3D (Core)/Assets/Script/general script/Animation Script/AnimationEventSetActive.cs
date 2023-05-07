@@ -10,8 +10,8 @@ public class AnimationEventSetActive : MonoBehaviour
     
     public void SetActiveOnAnimation()
     {
-        ActiveObject();
         DeactiveObject();
+        ActiveObject();
     }
     private void ActiveObject()
     {

@@ -153,7 +153,7 @@ public class EnemyControllerStatus : MonoBehaviour
     {
         isEnemySelectedUI = true;
 
-        enemySelectorObject = Instantiate(enemySelectorPrefab, transform.position + new Vector3(0,0,-0.35f), enemySelectorPrefab.transform.rotation);
+        enemySelectorObject = Instantiate(enemySelectorPrefab, enemyTrackPoint.transform.position, enemySelectorPrefab.transform.rotation);
         enemySelectorObject.GetComponent<EnemySelectorObject>().selectorTrackPoint = enemyTrackPoint.transform;
     }
     public void EnemyDeselected()

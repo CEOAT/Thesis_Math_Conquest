@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1684701009}
   - component: {fileID: 8005649171096536387}
   - component: {fileID: 9137915319917578480}
+  - component: {fileID: 8503240385538809875}
   m_Layer: 0
   m_Name: EM Game Controller
   m_TagString: Untagged
@@ -54,6 +55,8 @@ MonoBehaviour:
   GameplayUiGroup: {fileID: 0}
   ObjectiveText: {fileID: 0}
   CutsceneBlackBar: {fileID: 0}
+  LoadingCanvas: {fileID: 4315350934062484328, guid: aa22cb8eee60f1e468d067cb4f90d6d4,
+    type: 3}
   WorldSpaceBlackScreenCube: {fileID: 0}
   ImageFadeBlackPrefab: {fileID: 4722997382980211500, guid: 43169d1ef9d5d5442985b7973f2f5371,
     type: 3}
@@ -151,3 +154,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3d56064856c5b4290eced0943403ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  windowGroup: {fileID: 0}
+  windowTextPuzzleProblem: {fileID: 0}
+  windowTextDescription: {fileID: 0}
+  windowTextPuzzleCompleteCount: {fileID: 0}
+  windowInputField: {fileID: 0}
+--- !u!114 &8503240385538809875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4994313322238069129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e84e8ab16fdec1499a3e5bea387a70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 8474e6ece79a027468c5ce4c9fde2090, type: 2}
