@@ -101,6 +101,7 @@ public class SaveController : MonoBehaviour
     // called from main menu ---> continue game: return stage name
     public void LoadLastScenePlay()
     {
+        print(PlayerPrefs.GetString("StageName", "NoStage"));
         SceneManager.LoadScene(PlayerPrefs.GetString("StageName", "NoStage"));
     }
 

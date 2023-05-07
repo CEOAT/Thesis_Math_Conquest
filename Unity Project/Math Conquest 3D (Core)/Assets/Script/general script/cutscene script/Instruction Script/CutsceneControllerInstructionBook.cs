@@ -5,30 +5,34 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEditor;
 using Sirenix.OdinInspector;
+using UnityEngine.Audio;
 
 public class CutsceneControllerInstructionBook : MonoBehaviour
 {
     private bool isComponentSetupFirstTime = false;
 
     [Header("Instruction Page Number")]
-    [ReadOnly] private int pageCurrent;
+    [SerializeField] private int pageCurrent;
     private int pageTotal;
     private int elementInPageTotal;
 
+    [Header("Turn Page SFX")]
+    [SerializeField] private AudioSource audioSFX;
+
     [Header("Instruction Element")]
     [SerializeField] public GameObject instructionGroup;
+    [SerializeField] public GameObject instructionButtonGroup;
     [SerializeField] private GameObject contentIndexGroup;
     [SerializeField] private TMP_Text textPageCount;
     [SerializeField] private Button buttonNext;
     [SerializeField] private Button buttonPrevious;
+    [SerializeField] private Button buttonBack;
     [SerializeField] private TMP_Text textButtonNext;
     [SerializeField] private TMP_Text textButtonPrevious;
 
-    [Header("Instruction Setting")]
-    public bool isDeactivateAfterEnd = true;
 
     [Header("Instruction Data")]
-    public InstructionListClass instructionList;
+    public InstructionListClassBook instructionList;
 
     private MasterInput PlayerInput;
 
@@ -64,11 +68,7 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
         PlayerInput = new MasterInput();
         PlayerInput.WindowControl.NextInstructionPage.performed += context => NextPage();
         PlayerInput.WindowControl.PreviousInstructionPage.performed += context => PreviousPage();
-    }
-
-    private void Start()
-    {
-        instructionGroup.SetActive(false);
+        PlayerInput.WindowControl.CloseWindow.performed += context => EndPage();
     }
 #endregion
 
@@ -79,10 +79,10 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
     }
     private IEnumerator DisplayElementSequence()
     {
-        elementInPageTotal = instructionList.instructionSet[pageCurrent - 1].instructionData.Count;
+        elementInPageTotal = instructionList.instructionSet[pageCurrent - 1].instructionElementObjectList.Count;
         for (int i = 0; i <= elementInPageTotal - 1; i++)
         {
-            GameObject element = instructionList.instructionSet[pageCurrent - 1].instructionData[i].instructionElementObject;
+            GameObject element = instructionList.instructionSet[pageCurrent - 1].instructionElementObjectList[i];
             element.SetActive(true);
             yield return null;
         }
@@ -91,14 +91,14 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
     {
         for (int i = 0; i <= elementInPageTotal - 1; i++)
         {
-            instructionList.instructionSet[pageCurrent - 1].instructionData[i].instructionElementObject.SetActive(false);
+            instructionList.instructionSet[pageCurrent - 1].instructionElementObjectList[i].SetActive(false);
         }
     }
     private void HideLastPageElementPreviousButton()
     {
         for (int i = 0; i <= elementInPageTotal - 1; i++)
         {
-            instructionList.instructionSet[pageCurrent - 1].instructionData[i].instructionElementObject.SetActive(false);
+            instructionList.instructionSet[pageCurrent - 1].instructionElementObjectList[i].SetActive(false);
         }
     }
 #endregion
@@ -108,11 +108,13 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
     {
         buttonNext.GetComponent<Button>().onClick.AddListener(NextPage);
         buttonPrevious.GetComponent<Button>().onClick.AddListener(PreviousPage);
+        buttonBack.GetComponent<Button>().onClick.AddListener(EndPage);
     }
     private void ButtonRemoveEvent()
     {
-        buttonNext.GetComponent<Button>().onClick.RemoveAllListeners();
-        buttonPrevious.GetComponent<Button>().onClick.RemoveAllListeners();
+        buttonNext.GetComponent<Button>().onClick.RemoveListener(NextPage);
+        buttonPrevious.GetComponent<Button>().onClick.RemoveListener(PreviousPage);
+        buttonBack.GetComponent<Button>().onClick.RemoveListener(EndPage);
     }
     private void DisplayFirstPage()
     {
@@ -129,6 +131,7 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
     public void NextPage()
     {
         StopAllCoroutines();
+        audioSFX.Play();
 
         if (pageCurrent == pageTotal)
         {
@@ -145,7 +148,7 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
             DisplayNewPageElement();
         }
     }
-    private void EndPage()
+    public void EndPage()
     {
         ButtonRemoveEvent();
         PlayerInput.Disable();
@@ -157,15 +160,7 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
 
         pageCurrent = pageTotal;
 
-        DeactivateAfterEndInstruction();
-    }
-
-    private void DeactivateAfterEndInstruction()
-    {
-        if (isDeactivateAfterEnd == true)
-        {
-            this.gameObject.SetActive(false);
-        }
+        BackInstruction();
     }
 
     // press previous page button
@@ -177,6 +172,7 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
         }
 
         StopAllCoroutines();
+        audioSFX.Play();
 
         if (pageCurrent > 1)
         {
@@ -186,6 +182,13 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
             CheckCurrentPageUi();
             DisplayNewPageElement();
         }
+    }
+
+    public void BackInstruction()
+    {
+        contentIndexGroup.SetActive(true);
+        instructionButtonGroup.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     private void CheckCurrentPageUi()
@@ -216,10 +219,16 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
 #endregion
 
 #region instruction cutscene start and stop
+    private void OnEnable() 
+    {
+        StartInstruction();
+    }
+
     public void StartInstruction()
     {
         PlayerInput.Enable();
         instructionGroup.SetActive(true);
+        instructionButtonGroup.SetActive(true);
         contentIndexGroup.SetActive(false);
         DisplayFirstPage();
     }
