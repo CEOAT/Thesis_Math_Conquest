@@ -168,7 +168,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9bdec9f365060ea41bc5c3641fcd2896, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -191,7 +191,7 @@ SpriteRenderer:
   m_SortingOrder: 10
   m_Sprite: {fileID: -190424734, guid: b9985deb2722f5c4fa1c4f885a0a3590, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.42666668, y: 0.33333334}
@@ -291,6 +291,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   spiritFollowPointTransform: {fileID: 0}
   spiritFollowPointCurrent: {fileID: 0}
+  followSpeed: 1.5
   SpiritSprite: {fileID: 0}
 --- !u!1001 &1234598540014447429
 PrefabInstance:
