@@ -197,35 +197,33 @@ public class ExplorationModeGameController : MonoBehaviour
     }
     public void MenuLoadCheckPoint()
     {
-        StartCoroutine(ChangeSceneSequenceRestartStage());
+        StartCoroutine(LoadSceneSequence(SceneManager.GetActiveScene().name));
     }
     public void MenuRestartStage()
     {
         SaveController.RestartCheckpoint();
-        StartCoroutine(ChangeSceneSequenceRestartStage());
+        StartCoroutine(LoadSceneSequence(SceneManager.GetActiveScene().name));
     }
-    private IEnumerator ChangeSceneSequenceRestartStage()
-    {
-        Time.timeScale = 1f;
-        Instantiate(LoadingCanvas);
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
     public void MenuReturnToStageSelection()
     {
-        StartCoroutine(ChangeSceneSequenceMenu());
+        StartCoroutine(LoadSceneSequence("stage_main_menu"));
     }
     public void MenuReturnToMenu()
     {
-        StartCoroutine(ChangeSceneSequenceMenu());
+        StartCoroutine(LoadSceneSequence("stage_main_menu"));
     }
-    private IEnumerator ChangeSceneSequenceMenu()
+
+    private IEnumerator LoadSceneSequence(string stageName)
     {
         Time.timeScale = 1f;
         Instantiate(LoadingCanvas);
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0);
+        yield return new WaitForSeconds(1.5f);
+        AsyncOperation loadAsyncOperation = SceneManager.LoadSceneAsync(stageName);
+
+        while(!loadAsyncOperation.isDone)
+        {
+            yield return null;
+        }
     }
 
     public void MenuQuitGame()

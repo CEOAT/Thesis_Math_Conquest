@@ -90,10 +90,9 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(LoadingStageSequence(stageName));
     }
 
-    private RectTransform zetaRectTransform;
     private IEnumerator LoadingStageSequence(string stageName)
     {
-        zetaRectTransform = Instantiate(loadingPrefab).transform.GetChild(1).GetComponent<RectTransform>();
+        Instantiate(loadingPrefab);
         yield return new WaitForSeconds(1.5f);
         AsyncOperation loadAsyncOperation = SceneManager.LoadSceneAsync(stageName);
 
@@ -105,7 +104,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        LoadingStageSequence(PlayerPrefs.GetString("StageName", "NoStage"));
+        ConfirmEnterStage(PlayerPrefs.GetString("StageName", "NoStage"));
     }
 
     public void ExitGame()
