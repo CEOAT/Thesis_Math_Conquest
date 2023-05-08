@@ -176,6 +176,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &108579613 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3137231497079430633, guid: 3f94656246432b94394a8c55771663bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 5009757392277470257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000c8a3ba63440d4f9cb943870421593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &220101542 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7013630264704811154, guid: 3f94656246432b94394a8c55771663bd,
@@ -722,6 +734,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3059646348463659192, guid: 3f94656246432b94394a8c55771663bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 108579613}
+    - target: {fileID: 3059646348463659192, guid: 3f94656246432b94394a8c55771663bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059646348463659192, guid: 3f94656246432b94394a8c55771663bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3075775956152098501, guid: 3f94656246432b94394a8c55771663bd,
         type: 3}
       propertyPath: m_Name
@@ -897,16 +924,37 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7961264776212020113, guid: 3f94656246432b94394a8c55771663bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961264776212020113, guid: 3f94656246432b94394a8c55771663bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ConfirmEnterStage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961264776212020113, guid: 3f94656246432b94394a8c55771663bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: stage_prologue
+      objectReference: {fileID: 0}
     - target: {fileID: 8644128047466872650, guid: 3f94656246432b94394a8c55771663bd,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132184496640992148, guid: 3f94656246432b94394a8c55771663bd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35.374756
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 12470214849003396, guid: 3f94656246432b94394a8c55771663bd, type: 3}
     - {fileID: 2676998475812876443, guid: 3f94656246432b94394a8c55771663bd, type: 3}
     - {fileID: 3036415475896576257, guid: 3f94656246432b94394a8c55771663bd, type: 3}
     - {fileID: 518406286044101328, guid: 3f94656246432b94394a8c55771663bd, type: 3}
+    - {fileID: 4334593618553404884, guid: 3f94656246432b94394a8c55771663bd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f94656246432b94394a8c55771663bd, type: 3}
 --- !u!1001 &6199941703833069609
 PrefabInstance:
@@ -915,36 +963,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 491861155, guid: cfdbcb89643bc9f4c83c4cbc0acb6e49, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.030029759
-      objectReference: {fileID: 0}
-    - target: {fileID: 491861155, guid: cfdbcb89643bc9f4c83c4cbc0acb6e49, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.4123525
-      objectReference: {fileID: 0}
-    - target: {fileID: 491861155, guid: cfdbcb89643bc9f4c83c4cbc0acb6e49, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.1429979
-      objectReference: {fileID: 0}
-    - target: {fileID: 491861157, guid: cfdbcb89643bc9f4c83c4cbc0acb6e49, type: 3}
-      propertyPath: m_Range
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1921779675, guid: cfdbcb89643bc9f4c83c4cbc0acb6e49, type: 3}
-      propertyPath: m_Name
-      value: Light Animator
-      objectReference: {fileID: 0}
-    - target: {fileID: 3939787179770294448, guid: cfdbcb89643bc9f4c83c4cbc0acb6e49,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 0.002
-      objectReference: {fileID: 0}
-    - target: {fileID: 5885865049616090371, guid: cfdbcb89643bc9f4c83c4cbc0acb6e49,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 316bdbbfc28609048999e8495ccae422, type: 2}
     - target: {fileID: 6199941704569498478, guid: cfdbcb89643bc9f4c83c4cbc0acb6e49,
         type: 3}
       propertyPath: m_RootOrder

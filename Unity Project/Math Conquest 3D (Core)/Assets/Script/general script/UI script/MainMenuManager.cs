@@ -94,18 +94,18 @@ public class MainMenuManager : MonoBehaviour
     private IEnumerator LoadingStageSequence(string stageName)
     {
         zetaRectTransform = Instantiate(loadingPrefab).transform.GetChild(1).GetComponent<RectTransform>();
+        yield return new WaitForSeconds(1.5f);
+        AsyncOperation loadAsyncOperation = SceneManager.LoadSceneAsync(stageName);
 
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(stageName);
+        while(!loadAsyncOperation.isDone)
+        {
+            yield return null;
+        }
+    }
 
-        // AsyncOperation loadAsyncOperation = SceneManager.LoadSceneAsync(stageName);
-
-        // while(!loadAsyncOperation.isDone)
-        // {
-        //     float progressValue = Mathf.Clamp01(loadAsyncOperation.progress / 0.9f);
-        //     zetaRectTransform.anchoredPosition = new Vector2(zetaRectTransform.position.x, zetaRectTransform.position.y + 10);
-        //     yield return null;
-        // }
+    public void ContinueGame()
+    {
+        LoadingStageSequence(PlayerPrefs.GetString("StageName", "NoStage"));
     }
 
     public void ExitGame()
