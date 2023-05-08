@@ -63,6 +63,8 @@ public class EnemyControllerMovement : MonoBehaviour
     [SerializeField] private float enemyShootDistance;
     [SerializeField] private Vector3 enemyShootPointOffset;
 
+    [SerializeField] private bool flipModifier = false;
+
     private NavMeshAgent navMeshAgent;
     private Rigidbody rigidbody;
     private SpriteRenderer spriteRenderer;
@@ -87,6 +89,11 @@ public class EnemyControllerMovement : MonoBehaviour
         EnemyStatus = GetComponent<EnemyControllerStatus>();
         materialStart = GetComponent<SpriteRenderer>().material;
         materialDamaged = GetComponent<SpriteRenderer>().material;
+
+        if(flipModifier == true)
+        {
+            GetComponent<SpriteRenderer>().flipX = flipModifier;
+        }
     }
     private void SetupEnemyType()
     {

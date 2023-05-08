@@ -319,6 +319,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""action"": ""NextDialog"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a451da3c-180f-452d-b07d-50c68f1bdabb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextDialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -471,7 +482,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""05994b3c-0aa7-4fe8-906c-7e09d6d65d2d"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/backslash"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -527,6 +538,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""6274c1b8-e216-4783-b0ac-86bc3de6a708"",
                     ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d480b8a7-68be-4cb4-aa03-4aa0689b7f20"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

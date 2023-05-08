@@ -14,6 +14,11 @@ public class SaveController : MonoBehaviour
         PlayerPrefs.SetInt("CheckpointIndex", checkpointSaveData.checkpointIndex);
     }
 
+    public void ResetCheckpoint()
+    {
+        
+    }
+
     // called from end stage trigger
     public void SaveGameEndStage()
     {

@@ -88,6 +88,9 @@ public class MainMenuManager : MonoBehaviour
     public void ConfirmEnterStage(string stageName)
     {
         StartCoroutine(LoadingStageSequence(stageName));
+        PlayerPrefs.SetString("StageName", stageName);
+        PlayerPrefs.SetString("CheckpointName","Checkpoint-1");
+        PlayerPrefs.SetInt("CheckpointIndex", 0);
     }
 
     private IEnumerator LoadingStageSequence(string stageName)
@@ -104,7 +107,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        ConfirmEnterStage(PlayerPrefs.GetString("StageName", "NoStage"));
+        StartCoroutine(LoadingStageSequence(PlayerPrefs.GetString("StageName", "stage_prologue")));
     }
 
     public void ExitGame()
