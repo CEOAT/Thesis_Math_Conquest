@@ -89,11 +89,6 @@ public class DotNormManager : MonoBehaviour
         yield return null;
     }
 
-    public void EventHold(BaseEventData data)
-    {
-     
-    }
-
     public void EventUnhold(BaseEventData data)
     {
         if(left!=null) StopCoroutine(left);

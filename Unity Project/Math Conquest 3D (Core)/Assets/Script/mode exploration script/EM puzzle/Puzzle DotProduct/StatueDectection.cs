@@ -91,6 +91,12 @@ public class StatueDectection : ImmediateModeShapeDrawer
    #endregion
     
    #region Capsule_Var
+
+   public DetectDirection ThisCompassDirection
+   {
+       get => CompassDirection;
+       set => CompassDirection = value;
+   }
    public bool Isfocus
    {
        get => isfocus;
@@ -114,9 +120,15 @@ public class StatueDectection : ImmediateModeShapeDrawer
    [HideInInspector] public string DotproductInfo;
 
    #endregion
+
+   private void Awake()
+   {
+       DotModeConfiguration();
+   }
+
    void Start()
     {
-        DotModeConfiguration();
+       
         tempColor = Cone.Color;
         var tempPlayer = FindObjectOfType<ExplorationModePlayerControllerMovement>();
         _player = tempPlayer.GetComponent<ExplorationModePlayerControllerMovement>();
@@ -213,7 +225,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
                 {
                     var tempDot = Vector3.Dot(CompassObject.forward,
                         (this.transform.position - CompassObject.position).normalized);
-                    string thaiInfo = $"DotProduct(A,B) : {tempDot}"+ "\n ค่า Dot มากกว่า 0 อยู่ในทิศเดียวกับ vector foward ";
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot.ToString("F1")}"+ "\nค่า Dot มากกว่า 0 อยู่ในทิศเดียวกับ vector foward ";
                     DotproductInfo = thaiInfo;
                     Compasstxt.text = "Front Side";
                 }
@@ -221,7 +233,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
                 {
                     var tempDot = Vector3.Dot(CompassObject.forward,
                         (this.transform.position - CompassObject.position).normalized);
-                    string thaiInfo = $"DotProduct(A,B) : {tempDot}"+"\n ค่า Dot มากกว่า 0 อยู่ในทิศตรงข้ามกับ vector foward ";
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot.ToString("F1")}"+"\nค่า Dot น้อยกว่า 0 อยู่ในทิศตรงข้ามกับ vector foward ";
                     DotproductInfo = thaiInfo;
                     Compasstxt.text = "Back Side";
                 }
@@ -232,7 +244,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
                 {
                     var tempDot = Vector3.Dot(CompassObject.right,
                         (this.transform.position - CompassObject.position).normalized);
-                    string thaiInfo = $"DotProduct(A,B) : {tempDot}"+"\n ค่า Dot  มากกว่า 0 อยู่ในทิศเดียวกับ vector Right ";
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot.ToString("F1")}"+"\nค่า Dot  มากกว่า 0 อยู่ในทิศเดียวกับ vector Right ";
                     DotproductInfo = thaiInfo;
                     Compasstxt.text = "Right Side";
                 }
@@ -240,7 +252,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
                 {
                     var tempDot = Vector3.Dot(CompassObject.right,
                         (this.transform.position - CompassObject.position).normalized);
-                    string thaiInfo =  $"DotProduct(A,B) : {tempDot}"+ "\n ค่า Dot  มากกว่า 0 อยู่ในทิศเดียวกับ vector Left ";
+                    string thaiInfo =  $"DotProduct(A,B) : {tempDot.ToString("F1")}"+ "\nค่า Dot น้อยกว่า 0 อยู่ในทิศเดียวกับ vector Left ";
                     DotproductInfo = thaiInfo;
                     Compasstxt.text = "Left Side";
                 }
