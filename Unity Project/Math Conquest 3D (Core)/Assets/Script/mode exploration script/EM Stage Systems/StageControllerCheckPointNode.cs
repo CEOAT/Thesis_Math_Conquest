@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageControllerCheckPointNode : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class StageControllerCheckPointNode : MonoBehaviour
     {
         checkpointSaveData = new StageSaveData();
         checkpointSaveData.checkpointName = checkpointName;
+        checkpointSaveData.stageName = SceneManager.GetActiveScene().name;
     }
     private void FindIndexOfCheckpoint()
     {

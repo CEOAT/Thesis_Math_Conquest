@@ -4,12 +4,32 @@ using UnityEngine;
 
 public class UIPageButton : MonoBehaviour
 {
-    public GameObject openObject;
-    public GameObject closeObject;
+    [SerializeField] public GameObject openObject;
+    [SerializeField] public GameObject openObjectAnother;
+    [SerializeField] public GameObject closeObject;
+    [SerializeField] public GameObject closeObjectAnother;
+
 
     public void OpenWindow()
     {
-        openObject.SetActive(true);
-        closeObject.SetActive(false);
+        if(openObject != null)
+        {
+            openObject.SetActive(true);
+        }
+
+        if(openObjectAnother != null)
+        {
+            openObjectAnother.SetActive(true);
+        }
+
+        if(closeObjectAnother != null)
+        {
+            closeObjectAnother.SetActive(false);
+        }
+
+        if(closeObject != null)
+        {
+            closeObject.SetActive(false);
+        }
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class InstructionListClassBook
 {
-    public List<InstructionSet> instructionSet;
+    public List<InstructionSetBook> instructionSet;
 }
 
 [System.Serializable]
 public class InstructionSetBook
 {
-    public GameObject instructionElementObject;
+    public List<GameObject> instructionElementObjectList;
 }

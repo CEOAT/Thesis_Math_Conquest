@@ -88,24 +88,26 @@ public class MainMenuManager : MonoBehaviour
     public void ConfirmEnterStage(string stageName)
     {
         StartCoroutine(LoadingStageSequence(stageName));
+        PlayerPrefs.SetString("StageName", stageName);
+        PlayerPrefs.SetString("CheckpointName","Checkpoint-1");
+        PlayerPrefs.SetInt("CheckpointIndex", 0);
     }
 
-    private RectTransform zetaRectTransform;
     private IEnumerator LoadingStageSequence(string stageName)
     {
-        zetaRectTransform = Instantiate(loadingPrefab).transform.GetChild(1).GetComponent<RectTransform>();
+        Instantiate(loadingPrefab);
+        yield return new WaitForSeconds(1.5f);
+        AsyncOperation loadAsyncOperation = SceneManager.LoadSceneAsync(stageName);
 
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(stageName);
+        while(!loadAsyncOperation.isDone)
+        {
+            yield return null;
+        }
+    }
 
-        // AsyncOperation loadAsyncOperation = SceneManager.LoadSceneAsync(stageName);
-
-        // while(!loadAsyncOperation.isDone)
-        // {
-        //     float progressValue = Mathf.Clamp01(loadAsyncOperation.progress / 0.9f);
-        //     zetaRectTransform.anchoredPosition = new Vector2(zetaRectTransform.position.x, zetaRectTransform.position.y + 10);
-        //     yield return null;
-        // }
+    public void ContinueGame()
+    {
+        StartCoroutine(LoadingStageSequence(PlayerPrefs.GetString("StageName", "stage_prologue")));
     }
 
     public void ExitGame()

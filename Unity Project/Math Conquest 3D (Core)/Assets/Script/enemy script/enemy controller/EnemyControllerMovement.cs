@@ -63,6 +63,8 @@ public class EnemyControllerMovement : MonoBehaviour
     [SerializeField] private float enemyShootDistance;
     [SerializeField] private Vector3 enemyShootPointOffset;
 
+    [SerializeField] private bool flipModifier = false;
+
     private NavMeshAgent navMeshAgent;
     private Rigidbody rigidbody;
     private SpriteRenderer spriteRenderer;
@@ -86,6 +88,12 @@ public class EnemyControllerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         EnemyStatus = GetComponent<EnemyControllerStatus>();
         materialStart = GetComponent<SpriteRenderer>().material;
+        materialDamaged = GetComponent<SpriteRenderer>().material;
+
+        if(flipModifier == true)
+        {
+            GetComponent<SpriteRenderer>().flipX = flipModifier;
+        }
     }
     private void SetupEnemyType()
     {
@@ -298,13 +306,15 @@ public class EnemyControllerMovement : MonoBehaviour
     }
 
     private Color enemyColorDefault = new Color(255, 255, 255, 255);
-    private Color enemyColorRed = new Color(255, 0, 0, 255);
+    private Color enemyColorRed = new Color(200, 0, 0, 255);
     private IEnumerator EnemyHurtColorSwitch()
     {
+        Color tempColor;
+        tempColor = spriteRenderer.material.color;
         spriteRenderer.material = materialDamaged;
-        spriteRenderer.color = enemyColorRed;
+        materialDamaged.SetColor("_BaseColor", Color.red);
         yield return new WaitForSeconds(0.2f);
-        spriteRenderer.color = enemyColorDefault;
+        materialDamaged.SetColor("_BaseColor", tempColor);
         spriteRenderer.material = materialStart;
 
     }
