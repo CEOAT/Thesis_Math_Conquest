@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Shapes;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;

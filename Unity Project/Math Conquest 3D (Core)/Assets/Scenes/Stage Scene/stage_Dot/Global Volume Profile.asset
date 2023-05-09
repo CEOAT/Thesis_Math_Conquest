@@ -15,10 +15,109 @@ MonoBehaviour:
   active: 1
   texture:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: c878f56711b69174182d4600fd8281eb, type: 3}
+    m_Value: {fileID: 2800000, guid: c2420b96612bda943b6e8a8e4fda286e, type: 3}
   contribution:
     m_OverrideState: 1
+    m_Value: 0.579
+--- !u!114 &-7761112939015976969
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
+  m_Name: ShadowsMidtonesHighlights
+  m_EditorClassIdentifier: 
+  active: 1
+  shadows:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: -0.19857025}
+  midtones:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.11914205}
+  highlights:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 1}
+  shadowsStart:
+    m_OverrideState: 1
+    m_Value: 0.63
+  shadowsEnd:
+    m_OverrideState: 1
+    m_Value: 0.67
+  highlightsStart:
+    m_OverrideState: 1
+    m_Value: 0.85
+  highlightsEnd:
+    m_OverrideState: 1
+    m_Value: 1.66
+--- !u!114 &-6361606281561691227
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 0
+  mode:
+    m_OverrideState: 1
     m_Value: 1
+  gaussianStart:
+    m_OverrideState: 1
+    m_Value: 0
+  gaussianEnd:
+    m_OverrideState: 1
+    m_Value: 523.95
+  gaussianMaxRadius:
+    m_OverrideState: 1
+    m_Value: 1.5
+  highQualitySampling:
+    m_OverrideState: 1
+    m_Value: 1
+  focusDistance:
+    m_OverrideState: 1
+    m_Value: 12.83
+  aperture:
+    m_OverrideState: 1
+    m_Value: 2.4
+  focalLength:
+    m_OverrideState: 1
+    m_Value: 110
+  bladeCount:
+    m_OverrideState: 1
+    m_Value: 6
+  bladeCurvature:
+    m_OverrideState: 1
+    m_Value: 1
+  bladeRotation:
+    m_OverrideState: 1
+    m_Value: -180
+--- !u!114 &-5421490207924438680
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
+  m_Name: WhiteBalance
+  m_EditorClassIdentifier: 
+  active: 1
+  temperature:
+    m_OverrideState: 1
+    m_Value: 0
+  tint:
+    m_OverrideState: 1
+    m_Value: -2.9
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,6 +133,26 @@ MonoBehaviour:
   components:
   - {fileID: -8452792149571188438}
   - {fileID: 4587921027644584982}
+  - {fileID: -7761112939015976969}
+  - {fileID: 543459459273982966}
+  - {fileID: -5421490207924438680}
+  - {fileID: -6361606281561691227}
+--- !u!114 &543459459273982966
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
+  m_Name: Tonemapping
+  m_EditorClassIdentifier: 
+  active: 1
+  mode:
+    m_OverrideState: 1
+    m_Value: 2
 --- !u!114 &4587921027644584982
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -55,10 +174,10 @@ MonoBehaviour:
     m_Value: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 0.305
+    m_Value: 0.177
   clamp:
     m_OverrideState: 1
-    m_Value: 65472
+    m_Value: 1.63
   tint:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 0.7216981, a: 1}
@@ -66,8 +185,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   skipIterations:
-    m_OverrideState: 1
-    m_Value: 5
+    m_OverrideState: 0
+    m_Value: 0
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
