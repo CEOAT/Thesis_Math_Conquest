@@ -729,6 +729,85 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""VectorPuzzleControl"",
+            ""id"": ""0ba9d008-60a8-40b7-9f33-8c8469634618"",
+            ""actions"": [
+                {
+                    ""name"": ""ConfirmAnswer"",
+                    ""type"": ""Button"",
+                    ""id"": ""793a8ba7-493f-488d-b8a4-9707703780f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""8713f4e0-2541-4598-829c-8e8c0e26e422"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseWindow"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bcade76-24d3-4aa1-aa4e-1e42d6a67be5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8f457323-75f5-4289-a012-f00d737729fa"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5ba9f78-a710-47e0-9ea1-a840bdc8bd87"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmAnswer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f168643c-fd91-4e6e-b73d-31a133e9b014"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9f2c35f-fc7a-4f2d-a47d-f554724966da"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -779,6 +858,11 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_WindowControl_NextInstructionPage = m_WindowControl.FindAction("NextInstructionPage", throwIfNotFound: true);
         m_WindowControl_PreviousInstructionPage = m_WindowControl.FindAction("PreviousInstructionPage", throwIfNotFound: true);
         m_WindowControl_SwitchInputField = m_WindowControl.FindAction("SwitchInputField", throwIfNotFound: true);
+        // VectorPuzzleControl
+        m_VectorPuzzleControl = asset.FindActionMap("VectorPuzzleControl", throwIfNotFound: true);
+        m_VectorPuzzleControl_ConfirmAnswer = m_VectorPuzzleControl.FindAction("ConfirmAnswer", throwIfNotFound: true);
+        m_VectorPuzzleControl_Interact = m_VectorPuzzleControl.FindAction("Interact", throwIfNotFound: true);
+        m_VectorPuzzleControl_CloseWindow = m_VectorPuzzleControl.FindAction("CloseWindow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1151,6 +1235,55 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         }
     }
     public WindowControlActions @WindowControl => new WindowControlActions(this);
+
+    // VectorPuzzleControl
+    private readonly InputActionMap m_VectorPuzzleControl;
+    private IVectorPuzzleControlActions m_VectorPuzzleControlActionsCallbackInterface;
+    private readonly InputAction m_VectorPuzzleControl_ConfirmAnswer;
+    private readonly InputAction m_VectorPuzzleControl_Interact;
+    private readonly InputAction m_VectorPuzzleControl_CloseWindow;
+    public struct VectorPuzzleControlActions
+    {
+        private @MasterInput m_Wrapper;
+        public VectorPuzzleControlActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ConfirmAnswer => m_Wrapper.m_VectorPuzzleControl_ConfirmAnswer;
+        public InputAction @Interact => m_Wrapper.m_VectorPuzzleControl_Interact;
+        public InputAction @CloseWindow => m_Wrapper.m_VectorPuzzleControl_CloseWindow;
+        public InputActionMap Get() { return m_Wrapper.m_VectorPuzzleControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(VectorPuzzleControlActions set) { return set.Get(); }
+        public void SetCallbacks(IVectorPuzzleControlActions instance)
+        {
+            if (m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface != null)
+            {
+                @ConfirmAnswer.started -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnConfirmAnswer;
+                @ConfirmAnswer.performed -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnConfirmAnswer;
+                @ConfirmAnswer.canceled -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnConfirmAnswer;
+                @Interact.started -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnInteract;
+                @CloseWindow.started -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnCloseWindow;
+                @CloseWindow.performed -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnCloseWindow;
+                @CloseWindow.canceled -= m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface.OnCloseWindow;
+            }
+            m_Wrapper.m_VectorPuzzleControlActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ConfirmAnswer.started += instance.OnConfirmAnswer;
+                @ConfirmAnswer.performed += instance.OnConfirmAnswer;
+                @ConfirmAnswer.canceled += instance.OnConfirmAnswer;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @CloseWindow.started += instance.OnCloseWindow;
+                @CloseWindow.performed += instance.OnCloseWindow;
+                @CloseWindow.canceled += instance.OnCloseWindow;
+            }
+        }
+    }
+    public VectorPuzzleControlActions @VectorPuzzleControl => new VectorPuzzleControlActions(this);
     private int m_KeyboardControlSchemeIndex = -1;
     public InputControlScheme KeyboardControlScheme
     {
@@ -1198,5 +1331,11 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         void OnNextInstructionPage(InputAction.CallbackContext context);
         void OnPreviousInstructionPage(InputAction.CallbackContext context);
         void OnSwitchInputField(InputAction.CallbackContext context);
+    }
+    public interface IVectorPuzzleControlActions
+    {
+        void OnConfirmAnswer(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnCloseWindow(InputAction.CallbackContext context);
     }
 }

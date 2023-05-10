@@ -5,20 +5,26 @@ using Shapes;
 
 public class AddForce : ImmediateModeShapeDrawer
 {
-    [SerializeField] private Vector3 Force;
+    [SerializeField] private Vector3 force;
 
     private Rigidbody thisRigid;
-    // Start is called before the first frame update
+
+    public Vector3 Force
+    {
+        get => force;
+        set => force = value;
+    }
+   
     void Start()
     {
         thisRigid = GetComponent<Rigidbody>();
         
     }
 
-    // Update is called once per frame
+   
     void FixedUpdate()
     {
-        thisRigid.AddForce(Vector3.ClampMagnitude(Force,2));
+        thisRigid.AddForce(Vector3.ClampMagnitude(force,2f));
     }
     
     public override void DrawShapes( Camera cam ){
@@ -32,9 +38,9 @@ public class AddForce : ImmediateModeShapeDrawer
 
             // set static parameter to draw in the local space of this object
 
-            var tempVec = Vector3.ClampMagnitude(Force, 2f);
+            var tempVec = Vector3.ClampMagnitude(force, 2f);
             Draw.Line(this.transform.position,this.transform.position +tempVec);
-            Draw.Cone(this.transform.position+tempVec,Force.normalized,0.25f,0.25f);
+            Draw.Cone(this.transform.position+tempVec,force.normalized,0.25f,0.25f);
           
         
         }

@@ -14,7 +14,7 @@ public class StageControllerSetActiveTrigger : MonoBehaviour
     
     private void OnTriggerEnter(Collider player) 
     {
-        if(player.tag == "Player")
+        if(player.tag == "Player" || player.CompareTag("VectorBall"))
         {
             ActiveTrigger();
         }
@@ -73,7 +73,7 @@ public class StageControllerSetActiveTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider player)
     {
-        if(isActiveWhenLeaveTrigger == true && player.tag == "Player")
+        if(isActiveWhenLeaveTrigger == true && player.tag == "Player" || (isActiveWhenLeaveTrigger && player.CompareTag("VectorBall")))
         {
             ActiveTrigger();
         }
