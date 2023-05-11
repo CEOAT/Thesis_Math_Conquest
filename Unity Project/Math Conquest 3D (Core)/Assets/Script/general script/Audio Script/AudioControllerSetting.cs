@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,15 @@ public class AudioControllerSetting : MonoBehaviour
     private float audioValue;
     private Slider silder;
 
-    private void OnEnable()
+    public Slider Silder => silder;
+
+    private void Awake()
     {
         SetupComponent();
+    }
+
+    private void OnEnable()
+    {
         SetupAudioSetting();
     }
     private void SetupComponent()
@@ -36,7 +43,7 @@ public class AudioControllerSetting : MonoBehaviour
     {
         SaveAudioSetting();
     }
-    private void SaveAudioSetting()
+    public void SaveAudioSetting()
     {
         PlayerPrefs.SetFloat(audioGroupName, audioValue);
         PlayerPrefs.SetFloat(audioGroupName + "_Silder", silder.value);

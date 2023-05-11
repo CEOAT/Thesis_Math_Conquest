@@ -6097,6 +6097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8326380274148266314}
+  - component: {fileID: 8313679389471944935}
   m_Layer: 10
   m_Name: Game Setting UI Group
   m_TagString: Untagged
@@ -6126,6 +6127,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8313679389471944935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8716645265771199323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2208f1d25c6356141b9478167ab23c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 1931439784777364624}
+  screenModeDropdown: {fileID: 841612578437152961}
+  applybutt: {fileID: 4436838480212547231}
+  volumeslider:
+  - {fileID: 8791136363449815525}
+  - {fileID: 2039884789170154218}
+  - {fileID: 9048856860499947198}
+  - {fileID: 1401484873423051815}
 --- !u!1 &8758370157525145337
 GameObject:
   m_ObjectHideFlags: 0
@@ -6752,10 +6773,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7879884387045915346, guid: 94eecf2a25af6fe469449b93b9326ebe, type: 3}
-    - {fileID: 6862717994022109776, guid: 94eecf2a25af6fe469449b93b9326ebe, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94eecf2a25af6fe469449b93b9326ebe, type: 3}
+--- !u!114 &4436838480212547231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3869174877247566330, guid: 94eecf2a25af6fe469449b93b9326ebe,
+    type: 3}
+  m_PrefabInstance: {fileID: 585682468916340581}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6228638761968887152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6228638761968887152 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6796023020923961877, guid: 94eecf2a25af6fe469449b93b9326ebe,
@@ -6775,7 +6806,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openObject: {fileID: 539736828001642744}
+  openObjectAnother: {fileID: 0}
   closeObject: {fileID: 8716645265771199323}
+  closeObjectAnother: {fileID: 0}
 --- !u!224 &7591050654294519219 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7023389199438318294, guid: 94eecf2a25af6fe469449b93b9326ebe,
@@ -8553,7 +8586,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openObject: {fileID: 539736828001642744}
+  openObjectAnother: {fileID: 0}
   closeObject: {fileID: 999090871953480830}
+  closeObjectAnother: {fileID: 0}
 --- !u!224 &8204739480069270604 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 916968852407211541, guid: bfc671d14d02ba64bbdcc112b9222c3e,
