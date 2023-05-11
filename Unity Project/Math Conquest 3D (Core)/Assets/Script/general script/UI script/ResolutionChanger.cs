@@ -46,6 +46,16 @@ public class ResolutionChanger : MonoBehaviour
         
         List<string> optionFullscreen = new List<string>();
         _fullScreenModes = new List<FullScreenMode>();
+        
+        foreach (FullScreenMode VARIABLE in Enum.GetValues(typeof(FullScreenMode)))
+        {
+            //Filtering MaximizedWindows
+            if (VARIABLE != FullScreenMode.MaximizedWindow)
+            {
+                _fullScreenModes.Add(VARIABLE);
+                optionFullscreen.Add(VARIABLE.ToString());
+            }
+        }
         _currentfullscreenIndex = 0;
         foreach (FullScreenMode VARIABLE in Enum.GetValues(typeof(FullScreenMode)))
         {
@@ -53,18 +63,9 @@ public class ResolutionChanger : MonoBehaviour
             if (Screen.fullScreenMode == VARIABLE)
             {
                 screenModeDropdown.value = _currentfullscreenIndex;
+                break;
             }
-            else
-            {
-                _currentfullscreenIndex++;
-            }
-            
-            //Filtering MaximizedWindows
-            if (VARIABLE != FullScreenMode.MaximizedWindow)
-            {
-                _fullScreenModes.Add(VARIABLE);
-                optionFullscreen.Add(VARIABLE.ToString());
-            }
+            _currentfullscreenIndex++;
         }
         //Set ScreenMode Value And current ScreenMode
         screenModeDropdown.AddOptions(optionFullscreen);
@@ -139,6 +140,16 @@ public class ResolutionChanger : MonoBehaviour
        
     }
 
+    public void HackSetInteractable()
+    {
+        Resolution resolution = _filteredResolutions[resolutionDropdown.value];
+        Screen.SetResolution(resolution.width,resolution.height,_fullScreenModes[screenModeDropdown.value]);
+        _currentResolutionIndex = resolutionDropdown.value;
+        _currentfullscreenIndex =  screenModeDropdown.value;
+        
+        _tempReset.ResetDefaultState();
+    }
+
     public void OnchangeSetting()
     {
         // Debug.Log("_currentResolutionIndex"+_currentResolutionIndex +"DropValue"+resolutionDropdown.value);
@@ -148,8 +159,6 @@ public class ResolutionChanger : MonoBehaviour
         try
         {
             _tempReset.ResetDefaultState();
-          
-            Debug.Log(tempslideValue.Count);
             foreach (var SliderValue in volumeslider)
             {
                 if (tempslideValue[i] < SliderValue.Silder.value ||
