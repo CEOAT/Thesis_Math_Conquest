@@ -388,6 +388,11 @@ public class CutsceneControllerDialog : MonoBehaviour
         }
     }
 
+    private void SkipDialogCutscene()
+    {
+        EndDialogCutscene();
+    }
+
     private void OnTriggerEnter(Collider player)
     {
         if (player.CompareTag("Player"))
@@ -400,11 +405,13 @@ public class CutsceneControllerDialog : MonoBehaviour
     {
         playerInput = new MasterInput();
         playerInput.PlayerControlGeneral.NextDialog.performed += context => PlayNextDialog();
+        playerInput.PlayerControlGeneral.SkipCutscene.performed += context => SkipDialogCutscene();
         playerInput.Enable();
     }
     private void RemoveControl()
     {
         playerInput.PlayerControlGeneral.NextDialog.performed -= context => PlayNextDialog();
+        playerInput.PlayerControlGeneral.SkipCutscene.performed -= context => SkipDialogCutscene();
         playerInput.Disable();
     }
 }

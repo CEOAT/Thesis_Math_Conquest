@@ -262,6 +262,15 @@
                     "processors": "",
                     "interactions": "Press(pressPoint=0.8)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SkipCutscene",
+                    "type": "Button",
+                    "id": "c385a5b0-8ef0-4067-83b4-95b2e83d3526",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -306,6 +315,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "NextDialog",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7219ab9-7d8c-4da3-8071-d6a9bbccb68e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "MultiTap(tapDelay=0.3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipCutscene",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
