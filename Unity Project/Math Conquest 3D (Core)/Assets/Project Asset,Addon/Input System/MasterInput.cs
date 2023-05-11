@@ -284,6 +284,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(pressPoint=0.8)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipCutscene"",
+                    ""type"": ""Button"",
+                    ""id"": ""c385a5b0-8ef0-4067-83b4-95b2e83d3526"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,6 +337,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""NextDialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7219ab9-7d8c-4da3-8071-d6a9bbccb68e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""MultiTap(tapDelay=0.3)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipCutscene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -762,6 +782,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         m_PlayerControlGeneral = asset.FindActionMap("PlayerControlGeneral", throwIfNotFound: true);
         m_PlayerControlGeneral_PauseGame = m_PlayerControlGeneral.FindAction("PauseGame", throwIfNotFound: true);
         m_PlayerControlGeneral_NextDialog = m_PlayerControlGeneral.FindAction("NextDialog", throwIfNotFound: true);
+        m_PlayerControlGeneral_SkipCutscene = m_PlayerControlGeneral.FindAction("SkipCutscene", throwIfNotFound: true);
         // PlayerControlExploration
         m_PlayerControlExploration = asset.FindActionMap("PlayerControlExploration", throwIfNotFound: true);
         m_PlayerControlExploration_MoveUpdown = m_PlayerControlExploration.FindAction("MoveUpdown", throwIfNotFound: true);
@@ -962,12 +983,14 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private IPlayerControlGeneralActions m_PlayerControlGeneralActionsCallbackInterface;
     private readonly InputAction m_PlayerControlGeneral_PauseGame;
     private readonly InputAction m_PlayerControlGeneral_NextDialog;
+    private readonly InputAction m_PlayerControlGeneral_SkipCutscene;
     public struct PlayerControlGeneralActions
     {
         private @MasterInput m_Wrapper;
         public PlayerControlGeneralActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @PauseGame => m_Wrapper.m_PlayerControlGeneral_PauseGame;
         public InputAction @NextDialog => m_Wrapper.m_PlayerControlGeneral_NextDialog;
+        public InputAction @SkipCutscene => m_Wrapper.m_PlayerControlGeneral_SkipCutscene;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlGeneral; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -983,6 +1006,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @NextDialog.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
                 @NextDialog.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
                 @NextDialog.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnNextDialog;
+                @SkipCutscene.started -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnSkipCutscene;
+                @SkipCutscene.performed -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnSkipCutscene;
+                @SkipCutscene.canceled -= m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface.OnSkipCutscene;
             }
             m_Wrapper.m_PlayerControlGeneralActionsCallbackInterface = instance;
             if (instance != null)
@@ -993,6 +1019,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @NextDialog.started += instance.OnNextDialog;
                 @NextDialog.performed += instance.OnNextDialog;
                 @NextDialog.canceled += instance.OnNextDialog;
+                @SkipCutscene.started += instance.OnSkipCutscene;
+                @SkipCutscene.performed += instance.OnSkipCutscene;
+                @SkipCutscene.canceled += instance.OnSkipCutscene;
             }
         }
     }
@@ -1179,6 +1208,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     {
         void OnPauseGame(InputAction.CallbackContext context);
         void OnNextDialog(InputAction.CallbackContext context);
+        void OnSkipCutscene(InputAction.CallbackContext context);
     }
     public interface IPlayerControlExplorationActions
     {

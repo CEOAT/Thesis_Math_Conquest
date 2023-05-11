@@ -232,6 +232,11 @@ public class CutsceneControllerInstructionBook : MonoBehaviour
         contentIndexGroup.SetActive(false);
         DisplayFirstPage();
     }
+
+    private void SkipInstruction()
+    {
+        EndPage();
+    }
 #endregion
 }
 

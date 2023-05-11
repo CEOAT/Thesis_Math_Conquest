@@ -62,6 +62,7 @@ public class CutsceneControllerInstruction : MonoBehaviour
         PlayerInput = new MasterInput();
         PlayerInput.WindowControl.NextInstructionPage.performed += context => NextPage();
         PlayerInput.WindowControl.PreviousInstructionPage.performed += context => PreviousPage();
+        PlayerInput.PlayerControlGeneral.SkipCutscene.performed += context => EndPage();
     }
 
     private void Start()
@@ -271,6 +272,8 @@ public class CutsceneControllerInstruction : MonoBehaviour
             StartInstructionCutscene();
         }
     }
+
+    [Button]
     public void StartInstructionCutscene()
     {
         PlayerInput.Enable();
@@ -278,6 +281,11 @@ public class CutsceneControllerInstruction : MonoBehaviour
         DisplayFirstPage();
         GameController.TriggerCutscene();
         GameController.DisablePauseGame();
+    }
+
+    private void SkipInstruction()
+    {
+        EndPage();
     }
 #endregion
 }

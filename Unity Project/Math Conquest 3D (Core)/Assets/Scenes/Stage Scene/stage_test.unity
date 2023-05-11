@@ -1912,6 +1912,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6888507005799864503}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &464216265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 775558662767296971, guid: be224cfe16c7edc41bf5d9174348023e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9157653735101942395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &465770103 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3984741177191815932, guid: be224cfe16c7edc41bf5d9174348023e,
@@ -3324,6 +3330,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4277182931813492511, guid: 7d84c7c9b69f303438dfb28f1399db61,
         type: 3}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: pageNumber
+      value: 
+      objectReference: {fileID: 1335287900}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: buttonNextPageText
+      value: 
+      objectReference: {fileID: 649415506}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: buttonNextPageObject
+      value: 
+      objectReference: {fileID: 464216265}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: buttonPreviousPageText
+      value: 
+      objectReference: {fileID: 1047832246}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: instructionPageUiGroup
+      value: 
+      objectReference: {fileID: 465770103}
+    - target: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+        type: 3}
+      propertyPath: buttonPreviousPageObject
+      value: 
+      objectReference: {fileID: 2042258626}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9386a19ac0d8d4140b12b6dde568bad4, type: 3}
 --- !u!4 &566779503 stripped
@@ -9025,6 +9061,7 @@ MonoBehaviour:
   enemyBulletPrefab: {fileID: 0}
   enemyShootDistance: 0
   enemyShootPointOffset: {x: 0, y: 0, z: 0}
+  flipModifier: 0
   EventOnEnemyStartChase:
     m_PersistentCalls:
       m_Calls: []
@@ -9648,6 +9685,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 562046542}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1684701015 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8005649171096536387, guid: 9386a19ac0d8d4140b12b6dde568bad4,
+    type: 3}
+  m_PrefabInstance: {fileID: 562046542}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ccee92c4437994ab57e2c4229dc061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1685380857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10690,6 +10739,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6268476655874460034}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2042258626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 477344718147135757, guid: be224cfe16c7edc41bf5d9174348023e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9157653735101942395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2047097916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11658,6 +11713,7 @@ MonoBehaviour:
     type: 3}
   enemyShootDistance: 0
   enemyShootPointOffset: {x: 1, y: 0.5, z: 0}
+  flipModifier: 0
   EventOnEnemyStartChase:
     m_PersistentCalls:
       m_Calls: []
@@ -11996,6 +12052,7 @@ MonoBehaviour:
   enemyBulletPrefab: {fileID: 0}
   enemyShootDistance: 0
   enemyShootPointOffset: {x: 0, y: 0, z: 0}
+  flipModifier: 0
   EventOnEnemyStartChase:
     m_PersistentCalls:
       m_Calls: []
@@ -12678,7 +12735,7 @@ PrefabInstance:
     - target: {fileID: 4676851992140006750, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
@@ -12690,6 +12747,11 @@ PrefabInstance:
       propertyPath: GameController
       value: 
       objectReference: {fileID: 1684701008}
+    - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
+        type: 3}
+      propertyPath: InstructionManager
+      value: 
+      objectReference: {fileID: 1684701015}
     - target: {fileID: 4676851992140006751, guid: c01b5d9cbf447954986817b6b2934591,
         type: 3}
       propertyPath: buttonNextPageText
@@ -14191,6 +14253,7 @@ MonoBehaviour:
   enemyBulletPrefab: {fileID: 0}
   enemyShootDistance: 0
   enemyShootPointOffset: {x: 0, y: 0, z: 0}
+  flipModifier: 0
   EventOnEnemyStartChase:
     m_PersistentCalls:
       m_Calls: []
@@ -14542,6 +14605,7 @@ MonoBehaviour:
   enemyBulletPrefab: {fileID: 0}
   enemyShootDistance: 0
   enemyShootPointOffset: {x: 0, y: 0, z: 0}
+  flipModifier: 0
   EventOnEnemyStartChase:
     m_PersistentCalls:
       m_Calls: []
