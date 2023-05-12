@@ -15,7 +15,7 @@ public class VectorAddForceManager : MonoBehaviour
     [SerializeField] private GameObject CanvasPuzzle;
     [SerializeField] private TMP_InputField vectorX;
     [SerializeField] private TMP_InputField vectorZ;
-
+    [SerializeField] private GameObject Axis;
     [SerializeField] private GameObject CameraPuzzle;
 
     public MasterInput thisPlayerInput
@@ -46,6 +46,7 @@ public class VectorAddForceManager : MonoBehaviour
     {
         if (!Interable) return;
         CameraPuzzle.SetActive(true);
+        Axis.SetActive(true);
         _playeGameController.TriggerCutscene();
         puzzleBall.enabled = true;
         CanvasPuzzle.SetActive(true);
@@ -56,6 +57,7 @@ public class VectorAddForceManager : MonoBehaviour
     {
         Interable = true;
         CameraPuzzle.SetActive(false);
+        Axis.SetActive(false);
         _playeGameController.AllowMovement();
         CanvasPuzzle.SetActive(false);
         puzzleBall.enabled = false;
@@ -65,6 +67,7 @@ public class VectorAddForceManager : MonoBehaviour
     {
         Interable = false;
         CameraPuzzle.SetActive(false);
+        Axis.SetActive(false);
         _playeGameController.AllowMovement();
         CanvasPuzzle.SetActive(false);
         puzzleBall.enabled = false;
