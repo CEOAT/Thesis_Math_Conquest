@@ -10,6 +10,7 @@ public class AddForceTriggerButton : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            _manager.SetUpInput();
             _manager.thisPlayerInput.Enable();
             _manager.Interable = true;
         }

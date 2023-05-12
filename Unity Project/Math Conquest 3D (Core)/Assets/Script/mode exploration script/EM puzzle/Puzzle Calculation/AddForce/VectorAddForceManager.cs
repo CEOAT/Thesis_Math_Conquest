@@ -25,9 +25,9 @@ public class VectorAddForceManager : MonoBehaviour
     }
     public bool Interable;
 
-    private void Awake()
+    private void OnEnable()
     {
-        SetUpInput();
+       
     }
 
     private void Start()
@@ -39,6 +39,14 @@ public class VectorAddForceManager : MonoBehaviour
     private void Update()
     {
         AddForcetext.text = $"Vector Force = ({puzzleBall.Force.x},0,{puzzleBall.Force.z}) \n Magnitude limit = 2 ";
+    }
+    
+    public void SetUpInput()
+    {
+        PlayerInput = new MasterInput();
+        PlayerInput.VectorPuzzleControl.Interact.performed += context => EnablePuzzle();
+        PlayerInput.VectorPuzzleControl.ConfirmAnswer.performed += context => confirmValue();
+        PlayerInput.VectorPuzzleControl.CloseWindow.performed += context => DisablePuzzle();
     }
 
     // Start is called before the first frame update
@@ -75,13 +83,7 @@ public class VectorAddForceManager : MonoBehaviour
         this.enabled = false;
     }
 
-    private void SetUpInput()
-    {
-        PlayerInput = new MasterInput();
-        PlayerInput.VectorPuzzleControl.Interact.performed += context => EnablePuzzle();
-        PlayerInput.VectorPuzzleControl.ConfirmAnswer.performed += context => confirmValue();
-        PlayerInput.VectorPuzzleControl.CloseWindow.performed += context => DisablePuzzle();
-    }
+    
 
     public void confirmValue()
     {
