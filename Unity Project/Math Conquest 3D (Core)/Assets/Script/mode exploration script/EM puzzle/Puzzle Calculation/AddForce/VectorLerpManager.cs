@@ -74,6 +74,7 @@ public class VectorLerpManager : MonoBehaviour
             if (VARIABLE.isFocus)
             {
                 tempPlatform = VARIABLE;
+                LerpSlider.value = VARIABLE.T;
             }
         }
     }

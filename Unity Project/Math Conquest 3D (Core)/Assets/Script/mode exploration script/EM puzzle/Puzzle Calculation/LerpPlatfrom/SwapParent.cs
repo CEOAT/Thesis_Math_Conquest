@@ -24,6 +24,7 @@ public class SwapParent : MonoBehaviour
             {
                 if (this.transform == VARIABLE.transform)
                 {
+                    Debug.Log("found plat");
                     VARIABLE.isFocus =(true);
                 }
             }
