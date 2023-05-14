@@ -62,6 +62,8 @@ public class VectorAddForceManager : MonoBehaviour
         PlayerInput.Enable();
     }
 
+   
+
     public void DisablePuzzle()
     {
         Interable = true;

@@ -37,6 +37,14 @@ public class VectorLerpManager : MonoBehaviour
         _playeGameController = tempPlayer.GetComponent<ExplorationModeGameController>();
         Initconfiguration();
     }
+    
+    public void ResetPuzzle()
+    {
+        foreach (var VARIABLE in platforms)
+        {
+            VARIABLE.T = 0;
+        }
+    }
 
      public void SetUpInput()
     {
