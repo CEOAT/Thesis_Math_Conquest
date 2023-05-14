@@ -212,6 +212,26 @@ public class ExplorationModeGameController : MonoBehaviour
     {
         StartCoroutine(LoadSceneSequence("stage_main_menu"));
     }
+    private int stageIndex = 0;
+    public void MenuNextStage()
+    {
+        stageIndex = SceneManager.GetActiveScene().buildIndex;
+        
+        if(stageIndex + 1 == SceneManager.sceneCount)
+        {
+            MenuReturnToMenu();
+        }
+        else
+        {
+            StartCoroutine(LoadSceneSequence(GetNextStageName()));
+        }
+    }
+    private string GetNextStageName()
+    {
+        stageIndex += 1;
+        return System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(stageIndex));
+    }
+
 
     private IEnumerator LoadSceneSequence(string stageName)
     {

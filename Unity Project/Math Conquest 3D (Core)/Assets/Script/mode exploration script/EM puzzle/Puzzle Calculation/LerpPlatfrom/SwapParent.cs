@@ -7,9 +7,13 @@ public class SwapParent : MonoBehaviour
 {
     private Transform tempPlayerParent;
     private VectorLerpManager tempmanager;
-
+    private ExplorationModePlayerControllerMovement _player;
+    
     private void Start()
     {
+        var tempPlayer = FindObjectOfType<ExplorationModeGameController>();
+        _player = FindObjectOfType<ExplorationModePlayerControllerMovement>();
+        tempPlayerParent = _player.transform.parent;
         var tempmanagerstart = FindObjectOfType<VectorLerpManager>();
         tempmanager = tempmanagerstart.GetComponent<VectorLerpManager>();
     }
@@ -18,7 +22,6 @@ public class SwapParent : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            tempPlayerParent = other.transform.parent;
             other.transform.SetParent(this.transform);
             foreach (var VARIABLE in tempmanager.Platforms)
             {

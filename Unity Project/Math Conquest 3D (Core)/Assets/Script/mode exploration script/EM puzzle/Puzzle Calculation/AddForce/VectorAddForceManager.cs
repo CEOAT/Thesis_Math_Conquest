@@ -17,6 +17,7 @@ public class VectorAddForceManager : MonoBehaviour
     [SerializeField] private TMP_InputField vectorZ;
     [SerializeField] private GameObject Axis;
     [SerializeField] private GameObject CameraPuzzle;
+    [SerializeField] private Animator stair;
 
     public MasterInput thisPlayerInput
     {
@@ -80,6 +81,7 @@ public class VectorAddForceManager : MonoBehaviour
         CanvasPuzzle.SetActive(false);
         puzzleBall.enabled = false;
         PlayerInput.Disable();
+        stair.Play("passed");
         this.enabled = false;
     }
 

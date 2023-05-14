@@ -62,5 +62,6 @@ public class StageControllerEndStageTrigger : MonoBehaviour
         endStageWindowObject.GetChild(4).GetComponent<Button>().onClick.AddListener(GameController.MenuReturnToStageSelection);
         endStageWindowObject.GetChild(5).GetComponent<Button>().onClick.AddListener(GameController.MenuRestartStage);
         endStageWindowObject.GetChild(6).GetComponent<Button>().onClick.AddListener(GameController.MenuQuitGame);
+        endStageWindowObject.GetChild(7).GetComponent<Button>().onClick.AddListener(GameController.MenuNextStage);
     }
 }
