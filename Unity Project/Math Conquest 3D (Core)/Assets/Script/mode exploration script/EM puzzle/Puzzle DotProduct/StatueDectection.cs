@@ -219,7 +219,6 @@ public class StatueDectection : ImmediateModeShapeDrawer
         switch (CompassDirection)
         {
             case DetectDirection.Blue_Front :
-            case DetectDirection.Blue_Back :
                 if (Vector3.Dot(CompassObject.forward, (this.transform.position - CompassObject.position).normalized )> 0)
                 {
                     var tempDot = Vector3.Dot(CompassObject.forward,
@@ -237,7 +236,43 @@ public class StatueDectection : ImmediateModeShapeDrawer
                     Compasstxt.text = "Back Side";
                 }
                 break;
+            case DetectDirection.Blue_Back :
+                if (Vector3.Dot(-CompassObject.forward, (this.transform.position - CompassObject.position).normalized )> 0)
+                {
+                    var tempDot = Vector3.Dot(-CompassObject.forward,
+                        (this.transform.position - CompassObject.position).normalized);
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot.ToString("F1")}"+ "\nค่า Dot มากกว่า 0 อยู่ในทิศเดียวกับ vector -foward ";
+                    DotproductInfo = thaiInfo;
+                    Compasstxt.text = "Back Side";
+                }
+                else
+                {
+                    var tempDot = Vector3.Dot(-CompassObject.forward,
+                        (this.transform.position - CompassObject.position).normalized);
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot.ToString("F1")}"+"\nค่า Dot น้อยกว่า 0 อยู่ในทิศตรงข้ามกับ vector -foward ";
+                    DotproductInfo = thaiInfo;
+                    Compasstxt.text = "Front Side";
+                }
+                break;
             case DetectDirection.Red_Left :
+                if (Vector3.Dot(-CompassObject.right, (this.transform.position - CompassObject.position).normalized )> 0)
+                {
+                    var tempDot = Vector3.Dot(-CompassObject.right,
+                        (this.transform.position - CompassObject.position).normalized);
+                    string thaiInfo = $"DotProduct(A,B) : {tempDot.ToString("F1")}"+"\nค่า Dot  มากกว่า 0 อยู่ในทิศเดียวกับ vector -Right ";
+                    DotproductInfo = thaiInfo;
+                    Compasstxt.text = "Left Side";
+                }
+                else
+                {
+                    var tempDot = Vector3.Dot(-CompassObject.right,
+                        (this.transform.position - CompassObject.position).normalized);
+                    string thaiInfo =  $"DotProduct(A,B) : {tempDot.ToString("F1")}"+ "\nค่า Dot น้อยกว่า 0 อยู่ในทิศตรงข้าม vector -Right ";
+                    DotproductInfo = thaiInfo;
+                    Compasstxt.text = "Right Side";
+                }
+                break;
+                break;
             case DetectDirection.Red_Right:
                 if (Vector3.Dot(CompassObject.right, (this.transform.position - CompassObject.position).normalized )> 0)
                 {
@@ -251,7 +286,7 @@ public class StatueDectection : ImmediateModeShapeDrawer
                 {
                     var tempDot = Vector3.Dot(CompassObject.right,
                         (this.transform.position - CompassObject.position).normalized);
-                    string thaiInfo =  $"DotProduct(A,B) : {tempDot.ToString("F1")}"+ "\nค่า Dot น้อยกว่า 0 อยู่ในทิศเดียวกับ vector Left ";
+                    string thaiInfo =  $"DotProduct(A,B) : {tempDot.ToString("F1")}"+ "\nค่า Dot น้อยกว่า 0 อยู่ในทิศตรงข้าม vector Right ";
                     DotproductInfo = thaiInfo;
                     Compasstxt.text = "Left Side";
                 }
