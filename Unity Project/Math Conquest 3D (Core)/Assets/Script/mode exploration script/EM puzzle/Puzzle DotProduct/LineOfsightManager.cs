@@ -12,10 +12,12 @@ public class LineOfsightManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI VectorMagnitude;
     [SerializeField]private List<string> VectorNotation_UnityTransform;
     // Start is called before the first frame update
-
+    private ExplorationModeGameController gamecontroller;
     private int _currentStatueIndex =0;
     void Start()
     {
+        var temgamepcontroller = FindObjectOfType<ExplorationModeGameController>();
+        gamecontroller = temgamepcontroller;
         VecDirection_Dropdown.ClearOptions();
         VecDirection_Dropdown.AddOptions(VectorNotation_UnityTransform);
         GetCurrentStatus();
@@ -24,8 +26,27 @@ public class LineOfsightManager : MonoBehaviour
     private void Update()
     {
         VectorMagnitude.text = $"|A| : {StatuePuzzle[_currentStatueIndex].PlayerToStatueVector3.magnitude.ToString("F1")}";
+        if (gamecontroller.TriggerGameOver)
+        {
+            OngameOver();
+        }
+    }
+    Coroutine trigger ;
+    public void OngameOver()
+    {
+        if(trigger!=null) return;
+        trigger = StartCoroutine(StopBygameOver());
     }
 
+    IEnumerator StopBygameOver()
+    {
+        var temp = Radius.transform.parent;
+        var tempgrand = temp.parent;
+        yield return null;
+        tempgrand.gameObject.SetActive(false);
+        DisableThisPuzzle();
+        this.enabled = false;
+    }
     public void EnableThisPuzzle()
     {
         VecDirection_Dropdown.ClearOptions();

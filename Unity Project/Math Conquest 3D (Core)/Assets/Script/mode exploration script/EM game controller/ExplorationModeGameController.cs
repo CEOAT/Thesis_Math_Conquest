@@ -32,6 +32,9 @@ public class ExplorationModeGameController : MonoBehaviour
     [SerializeField] public SaveController SaveController;
     [SerializeField] public StageControllerCheckPointManager CheckpointManager;
     private MasterInput PlayerInput;
+    private bool triggerGameOver;
+
+    public bool TriggerGameOver => triggerGameOver;
 
     [Header("Menu Active Checking")]
     public bool isPauseGameDiabled;
@@ -170,6 +173,7 @@ public class ExplorationModeGameController : MonoBehaviour
     }
     private IEnumerator GameOverCutscene()
     {
+        triggerGameOver = true;
         Time.timeScale = 0.2f;
 
         PlayerAttackSystem.PlayerClearAnswer();
@@ -187,6 +191,7 @@ public class ExplorationModeGameController : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         GameOverWindowGroup.SetActive(true);
+        triggerGameOver = false;
         playerGameObject.transform.position += Vector3.up * 500;
     }
 
