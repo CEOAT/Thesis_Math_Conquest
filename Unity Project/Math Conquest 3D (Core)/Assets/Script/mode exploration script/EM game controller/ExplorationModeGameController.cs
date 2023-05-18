@@ -238,7 +238,7 @@ public class ExplorationModeGameController : MonoBehaviour
     }
 
 
-    private IEnumerator LoadSceneSequence(string stageName)
+    public IEnumerator LoadSceneSequence(string stageName)
     {
         Time.timeScale = 1f;
         Instantiate(LoadingCanvas);
